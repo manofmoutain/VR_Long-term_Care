@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: 04da3ef1e08ca844184363613b89c102
+guid: 76d5946f0a7e6c54796ba54c18daf734
 ModelImporter:
   serializedVersion: 20101
-  internalIDToNameTable:
-  - first:
-      74: 5685697100008369186
-    second: Animation
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 1

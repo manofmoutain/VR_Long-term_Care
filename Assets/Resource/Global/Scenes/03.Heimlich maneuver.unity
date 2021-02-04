@@ -638,6 +638,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1354913941}
     m_Modifications:
+    - target: {fileID: 614359569859640384, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8193581351894433478, guid: 76d5946f0a7e6c54796ba54c18daf734, type: 3}
+    - target: {fileID: 792486867685023241, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -302147632685222867, guid: 76d5946f0a7e6c54796ba54c18daf734, type: 3}
     - target: {fileID: 870979327067481665, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
@@ -650,6 +658,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1541857767272318504, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7485519865650665417, guid: 76d5946f0a7e6c54796ba54c18daf734, type: 3}
     - target: {fileID: 1990684905953706267, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: hideHandOnAttach
       value: 0
@@ -674,6 +686,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4186829871968826703, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3960067422262416654, guid: 76d5946f0a7e6c54796ba54c18daf734, type: 3}
+    - target: {fileID: 5105958362099682009, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -1334709589146556762, guid: 76d5946f0a7e6c54796ba54c18daf734, type: 3}
     - target: {fileID: 5156510240418711255, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: showRightPreview
       value: 1
@@ -690,6 +710,10 @@ PrefabInstance:
       propertyPath: poseNames.Array.data[0]
       value: PushPose (MAIN)
       objectReference: {fileID: 0}
+    - target: {fileID: 5343137502813354235, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6899935570538897620, guid: 76d5946f0a7e6c54796ba54c18daf734, type: 3}
     - target: {fileID: 5609364697138265324, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -742,6 +766,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mr.Woo
       objectReference: {fileID: 0}
+    - target: {fileID: 7748328056758762473, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3481876078947180059, guid: 76d5946f0a7e6c54796ba54c18daf734, type: 3}
+    - target: {fileID: 9089603251723054610, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -4446254216286444406, guid: 76d5946f0a7e6c54796ba54c18daf734, type: 3}
     m_RemovedComponents:
     - {fileID: 5156510240418711255, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
     - {fileID: -6794527623707529896, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}

@@ -4,5 +4,34 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/01.LoginProject.unity
+    guid: 052fae3a65cc81344a56b2145770914a
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/02.Detect Life.unity
+    guid: a98ab367fcd4c0d4c8f30e0a667ccfb1
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/03.Heimlich maneuver.unity
+    guid: 256d69c3ee72a93458213bfa9cb742aa
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/04.CPR.unity
+    guid: 9df0098cd1ed38e49af01ff4903121c0
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/05.Prepare Meal.unity
+    guid: 98e771f61f94b394d9caa8f2f20524c9
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/06.Wash Head.unity
+    guid: 5ac378c1dcebccd42a20db368428ea33
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/07.Wash lower body (female).unity
+    guid: d106eb9c2245d7348b5a48d08a03bda5
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/08.Wash lower body (male).unity
+    guid: a1c6642a503d087459246637791233aa
+  - enabled: 1
+    path: Assets/Resource/Global/Scenes/09.Help to get on wheelchair.unity
+    guid: 79d92e753739e0740b9143641ee5060d
+  m_configObjects:
+    Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 90cf8eeceffc4a64da9f538cef19ac80, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: eb96cb672d4eb204f89b561c31c4e11f, type: 2}
