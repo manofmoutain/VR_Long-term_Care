@@ -10,18 +10,20 @@ namespace InrteractableObject
         public float linearValue;
         [SerializeField] private GameObject[] allInteractPoints;
         [SerializeField] private GameObject interactPoint;
+        [SerializeField] private LinearDrive linearDrive;
 
 
         private void Start()
         {
-
+            interactPoint.GetComponent<MeshRenderer>().enabled = false;
+            if (linearDrive==null)
+            {
+                linearDrive.GetComponent<LinearDrive>();
+            }
         }
 
 
-        private void Update()
-        {
 
-        }
 
         #region InteractMethod
 
@@ -48,6 +50,7 @@ namespace InrteractableObject
             //what to do
             go.SetActive(true);
             go.GetComponent<MeshRenderer>().material.color = Color.red;
+
         }
 
             public void OnDetachedFromHand(GameObject go)
@@ -57,6 +60,7 @@ namespace InrteractableObject
                 //what to do
                 go.SetActive(true);
                 go.GetComponent<MeshRenderer>().material.color = Color.green;
+                interactPoint.transform.position=linearDrive.startPosition.position;
             }
 
         #endregion
