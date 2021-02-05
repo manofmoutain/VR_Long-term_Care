@@ -14,39 +14,13 @@ namespace InrteractableObject
 
         private void Start()
         {
-            for (int i = 0; i < allInteractPoints.Length; i++)
-            {
-                allInteractPoints[i].SetActive(false);
-            }
 
-            switch (SceneLoader.Instance.GetCurrentSceneName)
-            {
-                case "02.Detect Life" :
-
-                    break;
-                case "03.Heimlich maneuver":
-                    break;
-                case "04.CPR":
-                    break;
-                case "05.Prepare Meal":
-                    break;
-                case "06.Wash Head":
-                    break;
-                case "07.Wash lower body (female)":
-                    break;
-                case "08.Wash lower body (male)":
-                    break;
-                case "09.Help to get on wheelchair":
-                    break;
-            }
-
-            interactPoint.GetComponent<MeshRenderer>().enabled = false;
         }
 
 
         private void Update()
         {
-            linearValue = GetComponentInChildren<LinearMapping>().value;
+
         }
 
         #region InteractMethod
