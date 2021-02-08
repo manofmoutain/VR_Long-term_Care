@@ -5856,6 +5856,8 @@ GameObject:
   - component: {fileID: 231948135}
   - component: {fileID: 231948134}
   - component: {fileID: 6554074554205486698}
+  - component: {fileID: 5973747877968473053}
+  - component: {fileID: 2335689940909093849}
   m_Layer: 0
   m_Name: Mr.Woo
   m_TagString: Untagged
@@ -5929,9 +5931,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateActionSetOnAttach:
     actionSetPath: 
-  hideHandOnAttach: 1
+  hideHandOnAttach: 0
   hideSkeletonOnAttach: 0
-  hideControllerOnAttach: 0
+  hideControllerOnAttach: 1
   handAnimationOnPickup: 0
   setRangeOfMotionOnPickup: -1
   useHandObjectAttachmentPoint: 1
@@ -5967,6 +5969,7 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
+  attachedToHand: {fileID: 0}
 --- !u!114 &231948136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6046,27 +6049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46975e50f65399e42890a47c535d31c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapReleaseGesture: 0
-  catchingSpeedThreshold: 0
-  releaseVelocityTimeOffset: 0
-  scaleReleaseVelocity: 0
-  scaleReleaseVelocityThreshold: 0
-  rigidbody: {fileID: 0}
-  hadInterpolation: 0
-  sanpCurrentHand: {fileID: 0}
-  velocityEstimator: {fileID: 0}
-  scaleReleaseVelocityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OriginalPosition: {fileID: 0}
-  UsePosition: []
-  takeObject: {fileID: 0}
-  headTurnRoundGroup: {fileID: 0}
-  interactable: {fileID: 0}
-  snapZoneArea: []
+  snapTakeObject: 0
+  snapReleaseGesture: 1
   snapFixed:
     isLocated: 0
     isFixed: 0
@@ -6075,6 +6059,26 @@ MonoBehaviour:
     outside: 0
     outsideRange: 0
     outsideZone: {fileID: 0}
+  catchingSpeedThreshold: 0
+  releaseVelocityTimeOffset: 0
+  scaleReleaseVelocity: 0
+  scaleReleaseVelocityThreshold: 0
+  rigidbody: {fileID: 4938601503154907606}
+  hadInterpolation: 0
+  velocityEstimator: {fileID: 0}
+  scaleReleaseVelocityCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  interactable: {fileID: 0}
+  sanpCurrentHand: {fileID: 0}
+  OriginalPosition: {fileID: 0}
+  UsePosition:
+  - {fileID: 0}
+  snapZoneArea: []
+  takeObject: {fileID: 0}
   snapIn:
     m_PersistentCalls:
       m_Calls: []
@@ -6086,7 +6090,46 @@ MonoBehaviour:
       m_Calls: []
   dropDown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5973747877968473053}
+        m_TargetAssemblyTypeName: InrteractableObject.ResetPosition, Assembly-CSharp
+        m_MethodName: ReverTakeObjectPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5973747877968473053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552735585332728759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34092037579d1104eb40b47aae8ef1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEntry: 0
+--- !u!136 &2335689940909093849
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552735585332728759}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &7599389215402253295
 GameObject:
   m_ObjectHideFlags: 0

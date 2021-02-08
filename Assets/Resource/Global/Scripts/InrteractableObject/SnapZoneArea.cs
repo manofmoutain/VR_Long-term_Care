@@ -7,12 +7,17 @@ namespace InrteractableObject
     /// </summary>
     public class SnapZoneArea : MonoBehaviour
     {
+        /// <summary>
+        /// 是否已被黏著
+        /// </summary>
+        public bool isSnapIn;
 
         [SerializeField] private GameObject fadedObject;
+
         /// <summary>
         /// 要黏貼物件的外框線預置體
         /// </summary>
-        [Tooltip("要黏貼物件的外框線預置體")]public GameObject fadedPrefab; // used to preview insubstantial inputObject
+        [Tooltip("要黏貼物件的外框線預置體")] public GameObject fadedPrefab; // used to preview insubstantial inputObject
 
         /// <summary>
         /// 被偵測的區域碰撞體
@@ -27,36 +32,36 @@ namespace InrteractableObject
 
         void Start()
         {
-            if (sphereCollider==null)
+            if (sphereCollider == null)
             {
                 sphereCollider = GetComponent<SphereCollider>();
             }
-
         }
 
         private void OnTriggerEnter(Collider other)
         {
             //要黏貼的物件被抓取後，黏貼的物件tag會改為SnapObject
-            if (other.GetComponent<SnapTakeDropZone>())
+            if (other.GetComponent<SnapTakeDropZone>() && !isSnapIn)
             {
+                print($"{other.gameObject.name}進入放置區" );
                 //顯示外框線
-                fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity) as GameObject;
-                fadedObject.transform.parent = transform;
-                fadedObject.transform.localPosition = new Vector3();
-                fadedObject.transform.localScale = new Vector3(1,1,1);
+                fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity);
+                fadedObject.transform.SetParent(transform);
+                fadedObject.transform.localPosition = Vector3.zero;
+                fadedObject.transform.localScale = Vector3.one;
                 fadedObject.transform.localRotation = Quaternion.identity;
 
-
-                gameObject.tag = "AreaZone";
+                //要黏著的物體已黏著與此區域
+                isSnapIn = true;
                 snapTakeDropZone.snapFixed.isLocated = true;
                 //Debug.Log("Snap Object Correct！");
             }
-
         }
 
         private void OnTriggerExit(Collider other)
         {
             Destroy(fadedObject);
+            isSnapIn = false;
 
             //if (snapTakeDropZone.snapFixed.isThrowed)
             //{
@@ -69,6 +74,5 @@ namespace InrteractableObject
                 snapTakeDropZone.snapFixed.isLocated = false;
             }
         }
-
     }
 }

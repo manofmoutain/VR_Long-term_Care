@@ -13,7 +13,7 @@ namespace InrteractableObject
     {
         /// <summary>
         /// 是否進入重置區域
-       /// </summary>
+        /// </summary>
         public bool isEntry;
 
         private void Start()
@@ -23,18 +23,20 @@ namespace InrteractableObject
 
         /// <summary>
         /// 掛在SnapTakeDropZone腳本的DropDown上
-        /// 物件丟掉後，會回到原始位置
+        /// 物件掉落在特定位置後，會回到原始位置
         /// </summary>
         public void ReverTakeObjectPosition()
         {
-            transform.GetComponent<Rigidbody>().isKinematic = true;
+            if (isEntry)
+            {
+                transform.GetComponent<Rigidbody>().isKinematic = true;
 
-            transform.localPosition = Vector3.zero;
-            transform.localEulerAngles=Vector3.zero;
-            transform.localScale=Vector3.one;
+                transform.localPosition = Vector3.zero;
+                transform.localEulerAngles = Vector3.zero;
+                transform.localScale = Vector3.one;
 
-            isEntry = false;
+                isEntry = false;
+            }
         }
     }
 }
-

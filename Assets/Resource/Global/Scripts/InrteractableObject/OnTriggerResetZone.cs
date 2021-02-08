@@ -7,9 +7,9 @@ namespace InrteractableObject
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<ResetPosition>())
+            if (other.GetComponent<SnapTakeDropZone>())
             {
-                throw new NotImplementedException();
+                other.GetComponent<ResetPosition>().isEntry = true;
             }
         }
     }

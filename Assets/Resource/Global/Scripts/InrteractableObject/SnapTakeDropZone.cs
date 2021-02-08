@@ -13,43 +13,20 @@ namespace InrteractableObject
     public class SnapTakeDropZone : MonoBehaviour
     {
         /// <summary>
-        /// 是否已黏貼物體
+        /// 是否已抓取物件
         /// </summary>
+        [Header("狀態")] [Tooltip("是否已抓取此物件")] [SerializeField]
         private bool snapTakeObject;
 
         /// <summary>
-        ///是否已黏貼手勢(虛擬手)
+        ///Trigger放開後是否要脫離手勢
         /// </summary>
-        public bool snapReleaseGesture;
-
-        [SerializeField] private float catchingSpeedThreshold;
-        [SerializeField] private float releaseVelocityTimeOffset;
-        [SerializeField] private float scaleReleaseVelocity;
-        [SerializeField] private float scaleReleaseVelocityThreshold;
-
-        [SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;
-
-        [SerializeField] private Hand sanpCurrentHand;
-        [SerializeField] private VelocityEstimator velocityEstimator;
-        [SerializeField] private AnimationCurve scaleReleaseVelocityCurve;
-
-        [Tooltip("原本的位置")]public GameObject OriginalPosition;
-
-        [Tooltip("要黏著的區域")]public GameObject[] UsePosition;
-
-        [SerializeField] private GameObject takeObject;
-        [SerializeField] private GameObject headTurnRoundGroup;
-
-        [SerializeField] private Interactable interactable;
-        public List<SnapZoneArea> snapZoneArea;
-
+        [Tooltip("Trigger放開後是否要脫離手勢")] public bool snapReleaseGesture;
 
         [System.Serializable]
         public class SnapFixed
         {
-            [Tooltip("定位判斷－抓取的物件若吻合於黏貼區(未鬆手) ")]
-            public bool isLocated;
+            [Tooltip("定位判斷－抓取的物件若吻合於黏貼區(未鬆手) ")] public bool isLocated;
 
             [Tooltip("吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區) ")]
             public bool isFixed;
@@ -58,7 +35,6 @@ namespace InrteractableObject
         }
 
         public SnapFixed snapFixed;
-
 
         [System.Serializable]
         public class ThrowOutside
@@ -70,7 +46,26 @@ namespace InrteractableObject
 
         public ThrowOutside throwOutside;
 
-        public UnityEvent snapIn;
+        [Header("物理性")] [SerializeField] private float catchingSpeedThreshold;
+        [SerializeField] private float releaseVelocityTimeOffset;
+        [SerializeField] private float scaleReleaseVelocity;
+        [SerializeField] private float scaleReleaseVelocityThreshold;
+
+        [Header("本身的Component")] [SerializeField]
+        private Rigidbody rigidbody;
+
+        [SerializeField] private RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;
+        [SerializeField] private VelocityEstimator velocityEstimator;
+        [SerializeField] private AnimationCurve scaleReleaseVelocityCurve;
+        [SerializeField] private Interactable interactable;
+
+        [Header("外部物件")] [SerializeField] private Hand sanpCurrentHand;
+        [Tooltip("原本位置")] public GameObject OriginalPosition;
+        [Tooltip("要黏著的物件")] public GameObject[] UsePosition;
+        public List<SnapZoneArea> snapZoneArea;
+        [SerializeField] private GameObject takeObject;
+
+        [Header("事件")] public UnityEvent snapIn;
         public UnityEvent snapOut;
         public UnityEvent pickUp;
         public UnityEvent dropDown;
@@ -98,12 +93,12 @@ namespace InrteractableObject
 
 
             //取得 snapZoneArea 置放區域
-            for (int u = 0; u < UsePosition.Length; u++)
+            for (int i = 0; i < UsePosition.Length; i++)
             {
-                snapZoneArea.Add(UsePosition[u].transform.GetChild(0).GetComponent<SnapZoneArea>());
+                snapZoneArea.Add(UsePosition[i].transform.GetChild(0).GetComponent<SnapZoneArea>());
             }
 
-            //隱藏 Sanp Objects 的放置提示輪廓線
+            //隱藏放置提示輪廓線
             foreach (GameObject useObject in UsePosition)
             {
                 useObject.SetActive(false);
@@ -114,66 +109,65 @@ namespace InrteractableObject
         {
             if (snapTakeObject)
             {
-                gameObject.tag = "SnapObject";
+                // gameObject.tag = "SnapObject";
 
-                //顯示 Sanp Objects 的放置提示輪廓線
+                //開啟黏著區物件
                 foreach (GameObject useObject in UsePosition)
                 {
                     useObject.SetActive(true);
                 }
 
-                //固定位置：Snap Position.
+                //固定在新的位置
                 if (snapFixed.isFixed)
                 {
-                    gameObject.tag = "FixObject";
+                    // gameObject.tag = "FixObject";
 
-                    foreach (SnapZoneArea snapzone in snapZoneArea)
+                    foreach (SnapZoneArea snapZone in snapZoneArea)
                     {
                         //判斷是否為觸發放置區域
-                        if (snapzone.gameObject.tag == "AreaZone")
+                        if (snapZone.GetComponent<SnapZoneArea>())
                         {
-                            gameObject.transform.parent = snapzone.transform.parent.transform;
+                            transform.SetParent(snapZone.transform.parent.transform);
                         }
                     }
 
 
-                    gameObject.transform.localPosition = new Vector3();
-                    gameObject.transform.localEulerAngles = new Vector3();
-                    gameObject.transform.localScale = new Vector3(1, 1, 1);
+                    transform.localPosition = new Vector3();
+                    transform.localEulerAngles = new Vector3();
+                    transform.localScale = new Vector3(1, 1, 1);
 
-                    snapIn.Invoke();
+                    // snapIn.Invoke();
                 }
-                else
-                {
-                    pickUp.Invoke();
-                }
+
+                // else
+                // {
+                //     pickUp.Invoke();
+                // }
             }
             else
             {
                 //放下物品：參數重置
-                gameObject.tag = "DropObject";
-                gameObject.transform.parent = OriginalPosition.transform;
+                // gameObject.tag = "DropObject";
+                transform.SetParent(OriginalPosition.transform);
 
                 snapFixed.isLocated = false;
                 snapFixed.isFixed = false;
                 //snapFixed.isThrowed = false;
 
-                //隱藏 Sanp Objects 的放置提示輪廓線
+                //隱藏放置提示輪廓線
                 foreach (GameObject useObject in UsePosition)
                 {
-                    useObject.transform.GetChild(0).tag = "Untagged";
+                    useObject.transform.GetChild(0).GetComponent<SnapZoneArea>().isSnapIn = true;
                     useObject.SetActive(false);
                 }
 
 
                 if (snapFixed.isOutside)
                 {
-                    snapZoneArea[0].gameObject.tag = "AreaZone";
+                    // snapZoneArea[0].gameObject.tag = "AreaZone";
 
                     snapFixed.isFixed = true;
                     snapTakeObject = true;
-
-
                 }
                 else
                 {
@@ -224,8 +218,7 @@ namespace InrteractableObject
         {
             //snapFixed.isHover = true;
             hand.ShowGrabHint();
-
-            headTurnRoundGroup.GetComponent<SphereCollider>().enabled = false;
+            snapIn.Invoke();
         }
 
 
@@ -233,7 +226,7 @@ namespace InrteractableObject
         {
             //snapFixed.isHover = false;
             hand.HideGrabHint();
-            headTurnRoundGroup.GetComponent<SphereCollider>().enabled = true;
+            snapOut.Invoke();
         }
 
 
@@ -250,12 +243,12 @@ namespace InrteractableObject
                     hand.HoverLock(interactable);
                     hand.HideGrabHint();
 
-                    //Snap out：釋放吻合物件
+                    //手勢脫離物件
                     if (snapFixed.isFixed && snapReleaseGesture)
                     {
                         snapFixed.isFixed = false;
                         snapFixed.isLocated = false;
-                        snapOut.Invoke();
+                        // snapOut.Invoke();
                     }
 
                     //拿起指定的物件
@@ -267,7 +260,7 @@ namespace InrteractableObject
                         snapZoneArea[i].sphereCollider.isTrigger = true;
                     }
 
-                    Debug.Log($"{gameObject.name} is Grabbed.");
+                    Debug.Log($"抓住了{gameObject.name}");
                 }
                 else
                 {
@@ -287,9 +280,15 @@ namespace InrteractableObject
             }
         }
 
-
+        /// <summary>
+        /// 抓取物件的瞬間事件
+        /// </summary>
+        /// <param name="hand"></param>
         private void OnAttachedToHand(Hand hand)
         {
+            pickUp.Invoke();
+
+
             hadInterpolation = rigidbody.interpolation;
             rigidbody.interpolation = RigidbodyInterpolation.None;
 
@@ -313,9 +312,10 @@ namespace InrteractableObject
             bool isGrabEnding = hand.IsGrabEnding(gameObject);
             if (isGrabEnding)
             {
+                print($"正在抓取{gameObject.name}");
                 if (snapFixed.isLocated)
                 {
-                    //吻合物件後放開手勢
+                    //鬆開Trigger若手勢脫離的情況
                     if (snapReleaseGesture)
                     {
                         hand.DetachObject(gameObject);
@@ -347,16 +347,22 @@ namespace InrteractableObject
                 }
 
 
-                //開啟置放區的觸發
-                for (int u = 0; u < UsePosition.Length; u++)
+                //關閉置放區的trigger
+                for (int i = 0; i < UsePosition.Length; i++)
                 {
-                    snapZoneArea[u].sphereCollider.isTrigger = false;
+                    snapZoneArea[i].sphereCollider.isTrigger = false;
                 }
             }
         }
 
+        /// <summary>
+        /// 鬆開物件的瞬間事件
+        /// </summary>
+        /// <param name="hand"></param>
         private void OnDetachedFromHand(Hand hand)
         {
+            dropDown.Invoke();
+
             Vector3 velocity;
             Vector3 angularVelocity;
             GetReleaseVelocities(hand, out velocity, out angularVelocity);
@@ -364,6 +370,12 @@ namespace InrteractableObject
             rigidbody.velocity = velocity;
             rigidbody.angularVelocity = angularVelocity;
             rigidbody.interpolation = hadInterpolation;
+
+            // if (isReleaseGesture)
+            // {
+            //     snapReleaseGesture = true;
+            // }
+            // snapReleaseGesture = false;
 
             takeObject = null;
             sanpCurrentHand = null;

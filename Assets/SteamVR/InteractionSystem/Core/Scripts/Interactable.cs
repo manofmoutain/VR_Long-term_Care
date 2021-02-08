@@ -72,7 +72,7 @@ namespace Valve.VR.InteractionSystem
         [Tooltip("Higher is better")]
         public int hoverPriority = 0;
 
-        [System.NonSerialized]
+        // [System.NonSerialized]
         public Hand attachedToHand;
 
         [System.NonSerialized]
