@@ -13,6 +13,8 @@ namespace Heimlich_maneuver.Patient
         // [SerializeField] private LinearInteractable interactPoint;
         public bool isPushed;
 
+        [SerializeField] private GameObject originPosition;
+        [SerializeField] private GameObject sitPosition;
 
         private void Start()
         {

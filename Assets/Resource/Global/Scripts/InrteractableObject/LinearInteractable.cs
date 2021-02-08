@@ -7,10 +7,14 @@ namespace InrteractableObject
 {
     public class LinearInteractable : MonoBehaviour
     {
+        [SerializeField] private Hand otherHand;
         public float linearValue;
         [SerializeField] private GameObject[] allInteractPoints;
         [SerializeField] private GameObject interactPoint;
+        [SerializeField] private float lineMappingValue;
+        [SerializeField] private LinearMapping linearMapping;
         [SerializeField] private LinearDrive linearDrive;
+        [SerializeField] private Animator patientAnimator;
 
 
         private void Start()
@@ -22,7 +26,10 @@ namespace InrteractableObject
             }
         }
 
-
+        private void Update()
+        {
+            lineMappingValue = linearMapping.value;
+        }
 
 
         #region InteractMethod
@@ -61,6 +68,7 @@ namespace InrteractableObject
                 go.SetActive(true);
                 go.GetComponent<MeshRenderer>().material.color = Color.green;
                 interactPoint.transform.position=linearDrive.startPosition.position;
+                patientAnimator.Play(0,0,0);
             }
 
         #endregion
