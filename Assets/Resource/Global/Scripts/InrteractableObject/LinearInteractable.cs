@@ -1,7 +1,10 @@
-﻿using System;
-using Manager;
-using UnityEngine;
+﻿using UnityEngine;
+#if UNITY_ANDROID && !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+// SteamVR代碼
 using Valve.VR.InteractionSystem;
+#endif
 
 namespace InrteractableObject
 {
@@ -12,7 +15,7 @@ namespace InrteractableObject
         [SerializeField] private GameObject[] allInteractPoints;
         [SerializeField] private GameObject interactPoint;
         [SerializeField] private float lineMappingValue;
-        [SerializeField] private LinearMapping linearMapping;
+        [SerializeField] private GameObject linearMappingGameObject;
         [SerializeField] private LinearDrive linearDrive;
         [SerializeField] private Animator patientAnimator;
 
@@ -20,7 +23,7 @@ namespace InrteractableObject
         private void Start()
         {
             interactPoint.GetComponent<MeshRenderer>().enabled = false;
-            if (linearDrive==null)
+            if (linearDrive == null)
             {
                 linearDrive.GetComponent<LinearDrive>();
             }
@@ -28,9 +31,17 @@ namespace InrteractableObject
 
         private void Update()
         {
-            lineMappingValue = linearMapping.value;
+#if UNITY_ANDROID && !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+// SteamVR代碼
+            lineMappingValue = linearMappingGameObject.GetComponent<LinearMapping>().value;
+#endif
         }
-
+#if UNITY_ANDROID && !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+// SteamVR代碼
 
         #region InteractMethod
 
@@ -57,22 +68,21 @@ namespace InrteractableObject
             //what to do
             go.SetActive(true);
             go.GetComponent<MeshRenderer>().material.color = Color.red;
-
         }
 
-            public void OnDetachedFromHand(GameObject go)
-            {
-                //hint
-                interactPoint.GetComponent<MeshRenderer>().enabled = false;
-                //what to do
-                go.SetActive(true);
-                go.GetComponent<MeshRenderer>().material.color = Color.green;
-                interactPoint.transform.position=linearDrive.startPosition.position;
-                patientAnimator.Play(0,0,0);
-            }
+        public void OnDetachedFromHand(GameObject go)
+        {
+            //hint
+            interactPoint.GetComponent<MeshRenderer>().enabled = false;
+            //what to do
+            go.SetActive(true);
+            go.GetComponent<MeshRenderer>().material.color = Color.green;
+            interactPoint.transform.position = linearDrive.startPosition.position;
+            patientAnimator.Play(0, 0, 0);
+        }
 
         #endregion
 
-
+#endif
     }
 }

@@ -1,9 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+#if UNITY_ANDROID  &&  !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+// SteamVR代碼
 using Valve.VR.InteractionSystem;
+#endif
 
 namespace InrteractableObject
 {
@@ -158,7 +161,7 @@ namespace InrteractableObject
                 //隱藏放置提示輪廓線
                 foreach (GameObject useObject in UsePosition)
                 {
-                    useObject.transform.GetChild(0).GetComponent<SnapZoneArea>().isSnapIn = true;
+                    // useObject.transform.GetChild(0).GetComponent<SnapZoneArea>().isSnapIn = true;
                     useObject.SetActive(false);
                 }
 

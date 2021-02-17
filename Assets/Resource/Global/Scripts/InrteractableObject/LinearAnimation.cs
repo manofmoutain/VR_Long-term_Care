@@ -1,12 +1,18 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+
+#if UNITY_ANDROID  &&  !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+// SteamVR代碼
 using Valve.VR.InteractionSystem;
+#endif
+
 
 namespace InrteractableObject
 {
     public class LinearAnimation : MonoBehaviour
     {
-        public LinearMapping linearMapping;
+        public GameObject linearMappingGameObject;
         [SerializeField] private Animator animator;
 
         [SerializeField] private float currentLinearMapping = float.NaN;
@@ -21,19 +27,19 @@ namespace InrteractableObject
             }
 
             animator.speed = 0.0f;
-
-            if (linearMapping == null)
-            {
-                linearMapping = GetComponent<LinearMapping>();
-            }
         }
 
 
         private void Update()
         {
-            if (currentLinearMapping != linearMapping.value)
+#if UNITY_ANDROID && !UNITY_EDITOR
+ // Oculus Quest代碼
+
+#else
+// SteamVR代碼
+            if (currentLinearMapping != linearMappingGameObject.GetComponent<LinearMapping>().value)
             {
-                currentLinearMapping = linearMapping.value;
+                currentLinearMapping = linearMappingGameObject.GetComponent<LinearMapping>().value;
                 animator.enabled = true;
                 animator.Play(0, 0, currentLinearMapping);
                 framesUnchanged = 0;
@@ -46,6 +52,7 @@ namespace InrteractableObject
                     animator.enabled = false;
                 }
             }
+#endif
         }
     }
 }

@@ -40,10 +40,14 @@ namespace InrteractableObject
 
         private void OnTriggerEnter(Collider other)
         {
-            //要黏貼的物件被抓取後，黏貼的物件tag會改為SnapObject
+#if UNITY_ANDROID && !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+            // SteamVR代碼
+//要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
             if (other.GetComponent<SnapTakeDropZone>() && !isSnapIn)
             {
-                print($"{other.gameObject.name}進入放置區" );
+                print($"{other.gameObject.name}進入放置區");
                 //產生外框線
                 fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity);
                 fadedObject.transform.SetParent(transform);
@@ -56,23 +60,32 @@ namespace InrteractableObject
                 snapTakeDropZone.snapFixed.isLocated = true;
                 //Debug.Log("Snap Object Correct！");
             }
+#endif
         }
 
         private void OnTriggerExit(Collider other)
         {
-            Destroy(fadedObject);
-            isSnapIn = false;
-
-            //if (snapTakeDropZone.snapFixed.isThrowed)
-            //{
-            //    snapTakeDropZone.snapFixed.isLocated = false;
-            //    snapTakeDropZone.snapFixed.isThrowed = false;
-            //}
-
-            if (snapTakeDropZone.snapFixed.isLocated && !snapTakeDropZone.snapFixed.isFixed)
+#if UNITY_ANDROID && !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+            // SteamVR代碼
+            if (other.GetComponent<SnapTakeDropZone>() && isSnapIn)
             {
-                snapTakeDropZone.snapFixed.isLocated = false;
+                Destroy(fadedObject);
+                isSnapIn = false;
+
+                //if (snapTakeDropZone.snapFixed.isThrowed)
+                //{
+                //    snapTakeDropZone.snapFixed.isLocated = false;
+                //    snapTakeDropZone.snapFixed.isThrowed = false;
+                //}
+
+                if (snapTakeDropZone.snapFixed.isLocated && !snapTakeDropZone.snapFixed.isFixed)
+                {
+                    snapTakeDropZone.snapFixed.isLocated = false;
+                }
             }
+#endif
         }
     }
 }

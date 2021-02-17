@@ -1,16 +1,19 @@
-﻿using System;
-using InrteractableObject;
+﻿using InrteractableObject;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Serialization;
+#if UNITY_ANDROID  &&  !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+// SteamVR代碼
 using Valve.VR.InteractionSystem;
-using LinearAnimation = InrteractableObject.LinearAnimation;
+#endif
+
 
 namespace Heimlich_maneuver.Patient
 {
     public class HamlickPatient : MonoBehaviour
     {
         [SerializeField] private GameObject player;
+
         // [SerializeField] private LinearInteractable interactPoint;
         public bool isPushed;
 
@@ -30,10 +33,24 @@ namespace Heimlich_maneuver.Patient
 
         private void Update()
         {
-            interactHint.SetActive(transform.parent==sitTransform);
-            interactPoint.gameObject.SetActive(transform.parent==sitTransform && player.transform.position.z>transform.position.z);
-            // patient.GetComponent<SnapTakeDropZone>().enabled = patient.transform.parent==originTransform;
-            // GetComponent<LinearAnimation>().enabled = isPushed;
+            interactHint.SetActive(patient.transform.parent == sitTransform);
+            interactPoint.gameObject.SetActive(patient.transform.parent == sitTransform);
+
+
+#if UNITY_ANDROID  &&  !UNITY_EDITOR
+// Oculus Quest代碼
+#else
+// SteamVR代碼
+            if (patient.transform.parent == sitTransform)
+            {
+                patient.GetComponent<SnapTakeDropZone>().enabled = false;
+            }
+            else
+            {
+                patient.GetComponent<SnapTakeDropZone>().enabled = true;
+            }
+#endif
+
 
         }
 
