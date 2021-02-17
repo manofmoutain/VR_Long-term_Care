@@ -21,7 +21,7 @@ namespace Heimlich_maneuver.Patient
         [SerializeField] private Transform sitTransform;
 
         [SerializeField] private GameObject interactHint;
-        [SerializeField] private LinearInteractable interactPoint;
+        [SerializeField] private GameObject interactPoint;
 
         [SerializeField] private GameObject patient;
 
@@ -34,7 +34,7 @@ namespace Heimlich_maneuver.Patient
         private void Update()
         {
             interactHint.SetActive(patient.transform.parent == sitTransform);
-            interactPoint.gameObject.SetActive(patient.transform.parent == sitTransform);
+            interactPoint.SetActive(patient.transform.parent == sitTransform);
 
 
 #if UNITY_ANDROID  &&  !UNITY_EDITOR
@@ -50,8 +50,6 @@ namespace Heimlich_maneuver.Patient
                 patient.GetComponent<SnapTakeDropZone>().enabled = true;
             }
 #endif
-
-
         }
 
 

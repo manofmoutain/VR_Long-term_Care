@@ -16,17 +16,14 @@ namespace InrteractableObject
         [SerializeField] private GameObject interactPoint;
         [SerializeField] private float lineMappingValue;
         [SerializeField] private GameObject linearMappingGameObject;
-        [SerializeField] private LinearDrive linearDrive;
+        [SerializeField] private GameObject linearDrive;
         [SerializeField] private Animator patientAnimator;
 
 
         private void Start()
         {
             interactPoint.GetComponent<MeshRenderer>().enabled = false;
-            if (linearDrive == null)
-            {
-                linearDrive.GetComponent<LinearDrive>();
-            }
+
         }
 
         private void Update()
@@ -38,6 +35,8 @@ namespace InrteractableObject
             lineMappingValue = linearMappingGameObject.GetComponent<LinearMapping>().value;
 #endif
         }
+
+
 #if UNITY_ANDROID && !UNITY_EDITOR
 // Oculus Quest代碼
 #else
@@ -77,12 +76,11 @@ namespace InrteractableObject
             //what to do
             go.SetActive(true);
             go.GetComponent<MeshRenderer>().material.color = Color.green;
-            interactPoint.transform.position = linearDrive.startPosition.position;
+            interactPoint.transform.position = linearDrive.GetComponent<LinearDrive>().startPosition.position;
             patientAnimator.Play(0, 0, 0);
         }
 
         #endregion
-
 #endif
     }
 }
