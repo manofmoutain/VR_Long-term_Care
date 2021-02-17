@@ -44,7 +44,7 @@ namespace InrteractableObject
             if (other.GetComponent<SnapTakeDropZone>() && !isSnapIn)
             {
                 print($"{other.gameObject.name}進入放置區" );
-                //顯示外框線
+                //產生外框線
                 fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity);
                 fadedObject.transform.SetParent(transform);
                 fadedObject.transform.localPosition = Vector3.zero;

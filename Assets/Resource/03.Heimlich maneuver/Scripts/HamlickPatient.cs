@@ -1,6 +1,7 @@
 ﻿using System;
 using InrteractableObject;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
 using Valve.VR.InteractionSystem;
 using LinearAnimation = InrteractableObject.LinearAnimation;
@@ -13,8 +14,13 @@ namespace Heimlich_maneuver.Patient
         // [SerializeField] private LinearInteractable interactPoint;
         public bool isPushed;
 
-        [SerializeField] private GameObject originPosition;
-        [SerializeField] private GameObject sitPosition;
+        [SerializeField] private Transform originTransform;
+        [SerializeField] private Transform sitTransform;
+
+        [SerializeField] private GameObject interactHint;
+        [SerializeField] private LinearInteractable interactPoint;
+
+        [SerializeField] private GameObject patient;
 
         private void Start()
         {
@@ -24,7 +30,9 @@ namespace Heimlich_maneuver.Patient
 
         private void Update()
         {
-            // interactPoint.gameObject.SetActive(player.transform.position.z > transform.position.z);
+            interactHint.SetActive(transform.parent==sitTransform);
+            interactPoint.gameObject.SetActive(transform.parent==sitTransform && player.transform.position.z>transform.position.z);
+            // patient.GetComponent<SnapTakeDropZone>().enabled = patient.transform.parent==originTransform;
             // GetComponent<LinearAnimation>().enabled = isPushed;
 
         }

@@ -16,7 +16,7 @@ namespace InrteractableObject
         /// 是否已抓取物件
         /// </summary>
         [Header("狀態")] [Tooltip("是否已抓取此物件")] [SerializeField]
-        private bool snapTakeObject;
+        public bool snapTakeObject;
 
         /// <summary>
         ///Trigger放開後是否要脫離手勢
@@ -117,7 +117,7 @@ namespace InrteractableObject
                     useObject.SetActive(true);
                 }
 
-                //固定在新的位置
+                //放置在新的transform之下
                 if (snapFixed.isFixed)
                 {
                     // gameObject.tag = "FixObject";
@@ -125,9 +125,10 @@ namespace InrteractableObject
                     foreach (SnapZoneArea snapZone in snapZoneArea)
                     {
                         //判斷是否為觸發放置區域
-                        if (snapZone.GetComponent<SnapZoneArea>())
+                        if (snapZone.isSnapIn)
                         {
-                            transform.SetParent(snapZone.transform.parent.transform);
+                            transform.SetParent(snapZone.transform.parent);
+                            print($"{gameObject.name}已成為{snapZone.transform.parent.gameObject.name}的子物件");
                         }
                     }
 
