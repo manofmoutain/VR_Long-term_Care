@@ -6,7 +6,7 @@ using System.Data;
 using System.IO;
 using JetBrains.Annotations;
 
-namespace System
+namespace GlobalSystem
 {
     [System.Serializable]
     public class ScoreSystem

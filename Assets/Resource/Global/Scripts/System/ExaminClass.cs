@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace System
+namespace GlobalSystem
 {
     [CreateAssetMenu(fileName = "ExamClass",menuName="Exam/Class",order = 0)]
     public class ExaminClass : ScriptableObject

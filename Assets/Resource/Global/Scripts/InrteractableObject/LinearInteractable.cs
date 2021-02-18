@@ -11,10 +11,8 @@ namespace InrteractableObject
     public class LinearInteractable : MonoBehaviour
     {
         [SerializeField] private Hand otherHand;
-        public float linearValue;
         [SerializeField] private GameObject[] allInteractPoints;
         [SerializeField] private GameObject interactPoint;
-        [SerializeField] private float lineMappingValue;
         [SerializeField] private GameObject linearMappingGameObject;
         [SerializeField] private GameObject linearDrive;
         [SerializeField] private Animator patientAnimator;
@@ -26,15 +24,6 @@ namespace InrteractableObject
 
         }
 
-        private void Update()
-        {
-#if UNITY_ANDROID && !UNITY_EDITOR
-// Oculus Quest代碼
-#else
-// SteamVR代碼
-            lineMappingValue = linearMappingGameObject.GetComponent<LinearMapping>().value;
-#endif
-        }
 
 
 #if UNITY_ANDROID && !UNITY_EDITOR

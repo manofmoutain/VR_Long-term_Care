@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using Microsoft.CognitiveServices.Speech;
 using UnityEngine;
 
-namespace System
+namespace GlobalSystem
 {
     [Serializable]
     public class SpeechSystem

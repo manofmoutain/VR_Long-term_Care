@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using I18N.Other;
+using GlobalSystem;
 using UnityEngine;
-using Microsoft.CognitiveServices.Speech;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using UnityEditor.Rendering;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Manager

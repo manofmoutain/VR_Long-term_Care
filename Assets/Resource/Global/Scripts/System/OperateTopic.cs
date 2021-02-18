@@ -1,4 +1,6 @@
-﻿namespace System
+﻿using System;
+
+namespace GlobalSystem
 {
     /// <summary>
     /// 操作項目

@@ -1,4 +1,4 @@
-﻿namespace System
+﻿namespace GlobalSystem
 {
     public interface IScoreSystem
     {

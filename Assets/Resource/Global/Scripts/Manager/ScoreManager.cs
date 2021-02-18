@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GlobalSystem;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Manager
 {
@@ -9,6 +7,8 @@ namespace Manager
     {
         // public ScoreSystem _scoreSystem;
         [SerializeField] ScoreSystem _scoreSystem;
+        private Mod gameMod;
+        public Mod GameMod => gameMod;
         protected override void Awake()
         {
             base.Awake();
