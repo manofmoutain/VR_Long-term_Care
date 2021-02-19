@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Microsoft.CognitiveServices.Speech;
+using TMPro;
 using UnityEngine;
 
 namespace GlobalSystem
@@ -49,6 +50,9 @@ namespace GlobalSystem
         /// </summary>
         [SerializeField] private string message;
 
+        /// <summary>
+        /// 多少秒後重置訊息
+        /// </summary>
         [SerializeField]private float _waitForSecondsToClearMessage;
 
         #endregion
@@ -58,7 +62,7 @@ namespace GlobalSystem
         /// <summary>
         /// 回溯文字
         /// </summary>
-        public IEnumerator CleareMessageAfterRecognize()
+        public IEnumerator Co_CleareMessageAfterRecognize()
         {
             // waitingForRecognize = false;
             if (_waitForSecondsToClearMessage==0)
@@ -97,7 +101,7 @@ namespace GlobalSystem
             _speechMesssage = text;
         }
 
-        public void UpdateMessage(UnityEngine.UI.Text text)
+        public void UpdateMessage(TextMeshProUGUI text)
         {
             lock (threadLocker)
             {

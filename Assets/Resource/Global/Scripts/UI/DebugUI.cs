@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Manager;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DebugUI : MonoBehaviour
 {
-    [SerializeField] private Text debugSpeechUI;
+    [SerializeField] private TextMeshProUGUI debugSpeechUI;
     void Start()
     {
 
@@ -27,8 +28,4 @@ public class DebugUI : MonoBehaviour
         SpeechManager.Instance.UpdateDebugUI(debugSpeechUI);
     }
 
-    void III()
-    {
-
-    }
 }

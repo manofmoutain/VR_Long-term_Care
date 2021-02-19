@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using GlobalSystem;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Manager
 {
@@ -39,7 +39,7 @@ namespace Manager
         /// <summary>
         /// 辨識出的語音文字，顯示在UI上
         /// </summary>
-        [SerializeField] private Text SpeechDebugUIText;
+        [SerializeField] private TextMeshProUGUI SpeechDebugUIText;
 
         #endregion
 
@@ -63,7 +63,7 @@ namespace Manager
         /// </summary>
         public void ClearMessage()
         {
-            StartCoroutine(_speechSystem.CleareMessageAfterRecognize());
+            StartCoroutine(_speechSystem.Co_CleareMessageAfterRecognize());
         }
 
         /// <summary>
@@ -106,8 +106,11 @@ namespace Manager
             _speechSystem.VoiceRecognition();
         }
 
-
-        public void UpdateDebugUI(Text text)
+        /// <summary>
+        /// 更新顯示在牆上的語音文字
+        /// </summary>
+        /// <param name="text"></param>
+        public void UpdateDebugUI(TextMeshProUGUI text)
         {
             _speechSystem.UpdateMessage(text);
         }
@@ -144,8 +147,8 @@ namespace Manager
                 switch (index)
                 {
                     case 0:
-                        ScoreManager.Instance.DecreaseOperateSteps(0);
-                        ScoreManager.Instance.SetDone(index,true);
+                        // ScoreManager.Instance.DecreaseOperateSteps(0);
+                        // ScoreManager.Instance.SetDone(index, true);
                         break;
                     case 1:
                         break;

@@ -12,11 +12,11 @@ namespace Manager
                 Application.Quit();
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                SpeechManager.Instance.StartRecognizeSpeech();
-                // SpeechManager.Instance.ClearMessage();
-            }
+            // if (Input.GetKeyDown(KeyCode.Alpha1))
+            // {
+            //     SpeechManager.Instance.StartRecognizeSpeech();
+            //     // SpeechManager.Instance.ClearMessage();
+            // }
         }
         void III()
         {
