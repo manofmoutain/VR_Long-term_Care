@@ -66,7 +66,8 @@ namespace InrteractableObject
             go.SetActive(true);
             go.GetComponent<MeshRenderer>().material.color = Color.green;
             interactPoint.transform.position = linearDrive.GetComponent<LinearDrive>().startPosition.position;
-            patientAnimator.Play(0, 0, 0);
+            
+
         }
 
         #endregion

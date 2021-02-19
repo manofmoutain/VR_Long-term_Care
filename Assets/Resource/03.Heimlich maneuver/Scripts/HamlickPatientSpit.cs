@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Heimlich_maneuver.Patient
@@ -9,7 +6,7 @@ namespace Heimlich_maneuver.Patient
     public class HamlickPatientSpit : MonoBehaviour
     {
         [Header("音效")] [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip spit;
+        [SerializeField] private AudioClip spitSFX;
 
 
         [Header("生成物件")] [SerializeField] private Transform spawnPoint;
@@ -21,9 +18,15 @@ namespace Heimlich_maneuver.Patient
         [SerializeField] private bool isChoking;
 
         /// <summary>
+        /// 最小按壓次數
+        /// </summary>
+        [SerializeField]private int minPushCount;
+
+        /// <summary>
         /// 施作次數
         /// </summary>
         [SerializeField] private int pushCount;
+
 
         private void Start()
         {
@@ -32,13 +35,13 @@ namespace Heimlich_maneuver.Patient
 
         void Spit()
         {
-            if (pushCount > 5 && isChoking)
+            if (pushCount > minPushCount && isChoking)
             {
                 int random = Random.Range(0, 10);
                 if (random >= 7)
                 {
+                    audioSource.PlayOneShot(spitSFX);
                     GameObject go = Instantiate(bean, spawnPoint.position, Quaternion.identity, transform);
-                    go.AddComponent<Rigidbody>();
                     go.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 3);
                     Destroy(go, 3f);
                     isChoking = false;
@@ -54,4 +57,3 @@ namespace Heimlich_maneuver.Patient
         }
     }
 }
-

@@ -12,6 +12,7 @@ namespace Resource.Global.Scripts.Patient
     {
         [SerializeField] private GameObject patient;
         public UnityEvent onTriggerenter;
+        public UnityEvent onLinearInteractTriggerEnter;
         [SerializeField] private int count;
         public int Count => count;
 
