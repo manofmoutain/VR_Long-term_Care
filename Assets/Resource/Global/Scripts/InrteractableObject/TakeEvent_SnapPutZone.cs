@@ -10,10 +10,11 @@ using Valve.VR.InteractionSystem;
 
 namespace InrteractableObject
 {
+    [RequireComponent( typeof( Interactable ) )]
     /// <summary>
     /// 要黏著於其他物件的物件
     /// </summary>
-    public class SnapTakeDropZone : MonoBehaviour
+    public class TakeEvent_SnapPutZone : MonoBehaviour
     {
         /// <summary>
         /// 是否已抓取物件
@@ -65,7 +66,7 @@ namespace InrteractableObject
         [Header("外部物件")] [SerializeField] private Hand sanpCurrentHand;
         [Tooltip("原本位置")] public GameObject OriginalPosition;
         [Tooltip("要黏著的物件")] public GameObject[] UsePosition;
-        public List<SnapZoneArea> snapZoneArea;
+        public List<TakeEvent_SnapArea> snapZoneArea;
         [SerializeField] private GameObject takeObject;
 
         [Header("事件")] public UnityEvent snapIn;
@@ -98,7 +99,7 @@ namespace InrteractableObject
             //取得 snapZoneArea 置放區域
             for (int i = 0; i < UsePosition.Length; i++)
             {
-                snapZoneArea.Add(UsePosition[i].transform.GetChild(0).GetComponent<SnapZoneArea>());
+                snapZoneArea.Add(UsePosition[i].transform.GetChild(0).GetComponent<TakeEvent_SnapArea>());
             }
 
             //隱藏放置提示輪廓線
@@ -125,7 +126,7 @@ namespace InrteractableObject
                 {
                     // gameObject.tag = "FixObject";
 
-                    foreach (SnapZoneArea snapZone in snapZoneArea)
+                    foreach (TakeEvent_SnapArea snapZone in snapZoneArea)
                     {
                         //判斷是否為觸發放置區域
                         if (snapZone.isSnapIn)

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 namespace InrteractableObject
 {
+    [RequireComponent( typeof( Interactable ) )]
     public class WashHands : MonoBehaviour
     {
         [SerializeField] private GameObject hands;

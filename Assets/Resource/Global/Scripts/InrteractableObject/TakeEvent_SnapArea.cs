@@ -5,7 +5,7 @@ namespace InrteractableObject
     /// <summary>
     /// 要黏貼的區域
     /// </summary>
-    public class SnapZoneArea : MonoBehaviour
+    public class TakeEvent_SnapArea : MonoBehaviour
     {
         /// <summary>
         /// 是否已被黏著
@@ -27,7 +27,7 @@ namespace InrteractableObject
         /// <summary>
         /// 要黏貼的物件(必須要有snapTakeDropZone腳本)
         /// </summary>
-        public SnapTakeDropZone snapTakeDropZone;
+        public TakeEvent_SnapPutZone takeEventSnapPutZone;
 
 
         void Start()
@@ -45,7 +45,7 @@ namespace InrteractableObject
 #else
             // SteamVR代碼
 //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.GetComponent<SnapTakeDropZone>() && !isSnapIn)
+            if (other.GetComponent<TakeEvent_SnapPutZone>() && !isSnapIn)
             {
                 print($"{other.gameObject.name}進入放置區");
                 //產生外框線
@@ -57,7 +57,7 @@ namespace InrteractableObject
 
                 //要黏著的物體已黏著與此區域
                 isSnapIn = true;
-                snapTakeDropZone.snapFixed.isLocated = true;
+                takeEventSnapPutZone.snapFixed.isLocated = true;
                 //Debug.Log("Snap Object Correct！");
             }
 #endif
@@ -69,7 +69,7 @@ namespace InrteractableObject
 // Oculus Quest代碼
 #else
             // SteamVR代碼
-            if (other.GetComponent<SnapTakeDropZone>() && isSnapIn)
+            if (other.GetComponent<TakeEvent_SnapPutZone>() && isSnapIn)
             {
                 Destroy(fadedObject);
                 isSnapIn = false;
@@ -80,9 +80,9 @@ namespace InrteractableObject
                 //    snapTakeDropZone.snapFixed.isThrowed = false;
                 //}
 
-                if (snapTakeDropZone.snapFixed.isLocated && !snapTakeDropZone.snapFixed.isFixed)
+                if (takeEventSnapPutZone.snapFixed.isLocated && !takeEventSnapPutZone.snapFixed.isFixed)
                 {
-                    snapTakeDropZone.snapFixed.isLocated = false;
+                    takeEventSnapPutZone.snapFixed.isLocated = false;
                 }
             }
 #endif

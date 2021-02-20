@@ -19,10 +19,13 @@ namespace Heimlich_maneuver.Patient
         [Header("外部物件")] [SerializeField] private GameObject player;
 
 
+
+
         /// <summary>
         /// 是否處於施作的狀態
         /// </summary>
-        [Header("狀態")] [SerializeField] bool isPushed;
+        [Header("狀態")]
+        [SerializeField] bool isPushed;
 
         /// <summary>
         /// 是否以觸發語音詢問情況
