@@ -1,21 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Valve.VR.InteractionSystem;
 using UnityEngine;
 using UnityEngine.Events;
-#if UNITY_ANDROID  &&  !UNITY_EDITOR
-// Oculus Quest代碼
-#else
-// SteamVR代碼
-using Valve.VR.InteractionSystem;
-#endif
 
 namespace InrteractableObject
 {
-    [RequireComponent( typeof( Interactable ) )]
-    /// <summary>
-    /// 要黏著於其他物件的物件
-    /// </summary>
-    public class TakeEvent_SnapPutZone : MonoBehaviour
+    [RequireComponent(typeof(Interactable))]
+    public class TakeEvent_TwoHandSnapPuZone : MonoBehaviour
     {
+        [Header("雙手參數")]
+        [SerializeField] private GameObject AttachObjectLeft;
+        [SerializeField] private GameObject AttachObjectRight;
+        [SerializeField] private Hand playerHand_L;
+        [SerializeField] private Hand playerHand_R;
+        [SerializeField] private Vector3 handPos;
+        [SerializeField] private Vector3 worldPlaneNormal = new Vector3(1,0,0);
+
+
         /// <summary>
         /// 是否已抓取物件
         /// </summary>
@@ -71,8 +73,10 @@ namespace InrteractableObject
 
         [Header("事件")] public UnityEvent snapIn;
         public UnityEvent snapOut;
+        public UnityEvent attachUpdate;
         public UnityEvent pickUp;
         public UnityEvent dropDown;
+
 
 
         void Start()
@@ -99,7 +103,11 @@ namespace InrteractableObject
             //取得 snapZoneArea 置放區域
             for (int i = 0; i < UsePosition.Length; i++)
             {
-                snapZoneArea.Add(UsePosition[i].transform.GetChild(0).GetComponent<TakeEvent_SnapArea>());
+                if (UsePosition[i].transform.GetChild(0).GetComponent<TakeEvent_SnapArea>())
+                {
+                    snapZoneArea.Add(UsePosition[i].transform.GetChild(0).GetComponent<TakeEvent_SnapArea>());
+                }
+
             }
 
             //隱藏放置提示輪廓線
@@ -181,42 +189,7 @@ namespace InrteractableObject
             }
         }
 
-        private void GetReleaseVelocities(Hand hand, out Vector3 velocity, out Vector3 angularVelocity)
-        {
-            if (hand.noSteamVRFallbackCamera)
-            {
-                if (velocityEstimator != null)
-                {
-                    velocityEstimator.FinishEstimatingVelocity();
-                    velocity = velocityEstimator.GetVelocityEstimate();
-                    angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
-                }
-                else
-                {
-                    Debug.LogWarning(
-                        "[SteamVR Interaction System] Throwable: No Velocity Estimator component on object but release style set to short estimation. Please add one or change the release style.");
 
-                    velocity = rigidbody.velocity;
-                    angularVelocity = rigidbody.angularVelocity;
-                }
-            }
-            else
-            {
-                velocity = hand.GetTrackedObjectVelocity(releaseVelocityTimeOffset);
-                angularVelocity = hand.GetTrackedObjectAngularVelocity(releaseVelocityTimeOffset);
-            }
-
-
-            float scaleFactor = 1.0f;
-            if (scaleReleaseVelocityThreshold > 0)
-            {
-                scaleFactor =
-                    Mathf.Clamp01(
-                        scaleReleaseVelocityCurve.Evaluate(velocity.magnitude / scaleReleaseVelocityThreshold));
-            }
-
-            velocity *= (scaleFactor * scaleReleaseVelocity);
-        }
 
 
         private void OnHandHoverBegin(Hand hand)
@@ -291,6 +264,22 @@ namespace InrteractableObject
         /// <param name="hand"></param>
         private void OnAttachedToHand(Hand hand)
         {
+            switch (hand.name)
+            {
+                case "LeftHand":
+
+                    playerHand_L = hand;
+                    AttachObjectLeft = playerHand_L.currentAttachedObject.gameObject;
+                    break;
+
+
+                case "RightHand":
+
+                    playerHand_R = hand;
+                    AttachObjectRight = playerHand_R.currentAttachedObject.gameObject;
+                    handPos = ComputeToTransformProjected(playerHand_R.transform);
+                    break;
+            }
             pickUp.Invoke();
 
 
@@ -307,6 +296,24 @@ namespace InrteractableObject
             takeObject = hand.currentAttachedObject;
         }
 
+        private Vector3 ComputeToTransformProjected(Transform xForm)
+        {
+            //normalized： 以此當前向量作為標準值(正規化)
+            Vector3 toTransform = (xForm.position - gameObject.transform.position).normalized;
+
+            Vector3 toTransformProjected = new Vector3(0.0f, 0.0f, 0.0f);
+
+            //magnitude：把 vertor 平方相加在開根號
+            //sqrMagnitude：把vertor 平方
+            //確定抓到物體，
+            if (toTransform.sqrMagnitude > 0.0f)
+            {
+                toTransformProjected = Vector3.ProjectOnPlane(toTransform, worldPlaneNormal).normalized;
+            }
+
+            return toTransformProjected;
+        }
+
         /// <summary>
         /// 物件被抓取時持續偵測
         /// </summary>
@@ -317,7 +324,7 @@ namespace InrteractableObject
             bool isGrabEnding = hand.IsGrabEnding(gameObject);
             if (isGrabEnding)
             {
-                print($"正在抓取{gameObject.name}");
+
                 if (snapFixed.isLocated)
                 {
                     //鬆開Trigger若手勢脫離的情況
@@ -329,6 +336,7 @@ namespace InrteractableObject
                     //Snap in：吻合物件到指定位置
                     snapFixed.isFixed = true;
                     sanpCurrentHand = hand;
+                    print($"正在抓取{gameObject.name}");
                 }
                 else
                 {
@@ -366,6 +374,27 @@ namespace InrteractableObject
         /// <param name="hand"></param>
         private void OnDetachedFromHand(Hand hand)
         {
+            switch (hand.name)
+            {
+                case "LeftHand":
+                    AttachObjectLeft = null;
+                    playerHand_L = null;
+                    break;
+
+
+                case "RightHand":
+
+                    if (AttachObjectRight.tag == "PatientHead")
+                    {
+                        AttachObjectRight = null;
+                        playerHand_R = null;
+                        handPos = new Vector3();
+
+
+                    }
+                    break;
+            }
+
             dropDown.Invoke();
 
             Vector3 velocity;
@@ -384,6 +413,42 @@ namespace InrteractableObject
 
             takeObject = null;
             sanpCurrentHand = null;
+        }
+        private void GetReleaseVelocities(Hand hand, out Vector3 velocity, out Vector3 angularVelocity)
+        {
+            if (hand.noSteamVRFallbackCamera)
+            {
+                if (velocityEstimator != null)
+                {
+                    velocityEstimator.FinishEstimatingVelocity();
+                    velocity = velocityEstimator.GetVelocityEstimate();
+                    angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
+                }
+                else
+                {
+                    Debug.LogWarning(
+                        "[SteamVR Interaction System] Throwable: No Velocity Estimator component on object but release style set to short estimation. Please add one or change the release style.");
+
+                    velocity = rigidbody.velocity;
+                    angularVelocity = rigidbody.angularVelocity;
+                }
+            }
+            else
+            {
+                velocity = hand.GetTrackedObjectVelocity(releaseVelocityTimeOffset);
+                angularVelocity = hand.GetTrackedObjectAngularVelocity(releaseVelocityTimeOffset);
+            }
+
+
+            float scaleFactor = 1.0f;
+            if (scaleReleaseVelocityThreshold > 0)
+            {
+                scaleFactor =
+                    Mathf.Clamp01(
+                        scaleReleaseVelocityCurve.Evaluate(velocity.magnitude / scaleReleaseVelocityThreshold));
+            }
+
+            velocity *= (scaleFactor * scaleReleaseVelocity);
         }
     }
 }

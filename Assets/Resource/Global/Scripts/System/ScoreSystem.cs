@@ -66,6 +66,17 @@ namespace GlobalSystem
         }
 
         /// <summary>
+        /// 增加操作步驟
+        /// </summary>
+        /// <param name="index"></param>
+        public void IncreaseSteps(int index)
+        {
+            _operateTopics[index].operateSteps++;
+
+            Debug.Log($"第{index}項操作剩餘{_operateTopics[index].operateSteps}個步驟未操作");
+        }
+
+        /// <summary>
         /// 刪減操作步驟
         /// </summary>
         /// <param name="index"></param>
@@ -180,11 +191,10 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="index"></param>
         /// <param name="checkMark"></param>
-        public void SetIsDone(int index, bool checkMark)
+        public void SetIsDone(int index)
         {
-            checkMark = _operateTopics[index].operateSteps <= 0 ? true : false;
-            _operateTopics[index].isDone = checkMark;
-            Debug.Log($"第{index}題操作結果：{checkMark}");
+            _operateTopics[index].isDone = _operateTopics[index].operateSteps <= 0 ? true : false;
+            Debug.Log($"第{index}題操作結果：{_operateTopics[index].isDone}");
         }
 
 

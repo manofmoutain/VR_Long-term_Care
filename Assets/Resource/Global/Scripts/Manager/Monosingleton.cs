@@ -1,7 +1,4 @@
-﻿using System;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
-using UnityEditorInternal;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Manager
 {

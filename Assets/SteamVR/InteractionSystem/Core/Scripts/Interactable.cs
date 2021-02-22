@@ -14,22 +14,22 @@ namespace Valve.VR.InteractionSystem
     //-------------------------------------------------------------------------
     public class Interactable : MonoBehaviour
     {
-        [Tooltip("Activates an action set on attach and deactivates on detach")]
+        [Tooltip("激活在附加上設置的操作，並在分離時取消激活Activates an action set on attach and deactivates on detach")]
         public SteamVR_ActionSet activateActionSetOnAttach;
 
-        [Tooltip("Hide the whole hand on attachment and show on detach")]
+        [Tooltip("將整個手隱藏在附件上，並在分離時顯示Hide the whole hand on attachment and show on detach")]
         public bool hideHandOnAttach = true;
 
-        [Tooltip("Hide the skeleton part of the hand on attachment and show on detach")]
+        [Tooltip("在附件上隱藏手的骨骼部分，並在分離時顯示Hide the skeleton part of the hand on attachment and show on detach")]
         public bool hideSkeletonOnAttach = false;
 
-        [Tooltip("Hide the controller part of the hand on attachment and show on detach")]
+        [Tooltip("在附件上隱藏手的控制器部分，並在分離時顯示Hide the controller part of the hand on attachment and show on detach")]
         public bool hideControllerOnAttach = false;
 
-        [Tooltip("The integer in the animator to trigger on pickup. 0 for none")]
+        [Tooltip("動畫器中要在拾取時觸發的整數。 0為無The integer in the animator to trigger on pickup. 0 for none")]
         public int handAnimationOnPickup = 0;
 
-        [Tooltip("The range of motion to set on the skeleton. None for no change.")]
+        [Tooltip("要在骨骼上設置的運動範圍。 沒有改變就沒有The range of motion to set on the skeleton. None for no change.")]
         public SkeletalMotionRangeChange setRangeOfMotionOnPickup = SkeletalMotionRangeChange.None;
 
         public delegate void OnAttachedToHandDelegate(Hand hand);
@@ -39,7 +39,7 @@ namespace Valve.VR.InteractionSystem
         public event OnDetachedFromHandDelegate onDetachedFromHand;
 
 
-        [Tooltip("Specify whether you want to snap to the hand's object attachment point, or just the raw hand")]
+        [Tooltip("指定是要捕捉到手的對象附著點還是僅捕捉到原始手 Specify whether you want to snap to the hand's object attachment point, or just the raw hand")]
         public bool useHandObjectAttachmentPoint = true;
 
         public bool attachEaseIn = false;
@@ -54,28 +54,28 @@ namespace Valve.VR.InteractionSystem
         [HideInInspector]
         public SteamVR_Skeleton_Poser skeletonPoser;
 
-        [Tooltip("Should the rendered hand lock on to and follow the object")]
+        [Tooltip("渲染的手是否應該鎖定並跟隨對象Should the rendered hand lock on to and follow the object")]
         public bool handFollowTransform= true;
 
 
-        [Tooltip("Set whether or not you want this interactible to highlight when hovering over it")]
+        [Tooltip("設置當您將鼠標懸停在其上方時是否要使其突出顯示Set whether or not you want this interactible to highlight when hovering over it")]
         public bool highlightOnHover = true;
-        protected MeshRenderer[] highlightRenderers;
-        protected MeshRenderer[] existingRenderers;
-        protected GameObject highlightHolder;
-        protected SkinnedMeshRenderer[] highlightSkinnedRenderers;
-        protected SkinnedMeshRenderer[] existingSkinnedRenderers;
+        [SerializeField] protected MeshRenderer[] highlightRenderers;
+        [SerializeField] protected MeshRenderer[] existingRenderers;
+        [SerializeField] protected GameObject highlightHolder;
+        [SerializeField] protected SkinnedMeshRenderer[] highlightSkinnedRenderers;
+        [SerializeField] protected SkinnedMeshRenderer[] existingSkinnedRenderers;
         protected static Material highlightMat;
-        [Tooltip("An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.")]
+        [Tooltip("不為其突出顯示的子gameObjects的數組。 諸如透明零件，vfx等之類的東西。 An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.")]
         public GameObject[] hideHighlight;
 
-        [Tooltip("Higher is better")]
+        [Tooltip("越高越好 Higher is better")]
         public int hoverPriority = 0;
 
         // [System.NonSerialized]
         public Hand attachedToHand;
 
-        [System.NonSerialized]
+        // [System.Serializable]
         public List<Hand> hoveringHands = new List<Hand>();
         public Hand hoveringHand
         {

@@ -27,7 +27,9 @@ namespace InrteractableObject
         /// <summary>
         /// 要黏貼的物件(必須要有snapTakeDropZone腳本)
         /// </summary>
-        public TakeEvent_SnapPutZone takeEventSnapPutZone;
+        public TakeEvent_SingleHandSnapPutZone takeEventSingleHandSnapPutZone;
+
+        public TakeEvent_TwoHandSnapPuZone takeEventTwoHandSnapPuZone;
 
 
         void Start()
@@ -45,7 +47,7 @@ namespace InrteractableObject
 #else
             // SteamVR代碼
 //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.GetComponent<TakeEvent_SnapPutZone>() && !isSnapIn)
+            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() && !isSnapIn)
             {
                 print($"{other.gameObject.name}進入放置區");
                 //產生外框線
@@ -57,7 +59,16 @@ namespace InrteractableObject
 
                 //要黏著的物體已黏著與此區域
                 isSnapIn = true;
-                takeEventSnapPutZone.snapFixed.isLocated = true;
+                if (takeEventSingleHandSnapPutZone!=null)
+                {
+                    takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                }
+
+                if (takeEventTwoHandSnapPuZone!=null)
+                {
+                    takeEventTwoHandSnapPuZone.snapFixed.isLocated = true;
+                }
+
                 //Debug.Log("Snap Object Correct！");
             }
 #endif
@@ -69,7 +80,7 @@ namespace InrteractableObject
 // Oculus Quest代碼
 #else
             // SteamVR代碼
-            if (other.GetComponent<TakeEvent_SnapPutZone>() && isSnapIn)
+            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() && isSnapIn)
             {
                 Destroy(fadedObject);
                 isSnapIn = false;
@@ -79,11 +90,22 @@ namespace InrteractableObject
                 //    snapTakeDropZone.snapFixed.isLocated = false;
                 //    snapTakeDropZone.snapFixed.isThrowed = false;
                 //}
-
-                if (takeEventSnapPutZone.snapFixed.isLocated && !takeEventSnapPutZone.snapFixed.isFixed)
+                if (takeEventSingleHandSnapPutZone!=null)
                 {
-                    takeEventSnapPutZone.snapFixed.isLocated = false;
+                    if (takeEventSingleHandSnapPutZone.snapFixed.isLocated && !takeEventSingleHandSnapPutZone.snapFixed.isFixed)
+                    {
+                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = false;
+                    }
                 }
+
+                if (takeEventTwoHandSnapPuZone!=null)
+                {
+                    if (takeEventTwoHandSnapPuZone.snapFixed.isLocated && !takeEventTwoHandSnapPuZone.snapFixed.isFixed)
+                    {
+                        takeEventTwoHandSnapPuZone.snapFixed.isLocated = false;
+                    }
+                }
+
             }
 #endif
         }

@@ -41,15 +41,15 @@ namespace TitleUIScripts
         private void InitializeScoreData()
         {
             setSchool.text = PlayerPrefs.GetString("School") != ""
-                ? ScoreManager.Instance.School()
+                ? ScoreManager.Instance.GetSchool()
                 : PlayerPrefs.GetString("School");
 
 
-            for (int i = 0; i < ScoreManager.Instance.ListCount(); i++)
+            for (int i = 0; i < ScoreManager.Instance.GetListCount(); i++)
             {
-                whatToDo[i].text = ScoreManager.Instance.WhatToDo(i);
-                isToDo[i].text = ScoreManager.Instance.ToDo(i);
-                scoreList[i].text = ScoreManager.Instance.TopicScore(i).ToString();
+                whatToDo[i].text = ScoreManager.Instance.GetWhatToDo(i);
+                isToDo[i].text = ScoreManager.Instance.GetToDo(i);
+                scoreList[i].text = ScoreManager.Instance.GetTopicScore(i).ToString();
             }
         }
 
@@ -61,9 +61,9 @@ namespace TitleUIScripts
         private void RecoverScoreData()
         {
             PlayerPrefs.DeleteAll();
-            for (int i = 0; i < ScoreManager.Instance.ListCount(); i++)
+            for (int i = 0; i < ScoreManager.Instance.GetListCount(); i++)
             {
-                scoreList[i].text = ScoreManager.Instance.TopicScore(i).ToString();
+                scoreList[i].text = ScoreManager.Instance.GetTopicScore(i).ToString();
             }
 
             this.gameObject.SetActive(false);
@@ -77,13 +77,13 @@ namespace TitleUIScripts
             }
             else
             {
-                ScoreManager.Instance.SetSchool(setSchool.text != "" ? ScoreManager.Instance.School() : setSchool.text);
+                ScoreManager.Instance.SetSchool(setSchool.text != "" ? ScoreManager.Instance.GetSchool() : setSchool.text);
             }
 
-            for (int i = 0; i < ScoreManager.Instance.ListCount(); i++)
+            for (int i = 0; i < ScoreManager.Instance.GetListCount(); i++)
             {
-                scoreList[i].text = PlayerPrefs.GetInt($"Score{i}") != ScoreManager.Instance.TopicScore(i)
-                    ? ScoreManager.Instance.TopicScore(i).ToString()
+                scoreList[i].text = PlayerPrefs.GetInt($"Score{i}") != ScoreManager.Instance.GetTopicScore(i)
+                    ? ScoreManager.Instance.GetTopicScore(i).ToString()
                     : PlayerPrefs.GetInt($"Score{i}").ToString();
                 PlayerPrefs.SetInt($"Score{i}", int.Parse(scoreList[i].text));
                 this.gameObject.SetActive(false);

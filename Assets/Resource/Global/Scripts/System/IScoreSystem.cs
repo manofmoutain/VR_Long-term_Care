@@ -7,21 +7,21 @@
         void DecreaseOperateSteps(int index);
 
         void DecreaseScore(int index);
-        bool IsDone(int index);
-        string Lesson();
-        int ListCount();
-        int OperateSteps(int index);
+        bool GetIsDone(int index);
+        string GetLesson();
+        int GetListCount();
+        int GetOperateSteps(int index);
 
         void ReadExcelSimplePasses(string fileName, int listCount);
-        string School();
-        int Steps(int index);
-        string StudentID();
-        string StudentName();
+        string GetSchool();
+        int GetSteps(int index);
+        string GetStudentID();
+        string GetStudentName();
 
-        string ToDo(int index);
-        int TopicScore(int index);
-        int TotalScore();
-        string WhatToDo(int index);
+        string GetToDo(int index);
+        int GetTopicScore(int index);
+        int GetTotalScore();
+        string GetWhatToDo(int index);
         void SetStudentID(string text);
 
         #endregion

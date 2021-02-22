@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Manager;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 namespace Heimlich_maneuver.Patient
 {
@@ -25,6 +27,7 @@ namespace Heimlich_maneuver.Patient
         private void Update()
         {
             interactHint.SetActive(patient.transform.parent == sitTransform );
+
             interactPoint.SetActive(patient.transform.parent == sitTransform);
         }
     }

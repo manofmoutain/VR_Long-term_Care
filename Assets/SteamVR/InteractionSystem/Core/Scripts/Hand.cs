@@ -24,9 +24,7 @@ namespace Valve.VR.InteractionSystem
 
         #region TwoHandsParameter
 
-        [SerializeField]
-        Vector3 initialHandPosition1; // 主手位置
-
+        [SerializeField] Vector3 initialHandPosition1; // 主手位置
         [SerializeField] Vector3 initialHandPosition2; // 副手位置
         [SerializeField] Quaternion initialObjectRotation; // 抓住物體的旋轉值
         [SerializeField] Vector3 initialObjectScale; // 抓住物體的大小
@@ -41,14 +39,38 @@ namespace Valve.VR.InteractionSystem
         [Flags]
         public enum AttachmentFlags
         {
-            SnapOnAttach = 1 << 0, // 該對象應捕捉到手上指定的附著點的位置。
-            DetachOthers = 1 << 1, // 附著在此手上的其他物體將被分離。
-            DetachFromOtherHand = 1 << 2, // 該對象將與另一隻手分離。
-            ParentToHand = 1 << 3, // 該對象將成為手的父物件。
-            VelocityMovement = 1 << 4, // 對象將嘗試移動以匹配手的位置和旋轉。
-            TurnOnKinematic = 1 << 5, //打開靜態屬性-該對象將不會對外部物理做出響應。=>與TurnOffGravity配合，受物理現象控制，彈力隨時間消逝，且會持續前進
-            TurnOffGravity = 1 << 6, // 關掉重力-該對象將不會對外部物理做出響應=>獨立打開，不受物理現象控制，會無限彈跳與前進
-            AllowSidegrade = 1 << 7, // 該對象能夠從捏握切換為抓握。 減少投擲的可能性，但也減少意外摔倒的可能性
+            /// <summary>
+            /// 該對象應捕捉到手上指定的附著點的位置
+            /// </summary>
+            SnapOnAttach = 1 << 0,
+            /// <summary>
+            /// 附著在此手上的其他物體將被分離。
+            /// </summary>
+            DetachOthers = 1 << 1,
+            /// <summary>
+            /// 該對象將與另一隻手分離。
+            /// </summary>
+            DetachFromOtherHand = 1 << 2,
+            /// <summary>
+            /// 該對象將成為手的父物件。
+            /// </summary>
+            ParentToHand = 1 << 3,
+            /// <summary>
+            /// 對象將嘗試移動以匹配手的位置和旋轉。
+            /// </summary>
+            VelocityMovement = 1 << 4,
+            /// <summary>
+            /// 打開靜態屬性-該對象將不會對外部物理做出響應。=>與TurnOffGravity配合，受物理現象控制，彈力隨時間消逝，且會持續前進
+            /// </summary>
+            TurnOnKinematic = 1 << 5,
+            /// <summary>
+            /// 關掉重力-該對象將不會對外部物理做出響應=>獨立打開，不受物理現象控制，會無限彈跳與前進
+            /// </summary>
+            TurnOffGravity = 1 << 6,
+            /// <summary>
+            /// 該對象能夠從捏握切換為抓握。 減少投擲的可能性，但也減少意外摔倒的可能性
+            /// </summary>
+            AllowSidegrade = 1 << 7,
         };
 
         public const AttachmentFlags defaultAttachmentFlags = AttachmentFlags.ParentToHand |
@@ -128,7 +150,7 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-        private List<AttachedObject> attachedObjects = new List<AttachedObject>();
+        [SerializeField] private List<AttachedObject> attachedObjects = new List<AttachedObject>();
 
         public ReadOnlyCollection<AttachedObject> AttachedObjects
         {

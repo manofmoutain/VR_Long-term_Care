@@ -2,10 +2,9 @@
 
 namespace InrteractableObject
 {
-    [RequireComponent( typeof( TakeEvent_SnapPutZone ) )]
     /// <summary>
     /// 可互動性物件的重制位置
-    /// 這個腳本會和SnapTakeDropZone配合在一起
+    /// 這個腳本會和SnapPutZone配合在一起
     /// </summary>
     public class TakeEvent_ToResetPosition : MonoBehaviour
     {
