@@ -107,5 +107,15 @@ namespace Heimlich_maneuver.Patient
             ScoreManager.Instance.IncreaseOperateSteps(10);
             ScoreManager.Instance.SetDone(10);
         }
+
+        public void WashHandBeforeOperate()
+        {
+            if (patient.transform.parent==transform)
+            {
+                //項目十二：於事前進行洗手
+                ScoreManager.Instance.DecreaseOperateSteps(11);
+                ScoreManager.Instance.SetDone(11);
+            }
+        }
     }
 }
