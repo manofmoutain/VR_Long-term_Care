@@ -6,6 +6,7 @@ namespace InrteractableObject
 {
     public class TakeEvent_ResetZone : MonoBehaviour
     {
+        public UnityEvent onPatientEnter;
         public UnityEvent onTriggerEnter;
         private void OnTriggerEnter(Collider other)
         {
@@ -13,6 +14,7 @@ namespace InrteractableObject
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPuZone>())
             {
                 other.GetComponent<TakeEvent_ToResetPosition>().isEntry = true;
+                onPatientEnter.Invoke();
             }
 
         }

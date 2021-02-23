@@ -19,7 +19,7 @@ namespace Heimlich_maneuver.Patient
         /// <summary>
         /// 是否處於哽塞狀態
         /// </summary>
-        [SerializeField] private bool isChoking;
+        public bool isChoking;
 
         /// <summary>
         /// 最小按壓次數
@@ -41,6 +41,8 @@ namespace Heimlich_maneuver.Patient
                 patient = transform.GetChild(0).transform;
             }
             isChoking = true;
+
+            print(ScoreManager.Instance.GetLesson());
             minPushCount = ScoreManager.Instance.GetOperateSteps(3);
         }
 
@@ -59,7 +61,7 @@ namespace Heimlich_maneuver.Patient
                     Vector3 patientDirect = GetComponent<HamlickPatient>().GetPatientDirection();
                     go.GetComponent<Rigidbody>().velocity = velocityDirection* beanSpeed;
                     Destroy(go, 3f);
-                    // isChoking = false;
+                    isChoking = false;
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Manager;
 using UnityEngine;
 using UnityEngine.Serialization;

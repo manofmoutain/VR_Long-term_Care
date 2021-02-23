@@ -30,6 +30,16 @@ namespace Heimlich_maneuver.Patient
 
             interactPoint.SetActive(patient.transform.parent == sitTransform);
         }
+
+        public void ResetToOriginPosition()
+        {
+            if (!GetComponent<HamlickPatientSpit>().isChoking && patient.transform.parent==originTransform)
+            {
+                //項目六：將案主移回原位
+                ScoreManager.Instance.DecreaseOperateSteps(5);
+                ScoreManager.Instance.SetDone(5);
+            }
+        }
     }
 }
 

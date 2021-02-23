@@ -15,3 +15,4 @@ MonoBehaviour:
   examSceneIndex: 1
   fileName: Exam01
   operateCount: 8
+  operateTopics: []

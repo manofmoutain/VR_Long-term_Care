@@ -60,7 +60,7 @@ namespace GlobalSystem
         /// <param name="index">第幾項</param>
         public void DecreaseScore(int index)
         {
-            totalScore -= _operateTopics[index].score * Steps(index);
+            totalScore -= _operateTopics[index].score * GetSteps(index);
             Debug.Log(
                 $"第{index}題：{_operateTopics[index].whatToDo}操作失敗，扣{_operateTopics[index].score}分，總分剩{totalScore}分");
         }
@@ -105,7 +105,7 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public bool IsDone(int index)
+        public bool GetIsDone(int index)
         {
             Debug.Log(_operateTopics[index].isDone ? $"第{index}項已操作完成" : $"第{index}項操作未完成");
             return _operateTopics[index].isDone;
@@ -115,7 +115,7 @@ namespace GlobalSystem
         /// 回傳測試題目
         /// </summary>
         /// <returns></returns>
-        public string Lesson()
+        public string GetLesson()
         {
             Debug.Log($"測試題目為{m_Lesson}");
             return m_Lesson;
@@ -125,7 +125,7 @@ namespace GlobalSystem
         /// 獲取操作項目的數量
         /// </summary>
         /// <returns></returns>
-        public int ListCount()
+        public int GetListCount()
         {
             Debug.Log($"操作項目共有{_operateTopics.Count}項");
             return _operateTopics.Count;
@@ -136,7 +136,7 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public int OperateSteps(int index)
+        public int GetOperateSteps(int index)
         {
             Debug.Log($"第{index}項需要{_operateTopics[index].operateSteps}個操作步驟");
             return _operateTopics[index].operateSteps;
@@ -170,7 +170,7 @@ namespace GlobalSystem
             }
         }
 
-        public string School()
+        public string GetSchool()
         {
             Debug.Log($"受試者學校為：{m_School}");
             return m_School;
@@ -244,7 +244,7 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public int Steps(int index)
+        public int GetSteps(int index)
         {
             Debug.Log($"第{index}項操作剩餘{_operateTopics[index].operateSteps}個步驟未操作");
             return _operateTopics[index].operateSteps;
@@ -254,7 +254,7 @@ namespace GlobalSystem
         /// 回傳受試者編號
         /// </summary>
         /// <returns></returns>
-        public string StudentID()
+        public string GetStudentID()
         {
             Debug.Log($"受試者編號為：{m_ID}");
             return m_ID;
@@ -264,7 +264,7 @@ namespace GlobalSystem
         /// 回傳受試者姓名
         /// </summary>
         /// <returns></returns>
-        public string StudentName()
+        public string GetStudentName()
         {
             Debug.Log($"受試者姓名為：{m_StudentName}");
             return m_StudentName;
@@ -275,7 +275,7 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public string ToDo(int index)
+        public string GetToDo(int index)
         {
             Debug.Log($"第{index}項的目標標題為{_operateTopics[index].isToDo}");
             return _operateTopics[index].isToDo;
@@ -286,7 +286,7 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="index">操作項目編號</param>
         /// <returns></returns>
-        public int TopicScore(int index)
+        public int GetTopicScore(int index)
         {
             Debug.Log($"第{index}題的分數為{_operateTopics[index].score}");
             return _operateTopics[index].score;
@@ -296,7 +296,7 @@ namespace GlobalSystem
         /// 獲得總成績
         /// </summary>
         /// <returns></returns>
-        public int TotalScore()
+        public int GetTotalScore()
         {
             Debug.Log($"總分為{totalScore}");
             return totalScore < 0 ? totalScore = 0 : totalScore;
@@ -307,10 +307,15 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public string WhatToDo(int index)
+        public string GetWhatToDo(int index)
         {
             Debug.Log($"第{index}項的標題是{_operateTopics[index].whatToDo}");
             return _operateTopics[index].whatToDo;
+        }
+
+        public OperateTopic GetOperateTopic(int index)
+        {
+            return _operateTopics[index];
         }
 
         #endregion

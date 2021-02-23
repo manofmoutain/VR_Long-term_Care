@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 using Manager;
+using Mod = GlobalSystem.Mod;
 using Random = UnityEngine.Random;
 
 namespace TitleUIScripts
@@ -16,9 +17,14 @@ namespace TitleUIScripts
 
         private void Start()
         {
-            practiceBtn.onClick.AddListener(delegate { UI_Manager.Instance.OpenPanel(2, 0, false); });
+            practiceBtn.onClick.AddListener(delegate
+            {
+                ScoreManager.Instance.SetGameMod(Mod.Practice);
+                UI_Manager.Instance.OpenPanel(2, 0, false);
+            });
             examBtn.onClick.AddListener(delegate
             {
+                ScoreManager.Instance.SetGameMod(Mod.Exam);
                 int randomExam = Random.Range(3, 7);
                 switch (randomExam)
                 {

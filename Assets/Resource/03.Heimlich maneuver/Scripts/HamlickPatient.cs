@@ -103,6 +103,7 @@ namespace Heimlich_maneuver.Patient
 
         public void Fallen()
         {
+
             //項目十：案主掉落
             ScoreManager.Instance.IncreaseOperateSteps(10);
             ScoreManager.Instance.SetDone(10);
@@ -113,9 +114,10 @@ namespace Heimlich_maneuver.Patient
             if (patient.transform.parent==transform)
             {
                 //項目十二：於事前進行洗手
-                ScoreManager.Instance.DecreaseOperateSteps(11);
+                ScoreManager.Instance.IncreaseOperateSteps(11);
                 ScoreManager.Instance.SetDone(11);
             }
         }
+
     }
 }

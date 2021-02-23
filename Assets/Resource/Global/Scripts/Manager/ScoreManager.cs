@@ -1,4 +1,6 @@
-﻿using GlobalSystem;
+using System.Collections.Generic;
+using GlobalSystem;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using UnityEngine;
 
 namespace Manager
@@ -21,15 +23,10 @@ namespace Manager
 
         #region Public Methods
 
-        /// <summary>
-        /// 某個項目增加生於操作次數
-        /// </summary>
-        /// <param name="inderx"></param>
-        public void IncreaseOperateSteps(int inderx)
+        public void SetGameMod(Mod mod)
         {
-            _scoreSystem.IncreaseSteps(inderx);
+            gameMod = mod;
         }
-
         /// <summary>
         /// 某個項目刪去剩餘操作次數
         /// </summary>
@@ -55,7 +52,7 @@ namespace Manager
         /// <returns></returns>
         public bool GetIsDone(int index)
         {
-            return _scoreSystem.IsDone(index);
+            return _scoreSystem.GetIsDone(index);
         }
 
         /// <summary>
@@ -64,7 +61,7 @@ namespace Manager
         /// <returns></returns>
         public string GetLesson()
         {
-            return _scoreSystem.Lesson();
+            return _scoreSystem.GetLesson();
         }
 
         /// <summary>
@@ -73,7 +70,7 @@ namespace Manager
         /// <returns></returns>
         public int GetListCount()
         {
-            return _scoreSystem.ListCount();
+            return _scoreSystem.GetListCount();
         }
 
         /// <summary>
@@ -83,7 +80,12 @@ namespace Manager
         /// <returns></returns>
         public int GetOperateSteps(int index)
         {
-            return _scoreSystem.OperateSteps(index);
+            return _scoreSystem.GetOperateSteps(index);
+        }
+
+        public OperateTopic GetOperateTopic(int index)
+        {
+            return _scoreSystem.GetOperateTopic(index);
         }
 
         /// <summary>
@@ -92,7 +94,7 @@ namespace Manager
         /// <returns></returns>
         public string GetSchool()
         {
-            return _scoreSystem.School();
+            return _scoreSystem.GetSchool();
         }
 
         /// <summary>
@@ -102,7 +104,7 @@ namespace Manager
         /// <returns></returns>
         public int GetSteps(int index)
         {
-            return _scoreSystem.Steps(index);
+            return _scoreSystem.GetSteps(index);
         }
 
         /// <summary>
@@ -111,7 +113,7 @@ namespace Manager
         /// <returns></returns>
         public string GetStudentID()
         {
-            return _scoreSystem.StudentID();
+            return _scoreSystem.GetStudentID();
         }
 
         /// <summary>
@@ -120,7 +122,7 @@ namespace Manager
         /// <returns></returns>
         public string GetStudentName()
         {
-            return _scoreSystem.StudentName();
+            return _scoreSystem.GetStudentName();
         }
 
         /// <summary>
@@ -130,7 +132,7 @@ namespace Manager
         /// <returns></returns>
         public string GetToDo(int index)
         {
-            return _scoreSystem.ToDo(index);
+            return _scoreSystem.GetToDo(index);
         }
 
         /// <summary>
@@ -140,7 +142,7 @@ namespace Manager
         /// <returns></returns>
         public int GetTopicScore(int index)
         {
-            return _scoreSystem.TopicScore(index);
+            return _scoreSystem.GetTopicScore(index);
         }
 
         /// <summary>
@@ -149,7 +151,7 @@ namespace Manager
         /// <returns></returns>
         public int GetTotalScore()
         {
-            return _scoreSystem.TotalScore();
+            return _scoreSystem.GetTotalScore();
         }
 
         /// <summary>
@@ -159,7 +161,16 @@ namespace Manager
         /// <returns></returns>
         public string GetWhatToDo(int index)
         {
-            return _scoreSystem.WhatToDo(index);
+            return _scoreSystem.GetWhatToDo(index);
+        }
+
+        /// <summary>
+        /// 某個項目增加生於操作次數
+        /// </summary>
+        /// <param name="inderx"></param>
+        public void IncreaseOperateSteps(int inderx)
+        {
+            _scoreSystem.IncreaseSteps(inderx);
         }
 
         /// <summary>

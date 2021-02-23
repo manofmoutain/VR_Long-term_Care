@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace GlobalSystem
 {
@@ -8,5 +9,9 @@ namespace GlobalSystem
         public int examSceneIndex;
         public string fileName;
         public int operateCount;
+
+        public string lesson;
+
+        public List<OperateTopic> operateTopics;
     }
 }

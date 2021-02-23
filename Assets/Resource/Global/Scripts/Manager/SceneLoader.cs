@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Manager
@@ -12,6 +13,12 @@ namespace Manager
 
         public void LoadScene(int index)
         {
+            StartCoroutine(Co_LoadScene(index));
+        }
+
+        IEnumerator Co_LoadScene(int index)
+        {
+            yield return new WaitForSeconds(1.0f);
             SceneManager.LoadScene(index);
         }
 

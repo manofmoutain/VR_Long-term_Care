@@ -634,6 +634,14 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: onTriggerenter.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: patient
       value: 
       objectReference: {fileID: 1354913939}
@@ -641,6 +649,30 @@ PrefabInstance:
       propertyPath: onTriggerenter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1354913943}
+    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1354913943}
+    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Heimlich_maneuver.Patient.HamlickPatientSpit, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Push
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7177440739671263501, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2249,6 +2281,7 @@ GameObject:
   - component: {fileID: 1139709926}
   - component: {fileID: 1139709925}
   - component: {fileID: 1139709924}
+  - component: {fileID: 1139709928}
   m_Layer: 0
   m_Name: "\u539F\u59CB\u4F4D\u7F6ESnapZone"
   m_TagString: Untagged
@@ -2350,6 +2383,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139709922}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1139709928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139709922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d68e3b74a9c27f468fb761d9f13ef08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patient: {fileID: 0}
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onLinearInteractTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  count: 0
 --- !u!1 &1158603990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2758,7 @@ MonoBehaviour:
   beanSpeed: 3
   velocityDirection: {x: 1, y: 0, z: 0}
   isChoking: 0
-  minPushCount: 7
+  minPushCount: 0
   pushCount: 0
   patient: {fileID: 231948131}
 --- !u!114 &1354913944
@@ -3782,7 +3835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff34af81f9045acbde6a2fef237d952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onTriggerEnter:
+  onPatientEnter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1354913940}
@@ -3797,6 +3850,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1836287660
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4582,6 +4638,34 @@ PrefabInstance:
     - target: {fileID: 1749571095025465643, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749571095025465644, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749571095025465644, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Heimlich_maneuver.Patient.HamlickPatient, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749571095025465644, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749571095025465644, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749571095025465644, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1354913940}
+    - target: {fileID: 1749571095025465644, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: WashHandBeforeOperate
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749571095025465644, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05d281577f6ee6641b0c372e86944d09, type: 3}

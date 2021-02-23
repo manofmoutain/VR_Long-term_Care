@@ -11,14 +11,19 @@ namespace Resource.Global.Scripts.Patient
     public class OnTriggerEnterCount : MonoBehaviour
     {
         [SerializeField] private GameObject patient;
-        public UnityEvent onTriggerenter;
+        public UnityEvent onTriggerEnter;
         public UnityEvent onLinearInteractTriggerEnter;
         [SerializeField] private int count;
         public int Count => count;
 
         private void OnTriggerEnter(Collider other)
         {
-            onTriggerenter.Invoke();
+            onTriggerEnter.Invoke();
+
+            if (other.GetComponent<LinearDrive>())
+            {
+                onLinearInteractTriggerEnter.Invoke();
+            }
             // if (other.GetComponent<Interactable>())
             // {
             //     count++;
