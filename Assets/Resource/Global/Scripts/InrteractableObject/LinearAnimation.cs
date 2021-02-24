@@ -7,7 +7,7 @@ using Valve.VR.InteractionSystem;
 #endif
 
 
-namespace InrteractableObject
+namespace InteractableObject
 {
     public class LinearAnimation : MonoBehaviour
     {

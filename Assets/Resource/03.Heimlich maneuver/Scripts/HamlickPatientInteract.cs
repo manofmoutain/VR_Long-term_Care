@@ -1,43 +1,30 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Global.Pateint;
 using Manager;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 
-namespace Heimlich_maneuver.Patient
+namespace Heimlich_maneuver
 {
     public class HamlickPatientInteract : MonoBehaviour
     {
-        public Transform originTransform;
-
-        [Tooltip("替換位置")] [SerializeField]  Transform sitTransform;
         [Tooltip("提示UI")] [SerializeField]  GameObject interactHint;
         [Tooltip("要按壓的位置")] [SerializeField]  GameObject interactPoint;
-        [Tooltip("病人")] [SerializeField] GameObject patient;
 
-        private void Start()
-        {
-            if (patient == null)
-            {
-                patient = transform.GetChild(0).gameObject;
-            }
-        }
 
         private void Update()
         {
-            interactHint.SetActive(patient.transform.parent == sitTransform );
+            interactHint.SetActive(GetComponent<PatientTransform>().isAtChangedPosition );
 
-            interactPoint.SetActive(patient.transform.parent == sitTransform);
+            interactPoint.SetActive(GetComponent<PatientTransform>().isAtChangedPosition );
         }
 
-        public void ResetToOriginPosition()
+
+        public void ResetToOriginPosition(int index)
         {
-            if (!GetComponent<HamlickPatientSpit>().isChoking && patient.transform.parent==originTransform)
+            if (!GetComponent<HamlickPatientSpit>().isChoking && !GetComponent<PatientTransform>().isAtOriginPosition )
             {
                 //項目六：將案主移回原位
-                ScoreManager.Instance.DecreaseOperateSteps(5);
-                ScoreManager.Instance.SetDone(5);
+                ScoreManager.Instance.DecreaseOperateSteps(index);
+                ScoreManager.Instance.SetDone(index);
             }
         }
     }

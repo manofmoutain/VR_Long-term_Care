@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace InrteractableObject
+namespace InteractableObject
 {
     /// <summary>
     /// 要黏貼的區域

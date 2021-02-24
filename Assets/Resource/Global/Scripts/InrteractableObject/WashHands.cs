@@ -3,7 +3,7 @@ using Manager;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-namespace InrteractableObject
+namespace InteractableObject
 {
     [RequireComponent( typeof( Interactable ) )]
     public class WashHands : MonoBehaviour

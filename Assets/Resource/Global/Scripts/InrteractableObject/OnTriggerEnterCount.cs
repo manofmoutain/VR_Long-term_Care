@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Heimlich_maneuver.Patient;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 
-namespace Resource.Global.Scripts.Patient
+namespace InteractableObject
 {
     public class OnTriggerEnterCount : MonoBehaviour
     {

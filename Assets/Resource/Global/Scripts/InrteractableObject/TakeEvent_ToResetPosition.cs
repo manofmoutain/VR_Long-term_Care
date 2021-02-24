@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace InrteractableObject
+namespace InteractableObject
 {
     /// <summary>
     /// 可互動性物件的重制位置

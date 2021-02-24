@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace InrteractableObject
+namespace InteractableObject
 {
     public class TakeEvent_ResetZone : MonoBehaviour
     {

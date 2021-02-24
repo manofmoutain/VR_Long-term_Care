@@ -3,38 +3,31 @@ using System.Collections.Generic;
 using GlobalSystem;
 using TMPro;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Manager
 {
     public class SpeechManager : Monosingleton<SpeechManager>
     {
+        #region Public Variables
+
+        public bool GetWaitingForRecognize => _speechStatus.WaitingForRecognize;
+        public bool GetCorrectKeyWords(int index) => _situations[index].correctKeyWords;
+
+        public List<Situations> GetSituation => _situations;
+
+        public string GetRespondStatus => _speechStatus.RespondStatus;
+
+        #endregion
+
         #region Private Variables
 
-        /// <summary>
-        /// 需要辨識語音的情境
-        /// </summary>
-        [Serializable]
-        class Situations
-        {
-            #region Public Variables
-
-            public AudioClip[] respondAudio;
-            public string respond;
-            public string[] keyWords;
-
-            #endregion
-
-            #region Private Variables
-
-            [SerializeField] private string situationName;
-
-            #endregion
-        }
+        [SerializeField] private AudioSource audioSource;
 
         [SerializeField] private List<Situations> _situations;
 
 
-        [SerializeField] private SpeechSystem _speechSystem;
+        [SerializeField] private SpeechSystem _speechStatus;
 
         /// <summary>
         /// 辨識出的語音文字，顯示在UI上
@@ -47,11 +40,12 @@ namespace Manager
 
         private void Start()
         {
-            _speechSystem.SetRespondStatus(string.Empty);
-            _speechSystem = new SpeechSystem();
-            _speechSystem.SetMicPermission(false);
-            _speechSystem.SetMessage(string.Empty);
-            _speechSystem.NewThreadLocker();
+            audioSource = GetComponent<AudioSource>();
+            _speechStatus.SetRespondStatus(string.Empty);
+            _speechStatus = new SpeechSystem();
+            _speechStatus.SetMicPermission(false);
+            _speechStatus.SetMessage(string.Empty);
+            _speechStatus.NewThreadLocker();
         }
 
         #endregion
@@ -63,7 +57,7 @@ namespace Manager
         /// </summary>
         public void ClearMessage()
         {
-            StartCoroutine(_speechSystem.Co_CleareMessageAfterRecognize());
+            StartCoroutine(_speechStatus.Co_CleareMessageAfterRecognize());
         }
 
         /// <summary>
@@ -71,8 +65,8 @@ namespace Manager
         /// </summary>
         public void DebugSpeechUI()
         {
-            _speechSystem.SetMicPermission(true);
-            _speechSystem.SetMessage("按下按鈕以啟動語音辨識");
+            _speechStatus.SetMicPermission(true);
+            _speechStatus.SetMessage("按下按鈕以啟動語音辨識");
         }
 
         /// <summary>
@@ -84,6 +78,7 @@ namespace Manager
             foreach (string words in KeyWordsInSituation(index))
             {
                 Respond(words, index);
+
             }
         }
 
@@ -95,15 +90,25 @@ namespace Manager
             Debug.LogError("沒有置放辨識語音文字的UI");
         }
 
+        public void PlayAudio(int index)
+        {
+            if (_situations[index].respondAudio.Length!=0)
+            {
+                int random = UnityEngine.Random.Range(0, _situations[index].respondAudio.Length);
+                audioSource.PlayOneShot(_situations[index].respondAudio[random]);
+            }
+
+        }
+
         /// <summary>
         /// 開始語音辨識
         /// </summary>
         public void StartRecognizeSpeech()
         {
-            _speechSystem.SetRespondStatus("MicroReceive");
-            _speechSystem.SetMessage("辨識語音中.....");
-            _speechSystem.SetSpeechMassage(_speechSystem.Message);
-            _speechSystem.VoiceRecognition();
+            _speechStatus.SetRespondStatus("MicroReceive");
+            _speechStatus.SetMessage("辨識語音中.....");
+            _speechStatus.SetSpeechMassage(_speechStatus.Message);
+            _speechStatus.VoiceRecognition();
         }
 
         /// <summary>
@@ -112,7 +117,7 @@ namespace Manager
         /// <param name="text"></param>
         public void UpdateDebugUI(TextMeshProUGUI text)
         {
-            _speechSystem.UpdateMessage(text);
+            _speechStatus.UpdateMessage(text);
         }
 
         #endregion
@@ -128,6 +133,11 @@ namespace Manager
 
         #region Private Methods
 
+        /// <summary>
+        /// 取得某個情況所需的關鍵字
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         private string[] KeyWordsInSituation(int index) => _situations[index].keyWords;
 
         /// <summary>
@@ -137,41 +147,64 @@ namespace Manager
         /// <param name="index"></param>
         void Respond(string keyword, int index)
         {
-            if (StringExtensions.Contains(_speechSystem.SpeechMesssage, keyword, 0))
+            if (StringExtensions.Contains(_speechStatus.SpeechMesssage, keyword, 0))
             {
                 //兩秒後回溯文字
                 ClearMessage();
                 //打印回應的文字
                 Debug.Log(_situations[index].respond);
                 //ToDoSomething
-                switch (index)
+                for (int i = 0; i < _situations.Count; i++)
                 {
-                    case 0:
-                        // ScoreManager.Instance.DecreaseOperateSteps(0);
-                        // ScoreManager.Instance.SetDone(index, true);
-                        break;
-                    case 1:
-                        break;
-                    default:
-                        Debug.Log($"沒有設置回應");
-                        break;
-                        ;
+                    if (i==index)
+                    {
+                        _situations[i].correctKeyWords = true;
+                        Debug.Log($"這是{_situations[index].situationName}狀況");
+                        ScoreManager.Instance.DecreaseOperateSteps(_situations[i].topicIndex);
+                        ScoreManager.Instance.SetDone(_situations[i].topicIndex);
+                        PlayAudio(index);
+                    }
+
                 }
+                // switch (index)
+                // {
+                //     case 0:
+                //         Debug.Log($"這是{_situations[index].situationName}狀況");
+                //         // ScoreManager.Instance.DecreaseOperateSteps(0);
+                //         // ScoreManager.Instance.SetDone(index, true);
+                //         break;
+                //     case 1:
+                //         break;
+                //     default:
+                //         Debug.Log($"沒有設置回應");
+                //         break;
+                //         ;
+                // }
             }
         }
 
-        private void Update()
+        #endregion
+
+        #region Nested Types
+
+        /// <summary>
+        /// 需要辨識語音的情境
+        /// </summary>
+        [Serializable]
+        public class Situations
         {
-            if (_speechSystem.RespondStatus == "MicroReceive")
-            {
-                if (!_speechSystem.WaitingForRecognize)
-                {
-                    for (int i = 0; i < _situations.Count; i++)
-                    {
-                        FindKeyWords(i);
-                    }
-                }
-            }
+            #region Public Variables
+            public string situationName;
+            public bool correctKeyWords;
+            public AudioClip[] respondAudio;
+            public string respond;
+            public string[] keyWords;
+            /// <summary>
+            /// 語音辨識對應的考題編號
+            /// </summary>
+            public int topicIndex;
+
+            #endregion
         }
 
         #endregion

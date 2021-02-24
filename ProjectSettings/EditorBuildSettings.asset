@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: a98ab367fcd4c0d4c8f30e0a667ccfb1
   - enabled: 1
     path: Assets/Resource/Global/Scenes/03.Heimlich maneuver.unity
-    guid: 256d69c3ee72a93458213bfa9cb742aa
+    guid: 7f73782c053be304e9f551e01d7e5c0c
   - enabled: 1
     path: Assets/Resource/Global/Scenes/04.CPR.unity
     guid: 9df0098cd1ed38e49af01ff4903121c0

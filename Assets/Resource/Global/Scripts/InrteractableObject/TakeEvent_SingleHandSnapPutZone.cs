@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 #endif
 
-namespace InrteractableObject
+namespace InteractableObject
 {
     /// <summary>
     /// 要黏著於其他物件的物件

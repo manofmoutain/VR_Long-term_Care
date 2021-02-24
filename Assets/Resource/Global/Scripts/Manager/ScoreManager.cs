@@ -180,7 +180,7 @@ namespace Manager
         /// <param name="listCount"></param>
         public void Initialize(string fileName, int listCount)
         {
-            _scoreSystem = new ScoreSystem(100);
+            // _scoreSystem = new ScoreSystem(100);
             //讀取某個檔案
             _scoreSystem.ReadExcelSimplePasses(fileName, listCount);
         }

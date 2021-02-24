@@ -4,7 +4,7 @@ using Valve.VR.InteractionSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace InrteractableObject
+namespace InteractableObject
 {
     [RequireComponent(typeof(Interactable))]
     public class TakeEvent_TwoHandSnapPuZone : MonoBehaviour
