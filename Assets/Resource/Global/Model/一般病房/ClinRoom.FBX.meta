@@ -1,0 +1,400 @@
+fileFormatVersion: 2
+guid: 91737a1324a4b114c8d84c5cd69179ff
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: 001
+    100002: 002
+    100004: 003
+    100006: 33
+    100008: 34
+    100010: 35
+    100012: 36
+    100014: 38
+    100016: 5
+    100018: 6
+    100020: 7
+    100022: book1
+    100024: c002
+    100026: c003
+    100028: c004
+    100030: c005
+    100032: caa1
+    100034: call
+    100036: //RootNode
+    100038: comp010
+    100040: comp011
+    100042: comp012
+    100044: comp013
+    100046: comp5
+    100048: comp6
+    100050: door001
+    100052: door003
+    100054: Drip racks
+    100056: Drip racks001
+    100058: Iron cabinet
+    100060: Iron cabinet001
+    100062: Line1
+    100064: Line2
+    100066: Line3
+    100068: Line4
+    100070: Loft1
+    100072: Loft2
+    100074: Medical trash can
+    100076: Medical trash can001
+    100078: ob
+    100080: ob1
+    100082: ob2
+    100084: ob3
+    100086: pan002
+    100088: pan1
+    100090: Plane24
+    100092: plug
+    100094: plug004
+    100096: plug005
+    100098: plug006
+    100100: S057
+    100102: S56
+    100104: tim
+    100106: tim001
+    100108: ton013
+    100110: ton021
+    100112: ton022
+    100114: ton023
+    400000: 001
+    400002: 002
+    400004: 003
+    400006: 33
+    400008: 34
+    400010: 35
+    400012: 36
+    400014: 38
+    400016: 5
+    400018: 6
+    400020: 7
+    400022: book1
+    400024: c002
+    400026: c003
+    400028: c004
+    400030: c005
+    400032: caa1
+    400034: call
+    400036: //RootNode
+    400038: comp010
+    400040: comp011
+    400042: comp012
+    400044: comp013
+    400046: comp5
+    400048: comp6
+    400050: door001
+    400052: door003
+    400054: Drip racks
+    400056: Drip racks001
+    400058: Iron cabinet
+    400060: Iron cabinet001
+    400062: Line1
+    400064: Line2
+    400066: Line3
+    400068: Line4
+    400070: Loft1
+    400072: Loft2
+    400074: Medical trash can
+    400076: Medical trash can001
+    400078: ob
+    400080: ob1
+    400082: ob2
+    400084: ob3
+    400086: pan002
+    400088: pan1
+    400090: Plane24
+    400092: plug
+    400094: plug004
+    400096: plug005
+    400098: plug006
+    400100: S057
+    400102: S56
+    400104: tim
+    400106: tim001
+    400108: ton013
+    400110: ton021
+    400112: ton022
+    400114: ton023
+    2100000: 'Material #37'
+    2100002: No Name
+    2100004: 'Material #33'
+    2100006: 'Material #43'
+    2100008: 'Material #32'
+    2100010: 'Material #34'
+    2100012: 'Material #40'
+    2100014: 'Material #28'
+    2100016: 'Material #31'
+    2100018: 'Material #29'
+    2100020: 'Material #44'
+    2100022: 'Material #30'
+    2100024: 'Material #26'
+    2100026: 'Material #38'
+    2100028: 'Material #39'
+    2100030: 'Material #35'
+    2100032: 'Material #2'
+    2100034: 'Material #36'
+    2100036: 'Material #25'
+    2100038: 'Material #27'
+    2300000: 001
+    2300002: 002
+    2300004: 003
+    2300006: 33
+    2300008: 34
+    2300010: 35
+    2300012: 36
+    2300014: 38
+    2300016: 5
+    2300018: 6
+    2300020: 7
+    2300022: book1
+    2300024: c002
+    2300026: c003
+    2300028: c004
+    2300030: c005
+    2300032: caa1
+    2300034: call
+    2300036: comp010
+    2300038: comp011
+    2300040: comp012
+    2300042: comp013
+    2300044: comp5
+    2300046: comp6
+    2300048: door001
+    2300050: door003
+    2300052: Drip racks
+    2300054: Drip racks001
+    2300056: Iron cabinet
+    2300058: Iron cabinet001
+    2300060: Line1
+    2300062: Line2
+    2300064: Line3
+    2300066: Line4
+    2300068: Loft1
+    2300070: Loft2
+    2300072: Medical trash can
+    2300074: Medical trash can001
+    2300076: ob
+    2300078: ob1
+    2300080: ob2
+    2300082: ob3
+    2300084: pan002
+    2300086: pan1
+    2300088: Plane24
+    2300090: plug
+    2300092: plug004
+    2300094: plug005
+    2300096: plug006
+    2300098: S057
+    2300100: S56
+    2300102: tim
+    2300104: tim001
+    2300106: ton013
+    2300108: ton021
+    2300110: ton022
+    2300112: ton023
+    3300000: 001
+    3300002: 002
+    3300004: 003
+    3300006: 33
+    3300008: 34
+    3300010: 35
+    3300012: 36
+    3300014: 38
+    3300016: 5
+    3300018: 6
+    3300020: 7
+    3300022: book1
+    3300024: c002
+    3300026: c003
+    3300028: c004
+    3300030: c005
+    3300032: caa1
+    3300034: call
+    3300036: comp010
+    3300038: comp011
+    3300040: comp012
+    3300042: comp013
+    3300044: comp5
+    3300046: comp6
+    3300048: door001
+    3300050: door003
+    3300052: Drip racks
+    3300054: Drip racks001
+    3300056: Iron cabinet
+    3300058: Iron cabinet001
+    3300060: Line1
+    3300062: Line2
+    3300064: Line3
+    3300066: Line4
+    3300068: Loft1
+    3300070: Loft2
+    3300072: Medical trash can
+    3300074: Medical trash can001
+    3300076: ob
+    3300078: ob1
+    3300080: ob2
+    3300082: ob3
+    3300084: pan002
+    3300086: pan1
+    3300088: Plane24
+    3300090: plug
+    3300092: plug004
+    3300094: plug005
+    3300096: plug006
+    3300098: S057
+    3300100: S56
+    3300102: tim
+    3300104: tim001
+    3300106: ton013
+    3300108: ton021
+    3300110: ton022
+    3300112: ton023
+    4300000: Line1
+    4300002: 5
+    4300004: 6
+    4300006: Plane24
+    4300008: Loft1
+    4300010: 001
+    4300012: ob
+    4300014: door001
+    4300016: Line4
+    4300018: plug
+    4300020: 7
+    4300022: ton013
+    4300024: 33
+    4300026: ton021
+    4300028: pan1
+    4300030: tim
+    4300032: comp6
+    4300034: comp5
+    4300036: 34
+    4300038: plug004
+    4300040: S56
+    4300042: comp010
+    4300044: 35
+    4300046: 002
+    4300048: ob1
+    4300050: 36
+    4300052: S057
+    4300054: tim001
+    4300056: pan002
+    4300058: plug005
+    4300060: ton022
+    4300062: Line2
+    4300064: Loft2
+    4300066: plug006
+    4300068: 38
+    4300070: door003
+    4300072: Line3
+    4300074: comp011
+    4300076: comp012
+    4300078: comp013
+    4300080: book1
+    4300082: ton023
+    4300084: caa1
+    4300086: call
+    4300088: Medical trash can
+    4300090: Medical trash can001
+    4300092: Drip racks
+    4300094: Drip racks001
+    4300096: c002
+    4300098: c003
+    4300100: Iron cabinet
+    4300102: Iron cabinet001
+    4300104: 003
+    4300106: ob2
+    4300108: ob3
+    4300110: c004
+    4300112: c005
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.0254
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

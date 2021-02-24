@@ -1,3 +1,4 @@
 *.a filter=lfs diff=lfs merge=lfs -text
 Mr.fbx filter=lfs diff=lfs merge=lfs -text
 Assets/Resource/Global/Model/Mr.Woo/Mr.fbx filter=lfs diff=lfs merge=lfs -text
+.exr filter=lfs diff=lfs merge=lfs -text
