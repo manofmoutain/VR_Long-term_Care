@@ -5,6 +5,7 @@ using Excel;
 using System.Data;
 using System.IO;
 using JetBrains.Annotations;
+using TMPro.Examples;
 
 namespace GlobalSystem
 {
@@ -50,9 +51,17 @@ namespace GlobalSystem
         /// </summary>
         [SerializeField] private string m_StudentName;
 
+        [SerializeField] private float timing;
+        public float ExamTime => timing;
+
         #endregion
 
         #region Public Methods
+
+        public void StartCounting()
+        {
+            timing += Time.deltaTime;
+        }
 
         /// <summary>
         /// 依項目扣分

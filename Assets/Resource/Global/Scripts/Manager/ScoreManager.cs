@@ -232,6 +232,11 @@ namespace Manager
             _scoreSystem.SetStudentName(text);
         }
 
+        public void StartCounting()
+        {
+            _scoreSystem.StartCounting();
+        }
+
         #endregion
 
         #region Protected Methods

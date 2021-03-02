@@ -9,25 +9,25 @@ namespace InteractableObject
     [RequireComponent(typeof(Interactable))]
     public class TakeEvent_TwoHandSnapPuZone : MonoBehaviour
     {
-        [Header("雙手參數")]
-        [SerializeField] private GameObject AttachObjectLeft;
+        [Header("雙手參數")] [SerializeField] private GameObject AttachObjectLeft;
         [SerializeField] private GameObject AttachObjectRight;
         [SerializeField] private Hand playerHand_L;
         [SerializeField] private Hand playerHand_R;
         [SerializeField] private Vector3 handPos;
-        [SerializeField] private Vector3 worldPlaneNormal = new Vector3(1,0,0);
+        [SerializeField] private Vector3 worldPlaneNormal = new Vector3(1, 0, 0);
 
 
         /// <summary>
         /// 是否已抓取物件
         /// </summary>
         [Header("狀態")] [Tooltip("是否已抓取此物件")] [SerializeField]
-        public bool snapTakeObject;
+        private bool snapTakeObject;
 
         /// <summary>
         ///Trigger放開後是否要脫離手勢
         /// </summary>
-        [Tooltip("Trigger放開後是否要脫離手勢")] public bool snapReleaseGesture;
+        [Tooltip("Trigger放開後是否要脫離手勢")] [SerializeField]
+        private bool snapReleaseGesture;
 
         [System.Serializable]
         public class SnapFixed
@@ -50,7 +50,7 @@ namespace InteractableObject
             public Transform outsideZone;
         }
 
-        public ThrowOutside throwOutside;
+        [SerializeField] private ThrowOutside throwOutside;
 
         [Header("物理性")] [SerializeField] private float catchingSpeedThreshold;
         [SerializeField] private float releaseVelocityTimeOffset;
@@ -66,20 +66,40 @@ namespace InteractableObject
         [SerializeField] private Interactable interactable;
 
         [Header("外部物件")] [SerializeField] private Hand sanpCurrentHand;
-        [Tooltip("原本位置")] public GameObject OriginalPosition;
-        [Tooltip("要黏著的物件")] public GameObject[] UsePosition;
-        public List<TakeEvent_SnapArea> snapZoneArea;
+        [Tooltip("原本位置")] [SerializeField] GameObject OriginalPosition;
+        [Tooltip("要黏著的物件")] [SerializeField] GameObject[] UsePosition;
+        [SerializeField] List<TakeEvent_SnapArea> snapZoneArea;
         [SerializeField] private GameObject takeObject;
 
-        [Header("事件")] public UnityEvent snapIn;
-        public UnityEvent snapOut;
-        public UnityEvent attachUpdate;
-        public UnityEvent pickUp;
-        public UnityEvent dropDown;
+        /// <summary>
+        /// 雙手碰觸到物件的事件
+        /// </summary>
+        [Header("事件")] [SerializeField] UnityEvent snapIn;
 
+        /// <summary>
+        /// 雙手離開物件的事件
+        /// </summary>
+        [SerializeField] UnityEvent snapOut;
+
+        public UnityEvent attachUpdate;
+
+        /// <summary>
+        /// 雙手抓取物件的事件
+        /// </summary>
+        [SerializeField] public UnityEvent pickUp;
+
+        /// <summary>
+        /// 雙手鬆開物件但尚未離開物件的事件
+        /// </summary>
+        [SerializeField] public UnityEvent dropDown;
 
 
         void Start()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
         {
             snapTakeObject = false;
             snapFixed.isFixed = false;
@@ -97,7 +117,7 @@ namespace InteractableObject
             rigidbody.isKinematic = true;
 
             velocityEstimator = GetComponent<VelocityEstimator>();
-            interactable = gameObject.GetComponent<Interactable>();
+            interactable = GetComponent<Interactable>();
 
 
             //取得 snapZoneArea 置放區域
@@ -107,7 +127,6 @@ namespace InteractableObject
                 {
                     snapZoneArea.Add(UsePosition[i].transform.GetChild(0).GetComponent<TakeEvent_SnapArea>());
                 }
-
             }
 
             //隱藏放置提示輪廓線
@@ -119,10 +138,18 @@ namespace InteractableObject
 
         private void Update()
         {
+            GrabGameObject();
+        }
+
+        private void GrabGameObject()
+        {
             if (snapTakeObject)
             {
                 // gameObject.tag = "SnapObject";
+                if (playerHand_R!=null && playerHand_L!=null )
+                {
 
+                }
                 //開啟黏著區物件
                 foreach (GameObject useObject in UsePosition)
                 {
@@ -174,7 +201,8 @@ namespace InteractableObject
                     useObject.SetActive(false);
                 }
 
-
+                // if (playerHand_L != null & playerHand_R != null)
+                // {
                 if (snapFixed.isOutside)
                 {
                     // snapZoneArea[0].gameObject.tag = "AreaZone";
@@ -186,10 +214,10 @@ namespace InteractableObject
                 {
                     dropDown.Invoke();
                 }
+
+                // }
             }
         }
-
-
 
 
         private void OnHandHoverBegin(Hand hand)
@@ -202,56 +230,103 @@ namespace InteractableObject
 
         private void OnHandHoverEnd(Hand hand)
         {
-            //snapFixed.isHover = false;
+            switch (hand.name)
+            {
+                case "LeftHand":
+
+                    playerHand_L = null;
+                    // AttachObjectLeft = playerHand_L.currentAttachedObject.gameObject;
+                    break;
+
+
+                case "RightHand":
+
+                    playerHand_R = null;
+                    // AttachObjectRight = playerHand_R.currentAttachedObject.gameObject;
+                    // handPos = ComputeToTransformProjected(playerHand_R.transform);
+                    break;
+            }
+
             hand.HideGrabHint();
             snapOut.Invoke();
         }
 
-
+        /// <summary>
+        /// 碰觸物件時持續更新的事件
+        /// </summary>
+        /// <param name="hand"></param>
         private void HandHoverUpdate(Hand hand)
         {
-            GrabTypes grabTypes = hand.GetGrabStarting();
+            switch (hand.name)
+            {
+                case "LeftHand":
 
+                    playerHand_L = hand;
+                    // AttachObjectLeft = playerHand_L.currentAttachedObject.gameObject;
+                    break;
+
+
+                case "RightHand":
+
+                    playerHand_R = hand;
+                    // AttachObjectRight = playerHand_R.currentAttachedObject.gameObject;
+                    // handPos = ComputeToTransformProjected(playerHand_R.transform);
+                    break;
+            }
+
+            GrabTypes grabTypes = hand.GetGrabStarting();
             //GRAB THE OBJECT
             if (grabTypes != GrabTypes.None)
             {
-                if (interactable.attachedToHand == null)
+                print(grabTypes);
+
+                if (playerHand_L != null && playerHand_R != null)
                 {
-                    hand.AttachObject(gameObject, grabTypes);
-                    hand.HoverLock(interactable);
-                    hand.HideGrabHint();
-
-                    //手勢脫離物件
-                    if (snapFixed.isFixed && snapReleaseGesture)
+                    if (interactable.attachedToHand == null)
                     {
-                        snapFixed.isFixed = false;
-                        snapFixed.isLocated = false;
-                        // snapOut.Invoke();
-                    }
+                        hand.AttachObject(gameObject, grabTypes);
+                        hand.HoverLock(interactable);
+                        playerHand_L.HoverLock(interactable);
+                        playerHand_R.HoverLock(interactable);
+                        hand.HideGrabHint();
 
-                    //拿起指定的物件
-                    snapTakeObject = true;
 
-                    //開啟置放區的觸發
-                    for (int i = 0; i < UsePosition.Length; i++)
-                    {
-                        snapZoneArea[i].sphereCollider.isTrigger = true;
-                    }
-
-                    Debug.Log($"抓住了{gameObject.name}");
-                }
-                else
-                {
-                    //判斷觸發把手是否相同：拾起 / 放下 須皆為同隻手把
-                    if (sanpCurrentHand == hand)
-                    {
-                        //Snap out：釋放吻合物件
-                        if (snapFixed.isFixed && !snapReleaseGesture)
+                        //手勢脫離物件
+                        if (snapFixed.isFixed && snapReleaseGesture)
                         {
                             snapFixed.isFixed = false;
                             snapFixed.isLocated = false;
+                            // snapOut.Invoke();
+                        }
 
-                            snapOut.Invoke();
+                        if (playerHand_L != null & playerHand_R != null)
+                        {
+                            //拿起指定的物件
+                            snapTakeObject = true;
+                        }
+
+
+                        //開啟置放區的觸發
+                        for (int i = 0; i < UsePosition.Length; i++)
+                        {
+                            snapZoneArea[i].sphereCollider.isTrigger = true;
+                        }
+
+                        Debug.Log($"抓住了{gameObject.name}");
+                    }
+                    else
+                    {
+                        //判斷觸發把手是否相同：拾起 / 放下 須皆為同隻手把
+                        if (sanpCurrentHand == hand)
+                        {
+                            //Snap out：釋放吻合物件
+                            if (snapFixed.isFixed && !snapReleaseGesture)
+                            {
+                                snapFixed.isFixed = false;
+                                snapFixed.isLocated = false;
+
+                                snapOut.Invoke();
+                            }
                         }
                     }
                 }
@@ -264,22 +339,6 @@ namespace InteractableObject
         /// <param name="hand"></param>
         private void OnAttachedToHand(Hand hand)
         {
-            switch (hand.name)
-            {
-                case "LeftHand":
-
-                    playerHand_L = hand;
-                    AttachObjectLeft = playerHand_L.currentAttachedObject.gameObject;
-                    break;
-
-
-                case "RightHand":
-
-                    playerHand_R = hand;
-                    AttachObjectRight = playerHand_R.currentAttachedObject.gameObject;
-                    handPos = ComputeToTransformProjected(playerHand_R.transform);
-                    break;
-            }
             pickUp.Invoke();
 
 
@@ -296,23 +355,6 @@ namespace InteractableObject
             takeObject = hand.currentAttachedObject;
         }
 
-        private Vector3 ComputeToTransformProjected(Transform xForm)
-        {
-            //normalized： 以此當前向量作為標準值(正規化)
-            Vector3 toTransform = (xForm.position - gameObject.transform.position).normalized;
-
-            Vector3 toTransformProjected = new Vector3(0.0f, 0.0f, 0.0f);
-
-            //magnitude：把 vertor 平方相加在開根號
-            //sqrMagnitude：把vertor 平方
-            //確定抓到物體，
-            if (toTransform.sqrMagnitude > 0.0f)
-            {
-                toTransformProjected = Vector3.ProjectOnPlane(toTransform, worldPlaneNormal).normalized;
-            }
-
-            return toTransformProjected;
-        }
 
         /// <summary>
         /// 物件被抓取時持續偵測
@@ -324,7 +366,6 @@ namespace InteractableObject
             bool isGrabEnding = hand.IsGrabEnding(gameObject);
             if (isGrabEnding)
             {
-
                 if (snapFixed.isLocated)
                 {
                     //鬆開Trigger若手勢脫離的情況
@@ -384,14 +425,8 @@ namespace InteractableObject
 
                 case "RightHand":
 
-                    if (AttachObjectRight.tag == "PatientHead")
-                    {
-                        AttachObjectRight = null;
-                        playerHand_R = null;
-                        handPos = new Vector3();
-
-
-                    }
+                    AttachObjectRight = null;
+                    playerHand_R = null;
                     break;
             }
 
@@ -414,6 +449,32 @@ namespace InteractableObject
             takeObject = null;
             sanpCurrentHand = null;
         }
+
+
+        private Vector3 ComputeToTransformProjected(Transform xForm)
+        {
+            //normalized： 以此當前向量作為標準值(正規化)
+            Vector3 toTransform = (xForm.position - gameObject.transform.position).normalized;
+
+            Vector3 toTransformProjected = new Vector3(0.0f, 0.0f, 0.0f);
+
+            //magnitude：把 vertor 平方相加在開根號
+            //sqrMagnitude：把vertor 平方
+            //確定抓到物體，
+            if (toTransform.sqrMagnitude > 0.0f)
+            {
+                toTransformProjected = Vector3.ProjectOnPlane(toTransform, worldPlaneNormal).normalized;
+            }
+
+            return toTransformProjected;
+        }
+
+        /// <summary>
+        /// 鬆手之後給予物件的速度值
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <param name="velocity"></param>
+        /// <param name="angularVelocity"></param>
         private void GetReleaseVelocities(Hand hand, out Vector3 velocity, out Vector3 angularVelocity)
         {
             if (hand.noSteamVRFallbackCamera)

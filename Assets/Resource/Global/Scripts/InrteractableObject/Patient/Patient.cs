@@ -26,10 +26,10 @@ namespace Global.Pateint
         /// </summary>
         public float distaceToPlayer;
 
-        /// <summary>
-        /// 施測者是否在病患後面
-        /// </summary>
-        public bool isPlayerBehindPatient;
+        // /// <summary>
+        // /// 施測者是否在病患後面
+        // /// </summary>
+        // public bool isPlayerBehindPatient;
 
         /// <summary>
         /// 病患(子物件)在世界座標中的實際位置資訊
@@ -48,7 +48,7 @@ namespace Global.Pateint
                 patient = transform.GetChild(0).gameObject;
             }
 
-            isPlayerBehindPatient = false;
+            // isPlayerBehindPatient = false;
         }
 
         private void Update()
