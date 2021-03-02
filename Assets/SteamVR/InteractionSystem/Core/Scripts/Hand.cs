@@ -20,17 +20,36 @@ namespace Valve.VR.InteractionSystem
     //-------------------------------------------------------------------------
     public class Hand : MonoBehaviour
     {
+        /// <summary>
+        /// 主手位置
+        /// </summary>
         [Header("添加的雙手抓物資訊")]
-
         #region TwoHandsParameter
-
-        [SerializeField] Vector3 initialHandPosition1; // 主手位置
-        [SerializeField] Vector3 initialHandPosition2; // 副手位置
-        [SerializeField] Quaternion initialObjectRotation; // 抓住物體的旋轉值
-        [SerializeField] Vector3 initialObjectScale; // 抓住物體的大小
-        [SerializeField] Vector3 initialObjectDirection; // 物體到雙手中點的方向
-        [SerializeField] AttachmentFlags initialAttachmentFlags; // 初始化AttachmentFlags
-        public bool twoHandGrab = false; // bool, so you know when grabbed with 2 hands
+        [SerializeField] Vector3 initialHandPosition1;
+        /// <summary>
+        /// 副手位置
+        /// </summary>
+        [SerializeField] Vector3 initialHandPosition2;
+        /// <summary>
+        /// 抓住物體的旋轉值
+        /// </summary>
+        [SerializeField] Quaternion initialObjectRotation;
+        /// <summary>
+        /// 抓住物體的大小
+        /// </summary>
+        [SerializeField] Vector3 initialObjectScale;
+        /// <summary>
+        /// 體到雙手中點的方向
+        /// </summary>
+        [SerializeField] Vector3 initialObjectDirection;
+        /// <summary>
+        /// initialAttachmentFlags
+        /// </summary>
+        [SerializeField] AttachmentFlags initialAttachmentFlags;
+        /// <summary>
+        /// know when grabbed with 2 hands
+        /// </summary>
+        public bool twoHandGrab = false;
 
         #endregion
 
