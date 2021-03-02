@@ -50,7 +50,7 @@ namespace Heimlich_maneuver
         /// <param name="index">考題編號</param>
         public void StartPush(int index)
         {
-            if (GetComponent<Patient>().isPlayerBehindPatient)
+            if (GetComponent<HamlickPatient>().canHug)
             {
                 //項目三：找出正確按壓位置
                 ScoreManager.Instance.DecreaseOperateSteps(index);

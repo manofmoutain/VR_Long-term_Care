@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5846364451968565244}
   - component: {fileID: 5846364451968565233}
   m_Layer: 0
-  m_Name: Patient 1
+  m_Name: Patient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5846364451968565240}
-  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1.884, y: -0.261, z: 0.566}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -152,7 +152,6 @@ MonoBehaviour:
   isSpeechRecognize: 0
   playerVectorToPatient: {x: 0, y: 0, z: 0}
   distaceToPlayer: 0
-  isPlayerBehindPatient: 0
   patientDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &5846364451968565239
 MonoBehaviour:
@@ -254,422 +253,78 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5846364451968565246}
     m_Modifications:
-    - target: {fileID: 231948137, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: handFollowTransform
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5846364451968565247}
     - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onDetachedFromHand.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 5846364451968565247}
-    - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.HamlickPatientSpit, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 5846364451968565244}
     - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: StartPush
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243485776, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: onDetachedFromHand.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5846364451968565247}
     - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5846364451968565245}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Global.Pateint.Patient, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartSpeechRecognize
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.Patient.HamlickPatient, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.Patient.HamlickPatient, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 5846364451968565240}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 5846364451968565240}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071648301516178948, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382503870199032187, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382503870199032187, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382503870199032187, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5846364451968565245}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Global.Pateint.Patient, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartSpeechRecognize
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.Patient.HamlickPatient, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.Patient.HamlickPatient, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 5846364451968565240}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 5846364451968565240}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3912656461819102562, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642813105800977077, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642813105800977077, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642813105800977077, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: OriginalPosition
       value: 
       objectReference: {fileID: 5846364451968565240}
     - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: UsePosition.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: UsePosition.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: snapReleaseGesture
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.Patient.HamlickPatientWhenHug, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 5846364451968565233}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Hugging
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5846364451968565233}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.Patient.HamlickPatientWhenHug, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Hugging
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.HamlickPatient, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5846364451968565247}
     - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: HugPatientFromBack
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.HamlickPatientInteract, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 5846364451968565235}
     - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ResetToOriginPosition
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onTriggerenter.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5846364451968565233}
     - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: patient
       value: 
       objectReference: {fileID: 5846364451968565240}
     - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onTriggerenter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5846364451968565244}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5846364451968565244}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Heimlich_maneuver.HamlickPatientSpit, Assembly-CSharp
+    - target: {fileID: 7090406992762597395, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: UsePosition.Array.size
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Push
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684673954925299200, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: onLinearInteractTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 3
-      objectReference: {fileID: 0}
+    - target: {fileID: 7090406992762597395, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: OriginalPosition
+      value: 
+      objectReference: {fileID: 5846364451968565240}
+    - target: {fileID: 7090406992762597395, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5846364451968565233}
+    - target: {fileID: 7090406992762597395, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5846364451968565235}
+    - target: {fileID: 7090406992762597395, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: pickUp.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 5846364451968565235}
+    - target: {fileID: 7090406992762597395, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
+      propertyPath: dropDown.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5846364451968565233}
     - target: {fileID: 7177440739671263501, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -718,23 +373,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mr.Woo
       objectReference: {fileID: 0}
-    - target: {fileID: 7552735585332728759, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_TagString
-      value: Patient
-      objectReference: {fileID: 0}
-    - target: {fileID: 8505104643408195162, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8505104643408195162, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8505104643408195162, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5088096988448409770, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9fbbeeb3605b6694b80d0d448f3f354c, type: 3}
 --- !u!1 &4175612566739504062 stripped
 GameObject:

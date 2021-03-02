@@ -13,7 +13,7 @@ namespace Heimlich_maneuver
         [Header("狀態")]
         [SerializeField] bool isPushed;
 
-        [SerializeField] private bool canHug;
+        public bool canHug;
 
 
 
@@ -30,7 +30,6 @@ namespace Heimlich_maneuver
         {
             //player位於病患背後
             canHug = GetComponent<Patient>().patientDirection.z > 0;
-            GetComponent<Patient>().isPlayerBehindPatient = canHug;
         }
 
 
@@ -60,6 +59,7 @@ namespace Heimlich_maneuver
         /// <param name="index">考題編號</param>
         public void Fallen(int index)
         {
+            GetComponent<PatientSFX>().PlaySFX(0);
             //項目十：案主掉落
             ScoreManager.Instance.IncreaseOperateSteps(index);
             ScoreManager.Instance.SetDone(index);

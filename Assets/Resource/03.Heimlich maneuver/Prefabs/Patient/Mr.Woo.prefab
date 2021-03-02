@@ -147,9 +147,15 @@ MonoBehaviour:
   skeletonPoser: {fileID: 0}
   handFollowTransform: 1
   highlightOnHover: 1
+  highlightRenderers: []
+  existingRenderers: []
+  highlightHolder: {fileID: 0}
+  highlightSkinnedRenderers: []
+  existingSkinnedRenderers: []
   hideHighlight: []
   hoverPriority: 0
   attachedToHand: {fileID: 0}
+  hoveringHands: []
 --- !u!114 &3912656461819102562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,8 +172,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Manager.SpeechManager, Assembly-CSharp
-        m_MethodName: StartRecognizeSpeech
+        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
+        m_MethodName: StartSpeechRecognize
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -230,24 +236,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patient: {fileID: 0}
-  onTriggerenter:
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onLinearInteractTriggerEnter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Heimlich_maneuver.Patient.HamlickPatientSpit, Assembly-CSharp
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientSpit, Assembly-CSharp
         m_MethodName: Push
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onLinearInteractTriggerEnter:
-    m_PersistentCalls:
-      m_Calls: []
   count: 0
 --- !u!1 &1546232705
 GameObject:
@@ -396,9 +402,15 @@ MonoBehaviour:
   skeletonPoser: {fileID: 0}
   handFollowTransform: 1
   highlightOnHover: 1
+  highlightRenderers: []
+  existingRenderers: []
+  highlightHolder: {fileID: 0}
+  highlightSkinnedRenderers: []
+  existingSkinnedRenderers: []
   hideHighlight: []
   hoverPriority: 0
   attachedToHand: {fileID: 0}
+  hoveringHands: []
 --- !u!114 &3071648301516178948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,8 +427,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Manager.SpeechManager, Assembly-CSharp
-        m_MethodName: StartRecognizeSpeech
+        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
+        m_MethodName: StartSpeechRecognize
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -625,7 +637,7 @@ Transform:
   m_GameObject: {fileID: 394093906945815625}
   m_LocalRotation: {x: -1.3010426e-18, y: -1.7347235e-18, z: -2.9483523e-17, w: 1}
   m_LocalPosition: {x: -0.07198386, y: -0.07632339, z: 0.003127985}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2759330079194089955}
   m_Father: {fileID: 7009228465376511533}
@@ -1043,7 +1055,7 @@ Transform:
   m_GameObject: {fileID: 1117764660475542102}
   m_LocalRotation: {x: -4.3368087e-19, y: -5.0340546e-36, z: 1.16077395e-17, w: 1}
   m_LocalPosition: {x: 0.071987286, y: -0.07631088, z: 0.00312366}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 3238155858123928898}
   m_Father: {fileID: 8392969374403913632}
@@ -1257,7 +1269,7 @@ Transform:
   m_GameObject: {fileID: 1442172955656089480}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.0175383, z: -0.0012848651}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 7091728058404013219}
   - {fileID: 7133203306824580995}
@@ -6067,9 +6079,10 @@ GameObject:
   - component: {fileID: 5973747877968473053}
   - component: {fileID: 2335689940909093849}
   - component: {fileID: 3703178841941623023}
+  - component: {fileID: 7090406992762597395}
   m_Layer: 0
   m_Name: Mr.Woo
-  m_TagString: Untagged
+  m_TagString: Patient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6176,9 +6189,15 @@ MonoBehaviour:
   skeletonPoser: {fileID: 0}
   handFollowTransform: 0
   highlightOnHover: 1
+  highlightRenderers: []
+  existingRenderers: []
+  highlightHolder: {fileID: 0}
+  highlightSkinnedRenderers: []
+  existingSkinnedRenderers: []
   hideHighlight: []
   hoverPriority: 0
   attachedToHand: {fileID: 0}
+  hoveringHands: []
 --- !u!114 &231948135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6235,7 +6254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapTakeObject: 0
-  snapReleaseGesture: 0
+  snapReleaseGesture: 1
   snapFixed:
     isLocated: 0
     isFixed: 0
@@ -6273,7 +6292,44 @@ MonoBehaviour:
       m_Calls: []
   pickUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.Patient.HamlickPatientWhenHug,
+          Assembly-CSharp
+        m_MethodName: Hugging
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatient, Assembly-CSharp
+        m_MethodName: HugPatientFromBack
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientInteract, Assembly-CSharp
+        m_MethodName: ResetToOriginPosition
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   dropDown:
     m_PersistentCalls:
       m_Calls:
@@ -6282,6 +6338,19 @@ MonoBehaviour:
           Assembly-CSharp
         m_MethodName: ReturnToOriginPosition
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.Patient.HamlickPatientWhenHug,
+          Assembly-CSharp
+        m_MethodName: Hugging
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6331,6 +6400,128 @@ CapsuleCollider:
   m_Height: 0.25687242
   m_Direction: 1
   m_Center: {x: 0.1220186, y: 1.1095563, z: 0}
+--- !u!114 &7090406992762597395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552735585332728759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d497754d6cf958a4a8f19fbbc7ff0b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttachObjectLeft: {fileID: 0}
+  AttachObjectRight: {fileID: 0}
+  playerHand_L: {fileID: 0}
+  playerHand_R: {fileID: 0}
+  handPos: {x: 0, y: 0, z: 0}
+  worldPlaneNormal: {x: 1, y: 0, z: 0}
+  snapTakeObject: 0
+  snapReleaseGesture: 0
+  snapFixed:
+    isLocated: 0
+    isFixed: 0
+    isOutside: 0
+  throwOutside:
+    outside: 0
+    outsideRange: 0
+    outsideZone: {fileID: 0}
+  catchingSpeedThreshold: 0
+  releaseVelocityTimeOffset: 0
+  scaleReleaseVelocity: 0
+  scaleReleaseVelocityThreshold: 0
+  rigidbody: {fileID: 0}
+  hadInterpolation: 0
+  velocityEstimator: {fileID: 0}
+  scaleReleaseVelocityCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  interactable: {fileID: 0}
+  sanpCurrentHand: {fileID: 0}
+  OriginalPosition: {fileID: 0}
+  UsePosition: []
+  snapZoneArea: []
+  takeObject: {fileID: 0}
+  snapIn:
+    m_PersistentCalls:
+      m_Calls: []
+  snapOut:
+    m_PersistentCalls:
+      m_Calls: []
+  attachUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  pickUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientWhenHug, Assembly-CSharp
+        m_MethodName: Hugging
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientInteract, Assembly-CSharp
+        m_MethodName: ResetToOriginPosition
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientInteract, Assembly-CSharp
+        m_MethodName: ResetToOriginPosition
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dropDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5973747877968473053}
+        m_TargetAssemblyTypeName: InteractableObject.TakeEvent_ToResetPosition, Assembly-CSharp
+        m_MethodName: ReturnToOriginPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientWhenHug, Assembly-CSharp
+        m_MethodName: Hugging
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7599389215402253295
 GameObject:
   m_ObjectHideFlags: 0
@@ -7759,9 +7950,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3368988857842838345, guid: e08eb4307d39ba047a622f5a8d8b74b3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 961dc30997015024098f51bf302e3697, type: 2}
     - target: {fileID: 6109016687177433585, guid: e08eb4307d39ba047a622f5a8d8b74b3, type: 3}
       propertyPath: m_Name
-      value: Hug_LeftHand
+      value: Hug_RightHand
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e08eb4307d39ba047a622f5a8d8b74b3, type: 3}
@@ -7839,7 +8034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
       propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
       propertyPath: onHandHoverEnd.m_PersistentCalls.m_Calls.Array.size
@@ -8005,6 +8200,34 @@ PrefabInstance:
       propertyPath: onDetachedFromHand.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Heimlich_maneuver.HamlickPatientSpit, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: StartPush
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582063688713454365, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+      propertyPath: onAttachedToHand.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5582063688713454366, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
       propertyPath: linearMapping
       value: 
@@ -8025,9 +8248,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5582063688657502952, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
   m_PrefabInstance: {fileID: 5582063689617462605}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1229510570 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5582063688657502951, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+--- !u!1 &1641161045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5582063689069196312, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
   m_PrefabInstance: {fileID: 5582063689617462605}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1451650682 stripped
@@ -8045,9 +8268,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5582063689631835117, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
   m_PrefabInstance: {fileID: 5582063689617462605}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1641161045 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5582063689069196312, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+--- !u!4 &1229510570 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5582063688657502951, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
   m_PrefabInstance: {fileID: 5582063689617462605}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7643414939862729319
@@ -8103,7 +8326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5720231731651674573, guid: e160936437e74344a99bc23fffd3b8a0, type: 3}
       propertyPath: m_Name
-      value: Hug_RightHand
+      value: Hug_LeftHand
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e160936437e74344a99bc23fffd3b8a0, type: 3}
