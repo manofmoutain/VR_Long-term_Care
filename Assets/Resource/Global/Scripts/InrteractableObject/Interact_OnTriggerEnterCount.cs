@@ -4,7 +4,7 @@ using Valve.VR.InteractionSystem;
 
 namespace InteractableObject
 {
-    public class OnTriggerEnterCount : MonoBehaviour
+    public class Interact_OnTriggerEnterCount : MonoBehaviour
     {
         [SerializeField] private GameObject patient;
         public UnityEvent onTriggerEnter;

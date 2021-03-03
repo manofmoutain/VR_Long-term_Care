@@ -71,7 +71,7 @@ namespace Heimlich_maneuver
         /// <param name="index">考題編號</param>
         public void WashHandBeforeOperate(int index)
         {
-            if (GetComponent<Patient>().GetPatientTransform.parent==transform)
+            if (GetComponent<Patient>().GetPatientTransform.parent==transform || GetComponent<HamlickPatientSpit>().isChoking)
             {
                 //項目十二：於事前進行洗手
                 ScoreManager.Instance.IncreaseOperateSteps(index);

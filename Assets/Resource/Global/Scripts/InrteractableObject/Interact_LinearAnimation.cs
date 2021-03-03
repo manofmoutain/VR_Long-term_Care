@@ -9,12 +9,12 @@ using Valve.VR.InteractionSystem;
 
 namespace InteractableObject
 {
-    public class LinearAnimation : MonoBehaviour
+    public class Interact_LinearAnimation : MonoBehaviour
     {
         public GameObject linearMappingGameObject;
         [SerializeField] private Animator animator;
 
-        [SerializeField] private float currentLinearMapping = float.NaN;
+        public float currentLinearMapping = float.NaN;
         [SerializeField] private int framesUnchanged = 0;
 
 

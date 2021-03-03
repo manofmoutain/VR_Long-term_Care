@@ -11,11 +11,19 @@ namespace InteractableObject
         /// <summary>
         /// 是否進入重置區域
         /// </summary>
-        public bool isEntry;
+        [Tooltip("是否進入重置區域")]public bool isEntry;
+
+        [Header("物件原本的位置資訊")]
+        [SerializeField] private Vector3 originPosition;
+        [SerializeField] private Vector3 originRotation;
+        [SerializeField] private Vector3 originScale;
 
         private void Start()
         {
             isEntry = false;
+            originPosition = transform.localPosition;
+            originRotation = transform.localEulerAngles;
+            originScale = transform.localScale;
         }
 
         /// <summary>
@@ -26,11 +34,12 @@ namespace InteractableObject
         {
             if (isEntry)
             {
+                print($"{gameObject.name}回歸原位");
                 transform.GetComponent<Rigidbody>().isKinematic = true;
 
                 transform.localPosition = Vector3.zero;
                 transform.localEulerAngles = Vector3.zero;
-                transform.localScale = Vector3.one;
+                transform.localScale = originScale;
 
                 isEntry = false;
             }

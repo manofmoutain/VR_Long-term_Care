@@ -9,8 +9,13 @@ namespace InteractableObject
     [RequireComponent(typeof(Interactable))]
     public class TakeEvent_TwoHandSnapPuZone : MonoBehaviour
     {
-        [Header("雙手參數")] [SerializeField] private GameObject AttachObjectLeft;
-        [SerializeField] private GameObject AttachObjectRight;
+        [Header("模型位置參數")] [SerializeField] private Vector3 originPosition;
+        [SerializeField] private Vector3 originRotation;
+        [SerializeField] private Vector3 originScale;
+
+        [Header("雙手參數")]
+        // [SerializeField] private GameObject AttachObjectLeft;
+        // [SerializeField] private GameObject AttachObjectRight;
         [SerializeField] private Hand playerHand_L;
         [SerializeField] private Hand playerHand_R;
         [SerializeField] private Vector3 handPos;
@@ -32,11 +37,20 @@ namespace InteractableObject
         [System.Serializable]
         public class SnapFixed
         {
+            /// <summary>
+            /// 定位判斷－抓取的物件若吻合於黏貼區(未鬆手)
+            /// </summary>
             [Tooltip("定位判斷－抓取的物件若吻合於黏貼區(未鬆手) ")] public bool isLocated;
 
+            /// <summary>
+            /// 吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區)
+            /// </summary>
             [Tooltip("吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區) ")]
             public bool isFixed;
 
+            /// <summary>
+            /// 定點判斷
+            /// </summary>
             [Tooltip("定點判斷 ")] public bool isOutside;
         }
 
@@ -101,6 +115,10 @@ namespace InteractableObject
 
         private void Initialize()
         {
+            originPosition = transform.localPosition;
+            originRotation = transform.localEulerAngles;
+            originScale = transform.localScale;
+
             snapTakeObject = false;
             snapFixed.isFixed = false;
             snapFixed.isLocated = false;
@@ -143,20 +161,16 @@ namespace InteractableObject
 
         private void GrabGameObject()
         {
+            //如果以抓取物件
             if (snapTakeObject)
             {
-                // gameObject.tag = "SnapObject";
-                if (playerHand_R!=null && playerHand_L!=null )
-                {
-
-                }
                 //開啟黏著區物件
                 foreach (GameObject useObject in UsePosition)
                 {
                     useObject.SetActive(true);
                 }
 
-                //放置在新的transform之下
+                //已鬆手，物件已修正於新區域
                 if (snapFixed.isFixed)
                 {
                     // gameObject.tag = "FixObject";
@@ -172,17 +186,17 @@ namespace InteractableObject
                     }
 
 
-                    transform.localPosition = new Vector3();
-                    transform.localEulerAngles = new Vector3();
-                    transform.localScale = new Vector3(1, 1, 1);
+                    transform.localPosition = originPosition;
+                    transform.localEulerAngles = originRotation;
+                    transform.localScale = originScale;
 
-                    // snapIn.Invoke();
+                    snapIn.Invoke();
                 }
 
-                // else
-                // {
-                //     pickUp.Invoke();
-                // }
+                else
+                {
+                    pickUp.Invoke();
+                }
             }
             else
             {
@@ -278,32 +292,39 @@ namespace InteractableObject
             //GRAB THE OBJECT
             if (grabTypes != GrabTypes.None)
             {
-                print(grabTypes);
-
-                if (playerHand_L != null && playerHand_R != null)
+                // print(grabTypes);
+                if (interactable.attachedToHand == null)
                 {
-                    if (interactable.attachedToHand == null)
+                    print($"目前沒有任何一隻手附著到此物件");
+                    //如果雙手同時附著到此物件
+                    if (playerHand_L != null && playerHand_R != null)
                     {
                         hand.AttachObject(gameObject, grabTypes);
                         hand.HoverLock(interactable);
-                        playerHand_L.HoverLock(interactable);
-                        playerHand_R.HoverLock(interactable);
                         hand.HideGrabHint();
+                        // playerHand_L.AttachObject(gameObject, grabTypes);
+                        // playerHand_L.HoverLock(interactable);
+                        // playerHand_L.HideGrabHint();
+                        // playerHand_R.AttachObject(gameObject,grabTypes);
+                        // playerHand_R.HoverLock(interactable);
+                        // playerHand_R.HideGrabHint();
 
-
-                        //手勢脫離物件
+                        //如果設定Trigger鬆開後手勢脫離物件
                         if (snapFixed.isFixed && snapReleaseGesture)
                         {
                             snapFixed.isFixed = false;
+                            print($"已鬆手:{snapFixed.isFixed}");
                             snapFixed.isLocated = false;
+                            print($"物件吻合:{snapFixed.isLocated}");
                             // snapOut.Invoke();
                         }
 
-                        if (playerHand_L != null & playerHand_R != null)
-                        {
-                            //拿起指定的物件
-                            snapTakeObject = true;
-                        }
+                        // if (playerHand_L != null & playerHand_R != null)
+                        // {
+                        //拿起指定的物件
+                        snapTakeObject = true;
+                        Debug.Log($"抓住了{gameObject.name}");
+                        // }
 
 
                         //開啟置放區的觸發
@@ -311,13 +332,15 @@ namespace InteractableObject
                         {
                             snapZoneArea[i].sphereCollider.isTrigger = true;
                         }
-
-                        Debug.Log($"抓住了{gameObject.name}");
                     }
-                    else
+                }
+                else
+                {
+                    print($"附著到手上的是{interactable.attachedToHand}");
+                    //判斷觸發把手是否相同：拾起 / 放下 須皆為同隻手把
+                    if (sanpCurrentHand == hand)
                     {
-                        //判斷觸發把手是否相同：拾起 / 放下 須皆為同隻手把
-                        if (sanpCurrentHand == hand)
+                        if (playerHand_L!=null && playerHand_R!=null)
                         {
                             //Snap out：釋放吻合物件
                             if (snapFixed.isFixed && !snapReleaseGesture)
@@ -328,8 +351,39 @@ namespace InteractableObject
                                 snapOut.Invoke();
                             }
                         }
+                        else
+                        {
+                            hand.DetachObject(gameObject);
+                        }
+
                     }
                 }
+
+                //如果其中一隻手離開
+                // else
+                // {
+                //     //如果未鬆手
+                //     if (!hand.IsGrabEnding(gameObject))
+                //     {
+                //         //強制鬆手
+                //         hand.DetachObject(gameObject);
+                //         hand.HoverUnlock(interactable);
+                //         if (throwOutside.outside)
+                //         {
+                //             //計算物件原始位置與目前位置的距離：判斷是否有將物件移開
+                //             if ((transform.position - throwOutside.outsideZone.position).sqrMagnitude >
+                //                 throwOutside.outsideRange)
+                //             {
+                //                 snapFixed.isOutside = true;
+                //             }
+                //         }
+                //
+                //         snapTakeObject = false;
+                //         rigidbody.isKinematic = false;
+                //         Debug.Log("放下了" + gameObject.name);
+                //     }
+                //
+                // }
             }
         }
 
@@ -364,25 +418,36 @@ namespace InteractableObject
         {
             //放下物品
             bool isGrabEnding = hand.IsGrabEnding(gameObject);
+            // print($"isGrabEnding is {hand.IsGrabEnding(gameObject)}");
+            //處於鬆開Trigger的狀態
             if (isGrabEnding)
             {
+                //如果未鬆手
                 if (snapFixed.isLocated)
                 {
                     //鬆開Trigger若手勢脫離的情況
                     if (snapReleaseGesture)
                     {
+                        //強制鬆手
                         hand.DetachObject(gameObject);
+                        // playerHand_L.DetachObject(gameObject);
+                        // playerHand_R.DetachObject(gameObject);
                     }
 
                     //Snap in：吻合物件到指定位置
                     snapFixed.isFixed = true;
                     sanpCurrentHand = hand;
-                    print($"正在抓取{gameObject.name}");
+                    // print($"正在抓取{gameObject.name}");
                 }
+                //如果已鬆手(正常情況)
                 else
                 {
                     hand.DetachObject(gameObject);
+                    // playerHand_L.DetachObject(gameObject);
+                    // playerHand_R.DetachObject(gameObject);
                     hand.HoverUnlock(interactable);
+                    // playerHand_L.HoverUnlock(interactable);
+                    // playerHand_R.HoverUnlock(interactable);
                     //Debug.Log(gameObject.name + ": " + (transform.position - throwOutside.entryZone.position).sqrMagnitude);
 
                     if (throwOutside.outside)
@@ -407,6 +472,13 @@ namespace InteractableObject
                     snapZoneArea[i].sphereCollider.isTrigger = false;
                 }
             }
+            else
+            {
+                if (playerHand_L!=null && playerHand_R!=null)
+                {
+                    print($"正在抓住{gameObject.name}");
+                }
+            }
         }
 
         /// <summary>
@@ -418,14 +490,14 @@ namespace InteractableObject
             switch (hand.name)
             {
                 case "LeftHand":
-                    AttachObjectLeft = null;
+                    // AttachObjectLeft = null;
                     playerHand_L = null;
                     break;
 
 
                 case "RightHand":
 
-                    AttachObjectRight = null;
+                    // AttachObjectRight = null;
                     playerHand_R = null;
                     break;
             }

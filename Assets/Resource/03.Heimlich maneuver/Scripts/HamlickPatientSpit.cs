@@ -1,7 +1,10 @@
-﻿using Manager;
+﻿using System;
+using Manager;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Global.Pateint;
+using InteractableObject;
+using Valve.VR.InteractionSystem;
 
 namespace Heimlich_maneuver
 {
@@ -34,6 +37,10 @@ namespace Heimlich_maneuver
         /// </summary>
         [SerializeField] private int pushCount;
 
+        [SerializeField] private GameObject pushPoint;
+        [SerializeField] private Interact_LinearAnimation linearAnimation;
+        [SerializeField] private LinearMapping linearMapping;
+
 
         private void Start()
         {
@@ -41,6 +48,15 @@ namespace Heimlich_maneuver
 
             print(ScoreManager.Instance.GetLesson());
             minPushCount = ScoreManager.Instance.GetOperateSteps(3);
+        }
+
+        private void Update()
+        {
+            if (!isChoking)
+            {
+                pushPoint.transform.localPosition = Vector3.zero;
+                linearMapping.value=0;
+            }
         }
 
 

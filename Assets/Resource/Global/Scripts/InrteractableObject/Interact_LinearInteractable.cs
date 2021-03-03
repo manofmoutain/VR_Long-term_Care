@@ -8,7 +8,7 @@ using Valve.VR.InteractionSystem;
 
 namespace InteractableObject
 {
-    public class LinearInteractable : MonoBehaviour
+    public class Interact_LinearInteractable : MonoBehaviour
     {
         [SerializeField] private Hand otherHand;
         [SerializeField] private GameObject[] allInteractPoints;
