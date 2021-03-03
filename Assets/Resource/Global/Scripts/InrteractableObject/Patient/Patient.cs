@@ -26,10 +26,15 @@ namespace Global.Pateint
         /// </summary>
         public float distaceToPlayer;
 
-        // /// <summary>
-        // /// 施測者是否在病患後面
-        // /// </summary>
-        // public bool isPlayerBehindPatient;
+        /// <summary>
+        /// 施測者是否在病患後面
+        /// </summary>
+        public bool isPlayerBehindPatient;
+
+        /// <summary>
+        /// 施測者是否在病患左側
+        /// </summary>
+        public bool isPlayerLeftToPatient;
 
         /// <summary>
         /// 病患(子物件)在世界座標中的實際位置資訊
@@ -40,7 +45,7 @@ namespace Global.Pateint
         {
             if (player == null)
             {
-                player = FindObjectOfType<Player>().gameObject;
+                player = FindObjectOfType<Camera>().gameObject;
             }
 
             if (patient == null)
@@ -65,6 +70,8 @@ namespace Global.Pateint
             }
 
             patientDirection = GetPatientDirection();
+            isPlayerBehindPatient = patientDirection.z > 0;
+            isPlayerLeftToPatient = patientDirection.x > 0;
         }
 
         private Vector3 GetPatientDirection()

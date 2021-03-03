@@ -29,7 +29,7 @@ namespace Heimlich_maneuver
         private void Update()
         {
             //player位於病患背後
-            canHug = GetComponent<Patient>().patientDirection.z > 0;
+            canHug = GetComponent<Patient>().isPlayerBehindPatient;
         }
 
 

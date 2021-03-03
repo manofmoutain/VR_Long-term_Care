@@ -266,7 +266,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593931312}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -752,7 +752,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125851183}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -876,26 +876,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148348955973}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 1.45
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0.75, y: 0.75, z: 0}
---- !u!136 &7415819251037592130
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148348955973}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: -0.75, y: 0.75, z: 0}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!95 &347507147
 Animator:
   serializedVersion: 3
@@ -1550,6 +1536,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Hug_LeftHand '
       objectReference: {fileID: 0}
+    - target: {fileID: 5720231731651674573, guid: e160936437e74344a99bc23fffd3b8a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e160936437e74344a99bc23fffd3b8a0, type: 3}
 --- !u!1 &5720231731223653475 stripped
@@ -1955,6 +1945,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hug_RightHand
       objectReference: {fileID: 0}
+    - target: {fileID: 6109016687177433585, guid: e08eb4307d39ba047a622f5a8d8b74b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e08eb4307d39ba047a622f5a8d8b74b3, type: 3}
 --- !u!1 &6109016685853626134 stripped
@@ -2025,10 +2019,42 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.17
       objectReference: {fileID: 0}
+    - target: {fileID: -6516126627314317563, guid: b385a1c86b9759342a29952705d6f760, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6516126627314317563, guid: b385a1c86b9759342a29952705d6f760, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6516126627314317563, guid: b385a1c86b9759342a29952705d6f760, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3659132387797935942, guid: b385a1c86b9759342a29952705d6f760, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3659132387797935942, guid: b385a1c86b9759342a29952705d6f760, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3659132387797935942, guid: b385a1c86b9759342a29952705d6f760, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 812947928087963621, guid: b385a1c86b9759342a29952705d6f760, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a306039b2df56841802278d265daf01, type: 2}
     - target: {fileID: 919132149155446097, guid: b385a1c86b9759342a29952705d6f760, type: 3}
       propertyPath: m_Name
       value: MAN
       objectReference: {fileID: 0}
+    - target: {fileID: 6490459715130112860, guid: b385a1c86b9759342a29952705d6f760, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a9014efad4aee1441914500e38a3c36e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b385a1c86b9759342a29952705d6f760, type: 3}
 --- !u!4 &9057180345382458031 stripped
