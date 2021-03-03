@@ -6075,7 +6075,6 @@ GameObject:
   - component: {fileID: 231948137}
   - component: {fileID: 231948135}
   - component: {fileID: 231948134}
-  - component: {fileID: 5088096988448409770}
   - component: {fileID: 5973747877968473053}
   - component: {fileID: 2335689940909093849}
   - component: {fileID: 3703178841941623023}
@@ -6241,7 +6240,7 @@ MonoBehaviour:
   previewPoseSelection: 0
   blendingBehaviours: []
   scale: 1
---- !u!114 &5088096988448409770
+--- !u!114 &5973747877968473053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6250,9 +6249,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 7552735585332728759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46975e50f65399e42890a47c535d31c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 34092037579d1104eb40b47aae8ef1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEntry: 0
+--- !u!136 &2335689940909093849
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552735585332728759}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.07532427
+  m_Height: 0.3038816
+  m_Direction: 1
+  m_Center: {x: -0.122018605, y: 1.0860517, z: 2.2251488e-14}
+--- !u!136 &3703178841941623023
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552735585332728759}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.07532427
+  m_Height: 0.31175047
+  m_Direction: 1
+  m_Center: {x: 0.122018605, y: 1.0821173, z: -2.2251488e-14}
+--- !u!114 &7090406992762597395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552735585332728759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d497754d6cf958a4a8f19fbbc7ff0b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originPosition: {x: 0, y: 0, z: 0}
+  originRotation: {x: 0, y: 0, z: 0, w: 0}
+  originScale: {x: 0, y: 0, z: 0}
+  playerHand_L: {fileID: 0}
+  playerHand_R: {fileID: 0}
+  handPos: {x: 0, y: 0, z: 0}
+  worldPlaneNormal: {x: 1, y: 0, z: 0}
   snapTakeObject: 0
   snapReleaseGesture: 1
   snapFixed:
@@ -6282,169 +6329,6 @@ MonoBehaviour:
   UsePosition:
   - {fileID: 0}
   - {fileID: 0}
-  snapZoneArea: []
-  takeObject: {fileID: 0}
-  snapIn:
-    m_PersistentCalls:
-      m_Calls: []
-  snapOut:
-    m_PersistentCalls:
-      m_Calls: []
-  pickUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Heimlich_maneuver.Patient.HamlickPatientWhenHug,
-          Assembly-CSharp
-        m_MethodName: Hugging
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatient, Assembly-CSharp
-        m_MethodName: HugPatientFromBack
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientInteract, Assembly-CSharp
-        m_MethodName: ResetToOriginPosition
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  dropDown:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5973747877968473053}
-        m_TargetAssemblyTypeName: InrteractableObject.TakeEvent_ToResetPosition,
-          Assembly-CSharp
-        m_MethodName: ReturnToOriginPosition
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Heimlich_maneuver.Patient.HamlickPatientWhenHug,
-          Assembly-CSharp
-        m_MethodName: Hugging
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5973747877968473053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552735585332728759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34092037579d1104eb40b47aae8ef1c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEntry: 0
---- !u!136 &2335689940909093849
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552735585332728759}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.07532427
-  m_Height: 0.25687242
-  m_Direction: 1
-  m_Center: {x: -0.122018605, y: 1.1095563, z: 0}
---- !u!136 &3703178841941623023
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552735585332728759}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.07532427
-  m_Height: 0.25687242
-  m_Direction: 1
-  m_Center: {x: 0.1220186, y: 1.1095563, z: 0}
---- !u!114 &7090406992762597395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552735585332728759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d497754d6cf958a4a8f19fbbc7ff0b45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttachObjectLeft: {fileID: 0}
-  AttachObjectRight: {fileID: 0}
-  playerHand_L: {fileID: 0}
-  playerHand_R: {fileID: 0}
-  handPos: {x: 0, y: 0, z: 0}
-  worldPlaneNormal: {x: 1, y: 0, z: 0}
-  snapTakeObject: 0
-  snapReleaseGesture: 0
-  snapFixed:
-    isLocated: 0
-    isFixed: 0
-    isOutside: 0
-  throwOutside:
-    outside: 0
-    outsideRange: 0
-    outsideZone: {fileID: 0}
-  catchingSpeedThreshold: 0
-  releaseVelocityTimeOffset: 0
-  scaleReleaseVelocity: 0
-  scaleReleaseVelocityThreshold: 0
-  rigidbody: {fileID: 0}
-  hadInterpolation: 0
-  velocityEstimator: {fileID: 0}
-  scaleReleaseVelocityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  interactable: {fileID: 0}
-  sanpCurrentHand: {fileID: 0}
-  OriginalPosition: {fileID: 0}
-  UsePosition: []
   snapZoneArea: []
   takeObject: {fileID: 0}
   snapIn:
@@ -6498,10 +6382,10 @@ MonoBehaviour:
   dropDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5973747877968473053}
-        m_TargetAssemblyTypeName: InteractableObject.TakeEvent_ToResetPosition, Assembly-CSharp
-        m_MethodName: ReturnToOriginPosition
-        m_Mode: 1
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientWhenHug, Assembly-CSharp
+        m_MethodName: Hugging
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6510,10 +6394,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientWhenHug, Assembly-CSharp
-        m_MethodName: Hugging
-        m_Mode: 6
+      - m_Target: {fileID: 5973747877968473053}
+        m_TargetAssemblyTypeName: InteractableObject.TakeEvent_ToResetPosition, Assembly-CSharp
+        m_MethodName: ReturnToOriginPosition
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8248,9 +8132,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5582063688657502952, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
   m_PrefabInstance: {fileID: 5582063689617462605}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1641161045 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5582063689069196312, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+--- !u!4 &1229510570 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5582063688657502951, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
   m_PrefabInstance: {fileID: 5582063689617462605}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1451650682 stripped
@@ -8268,9 +8152,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5582063689631835117, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
   m_PrefabInstance: {fileID: 5582063689617462605}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1229510570 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5582063688657502951, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
+--- !u!1 &1641161045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5582063689069196312, guid: 037ec602d8337e14d968ed022d8f9b53, type: 3}
   m_PrefabInstance: {fileID: 5582063689617462605}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7643414939862729319

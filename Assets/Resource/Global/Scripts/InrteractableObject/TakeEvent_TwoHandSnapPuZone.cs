@@ -295,10 +295,11 @@ namespace InteractableObject
                 // print(grabTypes);
                 if (interactable.attachedToHand == null)
                 {
-                    print($"目前沒有任何一隻手附著到此物件");
+                    // print($"目前沒有任何一隻手附著到此物件");
                     //如果雙手同時附著到此物件
                     if (playerHand_L != null && playerHand_R != null)
                     {
+
                         hand.AttachObject(gameObject, grabTypes);
                         hand.HoverLock(interactable);
                         hand.HideGrabHint();
@@ -319,19 +320,17 @@ namespace InteractableObject
                             // snapOut.Invoke();
                         }
 
-                        // if (playerHand_L != null & playerHand_R != null)
-                        // {
+
                         //拿起指定的物件
                         snapTakeObject = true;
                         Debug.Log($"抓住了{gameObject.name}");
-                        // }
 
 
                         //開啟置放區的觸發
-                        for (int i = 0; i < UsePosition.Length; i++)
-                        {
-                            snapZoneArea[i].sphereCollider.isTrigger = true;
-                        }
+                        // for (int i = 0; i < UsePosition.Length; i++)
+                        // {
+                        //     snapZoneArea[i].sphereCollider.isTrigger = true;
+                        // }
                     }
                 }
                 else
@@ -358,32 +357,6 @@ namespace InteractableObject
 
                     }
                 }
-
-                //如果其中一隻手離開
-                // else
-                // {
-                //     //如果未鬆手
-                //     if (!hand.IsGrabEnding(gameObject))
-                //     {
-                //         //強制鬆手
-                //         hand.DetachObject(gameObject);
-                //         hand.HoverUnlock(interactable);
-                //         if (throwOutside.outside)
-                //         {
-                //             //計算物件原始位置與目前位置的距離：判斷是否有將物件移開
-                //             if ((transform.position - throwOutside.outsideZone.position).sqrMagnitude >
-                //                 throwOutside.outsideRange)
-                //             {
-                //                 snapFixed.isOutside = true;
-                //             }
-                //         }
-                //
-                //         snapTakeObject = false;
-                //         rigidbody.isKinematic = false;
-                //         Debug.Log("放下了" + gameObject.name);
-                //     }
-                //
-                // }
             }
         }
 
@@ -467,17 +440,34 @@ namespace InteractableObject
 
 
                 //關閉置放區的trigger
-                for (int i = 0; i < UsePosition.Length; i++)
-                {
-                    snapZoneArea[i].sphereCollider.isTrigger = false;
-                }
+                // for (int i = 0; i < UsePosition.Length; i++)
+                // {
+                //     snapZoneArea[i].sphereCollider.isTrigger = false;
+                // }
             }
             else
             {
-                if (playerHand_L!=null && playerHand_R!=null)
+                if (playerHand_L==null || playerHand_R==null)
                 {
-                    print($"正在抓住{gameObject.name}");
+                    print($"物件脫離手勢");
+                    // hand.DetachObject(gameObject);
+                    // hand.HoverUnlock(interactable);
+                    //
+                    // if (throwOutside.outside)
+                    // {
+                    //     //計算物件原始位置與目前位置的距離：判斷是否有將物件移開
+                    //     if ((transform.position - throwOutside.outsideZone.position).sqrMagnitude >
+                    //         throwOutside.outsideRange)
+                    //     {
+                    //         snapFixed.isOutside = true;
+                    //     }
+                    // }
+                    //
+                    // snapTakeObject = false;
+                    // rigidbody.isKinematic = false;
+
                 }
+                dropDown.Invoke();
             }
         }
 

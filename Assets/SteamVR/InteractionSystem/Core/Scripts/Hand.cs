@@ -416,7 +416,7 @@ namespace Valve.VR.InteractionSystem
         //
         // objectToAttach - The GameObject to attach
         // flags - The flags to use for attaching the object
-        // attachmentPoint - Name of the GameObject in the hierarchy of this Hand which should act as the attachment point for this GameObject
+        // attachmentPoint - 此Hand層次結構中GameObject的名稱，該名稱應作為此GameObject的附加點
         //-------------------------------------------------
         public void AttachObject(GameObject objectToAttach, GrabTypes grabbedWithType,
             AttachmentFlags flags = defaultAttachmentFlags, Transform attachmentOffset = null)

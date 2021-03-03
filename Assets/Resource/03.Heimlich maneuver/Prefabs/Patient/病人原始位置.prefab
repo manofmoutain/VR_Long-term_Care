@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSnapIn: 0
   fadedObject: {fileID: 0}
-  fadedPrefab: {fileID: 8630090093207757003, guid: 1f1b45752b3174d4b92b064ec0dccd0d, type: 3}
+  fadedPrefab: {fileID: 2310236768326455153, guid: 6fc9edb2e4418af46960e53a19e70dfa, type: 3}
   sphereCollider: {fileID: 4622067119907889910}
   takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventTwoHandSnapPuZone: {fileID: 0}
@@ -137,7 +137,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4622067120986483608}
-  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1.884, y: -0.261, z: 0.566}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

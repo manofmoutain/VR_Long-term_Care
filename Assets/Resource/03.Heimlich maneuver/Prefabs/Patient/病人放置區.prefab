@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSnapIn: 0
   fadedObject: {fileID: 0}
-  fadedPrefab: {fileID: 8630090093207757003, guid: 1f1b45752b3174d4b92b064ec0dccd0d, type: 3}
+  fadedPrefab: {fileID: 2310236768326455153, guid: 6fc9edb2e4418af46960e53a19e70dfa, type: 3}
   sphereCollider: {fileID: 1869113713331867655}
   takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventTwoHandSnapPuZone: {fileID: 0}
