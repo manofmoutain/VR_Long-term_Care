@@ -51,11 +51,11 @@ namespace InteractableObject
             {
                 if (!isSnapIn)
                 {
-                    print($"{other.gameObject.name}進入放置區");
+                    print($"{other.gameObject.name}進入{transform.parent.name}");
                     //產生外框線
-                    fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity);
-                    fadedObject.transform.SetParent(transform);
-                    fadedObject.transform.localPosition = Vector3.zero;
+                    fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity,transform);
+                    // fadedObject.transform.SetParent(transform);
+                    // fadedObject.transform.localPosition = Vector3.zero;
                     // fadedObject.transform.localScale = Vector3.one;
                     fadedObject.transform.localRotation = Quaternion.identity;
 

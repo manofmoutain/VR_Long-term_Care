@@ -181,7 +181,7 @@ namespace InteractableObject
                         if (snapZone.isSnapIn)
                         {
                             transform.SetParent(snapZone.transform.parent);
-                            print($"{gameObject.name}已成為{snapZone.transform.parent.gameObject.name}的子物件");
+                            print($"{gameObject.name}已成為{snapZone.transform.parent.name}的子物件");
                         }
                     }
 

@@ -8,8 +8,8 @@ using UnityEngine;
 public class ClockTime : MonoBehaviour
 {
     [SerializeField] private TaiwanCalendar taiwanTime;
-    [SerializeField] private int hour;
-    [SerializeField] private int minute;
+    [SerializeField] private string hour;
+    [SerializeField] private string minute;
     [SerializeField] private int second;
     [SerializeField] private TextMeshProUGUI timeTMPro;
 
@@ -21,9 +21,26 @@ public class ClockTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hour = taiwanTime.GetHour(DateTime.Now);
-        minute = taiwanTime.GetMinute(DateTime.Now);
+        if (taiwanTime.GetHour(DateTime.Now)<10)
+        {
+            hour = $"0{taiwanTime.GetHour(DateTime.Now)}";
+        }
+        else
+        {
+            hour = $"{taiwanTime.GetHour(DateTime.Now)}";
+        }
+
+        if (taiwanTime.GetMinute(DateTime.Now)<10)
+        {
+            minute = $"0{taiwanTime.GetMinute(DateTime.Now)}";
+        }
+        else
+        {
+            minute = $"{taiwanTime.GetMinute(DateTime.Now)}";
+        }
+
         second = taiwanTime.GetSecond(DateTime.Now);
         timeTMPro.text = $"{hour}:{minute}";
+
     }
 }

@@ -59,7 +59,7 @@ namespace Heimlich_maneuver
         /// <param name="index">考題編號</param>
         public void Fallen(int index)
         {
-            GetComponent<PatientSFX>().PlaySFX(0);
+            GetComponent<PatientSFX>().PlaySFX(1);
             //項目十：案主掉落
             ScoreManager.Instance.IncreaseOperateSteps(index);
             ScoreManager.Instance.SetDone(index);

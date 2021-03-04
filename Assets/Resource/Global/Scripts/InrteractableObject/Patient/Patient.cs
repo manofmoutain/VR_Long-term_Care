@@ -8,7 +8,9 @@ namespace Global.Pateint
     public class Patient : MonoBehaviour
     {
         [Header("物件")] public GameObject player;
+        [SerializeField] private Vector3 playerPosition;
         [SerializeField] GameObject patient;
+        [SerializeField] private Vector3 patientPosition;
         public Transform GetPatientTransform => patient.transform;
 
         /// <summary>
@@ -70,16 +72,22 @@ namespace Global.Pateint
             }
 
             patientDirection = GetPatientDirection();
-            isPlayerBehindPatient = patientDirection.z > 0;
+            isPlayerBehindPatient = patientDirection.z < 0;
             isPlayerLeftToPatient = patientDirection.x > 0;
         }
 
         private Vector3 GetPatientDirection()
         {
+            playerPosition = player.transform.position;
+            patientPosition = patient.transform.position;
+
             playerVectorToPatient = player.transform.position - patient.transform.parent.position;
             distaceToPlayer = Vector3.Distance(player.transform.position, patient.transform.parent.position);
             //得到位於病患的左右方向
-            Vector3 patientDirection = playerVectorToPatient / distaceToPlayer;
+            // patientDirection = playerVectorToPatient / distaceToPlayer;
+            //獲得病患與施測者之間的相對位置
+            patientDirection = patient.transform.InverseTransformDirection(player.transform.position);
+
             return patientDirection;
         }
 
