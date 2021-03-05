@@ -14,8 +14,14 @@ namespace InteractableObject
         [SerializeField] private Vector3 originScale;
 
         [Header("雙手參數")]
-        // [SerializeField] private GameObject AttachObjectLeft;
-        // [SerializeField] private GameObject AttachObjectRight;
+        [Tooltip("SnapOnAttach=該對象應捕捉到手上指定的附著點的位置；" +
+                 "DetachOthers=附著在此手上的其他物體將被分離；" +
+                 "DetachFromOtherHand=該對象將與另一隻手分離；" +
+                 "VelocityMovement=對象將嘗試移動以匹配手的位置和旋轉；" +
+                 "AllowSidegrade=該對象能夠從捏握切換為抓握")]
+        [SerializeField] private Hand.AttachmentFlags attachmentFlags;
+        [SerializeField] private GameObject AttachObjectLeft;
+        [SerializeField] private GameObject AttachObjectRight;
         [SerializeField] private Hand playerHand_L;
         [SerializeField] private Hand playerHand_R;
         [SerializeField] private Vector3 handPos;
@@ -34,35 +40,11 @@ namespace InteractableObject
         [Tooltip("Trigger放開後是否要脫離手勢")] [SerializeField]
         private bool snapReleaseGesture;
 
-        [System.Serializable]
-        public class SnapFixed
-        {
-            /// <summary>
-            /// 定位判斷－抓取的物件若吻合於黏貼區(未鬆手)
-            /// </summary>
-            [Tooltip("定位判斷－抓取的物件若吻合於黏貼區(未鬆手) ")] public bool isLocated;
 
-            /// <summary>
-            /// 吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區)
-            /// </summary>
-            [Tooltip("吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區) ")]
-            public bool isFixed;
-
-            /// <summary>
-            /// 定點判斷
-            /// </summary>
-            [Tooltip("定點判斷 ")] public bool isOutside;
-        }
 
         public SnapFixed snapFixed;
 
-        [System.Serializable]
-        public class ThrowOutside
-        {
-            public bool outside;
-            public float outsideRange;
-            public Transform outsideZone;
-        }
+
 
         [SerializeField] private ThrowOutside throwOutside;
 
@@ -79,7 +61,8 @@ namespace InteractableObject
         [SerializeField] private AnimationCurve scaleReleaseVelocityCurve;
         [SerializeField] private Interactable interactable;
 
-        [Header("外部物件")] [SerializeField] private Hand sanpCurrentHand;
+        [Header("外部物件")]
+        [SerializeField] private Hand sanpCurrentHand;
         [Tooltip("原本位置")] [SerializeField] GameObject OriginalPosition;
         [Tooltip("要黏著的物件")] [SerializeField] GameObject[] UsePosition;
         [SerializeField] List<TakeEvent_SnapArea> snapZoneArea;
@@ -249,14 +232,14 @@ namespace InteractableObject
                 case "LeftHand":
 
                     playerHand_L = null;
-                    // AttachObjectLeft = playerHand_L.currentAttachedObject.gameObject;
+                    AttachObjectLeft = null;
                     break;
 
 
                 case "RightHand":
 
                     playerHand_R = null;
-                    // AttachObjectRight = playerHand_R.currentAttachedObject.gameObject;
+                    AttachObjectRight = null;
                     // handPos = ComputeToTransformProjected(playerHand_R.transform);
                     break;
             }
@@ -276,15 +259,12 @@ namespace InteractableObject
                 case "LeftHand":
 
                     playerHand_L = hand;
-                    // AttachObjectLeft = playerHand_L.currentAttachedObject.gameObject;
                     break;
 
 
                 case "RightHand":
 
                     playerHand_R = hand;
-                    // AttachObjectRight = playerHand_R.currentAttachedObject.gameObject;
-                    // handPos = ComputeToTransformProjected(playerHand_R.transform);
                     break;
             }
 
@@ -297,12 +277,12 @@ namespace InteractableObject
                 {
                     // print($"目前沒有任何一隻手附著到此物件");
                     //如果雙手同時附著到此物件
-                    if (playerHand_L != null && playerHand_R != null)
+                    if (AttachObjectLeft!=null && AttachObjectRight!=null)
                     {
 
-                        hand.AttachObject(gameObject, grabTypes);
-                        hand.HoverLock(interactable);
-                        hand.HideGrabHint();
+                        // hand.AttachObject(gameObject, grabTypes);
+                        // hand.HoverLock(interactable);
+                        // hand.HideGrabHint();
                         // playerHand_L.AttachObject(gameObject, grabTypes);
                         // playerHand_L.HoverLock(interactable);
                         // playerHand_L.HideGrabHint();
@@ -368,6 +348,22 @@ namespace InteractableObject
         {
             pickUp.Invoke();
 
+            switch (hand.name)
+            {
+                case "LeftHand":
+
+                    playerHand_L = hand;
+                    AttachObjectLeft = playerHand_L.currentAttachedObject.gameObject;
+                    break;
+
+
+                case "RightHand":
+
+                    playerHand_R = hand;
+                    AttachObjectRight = playerHand_R.currentAttachedObject.gameObject;
+                    handPos = ComputeToTransformProjected(playerHand_R.transform);
+                    break;
+            }
 
             hadInterpolation = rigidbody.interpolation;
             rigidbody.interpolation = RigidbodyInterpolation.None;
@@ -480,14 +476,14 @@ namespace InteractableObject
             switch (hand.name)
             {
                 case "LeftHand":
-                    // AttachObjectLeft = null;
+                    AttachObjectLeft = null;
                     playerHand_L = null;
                     break;
 
 
                 case "RightHand":
 
-                    // AttachObjectRight = null;
+                    AttachObjectRight = null;
                     playerHand_R = null;
                     break;
             }
@@ -573,5 +569,34 @@ namespace InteractableObject
 
             velocity *= (scaleFactor * scaleReleaseVelocity);
         }
+    }
+
+
+    [System.Serializable]
+    public class SnapFixed
+    {
+        /// <summary>
+        /// 定位判斷－抓取的物件若吻合於黏貼區(未鬆手)
+        /// </summary>
+        [Tooltip("定位判斷－抓取的物件若吻合於黏貼區(未鬆手) ")] public bool isLocated;
+
+        /// <summary>
+        /// 吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區)
+        /// </summary>
+        [Tooltip("吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區) ")]
+        public bool isFixed;
+
+        /// <summary>
+        /// 定點判斷
+        /// </summary>
+        [Tooltip("定點判斷 ")] public bool isOutside;
+    }
+
+    [System.Serializable]
+    public class ThrowOutside
+    {
+        public bool outside;
+        public float outsideRange;
+        public Transform outsideZone;
     }
 }

@@ -30,6 +30,7 @@ namespace InteractableObject
         public TakeEvent_SingleHandSnapPutZone takeEventSingleHandSnapPutZone;
 
         public TakeEvent_TwoHandSnapPuZone takeEventTwoHandSnapPuZone;
+        public TakeEvent_TwoHandGrab takeEventTwoHandGrab;
 
 
         void Start()
@@ -47,7 +48,7 @@ namespace InteractableObject
 #else
             // SteamVR代碼
 //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPuZone>())
+            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPuZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
             {
                 if (!isSnapIn)
                 {
@@ -71,6 +72,11 @@ namespace InteractableObject
                         takeEventTwoHandSnapPuZone.snapFixed.isLocated = true;
                     }
 
+                    if (takeEventTwoHandGrab != null)
+                    {
+                        takeEventTwoHandGrab.snapFixed.isLocated = true;
+                    }
+
                     //Debug.Log("Snap Object Correct！");
                 }
             }
@@ -91,11 +97,6 @@ namespace InteractableObject
                     Destroy(fadedObject);
                     isSnapIn = false;
 
-                    //if (snapTakeDropZone.snapFixed.isThrowed)
-                    //{
-                    //    snapTakeDropZone.snapFixed.isLocated = false;
-                    //    snapTakeDropZone.snapFixed.isThrowed = false;
-                    //}
                     if (takeEventSingleHandSnapPutZone != null)
                     {
                         if (takeEventSingleHandSnapPutZone.snapFixed.isLocated &&
@@ -111,6 +112,15 @@ namespace InteractableObject
                             !takeEventTwoHandSnapPuZone.snapFixed.isFixed)
                         {
                             takeEventTwoHandSnapPuZone.snapFixed.isLocated = false;
+                        }
+                    }
+
+                    if (takeEventTwoHandGrab!=null)
+                    {
+                        if (takeEventTwoHandGrab.snapFixed.isLocated &&
+                            !takeEventTwoHandGrab.snapFixed.isFixed)
+                        {
+                            takeEventTwoHandGrab.snapFixed.isLocated = false;
                         }
                     }
                 }

@@ -7,7 +7,7 @@ namespace Global.Pateint
 {
     public class Patient : MonoBehaviour
     {
-        [Header("物件")] public GameObject player;
+        [Header("物件")] [Tooltip("VR攝影機")]public GameObject player;
         [SerializeField] private Vector3 playerPosition;
         [SerializeField] GameObject patient;
         [SerializeField] private Vector3 patientPosition;
@@ -45,6 +45,7 @@ namespace Global.Pateint
 
         private void Start()
         {
+            //因為player基本上都世界中心，人物移動其實是攝影機在動，因此以攝影機作為player
             if (player == null)
             {
                 player = FindObjectOfType<Camera>().gameObject;
@@ -60,6 +61,7 @@ namespace Global.Pateint
 
         private void Update()
         {
+            //持續偵測語音
             if (SpeechManager.Instance.GetRespondStatus == "MicroReceive")
             {
                 if (!SpeechManager.Instance.GetWaitingForRecognize)
@@ -81,10 +83,21 @@ namespace Global.Pateint
             playerPosition = player.transform.position;
             patientPosition = patient.transform.position;
 
-            playerVectorToPatient = player.transform.position - patient.transform.parent.position;
-            distaceToPlayer = Vector3.Distance(player.transform.position, patient.transform.parent.position);
+            if (patient.transform.parent!=null)
+            {
+                playerVectorToPatient = player.transform.position - patient.transform.parent.position;
+                distaceToPlayer = Vector3.Distance(player.transform.position, patient.transform.parent.position);
+            }
+            else
+            {
+                playerVectorToPatient = player.transform.position - patient.transform.position;
+                distaceToPlayer = Vector3.Distance(player.transform.position, patient.transform.position);
+            }
+
+
             //得到位於病患的左右方向
             // patientDirection = playerVectorToPatient / distaceToPlayer;
+
             //獲得病患與施測者之間的相對位置
             patientDirection = patient.transform.InverseTransformDirection(player.transform.position);
 

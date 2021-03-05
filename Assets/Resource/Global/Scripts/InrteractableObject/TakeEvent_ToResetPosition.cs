@@ -14,6 +14,7 @@ namespace InteractableObject
         [Tooltip("是否進入重置區域")]public bool isEntry;
 
         [Header("物件原本的位置資訊")]
+        [SerializeField] private Transform originTransform;
         [SerializeField] private Vector3 originPosition;
         [SerializeField] private Vector3 originRotation;
         [SerializeField] private Vector3 originScale;
@@ -21,6 +22,7 @@ namespace InteractableObject
         private void Start()
         {
             isEntry = false;
+            originTransform = transform.parent;
             originPosition = transform.localPosition;
             originRotation = transform.localEulerAngles;
             originScale = transform.localScale;
@@ -35,6 +37,7 @@ namespace InteractableObject
             if (isEntry)
             {
                 print($"{gameObject.name}回歸原位");
+                transform.SetParent(originTransform);
                 transform.GetComponent<Rigidbody>().isKinematic = true;
 
                 transform.localPosition = Vector3.zero;

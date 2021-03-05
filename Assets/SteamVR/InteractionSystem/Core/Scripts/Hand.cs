@@ -430,6 +430,7 @@ namespace Valve.VR.InteractionSystem
 
             if (otherHand.ObjectIsAttached(objectToAttach))
             {
+                print(objectToAttach);
                 initialHandPosition1 = trackedObject.transform.position;
                 initialHandPosition2 = otherHand.trackedObject.transform.position;
                 initialObjectRotation = objectToAttach.transform.rotation;
@@ -455,6 +456,7 @@ namespace Valve.VR.InteractionSystem
                     ); // negate the ParentToHand, SnapOnAttach and DetachFromOtherHand flags
 
                 twoHandGrab = true; // bool, so you know grabbed with 2 hands
+
             }
 
             #endregion
@@ -742,11 +744,11 @@ namespace Valve.VR.InteractionSystem
                          initialGrabDistance); // percentage based on the distance of the initial positions and the new positions
 
 
-                Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y,
-                    p * initialObjectScale.z); // calculate new object scale with p
+                // Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y,
+                //     p * initialObjectScale.z); // calculate new object scale with p
 
                 attachedObject.transform.rotation = handRot * initialObjectRotation; // add rotation
-                attachedObject.transform.localScale = newScale; // set new scale
+                // attachedObject.transform.localScale = newScale; // set new scale
                 // set the position of the object to the center of both hands based on the original object direction relative to the new scale and rotation
                 attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2)) +
                                                     (handRot * (initialObjectDirection * p));
