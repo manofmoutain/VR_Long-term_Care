@@ -23,10 +23,15 @@ namespace Manager
 
         #region Public Methods
 
+        /// <summary>
+        /// 設置模式
+        /// </summary>
+        /// <param name="mod"></param>
         public void SetGameMod(Mod mod)
         {
             gameMod = mod;
         }
+
         /// <summary>
         /// 某個項目刪去剩餘操作次數
         /// </summary>
@@ -126,7 +131,7 @@ namespace Manager
         }
 
         /// <summary>
-        /// 取得某個項目要操作的內容
+        /// 取得某個項目是否有操作的項目內容
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
@@ -165,7 +170,7 @@ namespace Manager
         }
 
         /// <summary>
-        /// 某個項目增加生於操作次數
+        /// 某個項目增加剩餘操作次數
         /// </summary>
         /// <param name="inderx"></param>
         public void IncreaseOperateSteps(int inderx)
@@ -199,7 +204,6 @@ namespace Manager
         /// 設置index的作答情況
         /// </summary>
         /// <param name="index"></param>
-        /// <param name="checkMark"></param>
         public void SetDone(int index)
         {
             _scoreSystem.SetIsDone(index);

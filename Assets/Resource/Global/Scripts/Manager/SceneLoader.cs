@@ -11,6 +11,18 @@ namespace Manager
             base.Awake();
         }
 
+        /// <summary>
+        /// 回到第一個場景Title
+        /// </summary>
+        public void LoadTitle()
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        /// <summary>
+        /// 讀取場景
+        /// </summary>
+        /// <param name="index"></param>
         public void LoadScene(int index)
         {
             StartCoroutine(Co_LoadScene(index));

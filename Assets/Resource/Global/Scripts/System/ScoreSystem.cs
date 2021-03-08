@@ -116,6 +116,10 @@ namespace GlobalSystem
         /// <returns></returns>
         public bool GetIsDone(int index)
         {
+            if (_operateTopics[index].operateSteps==0)
+            {
+                _operateTopics[index].isDone = true;
+            }
             Debug.Log(_operateTopics[index].isDone ? $"第{index}項已操作完成" : $"第{index}項操作未完成");
             return _operateTopics[index].isDone;
         }
@@ -307,6 +311,13 @@ namespace GlobalSystem
         /// <returns></returns>
         public int GetTotalScore()
         {
+            for (int i = 0; i < _operateTopics.Count; i++)
+            {
+                if (!_operateTopics[i].isDone)
+                {
+                    totalScore -=_operateTopics[i].score;
+                }
+            }
             Debug.Log($"總分為{totalScore}");
             return totalScore < 0 ? totalScore = 0 : totalScore;
         }
