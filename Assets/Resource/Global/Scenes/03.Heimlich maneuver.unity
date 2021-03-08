@@ -2995,34 +2995,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u986F\u793A\u672A\u5B8C\u6210\u9805\u76EEUI"
       objectReference: {fileID: 0}
-    - target: {fileID: 9086436701951084086, guid: f4485d01dc2b19047a96260006b1e03f, type: 3}
-      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086436701951084086, guid: f4485d01dc2b19047a96260006b1e03f, type: 3}
-      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086436701951084086, guid: f4485d01dc2b19047a96260006b1e03f, type: 3}
-      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086436701951084086, guid: f4485d01dc2b19047a96260006b1e03f, type: 3}
-      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1500995092}
-    - target: {fileID: 9086436701951084086, guid: f4485d01dc2b19047a96260006b1e03f, type: 3}
-      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ShowAchievement, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086436701951084086, guid: f4485d01dc2b19047a96260006b1e03f, type: 3}
-      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086436701951084086, guid: f4485d01dc2b19047a96260006b1e03f, type: 3}
-      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4485d01dc2b19047a96260006b1e03f, type: 3}
 --- !u!1001 &3336256967933682011

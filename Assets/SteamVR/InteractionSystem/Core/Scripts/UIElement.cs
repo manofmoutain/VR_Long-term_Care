@@ -15,6 +15,9 @@ namespace Valve.VR.InteractionSystem
 	[RequireComponent( typeof( Interactable ) )]
 	public class UIElement : MonoBehaviour
 	{
+		[SerializeField]private UnityEvent onHandHoverBegin;
+		[SerializeField]private UnityEvent onHandHoverEnd;
+		[SerializeField]private UnityEvent onHandHoverUpdate;
 		public CustomEvents.UnityEventHand onHandClick;
 
         protected Hand currentHand;
@@ -36,6 +39,7 @@ namespace Valve.VR.InteractionSystem
 			currentHand = hand;
 			InputModule.instance.HoverBegin( gameObject );
 			ControllerButtonHints.ShowButtonHint( hand, hand.uiInteractAction);
+			onHandHoverBegin.Invoke();
 		}
 
 
@@ -45,6 +49,7 @@ namespace Valve.VR.InteractionSystem
 			InputModule.instance.HoverEnd( gameObject );
 			ControllerButtonHints.HideButtonHint( hand, hand.uiInteractAction);
 			currentHand = null;
+			onHandHoverEnd.Invoke();
 		}
 
 

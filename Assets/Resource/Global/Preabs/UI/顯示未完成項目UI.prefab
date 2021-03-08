@@ -365,6 +365,8 @@ MonoBehaviour:
   achievementOBJ: {fileID: 3900697220690656697, guid: 7c91e6e2c5d807a4682ecf771ba12f1a, type: 3}
   score: {fileID: 5805170031425484522}
   restartBtn: {fileID: 2389843075610653400}
+  normalRestartSprite: {fileID: 21300000, guid: aef80248bb255a64082b3b98d96aa9fe, type: 3}
+  tochedRestartSprite: {fileID: 21300000, guid: eaca6d9271700a4469dba4d8b4f3bce4, type: 3}
 --- !u!1 &2374805417787607046
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,9 +736,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd2ef2dd3d5d64e96af4420220d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onHandClick:
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2374805417304045062}
+        m_TargetAssemblyTypeName: ShowAchievement, Assembly-CSharp
+        m_MethodName: TouchBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2374805417304045062}
+        m_TargetAssemblyTypeName: ShowAchievement, Assembly-CSharp
+        m_MethodName: LeaveBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHandHoverUpdate:
     m_PersistentCalls:
       m_Calls: []
+  onHandClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2374805417304045062}
+        m_TargetAssemblyTypeName: ShowAchievement, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5867456166265437341
 GameObject:
   m_ObjectHideFlags: 0

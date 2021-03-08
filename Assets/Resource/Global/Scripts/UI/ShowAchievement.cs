@@ -6,6 +6,7 @@ using Manager;
 using OfficeOpenXml.ConditionalFormatting;
 using TMPro;
 using TMPro.Examples;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
@@ -13,18 +14,25 @@ using Valve.VR.InteractionSystem;
 
 public class ShowAchievement : MonoBehaviour
 {
-    [SerializeField] private Transform spawnPoint;
+    [Header("")]
     [SerializeField] private RectTransform star;
+
+    [Header("生成未完成的項目物件")]
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject achievementOBJ;
     [SerializeField] private TextMeshProUGUI score;
+
+    [Header("重新開始按鈕")]
     [SerializeField] private Button restartBtn;
+    [SerializeField] private Sprite normalRestartSprite;
+    [SerializeField] private Sprite tochedRestartSprite;
 
     private void Start()
     {
+        restartBtn.GetComponent<Image>().sprite = normalRestartSprite;
         score.gameObject.SetActive(false);
         restartBtn.gameObject.SetActive(false);
         star.localScale = Vector3.zero;
-        // restartBtn.onClick.AddListener(delegate { SceneLoader.Instance.LoadTitle(); });
         // ShowAchievementInEnd();
     }
 
@@ -90,5 +98,21 @@ public class ShowAchievement : MonoBehaviour
         Destroy(FindObjectOfType<ScoreManager>().gameObject);
         Destroy(FindObjectOfType<Player>().gameObject);
         SceneLoader.Instance.LoadTitle();
+    }
+
+    /// <summary>
+    /// 觸碰到按鈕換圖片
+    /// </summary>
+    public void TouchBtn()
+    {
+        restartBtn.GetComponent<Image>().sprite = tochedRestartSprite;
+    }
+
+    /// <summary>
+    /// 離開按鈕還原圖片
+    /// </summary>
+    public void LeaveBtn()
+    {
+        restartBtn.GetComponent<Image>().sprite = normalRestartSprite;
     }
 }
