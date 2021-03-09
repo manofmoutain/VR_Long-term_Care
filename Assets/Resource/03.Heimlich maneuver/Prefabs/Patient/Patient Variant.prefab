@@ -147,6 +147,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &7288040706032364628
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415428519076005234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7026811, y: 2.7398057, z: 1}
+  m_Center: {x: 0, y: 0.8699033, z: 0}
 --- !u!1001 &5180861795143821367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,11 +209,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_Radius
-      value: 0.8948527
+      value: 0.72808117
       objectReference: {fileID: 0}
     - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_Height
-      value: 4.0000005
+      value: 2.5837393
+      objectReference: {fileID: 0}
+    - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+      propertyPath: m_Center.x
+      value: 0.038102422
+      objectReference: {fileID: 0}
+    - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+      propertyPath: m_Center.y
+      value: 1.0080442
+      objectReference: {fileID: 0}
+    - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+      propertyPath: m_Center.z
+      value: 0.06782338
+      objectReference: {fileID: 0}
+    - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5846364451968565232, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: sFXs.Array.size
@@ -220,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846364451968565240, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_Name
-      value: Patient (1) Variant
+      value: Patient Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5846364451968565246, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -232,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846364451968565246, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.9760132
+      value: 1.922
       objectReference: {fileID: 0}
     - target: {fileID: 5846364451968565246, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_LocalRotation.x

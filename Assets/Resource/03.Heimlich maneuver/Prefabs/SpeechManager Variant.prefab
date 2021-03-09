@@ -129,11 +129,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].respondAudio.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[1].respondAudio.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[2].respondAudio.Array.size
@@ -149,11 +149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].keyWords.Array.data[0]
-      value: "\u963F"
+      value: "\u600E\u9EBC"
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].keyWords.Array.data[1]
-      value: "\u5582"
+      value: "\u564E\u5230"
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[1].keyWords.Array.data[0]
@@ -198,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].respondAudio.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: eaccbde85e817af4db0477e6b69a9a8e, type: 3}
+      objectReference: {fileID: 8300000, guid: 2bc014c8e9fad584890ef6a522aa495b, type: 3}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].respondAudio.Array.data[1]
       value: 
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 8736412931247190697}
     - target: {fileID: 814602171245953676, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: m_Name
-      value: SpeechManager Variant
+      value: "\u8A9E\u97F3\u8FA8\u8B58\u7CFB\u7D71"
       objectReference: {fileID: 0}
     - target: {fileID: 7918684583577604067, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: m_LocalPosition.x
