@@ -14,14 +14,18 @@ namespace TitleUIScripts
 
         private void Start()
         {
-            backBtn.onClick.AddListener(delegate { UI_Manager.Instance.Back(); });
+            backBtn.onClick.AddListener(delegate
+            {
+                UI_Manager.Instance.Back();
+            });
 
         }
 
         public void EnterExam(int index)
         {
-            ScoreManager.Instance.Initialize(examClass[index].fileName, examClass[index].operateCount);
+            ScoreManager.Instance.Initialize(examClass[index].fileName, examClass[index].operateCount , examClass[index].limitTime);
             SceneLoader.Instance.LoadScene(examClass[index].examSceneIndex);
+            ScoreManager.Instance.StartCounting();
         }
     }
 }

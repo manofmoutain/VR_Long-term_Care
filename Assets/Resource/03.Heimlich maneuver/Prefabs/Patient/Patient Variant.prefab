@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd8cd88139a23747ad9b9c9332c3cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  right_Hand: {fileID: 0}
+  right_Hand_Grab_GameObkect: {fileID: 0}
+  left_Hand: {fileID: 0}
+  left_Hand_Grab_GameObkect: {fileID: 0}
   OriginalPositionGameObject: {fileID: 1640553966951339983}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0}
@@ -22,7 +26,7 @@ MonoBehaviour:
   snapZoneArea: []
   takeObject: {fileID: 0}
   snapTakeObject: 0
-  snapReleaseGesture: 0
+  snapReleaseGesture: 1
   snapFixed:
     isLocated: 0
     isFixed: 0
@@ -92,9 +96,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1640553966951339972}
-        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatientInteract, Assembly-CSharp
-        m_MethodName: ResetToOriginPosition
+      - m_Target: {fileID: 1640553966951339976}
+        m_TargetAssemblyTypeName: Heimlich_maneuver.HamlickPatient, Assembly-CSharp
+        m_MethodName: HugPatientFromBack
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -192,7 +196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_Radius
-      value: 2
+      value: 0.8948527
+      objectReference: {fileID: 0}
+    - target: {fileID: 827692240574079780, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+      propertyPath: m_Height
+      value: 4.0000005
       objectReference: {fileID: 0}
     - target: {fileID: 5846364451968565232, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: sFXs.Array.size
@@ -266,6 +274,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5846364451968565240, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
   m_PrefabInstance: {fileID: 5180861795143821367}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1640553966951339976 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5846364451968565247, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+  m_PrefabInstance: {fileID: 5180861795143821367}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640553966951339983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59aa2709c4c940bb94a689b473bdd5ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1640553966951339972 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5846364451968565235, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
