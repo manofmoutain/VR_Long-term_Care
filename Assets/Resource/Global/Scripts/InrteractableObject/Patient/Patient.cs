@@ -7,7 +7,7 @@ namespace Global.Pateint
 {
     public class Patient : MonoBehaviour
     {
-        [Header("物件")] [Tooltip("VR攝影機")]public GameObject player;
+        [Header("物件")] [Tooltip("VR攝影機")] public GameObject player;
         [SerializeField] private Vector3 playerPosition;
         [SerializeField] GameObject patient;
         [SerializeField] private Vector3 patientPosition;
@@ -24,9 +24,9 @@ namespace Global.Pateint
         [Header("位置資訊")] public Vector3 playerVectorToPatient;
 
         /// <summary>
-        /// 施測者與病患之間的距離
+        /// 施測者與病患之間的夾角餘弦
         /// </summary>
-        public float distaceToPlayer;
+        public float directionToPlayer;
 
         /// <summary>
         /// 施測者是否在病患後面
@@ -39,7 +39,7 @@ namespace Global.Pateint
         public bool isPlayerLeftToPatient;
 
         /// <summary>
-        /// 病患(子物件)在世界座標中的實際位置資訊
+        /// 病患與施測者之間的相對方位
         /// </summary>
         public Vector3 patientDirection;
 
@@ -73,33 +73,84 @@ namespace Global.Pateint
                 }
             }
 
-            patientDirection = GetPatientDirection();
-            isPlayerBehindPatient = patientDirection.z < 0;
-            isPlayerLeftToPatient = patientDirection.x > 0;
+
+            isPlayerBehindPatient = GetPatientDirection().y < 0;
+            isPlayerLeftToPatient = GetPatientDirection().y < 0;
         }
 
         private Vector3 GetPatientDirection()
         {
-            playerPosition = player.transform.position;
-            patientPosition = patient.transform.position;
+            playerPosition = player.transform.position.normalized;
+            patientPosition = patient.transform.position.normalized;
 
-            if (patient.transform.parent!=null)
-            {
-                playerVectorToPatient = player.transform.position - patient.transform.parent.position;
-                distaceToPlayer = Vector3.Distance(player.transform.position, patient.transform.parent.position);
-            }
-            else
-            {
-                playerVectorToPatient = player.transform.position - patient.transform.position;
-                distaceToPlayer = Vector3.Distance(player.transform.position, patient.transform.position);
-            }
+            // if (patient.transform.parent!=null)
+            // {
+            //     playerVectorToPatient = player.transform.position - patient.transform.parent.position;
+            //     distaceToPlayer = Vector3.Distance(player.transform.position, patient.transform.parent.position);
+            // }
+            // else
+            // {
+            //     playerVectorToPatient = player.transform.position - patient.transform.position;
+            //     distaceToPlayer = Vector3.Distance(playerPosition, patientPosition);
+            // }
 
 
             //得到位於病患的左右方向
             // patientDirection = playerVectorToPatient / distaceToPlayer;
 
             //獲得病患與施測者之間的相對位置
-            patientDirection = patient.transform.InverseTransformDirection(player.transform.position);
+            // patientDirection = player.transform.InverseTransformDirection(patientPosition);
+
+            // 計算向量V1，V2 點乘結果
+            // 即獲取V1,V2夾角餘弦cos(夾角)
+            directionToPlayer = Vector3.Dot(patientPosition, playerPosition);
+            // 夾角方向一般取（0 - 180 度）
+            // 如果取(0 - 360 度)
+            // direction >= 0 則夾角在（0 - 90] 和[270 - 360] 度之間
+            // direction < 0 則夾角在（90 - 270) 度之間
+            // direction 無法確定具體角度
+
+            // 反餘弦求V1，V2 夾角的弧度
+            float rad = Mathf.Acos(directionToPlayer);
+            // 再將弧度轉換爲角度
+            float deg = rad * Mathf.Rad2Deg;
+            // 得到的deg 爲V1，V2 在（0 - 180 度的夾角）還無法確定V1，V2 的相對夾角
+            // deg 還是無法確定具體角度
+
+            // 計算向量V1， V2 的叉乘結果
+            // 得到垂直於V1， V2 的向量， Vector3(0, sin(V1,V2夾角), 0)
+            // 即uy = sin(V1,V2夾角)
+            patientDirection = Vector3.Cross(patientPosition, playerPosition);
+            // uy >= 0 則夾角在( 0 - 180] 度之間
+            // uy < 0 則夾角在(180 - 360) 度之間
+            // uy 依然無法確定具體角度
+            if (patientDirection.y >= 0) // (0 - 180]
+            {
+                if (directionToPlayer >= 0)
+                {
+                    // (0 - 90] 度
+                    // print("前面");
+                }
+                else
+                {
+                    // (90 - 180] 度
+                    // print("(90 - 180] 度");
+                }
+            }
+            else // (180 - 360]
+            {
+                if (directionToPlayer >= 0)
+                {
+                    // [270 - 360]
+                    // 360 + (-1)deg
+                    // print("[後面]");
+                }
+                else
+                {
+                    // (180 - 270)
+                    // print("(180 - 270)");
+                }
+            }
 
             return patientDirection;
         }
