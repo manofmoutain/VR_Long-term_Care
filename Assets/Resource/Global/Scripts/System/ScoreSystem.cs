@@ -51,14 +51,34 @@ namespace GlobalSystem
         /// </summary>
         [SerializeField] private string m_StudentName;
 
+        /// <summary>
+        /// 時間限制
+        /// </summary>
+        [SerializeField] private int timeLimite;
+
+        /// <summary>
+        /// 操作時間
+        /// </summary>
         [SerializeField] private float timing;
+
+        /// <summary>
+        /// 操作時間
+        /// </summary>
         public float ExamTime => timing;
 
         #endregion
 
         #region Public Methods
 
-        public void StartCounting()
+        /// <summary>
+        /// 此測驗的時間限制
+        /// </summary>
+        public int LimitTime => timeLimite;
+
+        /// <summary>
+        /// 計算時間
+        /// </summary>
+        public void CountingTime()
         {
             timing += Time.deltaTime;
         }
@@ -82,7 +102,7 @@ namespace GlobalSystem
         {
             _operateTopics[index].operateSteps++;
 
-            Debug.Log($"第{index}項操作剩餘{_operateTopics[index].operateSteps}個步驟未操作");
+            Debug.Log($"第{index}項操作失誤，增加為{_operateTopics[index].operateSteps}個操作步驟");
         }
 
         /// <summary>
@@ -160,7 +180,7 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="fileName">檔案名稱</param>
         /// <param name="listCount">操作項目數量</param>
-        public void ReadExcelSimplePasses(string fileName, int listCount)
+        public void ReadExcelSimplePasses(string fileName, int listCount , int timeValue)
         {
             excelFileName = fileName;
             string excelName = excelFileName + ".xlsx";
@@ -181,6 +201,8 @@ namespace GlobalSystem
                 };
                 AddOperateTopics(newTopic);
             }
+
+            timeLimite = timeValue;
         }
 
         public string GetSchool()
@@ -311,13 +333,6 @@ namespace GlobalSystem
         /// <returns></returns>
         public int GetTotalScore()
         {
-            for (int i = 0; i < _operateTopics.Count; i++)
-            {
-                if (!_operateTopics[i].isDone)
-                {
-                    totalScore -=_operateTopics[i].score;
-                }
-            }
             Debug.Log($"總分為{totalScore}");
             return totalScore < 0 ? totalScore = 0 : totalScore;
         }
