@@ -9,6 +9,7 @@ namespace GlobalSystem
         public int examSceneIndex;
         public string fileName;
         public int operateCount;
+        public int limitTime;
 
         public string lesson;
 

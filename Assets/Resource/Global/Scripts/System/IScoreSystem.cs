@@ -12,7 +12,7 @@ namespace GlobalSystem
         int GetListCount();
         int GetOperateSteps(int index);
 
-        void ReadExcelSimplePasses(string fileName, int listCount);
+        void ReadExcelSimplePasses(string fileName, int listCount , int timeValue);
         string GetSchool();
         int GetSteps(int index);
         string GetStudentID();

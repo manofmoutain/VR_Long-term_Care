@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GlobalSystem;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
@@ -10,6 +11,7 @@ namespace Manager
         #region Public Variables
 
         public Mod GameMod => gameMod;
+        public bool isCounting;
 
         #endregion
 
@@ -18,6 +20,11 @@ namespace Manager
         [SerializeField] private Mod gameMod;
 
         [SerializeField] ScoreSystem _scoreSystem;
+
+        /// <summary>
+        /// 獲得操作時間
+        /// </summary>
+        public float GetTime => _scoreSystem.ExamTime;
 
         #endregion
 
@@ -183,11 +190,11 @@ namespace Manager
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="listCount"></param>
-        public void Initialize(string fileName, int listCount)
+        public void Initialize(string fileName, int listCount, int timeValue)
         {
             // _scoreSystem = new ScoreSystem(100);
             //讀取某個檔案
-            _scoreSystem.ReadExcelSimplePasses(fileName, listCount);
+            _scoreSystem.ReadExcelSimplePasses(fileName, listCount, timeValue);
         }
 
         /// <summary>
@@ -195,9 +202,9 @@ namespace Manager
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="listCount"></param>
-        public void ReadExcelSimplePasses(string fileName, int listCount)
+        public void ReadExcelSimplePasses(string fileName, int listCount, int timeValue)
         {
-            _scoreSystem.ReadExcelSimplePasses(fileName, listCount);
+            _scoreSystem.ReadExcelSimplePasses(fileName, listCount, timeValue);
         }
 
         /// <summary>
@@ -236,9 +243,33 @@ namespace Manager
             _scoreSystem.SetStudentName(text);
         }
 
+        /// <summary>
+        /// 開始計算測驗時間
+        /// </summary>
         public void StartCounting()
         {
-            _scoreSystem.StartCounting();
+            isCounting = true;
+        }
+
+        public void StopCountingTime()
+        {
+            isCounting = false;
+        }
+
+        /// <summary>
+        /// 是否在時限內完成操作：true=超過時間，false=時限內完成
+        /// </summary>
+        /// <returns></returns>
+        public bool IsTimeLimit()
+        {
+            if (Mathf.CeilToInt(_scoreSystem.ExamTime / 60) <= _scoreSystem.LimitTime)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         #endregion
@@ -258,6 +289,14 @@ namespace Manager
             }
 
             _scoreSystem = new ScoreSystem(100);
+        }
+
+        private void Update()
+        {
+            if (isCounting)
+            {
+                _scoreSystem.CountingTime();
+            }
         }
 
         #endregion
