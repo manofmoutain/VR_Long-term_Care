@@ -15,4 +15,6 @@ MonoBehaviour:
   examSceneIndex: 6
   fileName: Exam06-A
   operateCount: 4
+  limitTime: 25
+  lesson: 
   operateTopics: []
