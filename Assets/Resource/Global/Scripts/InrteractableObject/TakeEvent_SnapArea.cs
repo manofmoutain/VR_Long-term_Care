@@ -90,7 +90,7 @@ namespace InteractableObject
 // Oculus Quest代碼
 #else
             // SteamVR代碼
-            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPuZone>())
+            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPuZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
             {
                 if (isSnapIn)
                 {
