@@ -27,13 +27,26 @@ public class ShowAchievement : MonoBehaviour
     [SerializeField] private Sprite normalRestartSprite;
     [SerializeField] private Sprite tochedRestartSprite;
 
+    [Header("操作時間")] [SerializeField] private GameObject timePanel;
+    [SerializeField] private TextMeshProUGUI timeText;
+
     private void Start()
     {
         restartBtn.GetComponent<Image>().sprite = normalRestartSprite;
         score.gameObject.SetActive(false);
         restartBtn.gameObject.SetActive(false);
         star.localScale = Vector3.zero;
+        timePanel.SetActive(false);
         // ShowAchievementInEnd();
+    }
+
+    public void StopExam(int index)
+    {
+        ScoreManager.Instance.StopCountingTime();
+        if (!ScoreManager.Instance.IsTimeLimit())
+        {
+            ScoreManager.Instance.DecreaseOperateSteps(index);
+        }
     }
 
     /// <summary>
@@ -71,6 +84,13 @@ public class ShowAchievement : MonoBehaviour
         int a = 0;
         for (int i = 0; i < ScoreManager.Instance.GetListCount(); i++)
         {
+            if (i==ScoreManager.Instance.GetListCount()-1)
+            {
+                if (!ScoreManager.Instance.IsTimeLimit())
+                {
+                    ScoreManager.Instance.DecreaseOperateSteps(i);
+                }
+            }
             ScoreManager.Instance.GetIsDone(i);
 
             if (!ScoreManager.Instance.GetIsDone(i))
@@ -78,9 +98,10 @@ public class ShowAchievement : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 GameObject go = Instantiate(achievementOBJ, spawnPoint);
                 RectTransform rectTransform = go.GetComponent<RectTransform>();
-                rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, (-0.11f * (a)));
+                rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, (-0.11f * a));
                 go.GetComponentInChildren<TextMeshProUGUI>().text = ScoreManager.Instance.GetToDo(i);
                 a++;
+                ScoreManager.Instance.DecreaseScore(i);
             }
 
             score.text = ScoreManager.Instance.GetTotalScore().ToString();
@@ -88,6 +109,8 @@ public class ShowAchievement : MonoBehaviour
 
         score.gameObject.SetActive(true);
         restartBtn.gameObject.SetActive(true);
+        timePanel.SetActive(true);
+        timeText.text = $"{Mathf.CeilToInt(ScoreManager.Instance.GetTime / 60)}分{Mathf.CeilToInt(ScoreManager.Instance.GetTime % 60)}秒";
     }
 
     /// <summary>
