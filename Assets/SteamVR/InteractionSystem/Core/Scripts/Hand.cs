@@ -437,8 +437,7 @@ namespace Valve.VR.InteractionSystem
                 initialObjectDirection = objectToAttach.transform.position -
                                          (initialHandPosition1 + initialHandPosition2) * 0.5f;
 
-                otherHand.currentAttachedObject.transform.parent =
-                    null; // unset parent (the first hand), so it's moving freely
+                // otherHand.currentAttachedObject.transform.parent = null; // unset parent (the first hand), so it's moving freely
                 AttachedObject
                     objInfo = otherHand.GetAttachedObjectInfo(objectToAttach); // get first hand object attachInfo
 
