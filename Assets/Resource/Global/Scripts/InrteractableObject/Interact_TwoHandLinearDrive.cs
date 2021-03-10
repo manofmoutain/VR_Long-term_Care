@@ -9,6 +9,11 @@ namespace InteractableObject
 {
     public class Interact_TwoHandLinearDrive : MonoBehaviour
     {
+        /// <summary>
+        /// 鬆開手後是否回到原位
+        /// </summary>
+        [SerializeField] private bool isDetachToResetPosition;
+
         public Transform startPosition;
         public Transform endPosition;
         public LinearMapping linearMapping;
@@ -17,6 +22,8 @@ namespace InteractableObject
         public float momemtumDampenRate = 5.0f;
 
         [SerializeField] protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand;
+        [Tooltip("保持時用作位置和旋轉偏移量的局部點")]
+        public Transform attachmentOffset;
 
         [SerializeField] protected float initialMappingOffset;
         [SerializeField] protected int numMappingChangeSamples = 5;
@@ -64,7 +71,7 @@ namespace InteractableObject
                 sampleCount = 0;
                 mappingChangeRate = 0.0f;
 
-                hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
+                hand.AttachObject(gameObject, startingGrabType, attachmentFlags,attachmentOffset);
 
             }
         }
@@ -91,6 +98,12 @@ namespace InteractableObject
 
         protected void CalculateMappingChangeRate()
         {
+            if (isDetachToResetPosition)
+            {
+                linearMapping.value = 0;
+                transform.localPosition = Vector3.zero;
+            }
+
             //Compute the mapping change rate
             mappingChangeRate = 0.0f;
             int mappingSamplesCount = Mathf.Min(sampleCount, mappingChangeSamples.Length);
