@@ -103,7 +103,15 @@ namespace Heimlich_maneuver
                     GameObject go = Instantiate(bean, spawnPoint.position, Quaternion.identity,
                         GetComponent<Patient>().GetPatientTransform);
                     go.GetComponent<Rigidbody>().velocity = velocityDirection * beanSpeed;
-                    SpeechManager.Instance.StopAudio();
+                    if (GetComponent<AudioSource>().isPlaying)
+                    {
+                        GetComponent<AudioSource>().Stop();
+                    }
+
+                    if (SpeechManager.Instance.IsAudioPlaying())
+                    {
+                        SpeechManager.Instance.StopAudio();
+                    }
                     Destroy(go, 3f);
                     isChoking = false;
                 }
