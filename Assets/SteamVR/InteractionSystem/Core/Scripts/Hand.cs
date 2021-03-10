@@ -10,8 +10,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine.Events;
-using System.Threading;
-
 namespace Valve.VR.InteractionSystem
 {
     //-------------------------------------------------------------------------
@@ -749,6 +747,7 @@ namespace Valve.VR.InteractionSystem
 
 
                 // attachedObject.transform.rotation = handRot * initialObjectRotation; // add rotation
+
 
                 //讓物體可以用手將之縮放
                 // attachedObject.transform.localScale = newScale; // set new scale

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace InteractableObject
 {
     [RequireComponent(typeof(Interactable))]
-    public class TakeEvent_TwoHandSnapPuZone : MonoBehaviour
+    public class TakeEvent_TwoHandSnapPutZone : MonoBehaviour
     {
         [Header("模型位置參數")] [SerializeField] private Vector3 originPosition;
         [SerializeField] private Vector3 originRotation;

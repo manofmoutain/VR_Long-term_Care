@@ -52,6 +52,11 @@ namespace Manager
 
         #region Public Methods
 
+        public void StopAudio()
+        {
+            audioSource.Stop();
+        }
+
         /// <summary>
         /// 清除資訊
         /// </summary>
@@ -160,9 +165,9 @@ namespace Manager
                     {
                         _situations[i].correctKeyWords = true;
                         Debug.Log($"這是{_situations[index].situationName}狀況");
+                        PlayAudio(index);
                         ScoreManager.Instance.DecreaseOperateSteps(_situations[i].topicIndex);
                         ScoreManager.Instance.SetDone(_situations[i].topicIndex);
-                        PlayAudio(index);
                     }
 
                 }

@@ -96,8 +96,8 @@ public class ShowAchievement : MonoBehaviour
             if (!ScoreManager.Instance.GetIsDone(i))
             {
                 yield return new WaitForSeconds(0.5f);
-                GameObject go = Instantiate(achievementOBJ, spawnPoint);
-                RectTransform rectTransform = go.GetComponent<RectTransform>();
+                var go = Instantiate(achievementOBJ, spawnPoint);
+                var rectTransform = go.GetComponent<RectTransform>();
                 rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, (-0.11f * a));
                 go.GetComponentInChildren<TextMeshProUGUI>().text = ScoreManager.Instance.GetToDo(i);
                 a++;

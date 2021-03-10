@@ -19,5 +19,11 @@ namespace Global.Pateint
         {
             audioSource.PlayOneShot(sFXs[index]);
         }
+
+        public void StopSFX()
+        {
+            audioSource.Stop();
+
+        }
     }
 }

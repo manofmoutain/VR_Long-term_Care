@@ -38,7 +38,7 @@ namespace InteractableObject
             //hint
             interactPoint.GetComponent<MeshRenderer>().enabled = true;
             //what to do
-            go.SetActive(false);
+            go.SetActive(true);
         }
 
         public void OnHandHoverEnd(GameObject go)

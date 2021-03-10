@@ -29,7 +29,7 @@ namespace InteractableObject
         /// </summary>
         public TakeEvent_SingleHandSnapPutZone takeEventSingleHandSnapPutZone;
 
-        public TakeEvent_TwoHandSnapPuZone takeEventTwoHandSnapPuZone;
+        public TakeEvent_TwoHandSnapPutZone takeEventTwoHandSnapPutZone;
         public TakeEvent_TwoHandGrab takeEventTwoHandGrab;
 
 
@@ -48,7 +48,7 @@ namespace InteractableObject
 #else
             // SteamVR代碼
 //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPuZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
+            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
             {
                 if (!isSnapIn)
                 {
@@ -67,9 +67,9 @@ namespace InteractableObject
                         takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
                     }
 
-                    if (takeEventTwoHandSnapPuZone != null)
+                    if (takeEventTwoHandSnapPutZone != null)
                     {
-                        takeEventTwoHandSnapPuZone.snapFixed.isLocated = true;
+                        takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
                     }
 
                     if (takeEventTwoHandGrab != null)
@@ -90,7 +90,7 @@ namespace InteractableObject
 // Oculus Quest代碼
 #else
             // SteamVR代碼
-            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPuZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
+            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
             {
                 if (isSnapIn)
                 {
@@ -106,12 +106,12 @@ namespace InteractableObject
                         }
                     }
 
-                    if (takeEventTwoHandSnapPuZone != null)
+                    if (takeEventTwoHandSnapPutZone != null)
                     {
-                        if (takeEventTwoHandSnapPuZone.snapFixed.isLocated &&
-                            !takeEventTwoHandSnapPuZone.snapFixed.isFixed)
+                        if (takeEventTwoHandSnapPutZone.snapFixed.isLocated &&
+                            !takeEventTwoHandSnapPutZone.snapFixed.isFixed)
                         {
-                            takeEventTwoHandSnapPuZone.snapFixed.isLocated = false;
+                            takeEventTwoHandSnapPutZone.snapFixed.isLocated = false;
                         }
                     }
 
