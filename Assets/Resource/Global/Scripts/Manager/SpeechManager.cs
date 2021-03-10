@@ -52,9 +52,21 @@ namespace Manager
 
         #region Public Methods
 
+        /// <summary>
+        /// 停止語音播放系統的音效
+        /// </summary>
         public void StopAudio()
         {
             audioSource.Stop();
+        }
+
+        /// <summary>
+        /// 語音辨識系統是否正在播放音效
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAudioPlaying()
+        {
+            return audioSource.isPlaying;
         }
 
         /// <summary>
