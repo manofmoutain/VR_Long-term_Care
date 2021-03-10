@@ -9,7 +9,7 @@ namespace Global.Pateint
     {
         [Header("物件")] [Tooltip("VR攝影機")] public GameObject player;
         [SerializeField] private Vector3 playerPosition;
-        [SerializeField] GameObject patient;
+        public GameObject patient;
         [SerializeField] private Vector3 patientPosition;
         public Transform GetPatientTransform => patient.transform;
 
@@ -161,6 +161,7 @@ namespace Global.Pateint
             // StartCoroutine(Co_StopCo());
             // StartCoroutine(Co_SetDone(speechIndex, topicIndex));
         }
+
 
         IEnumerator Co_SetDone(int speechIndex, int topicIndex)
         {
