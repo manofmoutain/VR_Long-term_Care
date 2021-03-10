@@ -916,6 +916,9 @@ MonoBehaviour:
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0}
   originScale: {x: 0, y: 0, z: 0}
+  attachmentFlags: 0
+  AttachObjectLeft: {fileID: 0}
+  AttachObjectRight: {fileID: 0}
   playerHand_L: {fileID: 0}
   playerHand_R: {fileID: 0}
   handPos: {x: 0, y: 0, z: 0}
@@ -1039,6 +1042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEntry: 0
+  originTransform: {fileID: 0}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0}
   originScale: {x: 0, y: 0, z: 0}
@@ -1368,10 +1372,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   patient: {fileID: 919132148348955973}
+  patientPosition: {x: 0, y: 0, z: 0}
   isSpeechRecognize: 0
   playerVectorToPatient: {x: 0, y: 0, z: 0}
-  distaceToPlayer: 0
+  directionToPlayer: 0
+  isPlayerBehindPatient: 0
+  isPlayerLeftToPatient: 0
   patientDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &5846364451968565239
 MonoBehaviour:

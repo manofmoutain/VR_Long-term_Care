@@ -117,7 +117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].keyWords.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[1].keyWords.Array.size
@@ -198,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].respondAudio.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 2bc014c8e9fad584890ef6a522aa495b, type: 3}
+      objectReference: {fileID: 8300000, guid: c2252c7e6c0f854419ca5cf366600161, type: 3}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].respondAudio.Array.data[1]
       value: 
@@ -243,6 +243,10 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 8736412931247190697}
+    - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
+      propertyPath: _situations.Array.data[0].keyWords.Array.data[2]
+      value: "\u9084\u597D\u55CE"
+      objectReference: {fileID: 0}
     - target: {fileID: 814602171245953676, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: m_Name
       value: "\u8A9E\u97F3\u8FA8\u8B58\u7CFB\u7D71"

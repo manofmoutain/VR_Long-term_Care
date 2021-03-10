@@ -21,6 +21,7 @@ namespace Heimlich_maneuver
 
         private void Start()
         {
+            GetComponent<PatientSFX>().PlaySFX(2);
             isPushed = false;
             canHug = false;
 
