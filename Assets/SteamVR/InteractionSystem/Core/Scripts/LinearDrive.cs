@@ -13,6 +13,11 @@ namespace Valve.VR.InteractionSystem
 	[RequireComponent( typeof( Interactable ) )]
 	public class LinearDrive : MonoBehaviour
 	{
+		/// <summary>
+		/// 鬆開手後是否回到原位
+		/// </summary>
+		[SerializeField] private bool isDetachToResetPosition;
+
 		public Transform startPosition;
 		public Transform endPosition;
 		public LinearMapping linearMapping;
@@ -90,6 +95,11 @@ namespace Valve.VR.InteractionSystem
 
         protected void CalculateMappingChangeRate()
 		{
+			if (isDetachToResetPosition)
+			{
+				linearMapping.value = 0;
+				transform.localPosition = Vector3.zero;
+			}
 			//Compute the mapping change rate
 			mappingChangeRate = 0.0f;
 			int mappingSamplesCount = Mathf.Min( sampleCount, mappingChangeSamples.Length );
