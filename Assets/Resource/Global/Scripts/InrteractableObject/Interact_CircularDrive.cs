@@ -18,6 +18,25 @@ namespace InteractableObject
         /// </summary>
         [SerializeField] private GrabTypes grabbedWithType;
 
+        [Header("旋轉角度")]
+        [Tooltip("驅動器的輸出角度值（以度為單位，無限制）將無限制地增加或減少，採用360模數來查找轉數")]
+        public float outAngle;
+
+        /// <summary>
+        /// 是否要開啟角度事件，不可與Limit共用
+        /// </summary>
+        [Tooltip("是否要開啟角度事件，不可與Limit共用")][SerializeField] private bool isAngleEvent;
+
+        /// <summary>
+        /// 執行事件的角度值
+        /// </summary>
+        [Tooltip("執行事件的角度值")]public float eventAngle;
+
+        /// <summary>
+        /// 當角度為eventAngle值時，執行事件
+        /// </summary>
+        [SerializeField] private UnityEvent angleEvent;
+
         public enum Axis_t
         {
             XAxis,
@@ -126,9 +145,7 @@ namespace InteractableObject
         [Tooltip("顯示此圓形驅動器的線性值和角度值")]
         public TextMesh debugText = null;
 
-        [Header("旋轉角度")]
-        [Tooltip("驅動器的輸出角度值（以度為單位，無限制）將無限制地增加或減少，採用360模數來查找轉數")]
-        public float outAngle;
+
 
         [Header("隱藏的數值")]
         [SerializeField] private Quaternion start;
@@ -628,6 +645,10 @@ namespace InteractableObject
                         else
                         {
                             outAngle += signedAngleDelta;
+                            if (isAngleEvent && outAngle>=eventAngle)
+                            {
+                                angleEvent.Invoke();
+                            }
                             lastHandProjected = toHandProjected;
                         }
                     }
