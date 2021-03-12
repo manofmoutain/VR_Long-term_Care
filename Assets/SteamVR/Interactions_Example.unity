@@ -4102,6 +4102,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05229f3db0d24a4e9df9f11919f341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls: []
@@ -5976,6 +5985,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05229f3db0d24a4e9df9f11919f341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls: []
@@ -7487,6 +7505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c81a27fd18a29444be92481fe681f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDetachToResetPosition: 0
   startPosition: {fileID: 569280807}
   endPosition: {fileID: 193756866}
   linearMapping: {fileID: 236112115}
@@ -8846,6 +8865,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd2ef2dd3d5d64e96af4420220d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls:
@@ -12072,6 +12100,7 @@ GameObject:
   - component: {fileID: 888846718}
   - component: {fileID: 888846723}
   - component: {fileID: 888846722}
+  - component: {fileID: 888846719}
   - component: {fileID: 888846721}
   m_Layer: 0
   m_Name: Cylinder
@@ -12139,15 +12168,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &888846720
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888846716}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &888846721
+--- !u!114 &888846719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12156,14 +12177,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 888846716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f32883eed859804dbb0c5fedac91496, type: 3}
+  m_Script: {fileID: 11500000, guid: 018235910b910f048bc418c75f0ff447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attachmentFlags: 112
+  grabbedWithType: 0
   axisOfRotation: 1
+  rotateGameObject: 1
   childCollider: {fileID: 0}
   linearMapping: {fileID: 0}
-  hoverLock: 0
-  limited: 0
+  hoverLock: 1
+  limited: 1
   frozenDistanceMinMaxThreshold: {x: 0.1, y: 0.2}
   onFrozenDistanceThreshold:
     m_PersistentCalls:
@@ -12180,11 +12204,53 @@ MonoBehaviour:
       m_Calls: []
   forceStart: 0
   startAngle: 0
-  rotateGameObject: 1
   debugPath: 0
   dbgPathLimit: 50
   debugText: {fileID: 0}
   outAngle: 0
+  start: {x: 0, y: 0, z: 0, w: 0}
+  worldPlaneNormal: {x: 1, y: 0, z: 0}
+  localPlaneNormal: {x: 1, y: 0, z: 0}
+  lastHandProjected: {x: 0, y: 0, z: 0}
+  red: {r: 1, g: 0, b: 0, a: 1}
+  green: {r: 0, g: 1, b: 0, a: 1}
+  dbgHandObjects: []
+  dbgProjObjects: []
+  dbgObjectsParent: {fileID: 0}
+  dbgObjectCount: 0
+  dbgObjectIndex: 0
+  driving: 0
+  minMaxAngularThreshold: 1
+  frozen: 0
+  frozenAngle: 0
+  frozenHandWorldPos: {x: 0, y: 0, z: 0}
+  frozenSqDistanceMinMaxThreshold: {x: 0, y: 0}
+  handHoverLocked: {fileID: 0}
+  interactable: {fileID: 0}
+--- !u!33 &888846720
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888846716}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &888846721
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888846716}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &888846722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12199,9 +12265,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateActionSetOnAttach:
     actionSetPath: 
-  hideHandOnAttach: 1
+  hideHandOnAttach: 0
   hideSkeletonOnAttach: 0
-  hideControllerOnAttach: 0
+  hideControllerOnAttach: 1
   handAnimationOnPickup: 0
   setRangeOfMotionOnPickup: -1
   useHandObjectAttachmentPoint: 1
@@ -16917,6 +16983,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd2ef2dd3d5d64e96af4420220d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls:
@@ -17778,6 +17853,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd2ef2dd3d5d64e96af4420220d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls:
@@ -20020,6 +20104,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd2ef2dd3d5d64e96af4420220d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls:
@@ -22094,6 +22187,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd2ef2dd3d5d64e96af4420220d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls:
@@ -23349,6 +23451,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05229f3db0d24a4e9df9f11919f341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls: []
@@ -23662,6 +23773,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd2ef2dd3d5d64e96af4420220d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls:
@@ -24186,6 +24306,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd2ef2dd3d5d64e96af4420220d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls:
@@ -27784,6 +27913,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05229f3db0d24a4e9df9f11919f341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandHoverBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandHoverUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   onHandClick:
     m_PersistentCalls:
       m_Calls: []

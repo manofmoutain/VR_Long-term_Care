@@ -17,6 +17,9 @@ namespace Manager
 
         #region Private Variables
 
+        /// <summary>
+        /// 模式
+        /// </summary>
         [SerializeField] private Mod gameMod;
 
         [SerializeField] ScoreSystem _scoreSystem;

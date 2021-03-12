@@ -28,6 +28,9 @@ namespace GlobalSystem
         /// </summary>
         [SerializeField] private List<OperateTopic> _operateTopics;
 
+        /// <summary>
+        /// 試題檔案名稱
+        /// </summary>
         [SerializeField] private string excelFileName;
 
         /// <summary>
@@ -205,6 +208,10 @@ namespace GlobalSystem
             timeLimite = timeValue;
         }
 
+        /// <summary>
+        /// 取得輸入的學校名稱
+        /// </summary>
+        /// <returns></returns>
         public string GetSchool()
         {
             Debug.Log($"受試者學校為：{m_School}");
@@ -348,6 +355,11 @@ namespace GlobalSystem
             return _operateTopics[index].whatToDo;
         }
 
+        /// <summary>
+        /// 取得某個操作項目的內容
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public OperateTopic GetOperateTopic(int index)
         {
             return _operateTopics[index];
