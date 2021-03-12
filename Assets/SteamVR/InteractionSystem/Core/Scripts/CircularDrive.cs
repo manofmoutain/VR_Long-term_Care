@@ -22,88 +22,134 @@ namespace Valve.VR.InteractionSystem
 			ZAxis
 		};
 
-		[Tooltip( "The axis around which the circular drive will rotate in local space" )]
+		[Tooltip( "圓形驅動器將在局部空間中繞其旋轉的軸" )]
 		public Axis_t axisOfRotation = Axis_t.XAxis;
 
-		[Tooltip( "Child GameObject which has the Collider component to initiate interaction, only needs to be set if there is more than one Collider child" )]
+		[Tooltip( "具有Collider組件以啟動交互的子GameObject，僅當存在多個Collider子對象時才需要設置" )]
 		public Collider childCollider = null;
 
-		[Tooltip( "A LinearMapping component to drive, if not specified one will be dynamically added to this GameObject" )]
+		[Tooltip( "要驅動的LinearMapping組件（如果未指定）將動態添加到此GameObject中。" )]
 		public LinearMapping linearMapping;
 
-		[Tooltip( "If true, the drive will stay manipulating as long as the button is held down, if false, it will stop if the controller moves out of the collider" )]
+		/// <summary>
+		/// 是否只要抓住，驅動器就持續處於操作狀態，否則控制器移出碰撞體，驅動器將停止運行
+		/// </summary>
+		[Tooltip( "如果為true，則只要按住該按鈕，驅動器將一直處於操作狀態；如果為false，則如果控制器移出對撞機，驅動器將停止運行。" )]
 		public bool hoverLock = false;
 
-		[HeaderAttribute( "Limited Rotation" )]
-		[Tooltip( "If true, the rotation will be limited to [minAngle, maxAngle], if false, the rotation is unlimited" )]
+		/// <summary>
+		/// 是否要設定極限值
+		/// </summary>
+		[HeaderAttribute( "旋轉的極限值" )]
+		[Tooltip( "如果limited為true，則旋轉將限制為[minAngle，maxAngle]；如果為false，則旋轉將不受限制" )]
 		public bool limited = false;
+
+		/// <summary>
+		/// 如果limited為true，旋轉的極限值
+		/// </summary>
+		[Tooltip( "如果limited為true，旋轉的極限值" )]
 		public Vector2 frozenDistanceMinMaxThreshold = new Vector2( 0.1f, 0.2f );
+		/// <summary>
+		/// 如果旋轉值>=frozenDistanceMinMaxThreshold的Y值，執行事件
+		/// </summary>
 		public UnityEvent onFrozenDistanceThreshold;
 
-		[HeaderAttribute( "Limited Rotation Min" )]
-		[Tooltip( "If limited is true, the specifies the lower limit, otherwise value is unused" )]
+		/// <summary>
+		/// 極限值的最小值
+		/// </summary>
+		[HeaderAttribute( "旋轉值極限值的最小值" )]
+		[Tooltip( "如果Limited為true，則指定下限，否則未使用值" )]
 		public float minAngle = -45.0f;
-		[Tooltip( "If limited, set whether drive will freeze its angle when the min angle is reached" )]
+
+		/// <summary>
+		/// 達到最小角度時驅動器是否凍結其角度
+		/// </summary>
+		[Tooltip( "如果Limited，則設置達到最小角度時驅動器是否凍結其角度" )]
 		public bool freezeOnMin = false;
-		[Tooltip( "If limited, event invoked when minAngle is reached" )]
+
+		/// <summary>
+		/// 在最小值時的事件
+		/// </summary>
+		[Tooltip( "如果Limited，則在到達minAngle時調用事件" )]
 		public UnityEvent onMinAngle;
 
-		[HeaderAttribute( "Limited Rotation Max" )]
-		[Tooltip( "If limited is true, the specifies the upper limit, otherwise value is unused" )]
+		/// <summary>
+		/// 極限值的最大值
+		/// </summary>
+		[HeaderAttribute( "旋轉極限值的最大值" )]
+		[Tooltip( "如果limited為true，則指定上限，否則未使用值" )]
 		public float maxAngle = 45.0f;
-		[Tooltip( "If limited, set whether drive will freeze its angle when the max angle is reached" )]
+
+		/// <summary>
+		/// 設置達到最大角度時驅動器是否凍結其角度
+		/// </summary>
+		[Tooltip( "如果Limited，則設置達到最大角度時驅動器是否凍結其角度" )]
 		public bool freezeOnMax = false;
-		[Tooltip( "If limited, event invoked when maxAngle is reached" )]
+
+		/// <summary>
+		/// 在最大值時事件
+		/// </summary>
+		[Tooltip( "如果Limited，則在達到maxAngle時調用事件" )]
 		public UnityEvent onMaxAngle;
 
-		[Tooltip( "If limited is true, this forces the starting angle to be startAngle, clamped to [minAngle, maxAngle]" )]
+		/// <summary>
+		/// 在limited的情況中，是否要強制設定初始值
+		/// </summary>
+		[Tooltip( "如果limited為true，則強制將起始角度設為startAngle，並固定為[minAngle，maxAngle]" )]
 		public bool forceStart = false;
-		[Tooltip( "If limited is true and forceStart is true, the starting angle will be this, clamped to [minAngle, maxAngle]" )]
+
+		/// <summary>
+		/// 強制設定的初始旋轉值
+		/// </summary>
+		[Tooltip( "如果limited為true且forceStart為true，則起始角度將為此角度，並固定為[minAngle，maxAngle]" )]
 		public float startAngle = 0.0f;
 
-		[Tooltip( "If true, the transform of the GameObject this component is on will be rotated accordingly" )]
+		/// <summary>
+		/// 是否要同時旋轉此組件下的GameObject
+		/// </summary>
+		[Tooltip( "如果為true，則將相應旋轉此組件所在的GameObject的變換" )]
 		public bool rotateGameObject = true;
 
-		[Tooltip( "If true, the path of the Hand (red) and the projected value (green) will be drawn" )]
+		[Tooltip( "如果為true，將繪製“手形”的路徑（紅色）和預計值（綠色）" )]
 		public bool debugPath = false;
-		[Tooltip( "If debugPath is true, this is the maximum number of GameObjects to create to draw the path" )]
+		[Tooltip( "如果debugPath為true，則這是要創建以繪製路徑的GameObject的最大數量" )]
 		public int dbgPathLimit = 50;
 
-		[Tooltip( "If not null, the TextMesh will display the linear value and the angular value of this circular drive" )]
+		[Tooltip( "如果不為null，則TextMesh將顯示此圓形驅動器的線性值和角度值" )]
 		public TextMesh debugText = null;
 
-		[Tooltip( "The output angle value of the drive in degrees, unlimited will increase or decrease without bound, take the 360 modulus to find number of rotations" )]
+		[Tooltip( "驅動器的輸出角度值（以度為單位，無限制）將無限制地增加或減少，採用360模數來查找轉數" )]
 		public float outAngle;
 
-		private Quaternion start;
+		[SerializeField] private Quaternion start;
 
-		private Vector3 worldPlaneNormal = new Vector3( 1.0f, 0.0f, 0.0f );
-		private Vector3 localPlaneNormal = new Vector3( 1.0f, 0.0f, 0.0f );
+		[SerializeField] private Vector3 worldPlaneNormal = new Vector3( 1.0f, 0.0f, 0.0f );
+		[SerializeField] private Vector3 localPlaneNormal = new Vector3( 1.0f, 0.0f, 0.0f );
 
-		private Vector3 lastHandProjected;
+		[SerializeField] private Vector3 lastHandProjected;
 
-		private Color red = new Color( 1.0f, 0.0f, 0.0f );
-		private Color green = new Color( 0.0f, 1.0f, 0.0f );
+		[SerializeField] private Color red = new Color( 1.0f, 0.0f, 0.0f );
+		[SerializeField] private Color green = new Color( 0.0f, 1.0f, 0.0f );
 
-		private GameObject[] dbgHandObjects;
-		private GameObject[] dbgProjObjects;
-		private GameObject dbgObjectsParent;
-		private int dbgObjectCount = 0;
-		private int dbgObjectIndex = 0;
+		[SerializeField] private GameObject[] dbgHandObjects;
+		[SerializeField] private GameObject[] dbgProjObjects;
+		[SerializeField] private GameObject dbgObjectsParent;
+		[SerializeField] private int dbgObjectCount = 0;
+		[SerializeField] private int dbgObjectIndex = 0;
 
-		private bool driving = false;
+		[SerializeField] private bool driving = false;
 
-		// If the drive is limited as is at min/max, angles greater than this are ignored
-		private float minMaxAngularThreshold = 1.0f;
+		// 如果驅動器被限制為最小/最大，則大於此角度的角度將被忽略
+		[SerializeField] private float minMaxAngularThreshold = 1.0f;
 
-		private bool frozen = false;
-		private float frozenAngle = 0.0f;
-		private Vector3 frozenHandWorldPos = new Vector3( 0.0f, 0.0f, 0.0f );
-		private Vector2 frozenSqDistanceMinMaxThreshold = new Vector2( 0.0f, 0.0f );
+		[SerializeField] private bool frozen = false;
+		[SerializeField] private float frozenAngle = 0.0f;
+		[SerializeField] private Vector3 frozenHandWorldPos = new Vector3( 0.0f, 0.0f, 0.0f );
+		[SerializeField] private Vector2 frozenSqDistanceMinMaxThreshold = new Vector2( 0.0f, 0.0f );
 
-		private Hand handHoverLocked = null;
+		[SerializeField] private Hand handHoverLocked = null;
 
-        private Interactable interactable;
+		[SerializeField] private Interactable interactable;
 
 		//-------------------------------------------------
 		private void Freeze( Hand hand )
