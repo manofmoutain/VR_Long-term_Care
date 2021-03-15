@@ -408,14 +408,13 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-
-        //-------------------------------------------------
-        // Attach a GameObject to this GameObject
-        //
-        // objectToAttach - The GameObject to attach
-        // flags - The flags to use for attaching the object
-        // attachmentPoint - 此Hand層次結構中GameObject的名稱，該名稱應作為此GameObject的附加點
-        //-------------------------------------------------
+        /// <summary>
+        /// 將物件附著至手
+        /// </summary>
+        /// <param name="objectToAttach">要附著的物件</param>
+        /// <param name="grabbedWithType">抓握的方式</param>
+        /// <param name="flags">附著旗標(參考hand.attachmentFlags)</param>
+        /// <param name="attachmentOffset">此Hand層次結構中GameObject的名稱，該名稱應作為此GameObject的附加點</param>
         public void AttachObject(GameObject objectToAttach, GrabTypes grabbedWithType,
             AttachmentFlags flags = defaultAttachmentFlags, Transform attachmentOffset = null)
         {
@@ -789,7 +788,11 @@ namespace Valve.VR.InteractionSystem
 
         #endregion
 
-
+        /// <summary>
+        /// 物件是否附著在手上
+        /// </summary>
+        /// <param name="go">物件</param>
+        /// <returns></returns>
         public bool ObjectIsAttached(GameObject go)
         {
             for (int attachedIndex = 0; attachedIndex < attachedObjects.Count; attachedIndex++)
@@ -806,11 +809,11 @@ namespace Valve.VR.InteractionSystem
             hoverLocked = false;
         }
 
-        //-------------------------------------------------
-        // Detach this GameObject from the attached object stack of this Hand
-        //
-        // objectToDetach - The GameObject to detach from this Hand
-        //-------------------------------------------------
+        /// <summary>
+        /// 物件脫離手
+        /// </summary>
+        /// <param name="objectToDetach"></param>
+        /// <param name="restoreOriginalParent">物件是否回到父物件底下</param>
         public void DetachObject(GameObject objectToDetach, bool restoreOriginalParent = true)
         {
             int index = attachedObjects.FindIndex(l => l.attachedObject == objectToDetach);
