@@ -222,7 +222,7 @@ namespace InteractableObject
         private void OnHandHoverBegin(Hand hand)
         {
             //snapFixed.isHover = true;
-            hand.ShowGrabHint();
+            // hand.ShowGrabHint();
             snapIn.Invoke();
         }
 
@@ -230,7 +230,7 @@ namespace InteractableObject
         private void OnHandHoverEnd(Hand hand)
         {
             //snapFixed.isHover = false;
-            hand.HideGrabHint();
+            // hand.HideGrabHint();
             snapOut.Invoke();
         }
 
@@ -246,7 +246,7 @@ namespace InteractableObject
                 {
                     hand.AttachObject(gameObject, grabTypes);
                     hand.HoverLock(interactable);
-                    hand.HideGrabHint();
+                    // hand.HideGrabHint();
 
                     //手勢脫離物件
                     if (snapFixed.isFixed && snapReleaseGesture)

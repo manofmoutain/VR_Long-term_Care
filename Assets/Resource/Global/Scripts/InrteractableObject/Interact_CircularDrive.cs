@@ -14,13 +14,18 @@ namespace InteractableObject
         [SerializeField] private Hand.AttachmentFlags attachmentFlags;
 
         /// <summary>
-        /// 抓握的方式
+        /// 設定抓握的方式
         /// </summary>
-        [SerializeField] private GrabTypes grabbedWithType;
+        [Tooltip("設定抓握的方式")][SerializeField] private GrabTypes grabbedWithType;
 
         [Header("旋轉角度")]
         [Tooltip("驅動器的輸出角度值（以度為單位，無限制）將無限制地增加或減少，採用360模數來查找轉數")]
         public float outAngle;
+
+        /// <summary>
+        /// 給予Animator的值(0-1)
+        /// </summary>
+        public float value;
 
         /// <summary>
         /// 是否要開啟角度事件，不可與Limit共用
@@ -53,6 +58,11 @@ namespace InteractableObject
         /// </summary>
         [Tooltip("是否可以轉動")]
         public bool rotateGameObject = true;
+
+        /// <summary>
+        /// 鬆手後是否要轉回原角度
+        /// </summary>
+        [SerializeField]private bool isDetachedToResetAngle;
 
         [Tooltip("具有Collider組件以啟動交互的子GameObject，僅當存在多個Collider子對象時才需要設置")]
         public Collider childCollider = null;
@@ -144,7 +154,13 @@ namespace InteractableObject
 
         [Tooltip("顯示此圓形驅動器的線性值和角度值")]
         public TextMesh debugText = null;
-
+        [SerializeField] private Color red = new Color(1.0f, 0.0f, 0.0f);
+        [SerializeField] private Color green = new Color(0.0f, 1.0f, 0.0f);
+        [SerializeField] private GameObject[] dbgHandObjects;
+        [SerializeField] private GameObject[] dbgProjObjects;
+        [SerializeField] private GameObject dbgObjectsParent;
+        [SerializeField] private int dbgObjectCount = 0;
+        [SerializeField] private int dbgObjectIndex = 0;
 
 
         [Header("隱藏的數值")]
@@ -155,15 +171,12 @@ namespace InteractableObject
 
         [SerializeField] private Vector3 lastHandProjected;
 
-        [SerializeField] private Color red = new Color(1.0f, 0.0f, 0.0f);
-        [SerializeField] private Color green = new Color(0.0f, 1.0f, 0.0f);
 
-        [SerializeField] private GameObject[] dbgHandObjects;
-        [SerializeField] private GameObject[] dbgProjObjects;
-        [SerializeField] private GameObject dbgObjectsParent;
-        [SerializeField] private int dbgObjectCount = 0;
-        [SerializeField] private int dbgObjectIndex = 0;
 
+
+        /// <summary>
+        /// 是否正在驅動
+        /// </summary>
         [SerializeField] private bool driving = false;
 
         /// <summary>
@@ -171,39 +184,39 @@ namespace InteractableObject
         /// </summary>
         [SerializeField] private float minMaxAngularThreshold = 1.0f;
 
+
+        /// <summary>
+        /// 是否要凍結(並非不轉動，而是會在frozenSqDistanceMinMaxThreshold兩個值之間抖動)
+        /// </summary>
+        [Tooltip("是否要凍結(並非不轉動，而是會在frozenSqDistanceMinMaxThreshold兩個值之間抖動)")]
         [SerializeField] private bool frozen = false;
+        /// <summary>
+        /// 凍結瞬間的角度
+        /// </summary>
         [SerializeField] private float frozenAngle = 0.0f;
+        /// <summary>
+        /// 凍結時手的位置
+        /// </summary>
         [SerializeField] private Vector3 frozenHandWorldPos = new Vector3(0.0f, 0.0f, 0.0f);
+        /// <summary>
+        /// 凍結時，角度的偏移值
+        /// </summary>
         [SerializeField] private Vector2 frozenSqDistanceMinMaxThreshold = new Vector2(0.0f, 0.0f);
 
+        /// <summary>
+        /// 抓握的是哪一隻手
+        /// </summary>
         [SerializeField] private Hand handHoverLocked = null;
 
         [SerializeField] private Interactable interactable;
 
-        //-------------------------------------------------
-        private void Freeze(Hand hand)
-        {
-            frozen = true;
-            frozenAngle = outAngle;
-            frozenHandWorldPos = hand.hoverSphereTransform.position;
-            frozenSqDistanceMinMaxThreshold.x = frozenDistanceMinMaxThreshold.x * frozenDistanceMinMaxThreshold.x;
-            frozenSqDistanceMinMaxThreshold.y = frozenDistanceMinMaxThreshold.y * frozenDistanceMinMaxThreshold.y;
-        }
-
-
-        //-------------------------------------------------
-        private void UnFreeze()
-        {
-            frozen = false;
-            frozenHandWorldPos.Set(0.0f, 0.0f, 0.0f);
-        }
+        
 
         private void Awake()
         {
             interactable = this.GetComponent<Interactable>();
         }
 
-        //-------------------------------------------------
         private void Start()
         {
             if (childCollider == null)
@@ -270,13 +283,13 @@ namespace InteractableObject
 
         private void OnHandHoverBegin(Hand hand)
         {
-            hand.ShowGrabHint();
+            // hand.ShowGrabHint();
         }
 
 
         private void OnHandHoverEnd(Hand hand)
         {
-            hand.HideGrabHint();
+            // hand.HideGrabHint();
 
             if (driving && hand)
             {
@@ -291,9 +304,12 @@ namespace InteractableObject
 
         private void HandHoverUpdate(Hand hand)
         {
+            //抓握的狀態
             GrabTypes startingGrabType = hand.GetGrabStarting();
+            //是否已鬆手
             bool isGrabEnding = hand.IsGrabbingWithType(grabbedWithType) == false;
 
+            //如果沒有執行任何的抓握
             if (grabbedWithType == GrabTypes.None && startingGrabType != GrabTypes.None)
             {
 
@@ -314,6 +330,7 @@ namespace InteractableObject
 
                 hand.HideGrabHint();
             }
+            //如果鬆手
             else if (grabbedWithType != GrabTypes.None && isGrabEnding)
             {
                 // hand.DetachObject(gameObject);
@@ -412,7 +429,7 @@ namespace InteractableObject
 
 
         /// <summary>
-        ///描繪Debug路徑
+        ///描繪手移動的路徑(Debug用)
         /// </summary>
         /// <param name="xForm"></param>
         /// <param name="toTransformProjected"></param>
@@ -511,7 +528,7 @@ namespace InteractableObject
 
 
         /// <summary>
-        /// 持續更新底下物件的旋轉值
+        /// 持續更新物件的旋轉值
         /// </summary>
         private void UpdateGameObject()
         {
@@ -654,6 +671,28 @@ namespace InteractableObject
                     }
                 }
             }
+        }
+        
+        /// <summary>
+        /// 如果有設定凍結最小值或最大值，凍結手的位置？
+        /// </summary>
+        /// <param name="hand"></param>
+        private void Freeze(Hand hand)
+        {
+            frozen = true;
+            frozenAngle = outAngle;
+            //鎖定手的位置
+            frozenHandWorldPos = hand.hoverSphereTransform.position;
+            frozenSqDistanceMinMaxThreshold.x = frozenDistanceMinMaxThreshold.x * frozenDistanceMinMaxThreshold.x;
+            frozenSqDistanceMinMaxThreshold.y = frozenDistanceMinMaxThreshold.y * frozenDistanceMinMaxThreshold.y;
+        }
+
+
+        //-------------------------------------------------
+        private void UnFreeze()
+        {
+            frozen = false;
+            frozenHandWorldPos.Set(0.0f, 0.0f, 0.0f);
         }
 
         #endregion
