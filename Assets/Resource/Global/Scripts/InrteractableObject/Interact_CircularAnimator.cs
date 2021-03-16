@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 namespace InteractableObject
 {
     public class Interact_CircularAnimator : MonoBehaviour
     {
-        public GameObject circularDriveGameObject;
+        public LinearMapping circularDriveGameObject;
         [SerializeField] private Animator animator;
 
         public float currentCircularMapping = float.NaN;
@@ -31,9 +32,9 @@ namespace InteractableObject
 
 #else
 // SteamVR代碼
-            if (currentCircularMapping != circularDriveGameObject.GetComponent<Interact_CircularDrive>().linearMapping.value)
+            if (currentCircularMapping != circularDriveGameObject.value)
             {
-                currentCircularMapping = circularDriveGameObject.GetComponent<Interact_CircularDrive>().linearMapping.value;
+                currentCircularMapping = circularDriveGameObject.value;
                 animator.enabled = true;
                 animator.Play(0, 0, currentCircularMapping);
                 framesUnchanged = 0;
