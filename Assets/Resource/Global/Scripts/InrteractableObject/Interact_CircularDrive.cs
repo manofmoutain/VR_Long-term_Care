@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
+using Random = UnityEngine.Random;
 
 namespace InteractableObject
 {
@@ -267,6 +269,11 @@ namespace InteractableObject
             }
 
             UpdateAll();
+        }
+
+        private void Update()
+        {
+            // UpdateLinearMapping();
         }
 
 
