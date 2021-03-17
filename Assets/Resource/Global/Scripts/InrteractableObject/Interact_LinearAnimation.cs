@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 #if UNITY_ANDROID && !UNITY_EDITOR
 // Oculus Quest代碼
 #else

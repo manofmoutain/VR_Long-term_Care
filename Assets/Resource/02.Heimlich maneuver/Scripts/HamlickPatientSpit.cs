@@ -46,7 +46,7 @@ namespace Heimlich_maneuver
         {
             isChoking = true;
 
-            print(ScoreManager.Instance.GetLesson());
+            // print(ScoreManager.Instance.GetLesson());
             minPushCount = ScoreManager.Instance.GetOperateSteps(3);
         }
 

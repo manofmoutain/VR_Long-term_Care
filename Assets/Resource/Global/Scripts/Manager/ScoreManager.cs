@@ -265,14 +265,7 @@ namespace Manager
         /// <returns></returns>
         public bool IsTimeLimit()
         {
-            if (Mathf.CeilToInt(_scoreSystem.ExamTime / 60) <= _scoreSystem.LimitTime)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !(Mathf.CeilToInt(_scoreSystem.ExamTime) <= _scoreSystem.LimitTime*60.0f);
         }
 
         #endregion

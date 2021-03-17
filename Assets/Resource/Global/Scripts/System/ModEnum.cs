@@ -1,4 +1,4 @@
-﻿namespace GlobalSystem
+namespace GlobalSystem
 {
     public enum Mod
     {

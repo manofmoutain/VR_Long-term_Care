@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -71,7 +71,7 @@ namespace InteractableObject
                 sampleCount = 0;
                 mappingChangeRate = 0.0f;
 
-                hand.AttachObject(gameObject, startingGrabType, attachmentFlags,attachmentOffset);
+                hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
 
             }
         }

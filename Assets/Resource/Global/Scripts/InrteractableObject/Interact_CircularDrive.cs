@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,7 +81,7 @@ namespace InteractableObject
         /// <summary>
         /// 是否要設定極限值
         /// </summary>
-        [HeaderAttribute("旋轉的極限值")] [Tooltip("如果limited為true，則旋轉將限制為[minAngle，maxAngle]；如果為false，則旋轉將不受限制")]
+        [Header("旋轉的極限值")] [Tooltip("如果limited為true，則旋轉將限制為[minAngle，maxAngle]；如果為false，則旋轉將不受限制")]
         public bool limited = false;
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace InteractableObject
         /// <summary>
         /// 極限值的最小值
         /// </summary>
-        [HeaderAttribute("旋轉值極限值的最小值")] [Tooltip("如果Limited為true，則指定下限，否則未使用值")]
+        [Header("旋轉值極限值的最小值")] [Tooltip("如果Limited為true，則指定下限，否則未使用值")]
         public float minAngle = -45.0f;
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace InteractableObject
         /// <summary>
         /// 極限值的最大值
         /// </summary>
-        [HeaderAttribute("旋轉極限值的最大值")] [Tooltip("如果limited為true，則指定上限，否則未使用值")]
+        [Header("旋轉極限值的最大值")] [Tooltip("如果limited為true，則指定上限，否則未使用值")]
         public float maxAngle = 45.0f;
 
         /// <summary>

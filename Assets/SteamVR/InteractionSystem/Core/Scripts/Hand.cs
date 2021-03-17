@@ -3,7 +3,6 @@
 // Purpose: The hands used by the player in the vr interaction system
 //
 //=============================================================================
-
 using UnityEngine;
 using System;
 using System.Collections;
@@ -427,31 +426,37 @@ namespace Valve.VR.InteractionSystem
 
             if (otherHand.ObjectIsAttached(objectToAttach))
             {
-                print(objectToAttach);
+
                 initialHandPosition1 = trackedObject.transform.position;
                 initialHandPosition2 = otherHand.trackedObject.transform.position;
                 initialObjectRotation = objectToAttach.transform.rotation;
                 initialObjectScale = objectToAttach.transform.localScale;
                 initialAttachmentFlags = attachedObject.attachmentFlags;
-                initialObjectDirection = objectToAttach.transform.position -
-                                         (initialHandPosition1 + initialHandPosition2) * 0.5f;
+                initialObjectDirection = objectToAttach.transform.position - (initialHandPosition1 + initialHandPosition2) * 0.5f;
 
-                // otherHand.currentAttachedObject.transform.parent = null; // unset parent (the first hand), so it's moving freely
-                AttachedObject
-                    objInfo = otherHand.GetAttachedObjectInfo(objectToAttach); // get first hand object attachInfo
+                // unset parent (the first hand), so it's moving freely
+                // otherHand.currentAttachedObject.transform.parent = null;
+
+                // get first hand object attachInfo
+                AttachedObject objInfo = otherHand.GetAttachedObjectInfo(objectToAttach);
 
                 if (objInfo.attachedObject != null)
                 {
-                    objInfo.attachmentFlags &= ~AttachmentFlags.ParentToHand; // negate the ParentToHand flag
-                    objInfo.isParentedToHand = false; // set parentToHand variable false
-                    otherHand.ReplaceAttachedObjectInfo(objInfo, objectToAttach); // replace object attachInfo
+                    // negate the ParentToHand flag
+                    objInfo.attachmentFlags &= ~AttachmentFlags.ParentToHand;
+                    // set parentToHand variable false
+                    objInfo.isParentedToHand = false;
+                    // replace object attachInfo
+                    otherHand.ReplaceAttachedObjectInfo(objInfo, objectToAttach);
                 }
 
+                // negate the ParentToHand, SnapOnAttach and DetachFromOtherHand flags
                 attachedObject.attachmentFlags &= ~(AttachmentFlags.ParentToHand | AttachmentFlags.SnapOnAttach |
                                                     AttachmentFlags.DetachFromOtherHand
-                    ); // negate the ParentToHand, SnapOnAttach and DetachFromOtherHand flags
+                    );
 
-                twoHandGrab = true; // bool, so you know grabbed with 2 hands
+                // bool, so you know grabbed with 2 hands
+                twoHandGrab = true;
 
             }
 
@@ -714,45 +719,48 @@ namespace Valve.VR.InteractionSystem
             SteamVR_Input_Sources updatedSource)
         {
             GameObject attachedObject = currentAttachedObject;
-
+            // print(attachedObject);
             if (attachedObject != null && twoHandGrab)
             {
-                Vector3 currentHandPosition1 = trackedObject.transform.position; // current first hand position
-                Vector3 currentHandPosition2 =
-                    otherHand.trackedObject.transform.position; // current second hand position
+                // current first hand position
+                Vector3 currentHandPosition1 = trackedObject.transform.position;
+                // current second hand position
+                Vector3 currentHandPosition2 = otherHand.trackedObject.transform.position;
 
-                Vector3 handDir1 =
-                    (initialHandPosition1 - initialHandPosition2)
-                    .normalized; // direction vector of initial first and second hand position
-                Vector3 handDir2 =
-                    (currentHandPosition1 - currentHandPosition2)
-                    .normalized; // direction vector of current first and second hand position
+                // 最初始的主手和副手的方向向量
+                Vector3 handDir1 = (initialHandPosition1 - initialHandPosition2).normalized;
+                // 當前第主手和副手位置的方向向量
+                Vector3 handDir2 = (currentHandPosition1 - currentHandPosition2).normalized;
 
-                Quaternion
-                    handRot = Quaternion.FromToRotation(handDir1,
-                        handDir2); // calculate rotation based on those two direction vectors
+                // calculate rotation based on those two direction vectors
+                Quaternion handRot = Quaternion.FromToRotation(handDir1, handDir2);
 
 
                 float currentGrabDistance = Vector3.Distance(currentHandPosition1, currentHandPosition2);
                 float initialGrabDistance = Vector3.Distance(initialHandPosition1, initialHandPosition2);
-                float
-                    p = (currentGrabDistance /
-                         initialGrabDistance); // percentage based on the distance of the initial positions and the new positions
 
+                // 基於初始位置和新位置的距離的百分比
+                float p = (currentGrabDistance / initialGrabDistance);
 
-                // Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y,
-                //     p * initialObjectScale.z); // calculate new object scale with p
+                // calculate new object scale with p
+                Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y,p * initialObjectScale.z);
 
-
-                // attachedObject.transform.rotation = handRot * initialObjectRotation; // add rotation
+                // 給予旋轉值
+                // attachedObject.transform.rotation = handRot * initialObjectRotation;
 
 
                 //讓物體可以用手將之縮放
                 // attachedObject.transform.localScale = newScale; // set new scale
 
                 // 根據相對於新比例尺和旋轉角度的原始對象方向，將對象的位置設置為兩隻手的中心
-                attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2)) +
-                                                    (handRot * (initialObjectDirection * p));
+                // attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2)) + (handRot * (initialObjectDirection * p));
+
+                //抓取物件的位置為抓取的手的位置(不會隨雙手的位置而移動)
+                attachedObject.transform.position = currentHandPosition2;
+
+
+
+
             }
         }
 
@@ -1037,14 +1045,17 @@ namespace Valve.VR.InteractionSystem
                 trackedObject = this.gameObject.GetComponent<SteamVR_Behaviour_Pose>();
 
                 if (trackedObject != null)
+                {
                     trackedObject.onTransformUpdatedEvent += OnTransformUpdated;
+                    #region 雙手抓取
+
+                    trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
+
+                    #endregion
+
+                }
             }
 
-            #region 雙手抓取
-
-            trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
-
-            #endregion
         }
 
         protected virtual void OnDestroy()
