@@ -52,6 +52,7 @@ namespace Heimlich_maneuver
 
         private void Update()
         {
+            velocityDirection = GetComponent<Patient>().patientDirection;
             if (!isChoking)
             {
                 pushPoint.transform.localPosition = Vector3.zero;
@@ -102,6 +103,15 @@ namespace Heimlich_maneuver
                     GameObject go = Instantiate(bean, spawnPoint.position, Quaternion.identity,
                         GetComponent<Patient>().GetPatientTransform);
                     go.GetComponent<Rigidbody>().velocity = velocityDirection * beanSpeed;
+                    if (GetComponent<AudioSource>().isPlaying)
+                    {
+                        GetComponent<AudioSource>().Stop();
+                    }
+
+                    if (SpeechManager.Instance.IsAudioPlaying())
+                    {
+                        SpeechManager.Instance.StopAudio();
+                    }
                     Destroy(go, 3f);
                     isChoking = false;
                 }

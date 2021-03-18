@@ -53,6 +53,23 @@ namespace Manager
         #region Public Methods
 
         /// <summary>
+        /// 停止語音播放系統的音效
+        /// </summary>
+        public void StopAudio()
+        {
+            audioSource.Stop();
+        }
+
+        /// <summary>
+        /// 語音辨識系統是否正在播放音效
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAudioPlaying()
+        {
+            return audioSource.isPlaying;
+        }
+
+        /// <summary>
         /// 清除資訊
         /// </summary>
         public void ClearMessage()
@@ -160,9 +177,9 @@ namespace Manager
                     {
                         _situations[i].correctKeyWords = true;
                         Debug.Log($"這是{_situations[index].situationName}狀況");
+                        PlayAudio(index);
                         ScoreManager.Instance.DecreaseOperateSteps(_situations[i].topicIndex);
                         ScoreManager.Instance.SetDone(_situations[i].topicIndex);
-                        PlayAudio(index);
                     }
 
                 }
