@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[2].keyWords.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[0].respondAudio.Array.size
@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: _situations.Array.data[2].keyWords.Array.data[2]
-      value: 4
+      value: "\u5403\u592A\u5FEB"
       objectReference: {fileID: 0}
     - target: {fileID: 528813400243584632, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: SpeechDebugUIText
