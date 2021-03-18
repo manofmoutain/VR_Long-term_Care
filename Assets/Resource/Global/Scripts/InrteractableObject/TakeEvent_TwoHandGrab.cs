@@ -146,6 +146,7 @@ namespace InteractableObject
                 // hand.HideGrabHint();
                 if (!hand.otherHand.twoHandGrab && hand.twoHandGrab)
                 {
+                    hand.changePositionByTwoHands=true;
                      print("雙手抓取");
                     snapTakeObject = true;
                     if (snapFixed.isFixed && snapReleaseGesture)
@@ -197,6 +198,7 @@ namespace InteractableObject
 
             // if (!hand.otherHand.IsGrabEnding(gameObject))
             // {
+            hand.changePositionByTwoHands = false;
                 attached = false;
 
                 dropDown.Invoke();

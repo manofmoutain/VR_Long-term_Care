@@ -43,6 +43,7 @@ namespace InteractableObject
 
         protected virtual void Start()
         {
+            transform.position = startPosition.position;
             if (linearMapping == null)
             {
                 linearMapping = GetComponent<LinearMapping>();
@@ -120,11 +121,11 @@ namespace InteractableObject
 
         protected void UpdateLinearMapping(Transform updateTransform)
         {
+            print("Go");
             prevMapping = linearMapping.value;
             linearMapping.value = Mathf.Clamp01(initialMappingOffset + CalculateLinearMapping(updateTransform));
 
-            mappingChangeSamples[sampleCount % mappingChangeSamples.Length] =
-                (1.0f / Time.deltaTime) * (linearMapping.value - prevMapping);
+            mappingChangeSamples[sampleCount % mappingChangeSamples.Length] = (1.0f / Time.deltaTime) * (linearMapping.value - prevMapping);
             sampleCount++;
 
             if (repositionGameObject)

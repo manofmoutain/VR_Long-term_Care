@@ -23,26 +23,47 @@ namespace Valve.VR.InteractionSystem
         [Header("添加的雙手抓物資訊")]
         #region TwoHandsParameter
         [SerializeField] Vector3 initialHandPosition1;
+
         /// <summary>
         /// 副手位置
         /// </summary>
         [SerializeField] Vector3 initialHandPosition2;
+
         /// <summary>
         /// 抓住物體的旋轉值
         /// </summary>
         [SerializeField] Quaternion initialObjectRotation;
+
         /// <summary>
         /// 抓住物體的大小
         /// </summary>
         [SerializeField] Vector3 initialObjectScale;
+
         /// <summary>
         /// 體到雙手中點的方向
         /// </summary>
         [SerializeField] Vector3 initialObjectDirection;
+
         /// <summary>
         /// initialAttachmentFlags
         /// </summary>
         [SerializeField] AttachmentFlags initialAttachmentFlags;
+
+        /// <summary>
+        /// 開啟是否以雙手中心為移動
+        /// </summary>
+        public bool changePositionByTwoHands;
+
+        /// <summary>
+        /// 開啟旋轉
+        /// </summary>
+        public bool canChangeRotation;
+
+        /// <summary>
+        /// 開啟縮放功能
+        /// </summary>
+        public bool canChangeScale;
+
         /// <summary>
         /// know when grabbed with 2 hands
         /// </summary>
@@ -746,21 +767,29 @@ namespace Valve.VR.InteractionSystem
                 Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y,p * initialObjectScale.z);
 
                 // 給予旋轉值
-                // attachedObject.transform.rotation = handRot * initialObjectRotation;
+                if (canChangeRotation)
+                {
+                    attachedObject.transform.rotation = handRot * initialObjectRotation;
+                }
 
 
                 //讓物體可以用手將之縮放
-                // attachedObject.transform.localScale = newScale; // set new scale
+                if (canChangeScale)
+                {
+                    attachedObject.transform.localScale = newScale; // set new scale
+                }
 
-                // 根據相對於新比例尺和旋轉角度的原始對象方向，將對象的位置設置為兩隻手的中心
-                // attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2)) + (handRot * (initialObjectDirection * p));
-
-                //抓取物件的位置為抓取的手的位置(不會隨雙手的位置而移動)
-                attachedObject.transform.position = currentHandPosition2;
-
-
-
-
+                if (changePositionByTwoHands)
+                {
+                    // 根據相對於新比例尺和旋轉角度的原始對象方向，將對象的位置設置為兩隻手的中心
+                    // attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2)) + (handRot * (initialObjectDirection * p));
+                    attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2));
+                }
+                else
+                {
+                    //抓取物件的位置為抓取的手的位置(不會隨雙手的位置而移動)
+                    attachedObject.transform.position = currentHandPosition2;
+                }
             }
         }
 
