@@ -38,7 +38,6 @@ namespace Heimlich_maneuver
         [SerializeField] private int pushCount;
 
         [SerializeField] private GameObject pushPoint;
-        [SerializeField] private Interact_LinearAnimation linearAnimation;
         [SerializeField] private LinearMapping linearMapping;
 
 
@@ -81,9 +80,10 @@ namespace Heimlich_maneuver
         /// <param name="index">考題編號</param>
         public void Push(int index)
         {
-            // pushCount = triggerCount.GetComponent<OnTriggerEnterCount>().Count;
-            pushCount++;
-            //項目四：握拳向內壓數次
+
+                pushCount++;
+
+                //項目四：握拳向內壓數次
             ScoreManager.Instance.DecreaseOperateSteps(index);
             ScoreManager.Instance.SetDone(index);
             Spit();
@@ -99,6 +99,7 @@ namespace Heimlich_maneuver
                     //項目五：豆子擠出
                     ScoreManager.Instance.DecreaseOperateSteps(4);
                     ScoreManager.Instance.SetDone(4);
+                    SpeechManager.Instance.StopAudio();
                     GetComponent<PatientSFX>().PlaySFX(0);
                     GameObject go = Instantiate(bean, spawnPoint.position, Quaternion.identity,
                         GetComponent<Patient>().GetPatientTransform);
