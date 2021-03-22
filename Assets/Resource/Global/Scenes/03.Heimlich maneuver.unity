@@ -797,6 +797,10 @@ PrefabInstance:
       value: WashHand
       objectReference: {fileID: 0}
     - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
       propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1173168379}
@@ -808,6 +812,34 @@ PrefabInstance:
       propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1500995092}
+    - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: Heimlich_maneuver.HamlickPatient, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 1173168379}
+    - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: WashHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 759426249449852720, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
+      propertyPath: onHandHoverBegin.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_IntArgument
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6da9049a7ab65d04f87bb442890121d3, type: 3}
 --- !u!1001 &3336256967933682011
