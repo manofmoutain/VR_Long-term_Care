@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace InteractableObject
 {
@@ -22,7 +22,7 @@ namespace InteractableObject
         /// <summary>
         /// 被偵測的區域碰撞體
         /// </summary>
-        public SphereCollider sphereCollider;
+        public Collider sphereCollider;
 
         /// <summary>
         /// 要黏貼的物件(必須要有snapTakeDropZone腳本)
@@ -47,7 +47,7 @@ namespace InteractableObject
 // Oculus Quest代碼
 #else
             // SteamVR代碼
-//要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
+            //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
             {
                 if (!isSnapIn)

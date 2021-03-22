@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 
@@ -16,7 +16,7 @@ namespace InteractableObject
         {
             onTriggerEnter.Invoke();
 
-            if (other.GetComponent<LinearDrive>())
+            if (other.GetComponent<LinearDrive>() || other.GetComponent<Interact_TwoHandLinearDrive>())
             {
                 onLinearInteractTriggerEnter.Invoke();
             }
