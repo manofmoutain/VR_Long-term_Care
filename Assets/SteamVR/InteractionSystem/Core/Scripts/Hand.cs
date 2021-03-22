@@ -445,41 +445,41 @@ namespace Valve.VR.InteractionSystem
 
             #region 雙手抓物相關
 
-            if (otherHand.ObjectIsAttached(objectToAttach))
-            {
-
-                initialHandPosition1 = trackedObject.transform.position;
-                initialHandPosition2 = otherHand.trackedObject.transform.position;
-                initialObjectRotation = objectToAttach.transform.rotation;
-                initialObjectScale = objectToAttach.transform.localScale;
-                initialAttachmentFlags = attachedObject.attachmentFlags;
-                initialObjectDirection = objectToAttach.transform.position - (initialHandPosition1 + initialHandPosition2) * 0.5f;
-
-                // unset parent (the first hand), so it's moving freely
-                // otherHand.currentAttachedObject.transform.parent = null;
-
-                // get first hand object attachInfo
-                AttachedObject objInfo = otherHand.GetAttachedObjectInfo(objectToAttach);
-
-                if (objInfo.attachedObject != null)
-                {
-                    // negate the ParentToHand flag
-                    objInfo.attachmentFlags &= ~AttachmentFlags.ParentToHand;
-                    // set parentToHand variable false
-                    objInfo.isParentedToHand = false;
-                    // replace object attachInfo
-                    otherHand.ReplaceAttachedObjectInfo(objInfo, objectToAttach);
-                }
-
-                // negate the ParentToHand, SnapOnAttach and DetachFromOtherHand flags
-                attachedObject.attachmentFlags &= ~(AttachmentFlags.ParentToHand | AttachmentFlags.SnapOnAttach |
-                                                    AttachmentFlags.DetachFromOtherHand
-                    );
-
-                // bool, so you know grabbed with 2 hands
-                twoHandGrab = true;
-
-            }
+            // if (otherHand.ObjectIsAttached(objectToAttach))
+            // {
+            //
+            //     initialHandPosition1 = trackedObject.transform.position;
+            //     initialHandPosition2 = otherHand.trackedObject.transform.position;
+            //     initialObjectRotation = objectToAttach.transform.rotation;
+            //     initialObjectScale = objectToAttach.transform.localScale;
+            //     initialAttachmentFlags = attachedObject.attachmentFlags;
+            //     initialObjectDirection = objectToAttach.transform.position - (initialHandPosition1 + initialHandPosition2) * 0.5f;
+            //
+            //     // unset parent (the first hand), so it's moving freely
+            //     // otherHand.currentAttachedObject.transform.parent = null;
+            //
+            //     // get first hand object attachInfo
+            //     AttachedObject objInfo = otherHand.GetAttachedObjectInfo(objectToAttach);
+            //
+            //     if (objInfo.attachedObject != null)
+            //     {
+            //         // negate the ParentToHand flag
+            //         objInfo.attachmentFlags &= ~AttachmentFlags.ParentToHand;
+            //         // set parentToHand variable false
+            //         objInfo.isParentedToHand = false;
+            //         // replace object attachInfo
+            //         otherHand.ReplaceAttachedObjectInfo(objInfo, objectToAttach);
+            //     }
+            //
+            //     // negate the ParentToHand, SnapOnAttach and DetachFromOtherHand flags
+            //     attachedObject.attachmentFlags &= ~(AttachmentFlags.ParentToHand | AttachmentFlags.SnapOnAttach |
+            //                                         AttachmentFlags.DetachFromOtherHand
+            //         );
+            //
+            //     // bool, so you know grabbed with 2 hands
+            //     twoHandGrab = true;
+            //
+            // }
 
             #endregion
 
@@ -1078,7 +1078,7 @@ namespace Valve.VR.InteractionSystem
                     trackedObject.onTransformUpdatedEvent += OnTransformUpdated;
                     #region 雙手抓取
 
-                    trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
+                    // trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
 
                     #endregion
 
@@ -1096,7 +1096,7 @@ namespace Valve.VR.InteractionSystem
 
             #region 雙手抓取
 
-            trackedObject.onTransformUpdatedEvent -= TwoHandGrabbingUpdate;
+            // trackedObject.onTransformUpdatedEvent -= TwoHandGrabbingUpdate;
 
             #endregion
         }

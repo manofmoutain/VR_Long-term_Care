@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
-using Heimlich_maneuver;
 using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
@@ -14,10 +10,10 @@ namespace InteractableObject
     public class TakeEvent_TwoHandGrab : MonoBehaviour
     {
         [Header("雙手資訊")]
-        [SerializeField] private Hand right_Hand;
-        [SerializeField] private GameObject right_Hand_Grab_GameObkect;
-        [SerializeField] private Hand left_Hand;
-        [SerializeField] private GameObject left_Hand_Grab_GameObkect;
+        [SerializeField] private Hand rightHand;
+        [SerializeField] private GameObject rightHandAttachedGameObject;
+        [SerializeField] private Hand leftHand;
+        [SerializeField] private GameObject leftHandAttachedGameObject;
 
         [Header("模型位置參數")]
         [Tooltip("原本位置")]
@@ -141,11 +137,22 @@ namespace InteractableObject
 
             if (startingGrabType != GrabTypes.None)
             {
-                hand.AttachObject( gameObject, startingGrabType, attachmentFlags, attachmentOffset );
+                hand.AttachObject( gameObject, startingGrabType, Hand.AttachmentFlags.VelocityMovement, attachmentOffset );
+                switch (hand.gameObject.name)
+                {
+                    case "RightHand":
+                        rightHandAttachedGameObject = gameObject;
+                        break;
+                    case "LeftHand":
+                        leftHandAttachedGameObject = gameObject;
+                        break;
+
+                }
                 // print($"{hand.name}抓住了{gameObject.name}");
                 // hand.HideGrabHint();
-                if (!hand.otherHand.twoHandGrab && hand.twoHandGrab)
+                if (rightHandAttachedGameObject!=null && leftHandAttachedGameObject!=null)
                 {
+                    hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset );
                     hand.changePositionByTwoHands=true;
                      print("雙手抓取");
                     snapTakeObject = true;
@@ -168,7 +175,8 @@ namespace InteractableObject
         protected virtual void OnAttachedToHand( Hand hand )
         {
             hand.HoverLock( null );
-            if (hand.twoHandGrab && !hand.otherHand.twoHandGrab)
+
+            if (rightHandAttachedGameObject == null || leftHandAttachedGameObject==null)
             {
                 hadInterpolation = this.rigidbody.interpolation;
 
@@ -194,7 +202,8 @@ namespace InteractableObject
 
         protected virtual void OnDetachedFromHand(Hand hand)
         {
-            // print($"IsGrabEnding={hand.otherHand.IsGrabEnding(gameObject)}");
+            rightHandAttachedGameObject = null;
+            leftHandAttachedGameObject = null;
 
             // if (!hand.otherHand.IsGrabEnding(gameObject))
             // {
@@ -274,8 +283,12 @@ namespace InteractableObject
             }
             else
             {
-                // dropDown.Invoke();
+                if (rightHandAttachedGameObject!=null && leftHandAttachedGameObject!=null)
+                {
+                    // gameObject.transform.position = hand.transform.position;
+                }
             }
+
 
             // if (onHeldUpdate != null)
             //     onHeldUpdate.Invoke(hand);

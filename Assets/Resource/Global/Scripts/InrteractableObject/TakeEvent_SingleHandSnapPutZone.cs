@@ -16,6 +16,7 @@ namespace InteractableObject
     [RequireComponent( typeof( Interactable ) )]
     public class TakeEvent_SingleHandSnapPutZone : MonoBehaviour
     {
+        [SerializeField] private Hand.AttachmentFlags attachmentFlags=Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOffGravity | Hand.AttachmentFlags.TurnOnKinematic;
         /// <summary>
         /// 是否已抓取物件
         /// </summary>
@@ -69,9 +70,26 @@ namespace InteractableObject
         public List<TakeEvent_SnapArea> snapZoneArea;
         [SerializeField] private GameObject takeObject;
 
+        /// <summary>
+        /// 觸摸到的瞬間事件
+        /// </summary>
         [Header("事件")] public UnityEvent snapIn;
+        /// <summary>
+        /// 離開物件的瞬間事件
+        /// </summary>
         public UnityEvent snapOut;
+        /// <summary>
+        /// 拿起瞬間的事件
+        /// </summary>
         public UnityEvent pickUp;
+
+        /// <summary>
+        /// 持續抓取時的事件
+        /// </summary>
+        public UnityEvent grabEvent;
+        /// <summary>
+        /// 放下瞬間的事件
+        /// </summary>
         public UnityEvent dropDown;
 
 
@@ -159,7 +177,7 @@ namespace InteractableObject
                 snapFixed.isFixed = false;
                 //snapFixed.isThrowed = false;
 
-                //隱藏放置提示輪廓線
+                //隱藏放置區物件
                 foreach (GameObject useObject in UsePosition)
                 {
                     // useObject.transform.GetChild(0).GetComponent<SnapZoneArea>().isSnapIn = true;
@@ -181,42 +199,7 @@ namespace InteractableObject
             }
         }
 
-        private void GetReleaseVelocities(Hand hand, out Vector3 velocity, out Vector3 angularVelocity)
-        {
-            if (hand.noSteamVRFallbackCamera)
-            {
-                if (velocityEstimator != null)
-                {
-                    velocityEstimator.FinishEstimatingVelocity();
-                    velocity = velocityEstimator.GetVelocityEstimate();
-                    angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
-                }
-                else
-                {
-                    Debug.LogWarning(
-                        "[SteamVR Interaction System] Throwable: No Velocity Estimator component on object but release style set to short estimation. Please add one or change the release style.");
 
-                    velocity = rigidbody.velocity;
-                    angularVelocity = rigidbody.angularVelocity;
-                }
-            }
-            else
-            {
-                velocity = hand.GetTrackedObjectVelocity(releaseVelocityTimeOffset);
-                angularVelocity = hand.GetTrackedObjectAngularVelocity(releaseVelocityTimeOffset);
-            }
-
-
-            float scaleFactor = 1.0f;
-            if (scaleReleaseVelocityThreshold > 0)
-            {
-                scaleFactor =
-                    Mathf.Clamp01(
-                        scaleReleaseVelocityCurve.Evaluate(velocity.magnitude / scaleReleaseVelocityThreshold));
-            }
-
-            velocity *= (scaleFactor * scaleReleaseVelocity);
-        }
 
 
         private void OnHandHoverBegin(Hand hand)
@@ -244,7 +227,7 @@ namespace InteractableObject
             {
                 if (interactable.attachedToHand == null)
                 {
-                    hand.AttachObject(gameObject, grabTypes);
+                    hand.AttachObject(gameObject, grabTypes,attachmentFlags);
                     hand.HoverLock(interactable);
                     // hand.HideGrabHint();
 
@@ -313,8 +296,8 @@ namespace InteractableObject
         /// <param name="hand"></param>
         private void HandAttachedUpdate(Hand hand)
         {
-            //放下物品
             bool isGrabEnding = hand.IsGrabEnding(gameObject);
+            //放下物品
             if (isGrabEnding)
             {
 
@@ -359,6 +342,11 @@ namespace InteractableObject
                     snapZoneArea[i].sphereCollider.isTrigger = false;
                 }
             }
+            //持續抓取時
+            else
+            {
+                grabEvent.Invoke();
+            }
         }
 
         /// <summary>
@@ -385,6 +373,44 @@ namespace InteractableObject
 
             takeObject = null;
             sanpCurrentHand = null;
+        }
+
+
+        private void GetReleaseVelocities(Hand hand, out Vector3 velocity, out Vector3 angularVelocity)
+        {
+            if (hand.noSteamVRFallbackCamera)
+            {
+                if (velocityEstimator != null)
+                {
+                    velocityEstimator.FinishEstimatingVelocity();
+                    velocity = velocityEstimator.GetVelocityEstimate();
+                    angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
+                }
+                else
+                {
+                    Debug.LogWarning(
+                        "[SteamVR Interaction System] Throwable: No Velocity Estimator component on object but release style set to short estimation. Please add one or change the release style.");
+
+                    velocity = rigidbody.velocity;
+                    angularVelocity = rigidbody.angularVelocity;
+                }
+            }
+            else
+            {
+                velocity = hand.GetTrackedObjectVelocity(releaseVelocityTimeOffset);
+                angularVelocity = hand.GetTrackedObjectAngularVelocity(releaseVelocityTimeOffset);
+            }
+
+
+            float scaleFactor = 1.0f;
+            if (scaleReleaseVelocityThreshold > 0)
+            {
+                scaleFactor =
+                    Mathf.Clamp01(
+                        scaleReleaseVelocityCurve.Evaluate(velocity.magnitude / scaleReleaseVelocityThreshold));
+            }
+
+            velocity *= (scaleFactor * scaleReleaseVelocity);
         }
     }
 }
