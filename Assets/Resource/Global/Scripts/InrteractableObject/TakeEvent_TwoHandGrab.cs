@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -104,7 +104,7 @@ namespace InteractableObject
 
         protected virtual void OnHandHoverBegin( Hand hand )
         {
-            hand.ShowGrabHint();
+            // hand.ShowGrabHint();
             snapIn.Invoke();
             // 通過按住交互按鈕而不是按下按鈕來“捕獲”可拋出對象.
             // 僅當可拋物的移動速度快於規定的閾值速度並且未與另一隻手連接時，才執行此操作
@@ -130,7 +130,7 @@ namespace InteractableObject
 
         protected virtual void OnHandHoverEnd( Hand hand )
         {
-            hand.HideGrabHint();
+            // hand.HideGrabHint();
             snapOut.Invoke();
         }
 
@@ -143,9 +143,10 @@ namespace InteractableObject
             {
                 hand.AttachObject( gameObject, startingGrabType, attachmentFlags, attachmentOffset );
                 // print($"{hand.name}抓住了{gameObject.name}");
-                hand.HideGrabHint();
+                // hand.HideGrabHint();
                 if (!hand.otherHand.twoHandGrab && hand.twoHandGrab)
                 {
+                    hand.changePositionByTwoHands=true;
                      print("雙手抓取");
                     snapTakeObject = true;
                     if (snapFixed.isFixed && snapReleaseGesture)
@@ -197,6 +198,7 @@ namespace InteractableObject
 
             // if (!hand.otherHand.IsGrabEnding(gameObject))
             // {
+            hand.changePositionByTwoHands = false;
                 attached = false;
 
                 dropDown.Invoke();

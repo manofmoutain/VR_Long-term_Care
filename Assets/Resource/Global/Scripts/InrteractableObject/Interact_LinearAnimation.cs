@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 #if UNITY_ANDROID && !UNITY_EDITOR
 // Oculus Quest代碼
 #else
@@ -11,7 +11,7 @@ namespace InteractableObject
 {
     public class Interact_LinearAnimation : MonoBehaviour
     {
-        public GameObject linearMappingGameObject;
+        public LinearMapping linearMappingGameObject;
         [SerializeField] private Animator animator;
 
         public float currentLinearMapping = float.NaN;
@@ -36,9 +36,9 @@ namespace InteractableObject
 
 #else
 // SteamVR代碼
-            if (currentLinearMapping != linearMappingGameObject.GetComponent<LinearMapping>().value)
+            if (currentLinearMapping != linearMappingGameObject.value)
             {
-                currentLinearMapping = linearMappingGameObject.GetComponent<LinearMapping>().value;
+                currentLinearMapping = linearMappingGameObject.value;
                 animator.enabled = true;
                 animator.Play(0, 0, currentLinearMapping);
                 framesUnchanged = 0;

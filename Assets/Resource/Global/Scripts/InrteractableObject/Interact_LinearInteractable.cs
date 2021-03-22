@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 #if UNITY_ANDROID && !UNITY_EDITOR
 // Oculus Quest代碼
 #else
@@ -65,7 +65,16 @@ namespace InteractableObject
             //what to do
             go.SetActive(true);
             go.GetComponent<MeshRenderer>().material.color = Color.green;
-            interactPoint.transform.position = linearDrive.GetComponent<LinearDrive>().startPosition.position;
+            if (linearDrive.GetComponent<LinearDrive>())
+            {
+                interactPoint.transform.position = linearDrive.GetComponent<LinearDrive>().startPosition.position;
+            }
+
+            if (linearDrive.GetComponent<Interact_TwoHandLinearDrive>())
+            {
+                interactPoint.transform.position = linearDrive.GetComponent<Interact_TwoHandLinearDrive>().startPosition.position;
+            }
+
             
 
         }

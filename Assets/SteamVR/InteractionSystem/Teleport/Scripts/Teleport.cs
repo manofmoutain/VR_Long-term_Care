@@ -31,7 +31,10 @@ namespace Valve.VR.InteractionSystem
 		public Color pointerValidColor;
 		public Color pointerInvalidColor;
 		public Color pointerLockedColor;
-		public bool showPlayAreaMarker = true;
+		/// <summary>
+		/// 是否要顯示傳送框線
+		/// </summary>
+		[Tooltip("是否要顯示傳送框線")]public bool showPlayAreaMarker = true;
 
 		public float teleportFadeTime = 0.1f;
 		public float meshFadeTime = 0.2f;
