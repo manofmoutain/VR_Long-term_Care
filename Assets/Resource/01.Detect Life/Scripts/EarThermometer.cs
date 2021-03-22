@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Global.Pateint;
+using TMPro;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
@@ -15,9 +17,17 @@ namespace DetectLife
         [SerializeField] private Material onMaterial;
         [SerializeField] private MeshRenderer meshRenderer;
 
+        [SerializeField] private GameObject temperatureUI;
+        [SerializeField] private TextMeshProUGUI temperatureText;
+
+        [SerializeField] private AudioClip sFX;
+        [SerializeField] private AudioSource audioSource;
+
+        [SerializeField] private PatientTemperature patient;
         private void Start()
         {
             pointLight.SetActive(false);
+            temperatureUI.SetActive(false);
         }
 
 
@@ -27,7 +37,7 @@ namespace DetectLife
 
             if (grabTypes == GrabTypes.Pinch)
             {
-                print("123");
+                // print("123");
                 if (isOn)
                 {
                     isOn = false;
@@ -46,6 +56,14 @@ namespace DetectLife
         public void Switch()
         {
             pointLight.SetActive(!pointLight.activeSelf);
+        }
+
+
+        public void ShowTemperature(float temp)
+        {
+            audioSource.PlayOneShot(sFX);
+            temperatureUI.SetActive(true);
+            temperatureText.text = temp.ToString();
         }
     }
 }

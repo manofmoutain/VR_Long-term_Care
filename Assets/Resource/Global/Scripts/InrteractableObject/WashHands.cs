@@ -24,12 +24,6 @@ namespace InteractableObject
         {
             animator.SetTrigger("Pull");
             StartCoroutine(WashHand());
-            if (ScoreManager.Instance.GetSteps(11)==0)
-            {
-                //項目九：洗手
-                ScoreManager.Instance.DecreaseOperateSteps(8);
-                ScoreManager.Instance.SetDone(8);
-            }
         }
 
         IEnumerator WashHand()

@@ -79,5 +79,15 @@ namespace Heimlich_maneuver
                 ScoreManager.Instance.SetDone(index);
             }
         }
+
+        public void WashHand(int index)
+        {
+            if (ScoreManager.Instance.GetSteps(11)==0)
+            {
+                //項目九：洗手
+                ScoreManager.Instance.DecreaseOperateSteps(index);
+                ScoreManager.Instance.SetDone(index);
+            }
+        }
     }
 }
