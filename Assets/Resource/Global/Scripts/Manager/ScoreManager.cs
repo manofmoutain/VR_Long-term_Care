@@ -155,7 +155,7 @@ namespace Manager
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public int GetTopicScore(int index)
+        public float GetTopicScore(int index)
         {
             return _scoreSystem.GetTopicScore(index);
         }
@@ -164,7 +164,7 @@ namespace Manager
         /// 取得總分
         /// </summary>
         /// <returns></returns>
-        public int GetTotalScore()
+        public float GetTotalScore()
         {
             return _scoreSystem.GetTotalScore();
         }
