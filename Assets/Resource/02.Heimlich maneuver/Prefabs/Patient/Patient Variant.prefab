@@ -1,5 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/Resource/03.Heimlich maneuver/Prefabs/Patient/Patient Variant.prefab
+--- !u!114 &8281836438651362664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761503077756378707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782e6b18de7f6574fa930b3f89677973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDetachToResetPosition: 1
+  startPosition: {fileID: 761503077410794999}
+  endPosition: {fileID: 761503077295548004}
+  linearMapping: {fileID: 5180861795129541772}
+  repositionGameObject: 1
+  maintainMomemntum: 1
+  momemtumDampenRate: 5
+  attachmentFlags: 16
+  attachmentOffset: {fileID: 0}
+  initialMappingOffset: 0
+  numMappingChangeSamples: 5
+  mappingChangeSamples: []
+  prevMapping: 0
+  mappingChangeRate: 0
+  sampleCount: 0
+  interactable: {fileID: 0}
+=======
+>>>>>>> master:Assets/Resource/02.Heimlich maneuver/Prefabs/Patient/Patient Variant.prefab
+=======
+>>>>>>> master
 --- !u!114 &3336256967933682015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,10 +217,19 @@ PrefabInstance:
       propertyPath: patientAnimator
       value: 
       objectReference: {fileID: 5180861794931319292}
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/Resource/03.Heimlich maneuver/Prefabs/Patient/Patient Variant.prefab
+=======
+=======
+>>>>>>> master
     - target: {fileID: 15101118, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_Radius
       value: 0.05
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+>>>>>>> master:Assets/Resource/02.Heimlich maneuver/Prefabs/Patient/Patient Variant.prefab
+=======
+>>>>>>> master
     - target: {fileID: 347507145, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: showLeftPreview
       value: 0

@@ -9,14 +9,14 @@ namespace InteractableObject
 {
     public class Interact_TwoHandLinearDrive : MonoBehaviour
     {
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
         [SerializeField] private Hand rightHand;
         [SerializeField] private GameObject rightAttachedObjet;
         [SerializeField] private Hand leftHand;
         [SerializeField] private GameObject leftAttachedObject;
 
->>>>>>> master
+//>>>>>>> master
         /// <summary>
         /// 鬆開手後是否回到原位
         /// </summary>
