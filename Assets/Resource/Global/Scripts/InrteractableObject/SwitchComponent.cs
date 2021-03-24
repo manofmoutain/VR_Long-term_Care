@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+//<<<<<<< HEAD
 ﻿using System.Collections;
-=======
+//=======
 using System.Collections;
->>>>>>> master
+//>>>>>>> master
 using System.Collections.Generic;
 using UnityEngine;
 
