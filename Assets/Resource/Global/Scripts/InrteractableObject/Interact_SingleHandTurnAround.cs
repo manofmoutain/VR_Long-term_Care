@@ -1,17 +1,14 @@
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Valve.VR;
 using Valve.VR.InteractionSystem;
-using Random = UnityEngine.Random;
 
 namespace InteractableObject
 {
-    [RequireComponent(typeof(Interactable))]
-    public class Interact_CircularDrive : MonoBehaviour
+    public class Interact_SingleHandTurnAround : MonoBehaviour
     {
-
         [Header("手勢")]
         [SerializeField] private Hand.AttachmentFlags attachmentFlags;
 
@@ -149,20 +146,20 @@ namespace InteractableObject
 
         [Header("Debug")]
         [Tooltip("繪製“手”的路徑（紅色）和預計值（綠色）")]
-        bool debugPath = false;
+        public bool debugPath = false;
 
         [Tooltip("創建以繪製路徑的GameObject的最大數量")]
-        int dbgPathLimit = 50;
+        public int dbgPathLimit = 50;
 
         [Tooltip("顯示此圓形驅動器的線性值和角度值")]
-        TextMesh debugText = null;
-        private Color red = new Color(1.0f, 0.0f, 0.0f);
-        private Color green = new Color(0.0f, 1.0f, 0.0f);
-        private GameObject[] dbgHandObjects;
-        private GameObject[] dbgProjObjects;
-        private GameObject dbgObjectsParent;
-        private int dbgObjectCount = 0;
-        private int dbgObjectIndex = 0;
+        public TextMesh debugText = null;
+        [SerializeField] private Color red = new Color(1.0f, 0.0f, 0.0f);
+        [SerializeField] private Color green = new Color(0.0f, 1.0f, 0.0f);
+        [SerializeField] private GameObject[] dbgHandObjects;
+        [SerializeField] private GameObject[] dbgProjObjects;
+        [SerializeField] private GameObject dbgObjectsParent;
+        [SerializeField] private int dbgObjectCount = 0;
+        [SerializeField] private int dbgObjectIndex = 0;
 
 
         [Header("隱藏的數值")]
@@ -212,7 +209,7 @@ namespace InteractableObject
 
         [SerializeField] private Interactable interactable;
 
-        
+
 
         private void Awake()
         {
@@ -270,6 +267,12 @@ namespace InteractableObject
 
             UpdateAll();
         }
+
+        private void Update()
+        {
+            // UpdateLinearMapping();
+        }
+
 
         void OnDisable()
         {
@@ -420,10 +423,10 @@ namespace InteractableObject
                         gameObject.ToString()));
             }
 
-            if (debugPath && dbgPathLimit > 0)
-            {
-                DrawDebugPath(xForm, toTransformProjected);
-            }
+            // if (debugPath && dbgPathLimit > 0)
+            // {
+            //     DrawDebugPath(xForm, toTransformProjected);
+            // }
 
             return toTransformProjected;
         }
@@ -524,7 +527,7 @@ namespace InteractableObject
                 linearMapping.value = flTmp - Mathf.Floor(flTmp);
             }
 
-            // UpdateDebugText();
+            UpdateDebugText();
         }
 
 
@@ -553,7 +556,7 @@ namespace InteractableObject
 
 
         /// <summary>
-        /// 使用線性映射值和角度更新
+        /// 使用線性映射值和角度更新Debug TextMesh
         /// </summary>
         private void UpdateAll()
         {
@@ -673,7 +676,7 @@ namespace InteractableObject
                 }
             }
         }
-        
+
         /// <summary>
         /// 如果有設定凍結最小值或最大值，凍結手的位置？
         /// </summary>
