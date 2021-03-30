@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PrepareMeal
 {
-    public class FaucetCreateFlow : MonoBehaviour
+    public class EventToShowVFX : MonoBehaviour
     {
         [SerializeField] private ParticleSystem vfx;
         [SerializeField] private bool isFlowing;
@@ -29,7 +29,7 @@ namespace PrepareMeal
             }
         }
 
-        public void SwitchFlow(bool on)
+        public void SwitchVFX(bool on)
         {
             isFlowing = on;
             vfx.gameObject.SetActive(on);
