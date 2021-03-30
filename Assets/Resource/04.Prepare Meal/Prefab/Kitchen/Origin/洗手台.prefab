@@ -4920,7 +4920,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4649859470981869395}
         m_TargetAssemblyTypeName: PrepareMeal.FaucetCreateFlow, Assembly-CSharp
-        m_MethodName: SwitchFlow
+        m_MethodName: SwitchVFX
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4937,7 +4937,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4649859470981869395}
         m_TargetAssemblyTypeName: PrepareMeal.FaucetCreateFlow, Assembly-CSharp
-        m_MethodName: SwitchFlow
+        m_MethodName: SwitchVFX
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
