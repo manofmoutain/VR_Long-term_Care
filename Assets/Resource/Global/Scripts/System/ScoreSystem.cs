@@ -21,7 +21,7 @@ namespace GlobalSystem
         /// <summary>
         /// 總分
         /// </summary>
-        [SerializeField] private int totalScore;
+        [SerializeField] private float totalScore;
 
         /// <summary>
         /// 操作項目列表
@@ -92,7 +92,7 @@ namespace GlobalSystem
         /// <param name="index">第幾項</param>
         public void DecreaseScore(int index)
         {
-            totalScore -= _operateTopics[index].score * GetSteps(index);
+            totalScore -= _operateTopics[index].score;
             Debug.Log(
                 $"第{index}題：{_operateTopics[index].whatToDo}操作失敗，扣{_operateTopics[index].score}分，總分剩{totalScore}分");
         }
@@ -328,7 +328,7 @@ namespace GlobalSystem
         /// </summary>
         /// <param name="index">操作項目編號</param>
         /// <returns></returns>
-        public int GetTopicScore(int index)
+        public float GetTopicScore(int index)
         {
             Debug.Log($"第{index}題的分數為{_operateTopics[index].score}");
             return _operateTopics[index].score;
@@ -338,7 +338,7 @@ namespace GlobalSystem
         /// 獲得總成績
         /// </summary>
         /// <returns></returns>
-        public int GetTotalScore()
+        public float GetTotalScore()
         {
             Debug.Log($"總分為{totalScore}");
             return totalScore < 0 ? totalScore = 0 : totalScore;
@@ -417,7 +417,7 @@ namespace GlobalSystem
         /// 實例化分數系統
         /// </summary>
         /// <param name="score"></param>
-        public ScoreSystem(int score)
+        public ScoreSystem(float score)
         {
             totalScore = score;
         }

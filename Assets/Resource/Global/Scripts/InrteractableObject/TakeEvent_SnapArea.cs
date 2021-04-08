@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace InteractableObject
@@ -82,6 +83,37 @@ namespace InteractableObject
             }
 
 #endif
+        }
+
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() ||
+                other.GetComponent<TakeEvent_TwoHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
+            {
+                if (isSnapIn)
+                {
+                    print($"{other.gameObject.name}停留{transform.parent.name}");
+
+                    //要黏著的物體已黏著與此區域
+                    if (takeEventSingleHandSnapPutZone != null)
+                    {
+                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                    }
+
+                    if (takeEventTwoHandSnapPutZone != null)
+                    {
+                        takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
+                    }
+
+                    if (takeEventTwoHandGrab != null)
+                    {
+                        takeEventTwoHandGrab.snapFixed.isLocated = true;
+                    }
+
+                    //Debug.Log("Snap Object Correct！");
+                }
+            }
         }
 
         private void OnTriggerExit(Collider other)

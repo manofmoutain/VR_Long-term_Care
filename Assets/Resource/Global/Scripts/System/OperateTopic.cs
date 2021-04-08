@@ -23,7 +23,7 @@ namespace GlobalSystem
         /// <summary>
         /// 扣多少分
         /// </summary>
-        public int score;
+        public float score;
 
         /// <summary>
         /// 是否有操作這個項目

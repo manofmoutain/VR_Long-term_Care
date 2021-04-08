@@ -16,7 +16,7 @@ namespace InteractableObject
     [RequireComponent( typeof( Interactable ) )]
     public class TakeEvent_SingleHandSnapPutZone : MonoBehaviour
     {
-        [SerializeField] private Hand.AttachmentFlags attachmentFlags=Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOffGravity | Hand.AttachmentFlags.TurnOnKinematic;
+        [SerializeField] private Hand.AttachmentFlags attachmentFlags=Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand;
         /// <summary>
         /// 是否已抓取物件
         /// </summary>
@@ -26,7 +26,7 @@ namespace InteractableObject
         /// <summary>
         ///Trigger放開後是否要脫離手勢
         /// </summary>
-        [Tooltip("Trigger放開後是否要脫離手勢")] public bool snapReleaseGesture;
+        [Tooltip("Trigger放開後是否要脫離手勢")] public bool snapReleaseGesture=true;
 
         [System.Serializable]
         public class SnapFixed
@@ -109,6 +109,7 @@ namespace InteractableObject
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.maxAngularVelocity = 50.0f;
             rigidbody.isKinematic = true;
+            rigidbody.useGravity = true;
 
             velocityEstimator = GetComponent<VelocityEstimator>();
             interactable = gameObject.GetComponent<Interactable>();

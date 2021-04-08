@@ -17,6 +17,9 @@ namespace Valve.VR.InteractionSystem
     //-------------------------------------------------------------------------
     public class Hand : MonoBehaviour
     {
+        [Header("震動設定")]
+        [Tooltip("手觸碰物體時是否要觸發搖桿震動")] [SerializeField] private bool isHaptic;
+
         /// <summary>
         /// 主手位置
         /// </summary>
@@ -1772,13 +1775,21 @@ namespace Valve.VR.InteractionSystem
 
         public void TriggerHapticPulse(ushort microSecondsDuration)
         {
-            float seconds = (float) microSecondsDuration / 1000000f;
-            hapticAction.Execute(0, seconds, 1f / seconds, 1, handType);
+            if (isHaptic)
+            {
+                float seconds = (float) microSecondsDuration / 1000000f;
+                hapticAction.Execute(0, seconds, 1f / seconds, 1, handType);
+            }
+
         }
 
         public void TriggerHapticPulse(float duration, float frequency, float amplitude)
         {
-            hapticAction.Execute(0, duration, frequency, amplitude, handType);
+            if (isHaptic)
+            {
+                hapticAction.Execute(0, duration, frequency, amplitude, handType);
+
+            }
         }
 
         public void ShowGrabHint()

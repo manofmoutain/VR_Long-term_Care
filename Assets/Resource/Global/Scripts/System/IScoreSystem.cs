@@ -19,8 +19,8 @@ namespace GlobalSystem
         string GetStudentName();
 
         string GetToDo(int index);
-        int GetTopicScore(int index);
-        int GetTotalScore();
+        float GetTopicScore(int index);
+        float GetTotalScore();
         string GetWhatToDo(int index);
         void SetStudentID(string text);
 
