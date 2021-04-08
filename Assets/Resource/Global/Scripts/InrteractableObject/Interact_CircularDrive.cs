@@ -149,20 +149,20 @@ namespace InteractableObject
 
         [Header("Debug")]
         [Tooltip("繪製“手”的路徑（紅色）和預計值（綠色）")]
-        public bool debugPath = false;
+        bool debugPath = false;
 
         [Tooltip("創建以繪製路徑的GameObject的最大數量")]
-        public int dbgPathLimit = 50;
+        int dbgPathLimit = 50;
 
         [Tooltip("顯示此圓形驅動器的線性值和角度值")]
-        public TextMesh debugText = null;
-        [SerializeField] private Color red = new Color(1.0f, 0.0f, 0.0f);
-        [SerializeField] private Color green = new Color(0.0f, 1.0f, 0.0f);
-        [SerializeField] private GameObject[] dbgHandObjects;
-        [SerializeField] private GameObject[] dbgProjObjects;
-        [SerializeField] private GameObject dbgObjectsParent;
-        [SerializeField] private int dbgObjectCount = 0;
-        [SerializeField] private int dbgObjectIndex = 0;
+        TextMesh debugText = null;
+        private Color red = new Color(1.0f, 0.0f, 0.0f);
+        private Color green = new Color(0.0f, 1.0f, 0.0f);
+        private GameObject[] dbgHandObjects;
+        private GameObject[] dbgProjObjects;
+        private GameObject dbgObjectsParent;
+        private int dbgObjectCount = 0;
+        private int dbgObjectIndex = 0;
 
 
         [Header("隱藏的數值")]
@@ -270,12 +270,6 @@ namespace InteractableObject
 
             UpdateAll();
         }
-
-        private void Update()
-        {
-            // UpdateLinearMapping();
-        }
-
 
         void OnDisable()
         {
@@ -405,7 +399,7 @@ namespace InteractableObject
         /// </summary>
         /// <param name="xForm"></param>
         /// <returns></returns>
-        private Vector3 ComputeToTransformProjected(Transform xForm)
+        [SerializeField] private Vector3 ComputeToTransformProjected(Transform xForm)
         {
             Vector3 toTransform = (xForm.position - transform.position).normalized;
             Vector3 toTransformProjected = new Vector3(0.0f, 0.0f, 0.0f);
@@ -530,7 +524,7 @@ namespace InteractableObject
                 linearMapping.value = flTmp - Mathf.Floor(flTmp);
             }
 
-            UpdateDebugText();
+            // UpdateDebugText();
         }
 
 
@@ -559,13 +553,13 @@ namespace InteractableObject
 
 
         /// <summary>
-        /// 使用線性映射值和角度更新Debug TextMesh
+        /// 使用線性映射值和角度更新
         /// </summary>
         private void UpdateAll()
         {
             UpdateLinearMapping();
             UpdateGameObject();
-            UpdateDebugText();
+            // UpdateDebugText();
         }
 
 

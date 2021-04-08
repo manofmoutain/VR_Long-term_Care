@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   examSceneIndex: 4
   fileName: Exam04
-  operateCount: 6
+  operateCount: 35
   limitTime: 40
   lesson: 
   operateTopics: []
