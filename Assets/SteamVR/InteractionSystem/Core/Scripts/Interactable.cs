@@ -18,13 +18,13 @@ namespace Valve.VR.InteractionSystem
         public SteamVR_ActionSet activateActionSetOnAttach;
 
         [Tooltip("將整個手隱藏在附件上，並在分離時顯示Hide the whole hand on attachment and show on detach")]
-        public bool hideHandOnAttach = true;
+        public bool hideHandOnAttach=false;
 
-        [Tooltip("在附件上隱藏手的骨骼部分，並在分離時顯示Hide the skeleton part of the hand on attachment and show on detach")]
+        [Tooltip("在附件上隱藏手勢，並在分離時顯示Hide the skeleton part of the hand on attachment and show on detach")]
         public bool hideSkeletonOnAttach = false;
 
         [Tooltip("在附件上隱藏手的控制器部分，並在分離時顯示Hide the controller part of the hand on attachment and show on detach")]
-        public bool hideControllerOnAttach = false;
+        public bool hideControllerOnAttach = true;
 
         [Tooltip("動畫器中要在拾取時觸發的整數。 0為無The integer in the animator to trigger on pickup. 0 for none")]
         public int handAnimationOnPickup = 0;
