@@ -16,5 +16,65 @@ MonoBehaviour:
   fileName: Exam02
   operateCount: 12
   limitTime: 5
-  lesson: 
-  operateTopics: []
+  lesson: "\u6210\u4EBA\u7570\u7269\u54FD\u585E\u6025\u6551\u6CD5"
+  operateTopics:
+  - isDone: 0
+    operateSteps: 1
+    score: 5
+    isToDo: "\u672A\u95DC\u5FC3\u6848\u4E3B"
+    whatToDo: "\u95DC\u5FC3\u6848\u4E3B\u72C0\u6CC1"
+  - isDone: 0
+    operateSteps: 1
+    score: 10
+    isToDo: "\u672A\u65BC\u6B63\u78BA\u4F4D\u7F6E\u5C07\u6848\u4E3B\u79FB\u81F3\u6B63\u78BA\u4F4D\u7F6E"
+    whatToDo: "\u7ACB\u65BC\u5F8C\u5074\u5C07\u6848\u4E3B\u79FB\u5230\u7121\u624B\u6276\u624B\u6905\u4E0A"
+  - isDone: 0
+    operateSteps: 1
+    score: 15
+    isToDo: "\u672A\u6B63\u78BA\u627E\u51FA\u6309\u58D3\u4F4D\u7F6E"
+    whatToDo: "\u627E\u51FA\u6B63\u78BA\u6309\u58D3\u4F4D\u7F6E"
+  - isDone: 0
+    operateSteps: 7
+    score: 10
+    isToDo: "\u672A\u5B8C\u6210\u64E0\u58D3\u52D5\u4F5C"
+    whatToDo: "\u63E1\u62F3\u5411\u5167\u58D3\u6578\u6B21"
+  - isDone: 0
+    operateSteps: 1
+    score: 45
+    isToDo: "\u672A\u5C07\u8C46\u5B50\u64E0\u51FA\u5C31\u5B8C\u6210\u64CD\u4F5C"
+    whatToDo: "\u8C46\u5B50\u64E0\u51FA"
+  - isDone: 0
+    operateSteps: 1
+    score: 4
+    isToDo: "\u672A\u5C07\u6848\u4E3B\u79FB\u56DE\u6B63\u78BA\u4F4D\u7F6E"
+    whatToDo: "\u5C07\u6848\u4E3B\u79FB\u56DE\u539F\u4F4D"
+  - isDone: 0
+    operateSteps: 1
+    score: 3
+    isToDo: "\u672A\u6B63\u78BA\u5B89\u6170\u6848\u4E3B"
+    whatToDo: "\u5B89\u6170\u6848\u4E3B"
+  - isDone: 0
+    operateSteps: 1
+    score: 3
+    isToDo: "\u672A\u6B63\u78BA\u6559\u80B2\u6848\u4E3B"
+    whatToDo: "\u6559\u80B2\u6848\u4E3B"
+  - isDone: 0
+    operateSteps: 1
+    score: 3
+    isToDo: "\u672A\u6D17\u624B"
+    whatToDo: "\u6D17\u624B"
+  - isDone: 0
+    operateSteps: 1
+    score: 20
+    isToDo: "\u672A\u5728\u6642\u9650\u5167\u5B8C\u6210\u6AA2\u6E2C"
+    whatToDo: "\u6642\u9650\u5167\u5B8C\u6210"
+  - isDone: 0
+    operateSteps: 0
+    score: 100
+    isToDo: "\u672A\u5C0F\u5FC3\u62B1\u4F4F\u6848\u4E3B"
+    whatToDo: "\u6848\u4E3B\u672A\u6389\u843D\u65BC\u5730\u677F"
+  - isDone: 0
+    operateSteps: 0
+    score: 100
+    isToDo: "\u672A\u65BC\u65BD\u6E2C\u5F8C\u518D\u9032\u884C\u6D17\u624B"
+    whatToDo: "\u65BD\u6E2C\u524D\u6D17\u624B"
