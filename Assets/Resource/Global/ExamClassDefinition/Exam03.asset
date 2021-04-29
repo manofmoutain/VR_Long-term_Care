@@ -16,5 +16,40 @@ MonoBehaviour:
   fileName: Exam03
   operateCount: 7
   limitTime: 6
-  lesson: 
-  operateTopics: []
+  lesson: "\u6210\u4EBA\u5FC3\u80BA\u7526\u9192\u8853"
+  operateTopics:
+  - isDone: 0
+    operateSteps: 2
+    score: 4
+    isToDo: "\u6AA2\u67E5\u524D\u5F8C\u672A\u505A\u6D17\u624B\u52D5\u4F5C"
+    whatToDo: "\u64CD\u4F5C\u524D\u5F8C\u6D17\u624B(X2)"
+  - isDone: 0
+    operateSteps: 2
+    score: 4
+    isToDo: "\u672A\u6838\u5C0D\u75C5\u4EBA\u8EAB\u5206"
+    whatToDo: "\u6838\u5C0D\u75C5\u60A3\u8EAB\u4EFD(X2)"
+  - isDone: 0
+    operateSteps: 2
+    score: 4
+    isToDo: "\u672A\u5B8C\u6210\u8996\u8A3A\u75C5\u4EBA\u76AE\u819A\u75C5\u5FB5"
+    whatToDo: "\u8996\u8A3A\u75C5\u4EBA\u76AE\u819A\u75C5\u5FB5(X2)"
+  - isDone: 0
+    operateSteps: 18
+    score: 3
+    isToDo: "\u672A\u6309\u7167\u9806\u5E8F\u89F8\u8A3A\u75C5\u4EBA\u6DCB\u5DF4\u7D50\u8655"
+    whatToDo: "\u6309\u7167\u9806\u5E8F\u89F8\u8A3A\u75C5\u4EBA\u6DCB\u5DF4\u7D50\u8655(X18)"
+  - isDone: 0
+    operateSteps: 1
+    score: 4
+    isToDo: "\u672A\u89F8\u8A3A\u6309\u58D3\u75C5\u4EBA\u76AE\u819A\u816B\u584A"
+    whatToDo: "\u89F8\u8A3A\u6309\u58D3\u75C5\u4EBA\u76AE\u819A\u816B\u584A(X1)"
+  - isDone: 0
+    operateSteps: 2
+    score: 4
+    isToDo: "\u672A\u5B8C\u6210\u6E2C\u91CF\u75C5\u4EBA\u816B\u584A/\u6591\u584A\u5927\u5C0F"
+    whatToDo: "\u5B8C\u6210\u6E2C\u91CF\u75C5\u4EBA\u816B\u584A/\u6591\u584A\u5927\u5C0F(X2)"
+  - isDone: 0
+    operateSteps: 5
+    score: 2
+    isToDo: "\u672A\u6B63\u78BA\u7D00\u9304\u8B77\u7406\u6AA2\u67E5\u8CC7\u8A0A"
+    whatToDo: "\u6B63\u78BA\u7D00\u9304\u8B77\u7406\u6AA2\u67E5\u8CC7\u8A0A(X5)"

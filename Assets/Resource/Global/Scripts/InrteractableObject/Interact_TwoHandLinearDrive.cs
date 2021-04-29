@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +9,14 @@ namespace InteractableObject
 {
     public class Interact_TwoHandLinearDrive : MonoBehaviour
     {
+<<<<<<< HEAD
+=======
+        [SerializeField] private Hand rightHand;
+        [SerializeField] private GameObject rightAttachedObjet;
+        [SerializeField] private Hand leftHand;
+        [SerializeField] private GameObject leftAttachedObject;
+
+>>>>>>> master
         /// <summary>
         /// 鬆開手後是否回到原位
         /// </summary>
@@ -43,6 +51,10 @@ namespace InteractableObject
 
         protected virtual void Start()
         {
+            rightHand = null;
+            leftHand = null;
+
+            transform.position = startPosition.position;
             if (linearMapping == null)
             {
                 linearMapping = GetComponent<LinearMapping>();
@@ -58,7 +70,29 @@ namespace InteractableObject
             if (repositionGameObject)
             {
                 UpdateLinearMapping(transform);
+
             }
+        }
+
+        protected virtual void OnHandHoverBegin(Hand hand)
+        {
+            switch (hand.gameObject.name)
+            {
+                case "RightHand":
+                    rightHand=hand;
+
+                    break;
+                case "LeftHand":
+                    leftHand = hand;
+
+                    break;
+            }
+        }
+
+        protected virtual void OnHandHoverEnd(Hand hand)
+        {
+            rightHand = null;
+            leftHand = null;
         }
 
         protected virtual void HandHoverUpdate(Hand hand)
@@ -76,9 +110,24 @@ namespace InteractableObject
             }
         }
 
+        void OnAttachedToHand(Hand hand)
+        {
+            switch (hand.gameObject.name)
+            {
+                case "RightHand":
+                    rightHand=hand;
+                    rightAttachedObjet = gameObject;
+                    break;
+                case "LeftHand":
+                    leftHand = hand;
+                    leftAttachedObject = gameObject;
+                    break;
+            }
+        }
+
         protected virtual void HandAttachedUpdate(Hand hand)
         {
-            if (!hand.otherHand.twoHandGrab && hand.twoHandGrab)
+            if (rightAttachedObjet != null && leftAttachedObject != null)
             {
                 UpdateLinearMapping(hand.transform);
             }
@@ -92,6 +141,10 @@ namespace InteractableObject
 
         protected virtual void OnDetachedFromHand(Hand hand)
         {
+            rightHand = null;
+            rightAttachedObjet = null;
+            leftHand = null;
+            leftAttachedObject = null;
             CalculateMappingChangeRate();
         }
 
@@ -120,11 +173,11 @@ namespace InteractableObject
 
         protected void UpdateLinearMapping(Transform updateTransform)
         {
+            // print("Go");
             prevMapping = linearMapping.value;
             linearMapping.value = Mathf.Clamp01(initialMappingOffset + CalculateLinearMapping(updateTransform));
 
-            mappingChangeSamples[sampleCount % mappingChangeSamples.Length] =
-                (1.0f / Time.deltaTime) * (linearMapping.value - prevMapping);
+            mappingChangeSamples[sampleCount % mappingChangeSamples.Length] = (1.0f / Time.deltaTime) * (linearMapping.value - prevMapping);
             sampleCount++;
 
             if (repositionGameObject)

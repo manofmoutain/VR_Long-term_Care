@@ -16,5 +16,20 @@ MonoBehaviour:
   fileName: Exam07
   operateCount: 3
   limitTime: 20
-  lesson: 
-  operateTopics: []
+  lesson: "\u5354\u52A9\u4E0A\u4E0B\u5E8A\u53CA\u5750\u8F2A\u6905"
+  operateTopics:
+  - isDone: 0
+    operateSteps: 2
+    score: 4
+    isToDo: "\u6AA2\u67E5\u524D\u5F8C\u672A\u505A\u6D17\u624B\u52D5\u4F5C"
+    whatToDo: "\u64CD\u4F5C\u524D\u5F8C\u6D17\u624B(X2)"
+  - isDone: 0
+    operateSteps: 2
+    score: 4
+    isToDo: "\u672A\u6838\u5C0D\u75C5\u4EBA\u8EAB\u5206"
+    whatToDo: "\u6838\u5C0D\u75C5\u60A3\u8EAB\u4EFD(X2)"
+  - isDone: 0
+    operateSteps: 2
+    score: 4
+    isToDo: "\u672A\u5B8C\u6210\u8996\u8A3A\u75C5\u4EBA\u76AE\u819A\u75C5\u5FB5"
+    whatToDo: "\u8996\u8A3A\u75C5\u4EBA\u76AE\u819A\u75C5\u5FB5(X2)"
