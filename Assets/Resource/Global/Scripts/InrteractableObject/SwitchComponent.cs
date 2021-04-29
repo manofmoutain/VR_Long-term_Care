@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
+=======
+using System.Collections;
+>>>>>>> master
 using System.Collections.Generic;
 using UnityEngine;
 

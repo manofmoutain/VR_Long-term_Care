@@ -17,6 +17,9 @@ namespace Manager
 
         #region Private Variables
 
+        /// <summary>
+        /// 模式
+        /// </summary>
         [SerializeField] private Mod gameMod;
 
         [SerializeField] ScoreSystem _scoreSystem;
@@ -152,7 +155,7 @@ namespace Manager
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public int GetTopicScore(int index)
+        public float GetTopicScore(int index)
         {
             return _scoreSystem.GetTopicScore(index);
         }
@@ -161,7 +164,7 @@ namespace Manager
         /// 取得總分
         /// </summary>
         /// <returns></returns>
-        public int GetTotalScore()
+        public float GetTotalScore()
         {
             return _scoreSystem.GetTotalScore();
         }
@@ -262,14 +265,7 @@ namespace Manager
         /// <returns></returns>
         public bool IsTimeLimit()
         {
-            if (Mathf.CeilToInt(_scoreSystem.ExamTime / 60) <= _scoreSystem.LimitTime)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !(Mathf.CeilToInt(_scoreSystem.ExamTime) <= _scoreSystem.LimitTime*60.0f);
         }
 
         #endregion

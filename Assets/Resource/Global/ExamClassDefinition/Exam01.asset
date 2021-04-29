@@ -16,5 +16,45 @@ MonoBehaviour:
   fileName: Exam01
   operateCount: 8
   limitTime: 20
-  lesson: 
-  operateTopics: []
+  lesson: "\u751F\u547D\u5FB5\u8C61\u6E2C\u91CF"
+  operateTopics:
+  - isDone: 0
+    operateSteps: 10
+    score: 10
+    isToDo: "\u6AA2\u67E5\u524D\u5F8C\u672A\u505A\u8AAA\u660E"
+    whatToDo: "\u8AAA\u660E"
+  - isDone: 0
+    operateSteps: 10
+    score: 10
+    isToDo: "\u672A\u6D17\u624B"
+    whatToDo: "\u6D17\u624B"
+  - isDone: 0
+    operateSteps: 10
+    score: 10
+    isToDo: "\u672A\u6E96\u5099\u6B63\u78BA\u7269\u54C1"
+    whatToDo: "\u6E96\u5099\u7269\u54C1"
+  - isDone: 0
+    operateSteps: 10
+    score: 10
+    isToDo: "\u672A\u6B63\u78BA\u6E2C\u91CF\u9AD4\u6EAB"
+    whatToDo: "\u6E2C\u91CF\u9AD4\u6EAB\u4E26\u8A18\u9304"
+  - isDone: 0
+    operateSteps: 10
+    score: 10
+    isToDo: "\u672A\u6B63\u78BA\u6E2C\u91CF\u8108\u640F"
+    whatToDo: "\u6E2C\u91CF\u8108\u640F\u4E26\u8A18\u9304"
+  - isDone: 0
+    operateSteps: 10
+    score: 10
+    isToDo: "\u672A\u6B63\u78BA\u6E2C\u91CF\u547C\u5438"
+    whatToDo: "\u6E2C\u90CE\u547C\u5438\u4E26\u8A18\u9304"
+  - isDone: 0
+    operateSteps: 10
+    score: 10
+    isToDo: "\u672A\u6B63\u78BA\u6E2C\u91CF\u8840\u58D3"
+    whatToDo: "\u6E2C\u91CF\u8840\u58D3\u4E26\u8A18\u9304"
+  - isDone: 0
+    operateSteps: 10
+    score: 10
+    isToDo: "\u672A\u6B63\u78BA\u544A\u77E5\u7D50\u679C"
+    whatToDo: "\u544A\u77E5\u7D50\u679C"

@@ -160,6 +160,9 @@ namespace Global.Pateint
             SpeechManager.Instance.StartRecognizeSpeech();
             // StartCoroutine(Co_StopCo());
             // StartCoroutine(Co_SetDone(speechIndex, topicIndex));
+
+
+
         }
 
 

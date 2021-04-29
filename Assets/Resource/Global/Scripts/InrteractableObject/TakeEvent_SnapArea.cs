@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using System;
+using UnityEngine;
 
 namespace InteractableObject
 {
@@ -22,7 +23,7 @@ namespace InteractableObject
         /// <summary>
         /// 被偵測的區域碰撞體
         /// </summary>
-        public SphereCollider sphereCollider;
+        public Collider sphereCollider;
 
         /// <summary>
         /// 要黏貼的物件(必須要有snapTakeDropZone腳本)
@@ -47,7 +48,7 @@ namespace InteractableObject
 // Oculus Quest代碼
 #else
             // SteamVR代碼
-//要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
+            //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
             {
                 if (!isSnapIn)
@@ -82,6 +83,37 @@ namespace InteractableObject
             }
 
 #endif
+        }
+
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>() ||
+                other.GetComponent<TakeEvent_TwoHandSnapPutZone>() || other.GetComponent<TakeEvent_TwoHandGrab>())
+            {
+                if (isSnapIn)
+                {
+                    print($"{other.gameObject.name}停留{transform.parent.name}");
+
+                    //要黏著的物體已黏著與此區域
+                    if (takeEventSingleHandSnapPutZone != null)
+                    {
+                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                    }
+
+                    if (takeEventTwoHandSnapPutZone != null)
+                    {
+                        takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
+                    }
+
+                    if (takeEventTwoHandGrab != null)
+                    {
+                        takeEventTwoHandGrab.snapFixed.isLocated = true;
+                    }
+
+                    //Debug.Log("Snap Object Correct！");
+                }
+            }
         }
 
         private void OnTriggerExit(Collider other)
