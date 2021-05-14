@@ -29,7 +29,7 @@ namespace InteractableObject
         /// 是否已抓取物件
         /// </summary>
         [Header("狀態")] [Tooltip("是否已抓取此物件")] [SerializeField]
-        private bool snapTakeObject;
+        public bool snapTakeObject;
         /// <summary>
         ///Trigger放開後是否要脫離手勢
         /// </summary>
