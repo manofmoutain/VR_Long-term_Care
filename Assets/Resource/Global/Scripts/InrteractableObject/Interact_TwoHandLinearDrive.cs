@@ -57,10 +57,10 @@ namespace InteractableObject
                 linearMapping = GetComponent<LinearMapping>();
             }
 
-            if (linearMapping == null)
-            {
-                linearMapping = gameObject.AddComponent<LinearMapping>();
-            }
+            // if (linearMapping == null)
+            // {
+            //     linearMapping = gameObject.AddComponent<LinearMapping>();
+            // }
 
             initialMappingOffset = linearMapping.value;
 
