@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using GlobalSystem;
 using Manager;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,11 +22,13 @@ namespace TitleUIScripts
 
         [SerializeField] private GameObject setScene;
 
+        [SerializeField] private List<ExaminClass> _examinClasses;
+
 
         private void Awake()
         {
             GameObject go = Instantiate(manager);
-            go.AddComponent<ScoreManager>();
+            // go.AddComponent<ScoreManager>();
             // go.GetComponent<ScoreManager>().Initialize(operateListCount);
 
 
@@ -35,6 +39,10 @@ namespace TitleUIScripts
 
         private void Start()
         {
+            for (int i = 0; i < _examinClasses.Count; i++)
+            {
+                ScoreManager.Instance.AddExamData(_examinClasses[i]);
+            }
             loginBtn.onClick.AddListener(delegate
             {
                 ScoreManager.Instance.SetStudentID(setStudentID.text);
@@ -58,6 +66,11 @@ namespace TitleUIScripts
             {
                 loginBtn.interactable = false;
             }
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
         }
     }
 }

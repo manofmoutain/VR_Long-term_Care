@@ -24,10 +24,18 @@ namespace Manager
 
         [SerializeField] ScoreSystem _scoreSystem;
 
+        public string _ScoreSystem()
+        {
+            var _data = JsonUtility.ToJson(_scoreSystem);
+            return _data;
+        }
+
         /// <summary>
         /// 獲得操作時間
         /// </summary>
         public float GetTime => _scoreSystem.ExamTime;
+
+        [SerializeField] List<ExaminClass> _examinClasses;
 
         #endregion
 
@@ -200,6 +208,11 @@ namespace Manager
             _scoreSystem.ReadExcelSimplePasses(fileName, listCount, timeValue);
         }
 
+        public void AddExamData(ExaminClass examinClass)
+        {
+            _examinClasses.Add(examinClass);
+        }
+
         /// <summary>
         /// 從檔案獲取題目資料
         /// </summary>
@@ -208,6 +221,12 @@ namespace Manager
         public void ReadExcelSimplePasses(string fileName, int listCount, int timeValue)
         {
             _scoreSystem.ReadExcelSimplePasses(fileName, listCount, timeValue);
+        }
+
+        public void ReadExamData(int index)
+        {
+            _scoreSystem.LoadExamData(_examinClasses[index]);
+
         }
 
         /// <summary>

@@ -199,13 +199,32 @@ namespace GlobalSystem
                 {
                     whatToDo = collect[i][1].ToString(),
                     isToDo = collect[i][2].ToString(),
-                    score = int.Parse(collect[i][3].ToString()),
+                    score = float.Parse(collect[i][3].ToString()),
                     operateSteps = int.Parse(collect[i][4].ToString())
                 };
                 AddOperateTopics(newTopic);
             }
 
             timeLimite = timeValue;
+        }
+
+        public void LoadExamData(ExaminClass examinClass)
+        {
+            NewOperateList();
+            for (int i = 0; i < examinClass.operateCount; i++)
+            {
+                var newTopic = new OperateTopic
+                {
+                    whatToDo = examinClass.operateTopics[i].whatToDo,
+                    isToDo = examinClass.operateTopics[i].isToDo,
+                    score = examinClass.operateTopics[i].score,
+                    operateSteps = examinClass.operateTopics[i].operateSteps
+                };
+                AddOperateTopics(newTopic);
+            }
+            excelFileName = examinClass.fileName;
+            timeLimite = examinClass.limitTime;
+            m_Lesson = examinClass.lesson;
         }
 
         /// <summary>
