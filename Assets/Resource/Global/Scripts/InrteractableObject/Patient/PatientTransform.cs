@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Global.Pateint
 {
-    public class PatientTransform : MonoBehaviour
+    public partial class Patient : MonoBehaviour
     {
         [Tooltip("原始位置")] public Transform originTransform;
 
@@ -21,11 +21,7 @@ namespace Global.Pateint
         /// </summary>
         public bool isAtChangedPosition;
 
-        private void Update()
-        {
-            isAtOriginPosition = GetComponent<Patient>().GetPatientTransform.parent == originTransform;
-            isAtChangedPosition = GetComponent<Patient>().GetPatientTransform.parent == changedTransform;
-        }
+
 
 
     }

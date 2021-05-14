@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace Global.Pateint
 {
-    public class PatientSFX : MonoBehaviour
+    public partial class Patient : MonoBehaviour
     {
         [Header("音效")] [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip[] sFXs;
 
-        private void Start()
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
+        // private void Start()
+        // {
+        //     audioSource = GetComponent<AudioSource>();
+        // }
 
         public void PlaySFX(int index)
         {

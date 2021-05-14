@@ -2,7 +2,7 @@
 using UnityEngine;
 namespace Global.Pateint
 {
-    public class PatientTemperature : MonoBehaviour
+    public partial class PatientTemperature : MonoBehaviour
     {
         [SerializeField] private float[] temperatures;
         [SerializeField] private float temperature;

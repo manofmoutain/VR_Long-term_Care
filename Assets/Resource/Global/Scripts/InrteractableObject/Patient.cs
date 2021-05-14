@@ -5,7 +5,7 @@ using Valve.VR.InteractionSystem;
 
 namespace Global.Pateint
 {
-    public class Patient : MonoBehaviour
+    public partial class  Patient : MonoBehaviour
     {
         [Header("物件")] [Tooltip("VR攝影機")] public GameObject player;
         [SerializeField] private Vector3 playerPosition;
@@ -45,6 +45,7 @@ namespace Global.Pateint
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             //因為player基本上都世界中心，人物移動其實是攝影機在動，因此以攝影機作為player
             if (player == null)
             {
@@ -72,6 +73,9 @@ namespace Global.Pateint
                     }
                 }
             }
+
+            isAtOriginPosition = GetPatientTransform.parent == originTransform;
+            isAtChangedPosition = GetPatientTransform.parent == changedTransform;
 
 
             isPlayerBehindPatient = GetPatientDirection().y < 0;
