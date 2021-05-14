@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using GlobalSystem;
 using TMPro;
 using UnityEngine;
-using Random = System.Random;
 
 namespace Manager
 {
@@ -32,7 +31,7 @@ namespace Manager
         /// <summary>
         /// 辨識出的語音文字，顯示在UI上
         /// </summary>
-        [SerializeField] private TextMeshProUGUI SpeechDebugUIText;
+        // [SerializeField] private TextMeshProUGUI SpeechDebugUIText;
 
         #endregion
 
