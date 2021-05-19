@@ -77,7 +77,7 @@ namespace InteractableObject
         /// 是否只要抓住，驅動器就持續處於操作狀態，否則控制器移出碰撞體，驅動器將停止運行
         /// </summary>
         [Tooltip("如果為true，則只要按住該按鈕，驅動器將一直處於操作狀態；如果為false，則如果控制器移出對撞機，驅動器將停止運行。")]
-        public bool hoverLock = false;
+        public bool hoverLock = true;
 
         /// <summary>
         /// 是否要設定極限值
@@ -101,12 +101,6 @@ namespace InteractableObject
         [Header("旋轉值極限值的最小值")] [Tooltip("如果Limited為true，則指定下限，否則未使用值")]
         public float minAngle = -45.0f;
 
-        // /// <summary>
-        // /// 達到最小角度時驅動器是否凍結其角度
-        // /// </summary>
-        // [Tooltip("如果Limited，則設置達到最小角度時驅動器是否凍結其角度")]
-        // public bool freezeOnMin = false;
-
         /// <summary>
         /// 在最小值時的事件
         /// </summary>
@@ -118,12 +112,6 @@ namespace InteractableObject
         /// </summary>
         [Header("旋轉極限值的最大值")] [Tooltip("如果limited為true，則指定上限，否則未使用值")]
         public float maxAngle = 45.0f;
-
-        // /// <summary>
-        // /// 設置達到最大角度時驅動器是否凍結其角度
-        // /// </summary>
-        // [Tooltip("如果Limited，則設置達到最大角度時驅動器是否凍結其角度")]
-        // public bool freezeOnMax = false;
 
         /// <summary>
         /// 在最大值時事件
@@ -144,29 +132,10 @@ namespace InteractableObject
         [Tooltip("如果limited為true且forceStart為true，則起始角度將為此角度，並固定為[minAngle，maxAngle]")]
         public float startAngle = 0.0f;
 
-
-        // [Header("Debug")]
-        // [Tooltip("繪製“手”的路徑（紅色）和預計值（綠色）")]
-        // bool debugPath = false;
-        //
-        // [Tooltip("創建以繪製路徑的GameObject的最大數量")]
-        // int dbgPathLimit = 50;
-        //
-        // [Tooltip("顯示此圓形驅動器的線性值和角度值")]
-        // TextMesh debugText = null;
-        // private Color red = new Color(1.0f, 0.0f, 0.0f);
-        // private Color green = new Color(0.0f, 1.0f, 0.0f);
-        // private GameObject[] dbgHandObjects;
-        // private GameObject[] dbgProjObjects;
-        // private GameObject dbgObjectsParent;
-        // private int dbgObjectCount = 0;
-        // private int dbgObjectIndex = 0;
-
-
         [Header("隱藏的數值")] [SerializeField] private Quaternion start;
 
-        [SerializeField] private Vector3 worldPlaneNormal = new Vector3(1.0f, 0.0f, 0.0f);
-        [SerializeField] private Vector3 localPlaneNormal = new Vector3(1.0f, 0.0f, 0.0f);
+        [SerializeField] private Vector3 worldPlaneNormal ;
+        [SerializeField] private Vector3 localPlaneNormal ;
 
         [SerializeField] private Vector3 lastHandProjected;
 
@@ -175,25 +144,6 @@ namespace InteractableObject
         /// 如果驅動器被限制為最小/最大，則大於此角度的角度將被忽略
         /// </summary>
         [SerializeField] private float minMaxAngularThreshold = 1.0f;
-
-
-        // /// <summary>
-        // /// 是否要凍結(並非不轉動，而是會在frozenSqDistanceMinMaxThreshold兩個值之間抖動)
-        // /// </summary>
-        // [Tooltip("是否要凍結(並非不轉動，而是會在frozenSqDistanceMinMaxThreshold兩個值之間抖動)")]
-        // [SerializeField] private bool frozen = false;
-        // /// <summary>
-        // /// 凍結瞬間的角度
-        // /// </summary>
-        // [SerializeField] private float frozenAngle = 0.0f;
-        // /// <summary>
-        // /// 凍結時手的位置
-        // /// </summary>
-        // [SerializeField] private Vector3 frozenHandWorldPos = new Vector3(0.0f, 0.0f, 0.0f);
-        // /// <summary>
-        // /// 凍結時，角度的偏移值
-        // /// </summary>
-        // [SerializeField] private Vector2 frozenSqDistanceMinMaxThreshold = new Vector2(0.0f, 0.0f);
 
         /// <summary>
         /// 抓握的是哪一隻手
@@ -250,12 +200,6 @@ namespace InteractableObject
                 start = Quaternion.AngleAxis(transform.localEulerAngles[(int) axisOfRotation], localPlaneNormal);
                 outAngle = 0.0f;
             }
-
-            // if (debugText)
-            // {
-            //     debugText.alignment = TextAlignment.Left;
-            //     debugText.anchor = TextAnchor.UpperLeft;
-            // }
 
             UpdateAll();
         }
@@ -354,6 +298,14 @@ namespace InteractableObject
 
         void OnDetachedFromHand(Hand hand)
         {
+            if (hoverLock)
+            {
+                hand.HoverUnlock(interactable);
+                handHoverLocked = null;
+            }
+
+            driving = false;
+            grabbedWithType = GrabTypes.None;
         }
 
 
@@ -414,85 +366,6 @@ namespace InteractableObject
             return toTransformProjected;
         }
 
-        /*
-        /// <summary>
-        ///描繪手移動的路徑(Debug用)
-        /// </summary>
-        /// <param name="xForm"></param>
-        /// <param name="toTransformProjected"></param>
-        private void DrawDebugPath(Transform xForm, Vector3 toTransformProjected)
-        {
-            if (dbgObjectCount == 0)
-            {
-                dbgObjectsParent = new GameObject("Circular Drive Debug");
-                dbgHandObjects = new GameObject[dbgPathLimit];
-                dbgProjObjects = new GameObject[dbgPathLimit];
-                dbgObjectCount = dbgPathLimit;
-                dbgObjectIndex = 0;
-            }
-
-            //Actual path
-            GameObject gSphere = null;
-
-            if (dbgHandObjects[dbgObjectIndex])
-            {
-                gSphere = dbgHandObjects[dbgObjectIndex];
-            }
-            else
-            {
-                gSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                gSphere.transform.SetParent(dbgObjectsParent.transform);
-                dbgHandObjects[dbgObjectIndex] = gSphere;
-            }
-
-            gSphere.name = string.Format("actual_{0}", (int) ((1.0f - red.r) * 10.0f));
-            gSphere.transform.position = xForm.position;
-            gSphere.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-            gSphere.transform.localScale = new Vector3(0.004f, 0.004f, 0.004f);
-            gSphere.gameObject.GetComponent<Renderer>().material.color = red;
-
-            if (red.r > 0.1f)
-            {
-                red.r -= 0.1f;
-            }
-            else
-            {
-                red.r = 1.0f;
-            }
-
-            //Projected path
-            gSphere = null;
-
-            if (dbgProjObjects[dbgObjectIndex])
-            {
-                gSphere = dbgProjObjects[dbgObjectIndex];
-            }
-            else
-            {
-                gSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                gSphere.transform.SetParent(dbgObjectsParent.transform);
-                dbgProjObjects[dbgObjectIndex] = gSphere;
-            }
-
-            gSphere.name = string.Format("projed_{0}", (int) ((1.0f - green.g) * 10.0f));
-            gSphere.transform.position = transform.position + toTransformProjected * 0.25f;
-            gSphere.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-            gSphere.transform.localScale = new Vector3(0.004f, 0.004f, 0.004f);
-            gSphere.gameObject.GetComponent<Renderer>().material.color = green;
-
-            if (green.g > 0.1f)
-            {
-                green.g -= 0.1f;
-            }
-            else
-            {
-                green.g = 1.0f;
-            }
-
-            dbgObjectIndex = (dbgObjectIndex + 1) % dbgObjectCount;
-        }
-        */
-
 
         /// <summary>
         /// 從角度更新LinearMapping值
@@ -526,20 +399,6 @@ namespace InteractableObject
                 transform.localRotation = start * Quaternion.AngleAxis(outAngle, localPlaneNormal);
             }
         }
-
-
-        /*
-        /// <summary>
-        /// 使用線性映射值和角度更新Debug TextMesh
-        /// </summary>
-        private void UpdateDebugText()
-        {
-            if (debugText)
-            {
-                debugText.text = string.Format("Linear: {0}\nAngle:  {1}\n", linearMapping.value, outAngle);
-            }
-        }
-        */
 
 
         /// <summary>
@@ -666,31 +525,6 @@ namespace InteractableObject
                 }
             }
         }
-
-        /*
-        /// <summary>
-        /// 如果有設定凍結最小值或最大值，凍結手的位置？
-        /// </summary>
-        /// <param name="hand"></param>
-        private void Freeze(Hand hand)
-        {
-            frozen = true;
-            frozenAngle = outAngle;
-            //鎖定手的位置
-            frozenHandWorldPos = hand.hoverSphereTransform.position;
-            frozenSqDistanceMinMaxThreshold.x = frozenDistanceMinMaxThreshold.x * frozenDistanceMinMaxThreshold.x;
-            frozenSqDistanceMinMaxThreshold.y = frozenDistanceMinMaxThreshold.y * frozenDistanceMinMaxThreshold.y;
-        }
-        */
-
-
-        /*
-        private void UnFreeze()
-        {
-            frozen = false;
-            frozenHandWorldPos.Set(0.0f, 0.0f, 0.0f);
-        }
-        */
 
         #endregion
     }
