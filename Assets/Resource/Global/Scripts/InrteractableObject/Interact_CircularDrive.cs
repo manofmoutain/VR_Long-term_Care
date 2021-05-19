@@ -11,16 +11,18 @@ namespace InteractableObject
     [RequireComponent(typeof(Interactable))]
     public class Interact_CircularDrive : MonoBehaviour
     {
-
-        [Header("手勢")]
-        [SerializeField] private Hand.AttachmentFlags attachmentFlags;
+        [Header("手勢")] [SerializeField] private Hand.AttachmentFlags attachmentFlags;
 
         /// <summary>
         /// 設定抓握的方式
         /// </summary>
-        [Tooltip("設定抓握的方式")][SerializeField] private GrabTypes grabbedWithType;
+        [Tooltip("設定抓握的方式")] [SerializeField] private GrabTypes grabbedWithType;
 
-        [Header("旋轉角度")]
+        /// <summary>
+        /// 是否正在驅動
+        /// </summary>
+        [Header("旋轉角度")] [SerializeField] private bool driving = false;
+
         [Tooltip("驅動器的輸出角度值（以度為單位，無限制）將無限制地增加或減少，採用360模數來查找轉數")]
         public float outAngle;
 
@@ -32,12 +34,13 @@ namespace InteractableObject
         /// <summary>
         /// 是否要開啟角度事件，不可與Limit共用
         /// </summary>
-        [Tooltip("是否要開啟角度事件，不可與Limit共用")][SerializeField] private bool isAngleEvent;
+        [Tooltip("是否要開啟角度事件，不可與Limit共用")] [SerializeField]
+        private bool isAngleEvent;
 
         /// <summary>
         /// 執行事件的角度值
         /// </summary>
-        [Tooltip("執行事件的角度值")]public float eventAngle;
+        [Tooltip("執行事件的角度值")] public float eventAngle;
 
         /// <summary>
         /// 當角度為eventAngle值時，執行事件
@@ -51,20 +54,18 @@ namespace InteractableObject
             ZAxis
         };
 
-        [Header("驅動設定")]
-        [Tooltip("圓形驅動器將在局部空間中繞其旋轉的軸")]
+        [Header("驅動設定")] [Tooltip("圓形驅動器將在局部空間中繞其旋轉的軸")]
         public Axis_t axisOfRotation = Axis_t.XAxis;
 
         /// <summary>
         /// 是否可以轉動
         /// </summary>
-        [Tooltip("是否可以轉動")]
-        public bool rotateGameObject = true;
+        [Tooltip("是否可以轉動")] public bool rotateGameObject = true;
 
         /// <summary>
         /// 鬆手後是否要轉回原角度
         /// </summary>
-        [SerializeField]private bool isDetachedToResetAngle;
+        [SerializeField] private bool isDetachedToResetAngle;
 
         [Tooltip("具有Collider組件以啟動交互的子GameObject，僅當存在多個Collider子對象時才需要設置")]
         public Collider childCollider = null;
@@ -87,8 +88,7 @@ namespace InteractableObject
         /// <summary>
         /// 如果limited為true，旋轉的極限值
         /// </summary>
-        [Tooltip("如果limited為true，旋轉的極限值")]
-        public Vector2 frozenDistanceMinMaxThreshold = new Vector2(0.1f, 0.2f);
+        [Tooltip("如果limited為true，旋轉的極限值")] public Vector2 frozenDistanceMinMaxThreshold = new Vector2(0.1f, 0.2f);
 
         /// <summary>
         /// 如果旋轉值>=frozenDistanceMinMaxThreshold的Y值，執行事件
@@ -101,11 +101,11 @@ namespace InteractableObject
         [Header("旋轉值極限值的最小值")] [Tooltip("如果Limited為true，則指定下限，否則未使用值")]
         public float minAngle = -45.0f;
 
-        /// <summary>
-        /// 達到最小角度時驅動器是否凍結其角度
-        /// </summary>
-        [Tooltip("如果Limited，則設置達到最小角度時驅動器是否凍結其角度")]
-        public bool freezeOnMin = false;
+        // /// <summary>
+        // /// 達到最小角度時驅動器是否凍結其角度
+        // /// </summary>
+        // [Tooltip("如果Limited，則設置達到最小角度時驅動器是否凍結其角度")]
+        // public bool freezeOnMin = false;
 
         /// <summary>
         /// 在最小值時的事件
@@ -119,11 +119,11 @@ namespace InteractableObject
         [Header("旋轉極限值的最大值")] [Tooltip("如果limited為true，則指定上限，否則未使用值")]
         public float maxAngle = 45.0f;
 
-        /// <summary>
-        /// 設置達到最大角度時驅動器是否凍結其角度
-        /// </summary>
-        [Tooltip("如果Limited，則設置達到最大角度時驅動器是否凍結其角度")]
-        public bool freezeOnMax = false;
+        // /// <summary>
+        // /// 設置達到最大角度時驅動器是否凍結其角度
+        // /// </summary>
+        // [Tooltip("如果Limited，則設置達到最大角度時驅動器是否凍結其角度")]
+        // public bool freezeOnMax = false;
 
         /// <summary>
         /// 在最大值時事件
@@ -135,8 +135,7 @@ namespace InteractableObject
         /// <summary>
         /// 在limited的情況中，是否要強制設定初始值
         /// </summary>
-        [Header("強制改變初始值")]
-        [Tooltip("如果limited為true，則強制將起始角度設為startAngle，並固定為[minAngle，maxAngle]")]
+        [Header("強制改變初始值")] [Tooltip("如果limited為true，則強制將起始角度設為startAngle，並固定為[minAngle，maxAngle]")]
         public bool forceStart = false;
 
         /// <summary>
@@ -146,27 +145,25 @@ namespace InteractableObject
         public float startAngle = 0.0f;
 
 
+        // [Header("Debug")]
+        // [Tooltip("繪製“手”的路徑（紅色）和預計值（綠色）")]
+        // bool debugPath = false;
+        //
+        // [Tooltip("創建以繪製路徑的GameObject的最大數量")]
+        // int dbgPathLimit = 50;
+        //
+        // [Tooltip("顯示此圓形驅動器的線性值和角度值")]
+        // TextMesh debugText = null;
+        // private Color red = new Color(1.0f, 0.0f, 0.0f);
+        // private Color green = new Color(0.0f, 1.0f, 0.0f);
+        // private GameObject[] dbgHandObjects;
+        // private GameObject[] dbgProjObjects;
+        // private GameObject dbgObjectsParent;
+        // private int dbgObjectCount = 0;
+        // private int dbgObjectIndex = 0;
 
-        [Header("Debug")]
-        [Tooltip("繪製“手”的路徑（紅色）和預計值（綠色）")]
-        bool debugPath = false;
 
-        [Tooltip("創建以繪製路徑的GameObject的最大數量")]
-        int dbgPathLimit = 50;
-
-        [Tooltip("顯示此圓形驅動器的線性值和角度值")]
-        TextMesh debugText = null;
-        private Color red = new Color(1.0f, 0.0f, 0.0f);
-        private Color green = new Color(0.0f, 1.0f, 0.0f);
-        private GameObject[] dbgHandObjects;
-        private GameObject[] dbgProjObjects;
-        private GameObject dbgObjectsParent;
-        private int dbgObjectCount = 0;
-        private int dbgObjectIndex = 0;
-
-
-        [Header("隱藏的數值")]
-        [SerializeField] private Quaternion start;
+        [Header("隱藏的數值")] [SerializeField] private Quaternion start;
 
         [SerializeField] private Vector3 worldPlaneNormal = new Vector3(1.0f, 0.0f, 0.0f);
         [SerializeField] private Vector3 localPlaneNormal = new Vector3(1.0f, 0.0f, 0.0f);
@@ -174,36 +171,29 @@ namespace InteractableObject
         [SerializeField] private Vector3 lastHandProjected;
 
 
-
-
-        /// <summary>
-        /// 是否正在驅動
-        /// </summary>
-        [SerializeField] private bool driving = false;
-
         /// <summary>
         /// 如果驅動器被限制為最小/最大，則大於此角度的角度將被忽略
         /// </summary>
         [SerializeField] private float minMaxAngularThreshold = 1.0f;
 
 
-        /// <summary>
-        /// 是否要凍結(並非不轉動，而是會在frozenSqDistanceMinMaxThreshold兩個值之間抖動)
-        /// </summary>
-        [Tooltip("是否要凍結(並非不轉動，而是會在frozenSqDistanceMinMaxThreshold兩個值之間抖動)")]
-        [SerializeField] private bool frozen = false;
-        /// <summary>
-        /// 凍結瞬間的角度
-        /// </summary>
-        [SerializeField] private float frozenAngle = 0.0f;
-        /// <summary>
-        /// 凍結時手的位置
-        /// </summary>
-        [SerializeField] private Vector3 frozenHandWorldPos = new Vector3(0.0f, 0.0f, 0.0f);
-        /// <summary>
-        /// 凍結時，角度的偏移值
-        /// </summary>
-        [SerializeField] private Vector2 frozenSqDistanceMinMaxThreshold = new Vector2(0.0f, 0.0f);
+        // /// <summary>
+        // /// 是否要凍結(並非不轉動，而是會在frozenSqDistanceMinMaxThreshold兩個值之間抖動)
+        // /// </summary>
+        // [Tooltip("是否要凍結(並非不轉動，而是會在frozenSqDistanceMinMaxThreshold兩個值之間抖動)")]
+        // [SerializeField] private bool frozen = false;
+        // /// <summary>
+        // /// 凍結瞬間的角度
+        // /// </summary>
+        // [SerializeField] private float frozenAngle = 0.0f;
+        // /// <summary>
+        // /// 凍結時手的位置
+        // /// </summary>
+        // [SerializeField] private Vector3 frozenHandWorldPos = new Vector3(0.0f, 0.0f, 0.0f);
+        // /// <summary>
+        // /// 凍結時，角度的偏移值
+        // /// </summary>
+        // [SerializeField] private Vector2 frozenSqDistanceMinMaxThreshold = new Vector2(0.0f, 0.0f);
 
         /// <summary>
         /// 抓握的是哪一隻手
@@ -212,11 +202,10 @@ namespace InteractableObject
 
         [SerializeField] private Interactable interactable;
 
-        
 
         private void Awake()
         {
-            interactable = this.GetComponent<Interactable>();
+            interactable = GetComponent<Interactable>();
         }
 
         private void Start()
@@ -262,11 +251,11 @@ namespace InteractableObject
                 outAngle = 0.0f;
             }
 
-            if (debugText)
-            {
-                debugText.alignment = TextAlignment.Left;
-                debugText.anchor = TextAnchor.UpperLeft;
-            }
+            // if (debugText)
+            // {
+            //     debugText.alignment = TextAlignment.Left;
+            //     debugText.anchor = TextAnchor.UpperLeft;
+            // }
 
             UpdateAll();
         }
@@ -313,7 +302,6 @@ namespace InteractableObject
             //如果沒有執行任何的抓握
             if (grabbedWithType == GrabTypes.None && startingGrabType != GrabTypes.None)
             {
-
                 grabbedWithType = startingGrabType;
                 // Trigger was just pressed
                 lastHandProjected = ComputeToTransformProjected(hand.hoverSphereTransform);
@@ -323,7 +311,8 @@ namespace InteractableObject
                     hand.HoverLock(interactable);
                     handHoverLocked = hand;
                 }
-                hand.AttachObject(gameObject, startingGrabType,attachmentFlags);
+
+                hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
                 driving = true;
 
                 ComputeAngle(hand);
@@ -363,13 +352,9 @@ namespace InteractableObject
         }
 
 
-
         void OnDetachedFromHand(Hand hand)
         {
-
         }
-
-
 
 
         #region 計算的方法
@@ -399,7 +384,8 @@ namespace InteractableObject
         /// </summary>
         /// <param name="xForm"></param>
         /// <returns></returns>
-        [SerializeField] private Vector3 ComputeToTransformProjected(Transform xForm)
+        [SerializeField]
+        private Vector3 ComputeToTransformProjected(Transform xForm)
         {
             Vector3 toTransform = (xForm.position - transform.position).normalized;
             Vector3 toTransformProjected = new Vector3(0.0f, 0.0f, 0.0f);
@@ -420,15 +406,15 @@ namespace InteractableObject
                         gameObject.ToString()));
             }
 
-            if (debugPath && dbgPathLimit > 0)
-            {
-                DrawDebugPath(xForm, toTransformProjected);
-            }
+            // if (debugPath && dbgPathLimit > 0)
+            // {
+            //     DrawDebugPath(xForm, toTransformProjected);
+            // }
 
             return toTransformProjected;
         }
 
-
+        /*
         /// <summary>
         ///描繪手移動的路徑(Debug用)
         /// </summary>
@@ -505,6 +491,7 @@ namespace InteractableObject
 
             dbgObjectIndex = (dbgObjectIndex + 1) % dbgObjectCount;
         }
+        */
 
 
         /// <summary>
@@ -535,11 +522,13 @@ namespace InteractableObject
         {
             if (rotateGameObject)
             {
+                print($"localPlaneNormal : {localPlaneNormal}");
                 transform.localRotation = start * Quaternion.AngleAxis(outAngle, localPlaneNormal);
             }
         }
 
 
+        /*
         /// <summary>
         /// 使用線性映射值和角度更新Debug TextMesh
         /// </summary>
@@ -550,6 +539,7 @@ namespace InteractableObject
                 debugText.text = string.Format("Linear: {0}\nAngle:  {1}\n", linearMapping.value, outAngle);
             }
         }
+        */
 
 
         /// <summary>
@@ -577,6 +567,7 @@ namespace InteractableObject
 
                 if (absAngleDelta > 0.0f)
                 {
+                    /*
                     if (frozen)
                     {
                         float frozenSqDist = (hand.hoverSphereTransform.position - frozenHandWorldPos).sqrMagnitude;
@@ -603,77 +594,80 @@ namespace InteractableObject
                     }
                     else
                     {
-                        Vector3 cross = Vector3.Cross(lastHandProjected, toHandProjected).normalized;
-                        float dot = Vector3.Dot(worldPlaneNormal, cross);
+                        */
+                    Vector3 cross = Vector3.Cross(lastHandProjected, toHandProjected).normalized;
+                    float dot = Vector3.Dot(worldPlaneNormal, cross);
 
-                        float signedAngleDelta = absAngleDelta;
+                    float signedAngleDelta = absAngleDelta;
 
-                        if (dot < 0.0f)
+                    if (dot < 0.0f)
+                    {
+                        signedAngleDelta = -signedAngleDelta;
+                    }
+
+                    //如果設定存在極限值
+                    if (limited)
+                    {
+                        float angleTmp = Mathf.Clamp(outAngle + signedAngleDelta, minAngle, maxAngle);
+
+                        if (outAngle == minAngle)
                         {
-                            signedAngleDelta = -signedAngleDelta;
+                            if (angleTmp > minAngle && absAngleDelta < minMaxAngularThreshold)
+                            {
+                                outAngle = angleTmp;
+                                lastHandProjected = toHandProjected;
+                            }
                         }
-
-                        //如果設定存在極限值
-                        if (limited)
+                        else if (outAngle == maxAngle)
                         {
-                            float angleTmp = Mathf.Clamp(outAngle + signedAngleDelta, minAngle, maxAngle);
-
-                            if (outAngle == minAngle)
-                            {
-                                if (angleTmp > minAngle && absAngleDelta < minMaxAngularThreshold)
-                                {
-                                    outAngle = angleTmp;
-                                    lastHandProjected = toHandProjected;
-                                }
-                            }
-                            else if (outAngle == maxAngle)
-                            {
-                                if (angleTmp < maxAngle && absAngleDelta < minMaxAngularThreshold)
-                                {
-                                    outAngle = angleTmp;
-                                    lastHandProjected = toHandProjected;
-                                }
-                            }
-                            else if (angleTmp == minAngle)
-                            {
-                                outAngle = angleTmp;
-                                lastHandProjected = toHandProjected;
-                                onMinAngle.Invoke();
-                                if (freezeOnMin)
-                                {
-                                    Freeze(hand);
-                                }
-                            }
-                            else if (angleTmp == maxAngle)
-                            {
-                                outAngle = angleTmp;
-                                lastHandProjected = toHandProjected;
-                                onMaxAngle.Invoke();
-                                if (freezeOnMax)
-                                {
-                                    Freeze(hand);
-                                }
-                            }
-                            else
+                            if (angleTmp < maxAngle && absAngleDelta < minMaxAngularThreshold)
                             {
                                 outAngle = angleTmp;
                                 lastHandProjected = toHandProjected;
                             }
+                        }
+                        else if (angleTmp == minAngle)
+                        {
+                            outAngle = angleTmp;
+                            lastHandProjected = toHandProjected;
+                            onMinAngle.Invoke();
+                            // if (freezeOnMin)
+                            // {
+                            //     Freeze(hand);
+                            // }
+                        }
+                        else if (angleTmp == maxAngle)
+                        {
+                            outAngle = angleTmp;
+                            lastHandProjected = toHandProjected;
+                            onMaxAngle.Invoke();
+                            // if (freezeOnMax)
+                            // {
+                            //     Freeze(hand);
+                            // }
                         }
                         else
                         {
-                            outAngle += signedAngleDelta;
-                            if (isAngleEvent && outAngle>=eventAngle)
-                            {
-                                angleEvent.Invoke();
-                            }
+                            outAngle = angleTmp;
                             lastHandProjected = toHandProjected;
                         }
                     }
+                    else
+                    {
+                        outAngle += signedAngleDelta;
+                        if (isAngleEvent && outAngle >= eventAngle)
+                        {
+                            angleEvent.Invoke();
+                        }
+
+                        lastHandProjected = toHandProjected;
+                    }
+                    // }
                 }
             }
         }
-        
+
+        /*
         /// <summary>
         /// 如果有設定凍結最小值或最大值，凍結手的位置？
         /// </summary>
@@ -687,14 +681,16 @@ namespace InteractableObject
             frozenSqDistanceMinMaxThreshold.x = frozenDistanceMinMaxThreshold.x * frozenDistanceMinMaxThreshold.x;
             frozenSqDistanceMinMaxThreshold.y = frozenDistanceMinMaxThreshold.y * frozenDistanceMinMaxThreshold.y;
         }
+        */
 
 
-        //-------------------------------------------------
+        /*
         private void UnFreeze()
         {
             frozen = false;
             frozenHandWorldPos.Set(0.0f, 0.0f, 0.0f);
         }
+        */
 
         #endregion
     }
