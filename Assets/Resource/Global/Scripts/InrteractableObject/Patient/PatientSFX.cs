@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Global.Pateint
 {
-    public partial class Patient : MonoBehaviour
+    public partial class Patient
     {
         [Header("音效")] [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip[] sFXs;

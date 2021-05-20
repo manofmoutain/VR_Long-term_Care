@@ -194,7 +194,6 @@ namespace InteractableObject
             {
                 worldPlaneNormal = transform.parent.localToWorldMatrix.MultiplyVector(worldPlaneNormal).normalized;
             }
-            print($"worldPlaneNormal : {worldPlaneNormal}");
 
             if (limited)
             {

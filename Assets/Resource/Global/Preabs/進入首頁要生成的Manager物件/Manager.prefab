@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7692791593908598638}
   - component: {fileID: 7692791593908598636}
   - component: {fileID: 7692791593908598639}
+  - component: {fileID: 3628326446894505009}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -56,3 +57,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969979ad838045d6ac51ac63c04d40bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3628326446894505009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692791593908598633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f507f17f6e0491284f5b1ff94df0e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCounting: 0
+  gameMod: 0
+  _scoreSystem:
+    topicCount: 0
+    totalScore: 0
+    _operateTopics: []
+    excelFileName: 
+    m_ID: 
+    m_Lesson: 
+    m_School: 
+    m_StudentName: 
+    timeLimite: 0
+    timing: 0
