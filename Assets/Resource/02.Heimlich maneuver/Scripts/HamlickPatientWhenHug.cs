@@ -2,7 +2,7 @@
 
 namespace Heimlich_maneuver
 {
-    public class HamlickPatientWhenHug : MonoBehaviour
+    public partial class HamlickPatient
     {
         [Header("模型")] [SerializeField] private GameObject hugRightHand;
         [SerializeField] private GameObject hugLeftHand;
@@ -12,18 +12,6 @@ namespace Heimlich_maneuver
         /// </summary>
         [Header("狀態")]
         [SerializeField] private bool isHuging;
-
-        private void Start()
-        {
-            isHuging = false;
-        }
-
-        private void Update()
-        {
-            hugLeftHand.SetActive(isHuging);
-            hugRightHand.SetActive(isHuging);
-            // patient.GetComponent<TakeEvent_SnapPutZone>().enabled = isHuging;
-        }
 
         public void Hugging(bool hugging)
         {

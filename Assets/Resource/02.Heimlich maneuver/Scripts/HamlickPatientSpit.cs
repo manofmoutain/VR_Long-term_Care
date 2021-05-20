@@ -8,7 +8,7 @@ using Valve.VR.InteractionSystem;
 
 namespace Heimlich_maneuver
 {
-    public class HamlickPatientSpit : MonoBehaviour
+    public partial class HamlickPatient
     {
         [Header("生成物件")]
         [SerializeField] private Transform spawnPoint;
@@ -39,25 +39,6 @@ namespace Heimlich_maneuver
 
         [SerializeField] private GameObject pushPoint;
         [SerializeField] private LinearMapping linearMapping;
-
-
-        private void Start()
-        {
-            isChoking = true;
-
-            // print(ScoreManager.Instance.GetLesson());
-            minPushCount = ScoreManager.Instance.GetOperateSteps(3);
-        }
-
-        private void Update()
-        {
-            velocityDirection = GetComponent<Patient>().patientDirection;
-            if (!isChoking)
-            {
-                pushPoint.transform.localPosition = Vector3.zero;
-                linearMapping.value=0;
-            }
-        }
 
 
         /// <summary>
@@ -100,7 +81,7 @@ namespace Heimlich_maneuver
                     ScoreManager.Instance.DecreaseOperateSteps(4);
                     ScoreManager.Instance.SetDone(4);
                     SpeechManager.Instance.StopAudio();
-                    GetComponent<PatientSFX>().PlaySFX(0);
+                    GetComponent<Patient>().PlaySFX(0);
                     GameObject go = Instantiate(bean, spawnPoint.position, Quaternion.identity,
                         GetComponent<Patient>().GetPatientTransform);
                     go.GetComponent<Rigidbody>().velocity = velocityDirection * beanSpeed;

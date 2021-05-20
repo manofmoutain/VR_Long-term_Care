@@ -5,7 +5,7 @@ using Global.Pateint;
 
 namespace Heimlich_maneuver
 {
-    public class HamlickPatient : MonoBehaviour
+    public partial class HamlickPatient : MonoBehaviour
     {
         /// <summary>
         /// 是否處於施作的狀態
@@ -21,9 +21,17 @@ namespace Heimlich_maneuver
 
         private void Start()
         {
-            GetComponent<PatientSFX>().PlaySFX(2);
+            GetComponent<Patient>().PlaySFX(2);
             isPushed = false;
             canHug = false;
+
+
+            isChoking = true;
+
+            // print(ScoreManager.Instance.GetLesson());
+            minPushCount = ScoreManager.Instance.GetOperateSteps(3);
+
+            isHuging = false;
 
         }
 
@@ -31,6 +39,21 @@ namespace Heimlich_maneuver
         {
             //player位於病患背後
             canHug = GetComponent<Patient>().isPlayerBehindPatient;
+
+            interactHint.SetActive(GetComponent<Patient>().isAtChangedPosition );
+
+            interactPoint.SetActive(GetComponent<Patient>().isAtChangedPosition );
+
+
+            velocityDirection = GetComponent<Patient>().patientDirection;
+            if (!isChoking)
+            {
+                pushPoint.transform.localPosition = Vector3.zero;
+                linearMapping.value=0;
+            }
+
+            hugLeftHand.SetActive(isHuging);
+            hugRightHand.SetActive(isHuging);
         }
 
 
@@ -60,7 +83,7 @@ namespace Heimlich_maneuver
         /// <param name="index">考題編號</param>
         public void Fallen(int index)
         {
-            GetComponent<PatientSFX>().PlaySFX(1);
+            GetComponent<Patient>().PlaySFX(1);
             //項目十：案主掉落
             ScoreManager.Instance.IncreaseOperateSteps(index);
             ScoreManager.Instance.SetDone(index);
@@ -72,7 +95,7 @@ namespace Heimlich_maneuver
         /// <param name="index">考題編號</param>
         public void WashHandBeforeOperate(int index)
         {
-            if (GetComponent<Patient>().GetPatientTransform.parent==transform || GetComponent<HamlickPatientSpit>().isChoking)
+            if (GetComponent<Patient>().GetPatientTransform.parent==transform || isChoking)
             {
                 //項目十二：於事前進行洗手
                 ScoreManager.Instance.IncreaseOperateSteps(index);
