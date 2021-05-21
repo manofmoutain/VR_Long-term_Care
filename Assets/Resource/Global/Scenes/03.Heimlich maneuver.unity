@@ -2338,24 +2338,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &1751635924 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5943304749458318780, guid: 761d0d8ab7fd7f44389df9aa848a54dc, type: 3}
-  m_PrefabInstance: {fileID: 5943304749697213250}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1751635928
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1751635924}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.3241189, y: 1.3075564, z: 0.000000038969773}
-  m_Center: {x: -0.000000059604645, y: 0, z: 0}
 --- !u!1001 &1817755972
 PrefabInstance:
   m_ObjectHideFlags: 0

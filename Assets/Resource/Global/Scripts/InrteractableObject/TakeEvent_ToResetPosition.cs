@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace InteractableObject
@@ -28,6 +29,11 @@ namespace InteractableObject
             originScale = transform.localScale;
         }
 
+        private void Update()
+        {
+            ReturnToOriginPosition();
+        }
+
         /// <summary>
         /// 掛在SnapTakeDropZone腳本的DropDown上
         /// 物件掉落在特定位置後，會回到原始位置
@@ -46,6 +52,11 @@ namespace InteractableObject
 
                 isEntry = false;
             }
+        }
+
+        public void SetIsEntry()
+        {
+            isEntry = true;
         }
     }
 }
