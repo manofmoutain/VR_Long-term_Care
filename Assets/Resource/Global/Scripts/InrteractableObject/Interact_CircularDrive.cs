@@ -68,7 +68,7 @@ namespace InteractableObject
         private Collider childCollider;
 
         [Tooltip("要驅動的LinearMapping組件（如果未指定）將動態添加到此GameObject中。")]
-        private LinearMapping linearMapping;
+        private Interact_LinearMapping linearMapping;
 
         /// <summary>
         /// 是否只要抓住，驅動器就持續處於操作狀態，否則控制器移出碰撞體，驅動器將停止運行
@@ -176,12 +176,12 @@ namespace InteractableObject
 
             if (linearMapping == null)
             {
-                linearMapping = GetComponent<LinearMapping>();
+                linearMapping = GetComponent<Interact_LinearMapping>();
             }
 
             if (linearMapping == null)
             {
-                linearMapping = gameObject.AddComponent<LinearMapping>();
+                linearMapping = gameObject.AddComponent<Interact_LinearMapping>();
             }
 
             worldPlaneNormal = new Vector3(0.0f, 0.0f, 0.0f);
