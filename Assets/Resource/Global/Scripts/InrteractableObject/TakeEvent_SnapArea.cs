@@ -87,6 +87,7 @@ namespace InteractableObject
 
                     if (autoHandGrab!=null)
                     {
+                        // print($"{autoHandGrab.name}.snapFixed.isLocated : {autoHandGrab.snapFixed.isLocated}");
                         autoHandGrab.snapFixed.isLocated = true;
                     }
                     //Debug.Log("Snap Object Correct！");
@@ -125,6 +126,7 @@ namespace InteractableObject
                     }
                     if (autoHandGrab!=null)
                     {
+                        // print($"{autoHandGrab.name}.snapFixed.isLocated : {autoHandGrab.snapFixed.isLocated}");
                         autoHandGrab.snapFixed.isLocated = true;
                     }
 
