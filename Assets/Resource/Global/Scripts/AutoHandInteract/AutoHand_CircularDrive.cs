@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using Autohand;
 using UnityEngine;
 using UnityEngine.Events;
-using Valve.VR.InteractionSystem;
-using Random = UnityEngine.Random;
+using InteractableObject;
+using Hand = Autohand.Hand;
 
-namespace InteractableObject
+namespace AutoHandInteract
 {
-    [RequireComponent(typeof(Interactable))]
-    public class Interact_CircularDrive : MonoBehaviour
+    [RequireComponent(typeof(AutoHand_Grabbable))]
+    public class AutoHand_CircularDrive : MonoBehaviour
     {
         public enum Axis_t
         {
@@ -18,30 +18,17 @@ namespace InteractableObject
             ZAxis
         };
 
+        private Grabbable grabbable;
+
         /// <summary>
         /// 抓握的是哪一隻手
         /// </summary>
-        [Header("手勢")] [SerializeField] private Hand handHoverLocked;
-
-        /// <summary>
-        /// 手勢標誌
-        /// </summary>
-        [SerializeField] private Hand.AttachmentFlags attachmentFlags;
-
-        /// <summary>
-        /// 設定抓握的方式
-        /// </summary>
-        [Tooltip("設定抓握的方式")] [SerializeField] private GrabTypes grabbedWithType;
-
-        /// <summary>
-        /// 旋轉方式是否為定點旋轉(true=定點旋轉，false=環繞旋轉)
-        /// </summary>
-        [Tooltip("旋轉方式是否為定點旋轉(true=定點旋轉，false=環繞旋轉)")][SerializeField] private bool isRoot =true;
+        [Header("手勢")] [SerializeField] private Hand grabbedHand;
 
         /// <summary>
         /// 是否正在驅動
         /// </summary>
-        [Header("旋轉角度")] [SerializeField] private bool driving = false;
+        [Header("旋轉角度")] public bool driving = false;
 
         [Tooltip("驅動器的輸出角度值（以度為單位，無限制）將無限制地增加或減少，採用360模數來查找轉數")]
         public float outAngle;
@@ -68,19 +55,13 @@ namespace InteractableObject
         private Collider childCollider;
 
         [Tooltip("要驅動的LinearMapping組件（如果未指定）將動態添加到此GameObject中。")]
-        private LinearMapping linearMapping;
+        private Interact_LinearMapping linearMapping;
 
-        /// <summary>
-        /// 是否只要抓住，驅動器就持續處於操作狀態，否則控制器移出碰撞體，驅動器將停止運行
-        /// </summary>
-        [Tooltip("如果為true，則只要按住該按鈕，驅動器將一直處於操作狀態；如果為false，則如果控制器移出對撞機，驅動器將停止運行。")]
-        public bool hoverLock = true;
-
-        /// <summary>
+       /// <summary>
         /// 是否要設定極限值
         /// </summary>
         [Header("旋轉的極限值")] [Tooltip("如果limited為true，則旋轉將限制為[minAngle，maxAngle]；如果為false，則旋轉將不受限制")]
-        [SerializeField] bool limited ;
+        public bool limited;
 
         // /// <summary>
         // /// 如果limited為true，旋轉的極限值
@@ -95,94 +76,98 @@ namespace InteractableObject
         /// <summary>
         /// 極限值的最小值
         /// </summary>
-        [Header("旋轉值極限值的最小值")] [Tooltip("如果Limited為true，則指定下限，否則未使用值")]
-        public float minAngle ;
+        [Header("旋轉值極限值的最小值")] [Tooltip("如果Limited為true，則指定下限，否則未使用值")][HideInInspector]
+        public float minAngle;
 
         /// <summary>
         /// 在最小值時的事件
         /// </summary>
-        [Tooltip("如果Limited，則在到達minAngle時調用事件")]
+        [Tooltip("如果Limited，則在到達minAngle時調用事件")][HideInInspector]
         public UnityEvent onMinAngle;
 
         /// <summary>
         /// 極限值的最大值
         /// </summary>
-        [Header("旋轉極限值的最大值")] [Tooltip("如果limited為true，則指定上限，否則未使用值")]
-        public float maxAngle ;
+        [Header("旋轉極限值的最大值")] [Tooltip("如果limited為true，則指定上限，否則未使用值")][HideInInspector]
+        public float maxAngle;
 
         /// <summary>
         /// 在最大值時事件
         /// </summary>
-        [Tooltip("如果Limited，則在達到maxAngle時調用事件")]
+        [Tooltip("如果Limited，則在達到maxAngle時調用事件")][HideInInspector]
         public UnityEvent onMaxAngle;
+
 
         /// <summary>
         /// 是否要開啟角度事件，不可與Limit共用
         /// </summary>
-        [Header("特定角度的事件")][Tooltip("是否要開啟角度事件，不可與Limit共用")] [SerializeField]
-        private bool isAngleEvent;
+        [Header("特定角度的事件")] [Tooltip("是否要開啟角度事件，不可與Limit共用")] [SerializeField]
+        public bool isAngleEvent;
 
         /// <summary>
         /// 執行事件的角度值
         /// </summary>
-        [Tooltip("執行事件的角度值")] public float eventAngle;
+        [Tooltip("執行事件的角度值")][HideInInspector] public float eventAngle;
 
         /// <summary>
         /// 當角度為eventAngle值時，執行事件
         /// </summary>
-        [SerializeField] private UnityEvent angleEvent;
+        [SerializeField][HideInInspector] private UnityEvent angleEvent;
 
         /// <summary>
         /// 在limited的情況中，是否要強制設定初始值
         /// </summary>
         [Header("強制改變初始值")] [Tooltip("如果limited為true，則強制將起始角度設為startAngle，並固定為[minAngle，maxAngle]")]
-        public bool forceStart ;
+        public bool forceStart;
 
         /// <summary>
         /// 強制設定的初始旋轉值
         /// </summary>
-        [Tooltip("如果limited為true且forceStart為true，則起始角度將為此角度，並固定為[minAngle，maxAngle]")]
-        public float startAngle;
+        [Tooltip("如果limited為true且forceStart為true，則起始角度將為此角度，並固定為[minAngle，maxAngle]")][HideInInspector][SerializeField]
+        private float startAngle;
 
-        [Header("控制三維的值")] [SerializeField] private Quaternion start;
 
-        [SerializeField] private Vector3 worldPlaneNormal ;
-        [SerializeField] private Vector3 localPlaneNormal ;
-
-        [SerializeField] private Vector3 lastHandProjected;
-
+        [Header("控制三維的值")] public bool isUnhiddenHiddenVector3;
+        [HideInInspector] [SerializeField] private Quaternion start;
+        [HideInInspector] [SerializeField] private Vector3 worldPlaneNormal;
+        [HideInInspector] [SerializeField] private Vector3 localPlaneNormal;
+        [HideInInspector] [SerializeField] private Vector3 lastHandProjected;
 
         /// <summary>
         /// 如果驅動器被限制為最小/最大，則大於此角度的角度將被忽略
         /// </summary>
-        [SerializeField] private float minMaxAngularThreshold = 1.0f;
-
-
-
-        [SerializeField] private Interactable interactable;
+        [HideInInspector] [SerializeField] private float minMaxAngularThreshold = 1.0f;
 
 
         private void Awake()
         {
-            interactable = GetComponent<Interactable>();
+            grabbable = GetComponent<Grabbable>();
         }
 
         private void Start()
         {
+            grabbable.OnBeforeGrabEvent += OnBeforeGrab;
+            grabbable.OnGrabEvent += OnGrab;
+            grabbable.OnReleaseEvent += OnRelease;
+
+
+
             if (childCollider == null)
             {
                 childCollider = GetComponentInChildren<Collider>();
             }
 
-            if (linearMapping == null)
+            if (linearMapping == null && !GetComponent<Interact_LinearMapping>())
             {
-                linearMapping = GetComponent<LinearMapping>();
+                linearMapping = gameObject.AddComponent<Interact_LinearMapping>();
+                linearMapping = GetComponent<Interact_LinearMapping>();
+            }
+            else if (linearMapping == null && GetComponent<Interact_LinearMapping>())
+            {
+                linearMapping = GetComponent<Interact_LinearMapping>();
             }
 
-            if (linearMapping == null)
-            {
-                linearMapping = gameObject.AddComponent<LinearMapping>();
-            }
+
 
             worldPlaneNormal = new Vector3(0.0f, 0.0f, 0.0f);
             worldPlaneNormal[(int) axisOfRotation] = 0.005f;
@@ -214,108 +199,89 @@ namespace InteractableObject
             UpdateAll();
         }
 
+        private void Update()
+        {
+
+        }
+
         void OnDisable()
         {
-            if (handHoverLocked)
+            if (grabbedHand)
             {
-                handHoverLocked.HideGrabHint();
-                handHoverLocked.HoverUnlock(interactable);
-                handHoverLocked = null;
+                grabbedHand = null;
             }
         }
 
 
-        private void OnHandHoverBegin(Hand hand)
+        void OnBeforeGrab(Hand hand, Grabbable grabbable)
         {
-            // hand.ShowGrabHint();
+            // GetComponent<Rigidbody>().isKinematic = true;
         }
 
-
-        private void OnHandHoverEnd(Hand hand)
+        void OnGrab(Hand hand, Grabbable grabbable)
         {
-            // hand.HideGrabHint();
+            // print($"{hand.name} grabbed");
+            // lastHandProjected = ComputeToTransformProjected(hand.transform);
 
-            if (driving && hand)
-            {
-                //hand.TriggerHapticPulse() //todo: fix
-                StartCoroutine(HapticPulses(hand, 1.0f, 10));
-            }
+            grabbedHand = hand;
 
+            // driving = true;
+
+            // UpdateLinearMapping();
+            // ComputeAngle(hand);
+            // UpdateAll();
+
+            // if (driving && !hand.IsGrabbing())
+            // {
+            //     ComputeAngle(hand);
+            //     UpdateAll();
+            // }
+        }
+
+        void OnRelease(Hand hand, Grabbable grabbable)
+        {
+            print($"{hand.name} released");
+
+            StartCoroutine(HapticPulses(hand, 1.0f, 10));
+
+            // GetComponent<Rigidbody>().isKinematic = false;
             driving = false;
-            handHoverLocked = null;
+            grabbedHand = null;
         }
 
-
-        private void HandHoverUpdate(Hand hand)
+        private void OnTriggerStay(Collider other)
         {
-            //抓握的狀態
-            GrabTypes startingGrabType = hand.GetGrabStarting();
-            //是否已鬆手
-            bool isGrabEnding = hand.IsGrabbingWithType(grabbedWithType) == false;
-
-            //如果沒有執行任何的抓握
-            if (grabbedWithType == GrabTypes.None && startingGrabType != GrabTypes.None)
+            if (other.gameObject.GetComponent<Hand>())
             {
-                grabbedWithType = startingGrabType;
-                // Trigger was just pressed
-                lastHandProjected = ComputeToTransformProjected(hand.hoverSphereTransform);
 
-                if (hoverLock)
+                if (grabbedHand != null)
                 {
-                    hand.HoverLock(interactable);
-                    handHoverLocked = hand;
+                    print($"{grabbedHand.IsGrabbing()}");
+                    // if (driving)
+                    // {
+                    //     // print($"IsGrabbing : {grabbedHand.IsGrabbing()}");
+                    //     lastHandProjected = ComputeToTransformProjected(grabbedHand.transform);
+                    //     grabbable.body.isKinematic = false;
+                    //     UpdateLinearMapping();
+                    //     ComputeAngle(grabbedHand);
+                    //     UpdateAll();
+                    // }
+                    // else
+                    // {
+                    //     // print($"IsGrabbing : {grabbedHand.IsGrabbing()}");
+                    //     grabbable.body.isKinematic = true;
+                    // }
                 }
-
-                hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
-                driving = true;
-
-                ComputeAngle(hand);
-                UpdateAll();
-
-                hand.HideGrabHint();
             }
-            //如果鬆手
-            else if (grabbedWithType != GrabTypes.None && isGrabEnding)
-            {
-                // hand.DetachObject(gameObject);
-                // Trigger was just released
-                if (hoverLock)
-                {
-                    hand.HoverUnlock(interactable);
-                    handHoverLocked = null;
-                }
+        }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<Hand>())
+            {
                 driving = false;
-                grabbedWithType = GrabTypes.None;
+                // grabbedHand = null;
             }
-
-            if (driving && isGrabEnding == false && hand.hoveringInteractable == this.interactable)
-            {
-                ComputeAngle(hand);
-                UpdateAll();
-            }
-        }
-
-        void HandAttachedUpdate(Hand hand)
-        {
-            UpdateLinearMapping();
-            if (hand.IsGrabEnding(this.gameObject))
-            {
-                hand.DetachObject(gameObject);
-            }
-        }
-
-
-        void OnDetachedFromHand(Hand hand)
-        {
-            if (hoverLock)
-            {
-                hand.HoverUnlock(interactable);
-                handHoverLocked = null;
-            }
-
-            driving = false;
-            grabbedWithType = GrabTypes.None;
         }
 
 
@@ -325,7 +291,7 @@ namespace InteractableObject
         {
             if (hand != null)
             {
-                int nRangeMax = (int) Util.RemapNumberClamped(flMagnitude, 0.0f, 1.0f, 100.0f, 900.0f);
+                int nRangeMax = (int) AutoHand_Util.RemapNumberClamped(flMagnitude, 0.0f, 1.0f, 100.0f, 900.0f);
                 nCount = Mathf.Clamp(nCount, 1, 10);
 
                 //float hapticDuration = nRangeMax * nCount;
@@ -334,8 +300,8 @@ namespace InteractableObject
 
                 for (ushort i = 0; i < nCount; ++i)
                 {
-                    ushort duration = (ushort) Random.Range(100, nRangeMax);
-                    hand.TriggerHapticPulse(duration);
+                    // ushort duration = (ushort) Random.Range(100, nRangeMax);
+                    // hand.TriggerHapticPulse(duration);
                     yield return new WaitForSeconds(.01f);
                 }
             }
@@ -429,19 +395,14 @@ namespace InteractableObject
         private void ComputeAngle(Hand hand)
         {
             Vector3 toHandProjected;
-            if (isRoot)
-            {
-                toHandProjected = ComputeToTransformProjected(hand.transform);
-            }
-            else
-            {
-                toHandProjected = ComputeToTransformProjected(hand.hoverSphereTransform);
-            }
 
+            toHandProjected = ComputeToTransformProjected(hand.follow);
+            // print($"toHandProjected : {toHandProjected} ; lastHandProjected : {lastHandProjected}");
 
             if (!toHandProjected.Equals(lastHandProjected))
             {
                 float absAngleDelta = Vector3.Angle(lastHandProjected, toHandProjected);
+                // print($"absAngleDelta : {absAngleDelta}");
 
                 if (absAngleDelta > 0.0f)
                 {

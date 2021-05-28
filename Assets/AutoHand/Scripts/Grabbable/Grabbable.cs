@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace Autohand {
     public class Grabbable : MonoBehaviour {
@@ -82,8 +83,8 @@ namespace Autohand {
         public UnityEvent onSqueeze;
         [HideInInspector]
         public UnityEvent onUnsqueeze;
-        [HideInInspector]
-        public UnityEvent OnJointBreak;
+       [HideInInspector]
+        public UnityEvent onJointBreak;
 
 
 
@@ -109,12 +110,12 @@ namespace Autohand {
 
         protected bool beingHeld = false;
 
-        protected List<Hand> heldBy;
+        [SerializeField] protected List<Hand> heldBy;
         protected bool throwing;
         protected bool hightlighting;
         protected GameObject highlightObj;
-        protected PlacePoint placePoint = null;
-        protected PlacePoint lastPlacePoint = null;
+        [SerializeField]protected PlacePoint placePoint = null;
+        [SerializeField]protected PlacePoint lastPlacePoint = null;
 
         Transform originalParent;
         Vector3 lastCenterOfMassPos;
@@ -376,7 +377,7 @@ namespace Autohand {
         public virtual void OnHandJointBreak(Hand hand) {
             if(!pullApartBreakOnly || heldBy.Count > 1){
                 OnJointBreakEvent?.Invoke(hand, this);
-                OnJointBreak?.Invoke();
+                onJointBreak?.Invoke();
                 body.WakeUp();
                 body.velocity /= 1000;
                 body.angularVelocity /= 1000;

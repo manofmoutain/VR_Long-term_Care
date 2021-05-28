@@ -65,7 +65,7 @@ namespace Heimlich_maneuver
         {
             if (canHug)
             {
-                //項目二：立於後側將案主移到無手扶手椅上
+                //項目1：立於後側將案主移到無手扶手椅上
                 ScoreManager.Instance.DecreaseOperateSteps(index);
                 ScoreManager.Instance.SetDone(index);
                 print($"施測者在{gameObject.name}後面");
@@ -84,7 +84,7 @@ namespace Heimlich_maneuver
         public void Fallen(int index)
         {
             GetComponent<Patient>().PlaySFX(1);
-            //項目十：案主掉落
+            //項目10：案主掉落
             ScoreManager.Instance.IncreaseOperateSteps(index);
             ScoreManager.Instance.SetDone(index);
         }
@@ -97,7 +97,7 @@ namespace Heimlich_maneuver
         {
             if (GetComponent<Patient>().GetPatientTransform.parent==transform || isChoking)
             {
-                //項目十二：於事前進行洗手
+                //項目11：於事前進行洗手
                 ScoreManager.Instance.IncreaseOperateSteps(index);
                 ScoreManager.Instance.SetDone(index);
             }
@@ -107,7 +107,7 @@ namespace Heimlich_maneuver
         {
             if (ScoreManager.Instance.GetSteps(11)==0)
             {
-                //項目九：洗手
+                //項目8：洗手
                 ScoreManager.Instance.DecreaseOperateSteps(index);
                 ScoreManager.Instance.SetDone(index);
             }

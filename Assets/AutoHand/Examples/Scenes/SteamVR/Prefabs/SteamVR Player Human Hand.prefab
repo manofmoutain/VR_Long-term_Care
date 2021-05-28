@@ -60,6 +60,28 @@ Transform:
   m_Father: {fileID: 94686562776500854}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 49.409, y: 5.99, z: 2.166}
+--- !u!114 &976357654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707104894983514428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77afd5561c0203541a726406927eb019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 3220342384345165914}
+  button:
+    actionPath: /actions/default/in/GrabPinch
+    needsReinit: 0
+  bendOffsets:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
 --- !u!114 &376740649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,28 +110,6 @@ MonoBehaviour:
   turnAngle: 15
   speed: 5
   gravity: 1
---- !u!114 &976357654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 707104894983514428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77afd5561c0203541a726406927eb019, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 3220342384345165914}
-  button:
-    actionPath: /actions/default/in/GrabPinch
-    needsReinit: 0
-  bendOffsets:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
 --- !u!114 &976357656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2202260360745086663, guid: 7ddaef112cded9a4bbca3e89c198134e, type: 3}
       propertyPath: m_Name
-      value: SteamVR Player
+      value: SteamVR Player Human Hand
       objectReference: {fileID: 0}
     - target: {fileID: 2202260360745086666, guid: 7ddaef112cded9a4bbca3e89c198134e, type: 3}
       propertyPath: m_Mesh
@@ -273,11 +273,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2205448607334444695, guid: 7ddaef112cded9a4bbca3e89c198134e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2205448607334444695, guid: 7ddaef112cded9a4bbca3e89c198134e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2205448607334444695, guid: 7ddaef112cded9a4bbca3e89c198134e, type: 3}
       propertyPath: m_LocalRotation.w

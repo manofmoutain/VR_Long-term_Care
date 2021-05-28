@@ -49,7 +49,7 @@ namespace Heimlich_maneuver
         {
             if (GetComponent<HamlickPatient>().canHug)
             {
-                //項目三：找出正確按壓位置
+                //項目2：找出正確按壓位置
                 ScoreManager.Instance.DecreaseOperateSteps(index);
                 ScoreManager.Instance.SetDone(index);
             }

@@ -11,7 +11,7 @@ namespace InteractableObject
 {
     public class Interact_LinearAnimation : MonoBehaviour
     {
-        public LinearMapping linearMappingGameObject;
+        public Interact_LinearMapping linearMappingGameObject;
         [SerializeField] private Animator animator;
 
         public float currentLinearMapping = float.NaN;

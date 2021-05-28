@@ -15,9 +15,8 @@ GameObject:
   - component: {fileID: 1372401608}
   - component: {fileID: 1372401607}
   - component: {fileID: 1372401606}
-  - component: {fileID: 1372401605}
-  - component: {fileID: 1372401604}
-  - component: {fileID: 2148703059996319016}
+  - component: {fileID: 7292306337095412002}
+  - component: {fileID: 8970883286834196542}
   m_Layer: 0
   m_Name: "\u7827\u677F"
   m_TagString: Untagged
@@ -66,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2573733167556495074, guid: d8cf5ebb72780a54587a7ad8bbdca56e, type: 3}
+  - {fileID: 2100000, guid: 7da47f74408ef784da8b68cbaef57266, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,7 +95,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5298842368369338152}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.4787439, y: 0.03554503, z: 0.27707767}
@@ -143,69 +142,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5298842368369338152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bd8cd88139a23747ad9b9c9332c3cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateActionSetOnAttach:
-    actionSetPath: 
-  hideHandOnAttach: 1
-  hideSkeletonOnAttach: 0
-  hideControllerOnAttach: 0
-  handAnimationOnPickup: 0
-  setRangeOfMotionOnPickup: -1
-  useHandObjectAttachmentPoint: 1
-  attachEaseIn: 0
-  snapAttachEaseInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  snapAttachEaseInTime: 0.15
-  snapAttachEaseInCompleted: 0
-  skeletonPoser: {fileID: 0}
-  handFollowTransform: 1
-  highlightOnHover: 1
-  highlightRenderers: []
-  existingRenderers: []
-  highlightHolder: {fileID: 0}
-  highlightSkinnedRenderers: []
-  existingSkinnedRenderers: []
-  hideHighlight: []
-  hoverPriority: 0
-  attachedToHand: {fileID: 0}
-  hoveringHands: []
---- !u!114 &1372401605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5298842368369338152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46975e50f65399e42890a47c535d31c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentFlags: 12
+  isUsingTwoHands: 0
+  rightHand: {fileID: 0}
+  rightHandAttachedGameObject: {fileID: 0}
+  leftHand: {fileID: 0}
+  leftHandAttachedGameObject: {fileID: 0}
+  OriginalPositionGameObject: {fileID: 0}
+  UsePosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  snapZoneArea: []
+  takeObject: {fileID: 0}
   snapTakeObject: 0
   snapReleaseGesture: 1
   snapFixed:
@@ -216,41 +166,28 @@ MonoBehaviour:
     outside: 0
     outsideRange: 0
     outsideZone: {fileID: 0}
-  catchingSpeedThreshold: 0
-  releaseVelocityTimeOffset: 0
-  scaleReleaseVelocity: 0
-  scaleReleaseVelocityThreshold: 0
-  rigidbody: {fileID: 0}
-  hadInterpolation: 0
-  velocityEstimator: {fileID: 0}
-  scaleReleaseVelocityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  attachmentFlags: 24
+  catchingSpeedThreshold: -1
+  attachmentOffset: {fileID: 0}
   interactable: {fileID: 0}
-  sanpCurrentHand: {fileID: 0}
-  OriginalPosition: {fileID: 0}
-  UsePosition: []
-  snapZoneArea: []
-  takeObject: {fileID: 0}
+  attached: 0
+  attachTime: 0
+  attachPosition: {x: 0, y: 0, z: 0}
+  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  isHiddenEvents: 1
   snapIn:
     m_PersistentCalls:
       m_Calls: []
   snapOut:
     m_PersistentCalls:
       m_Calls: []
-  pickUp:
-    m_PersistentCalls:
-      m_Calls: []
-  grabEvent:
+  onPickUp:
     m_PersistentCalls:
       m_Calls: []
   dropDown:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1372401604
+--- !u!114 &7292306337095412002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,14 +196,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5298842368369338152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
+  m_Script: {fileID: 11500000, guid: 529f955dc7c27804d948c1e7bee2711b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activateActionSetOnAttach:
     actionSetPath: 
-  hideHandOnAttach: 1
+  hideHandOnAttach: 0
   hideSkeletonOnAttach: 0
-  hideControllerOnAttach: 0
+  hideControllerOnAttach: 1
   handAnimationOnPickup: 0
   setRangeOfMotionOnPickup: -1
   useHandObjectAttachmentPoint: 1
@@ -309,7 +246,7 @@ MonoBehaviour:
   hoverPriority: 0
   attachedToHand: {fileID: 0}
   hoveringHands: []
---- !u!114 &2148703059996319016
+--- !u!114 &8970883286834196542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,19 +255,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5298842368369338152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Script: {fileID: 11500000, guid: d2dd4b731b5288f4992fb6c59d7d89a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poseEditorExpanded: 1
   blendEditorExpanded: 1
   poseNames:
-  - '[not set]'
+  - Archery_Pose (MAIN)
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf, type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25, type: 3}
-  skeletonMainPose: {fileID: 0}
+  skeletonMainPose: {fileID: 11400000, guid: 4d274034a7f36cf49b63ac0d50609916, type: 2}
   skeletonAdditionalPoses: []
   showLeftPreview: 0
-  showRightPreview: 1
+  showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
   previewPoseSelection: 0

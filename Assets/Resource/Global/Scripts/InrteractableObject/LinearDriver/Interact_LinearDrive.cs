@@ -7,12 +7,13 @@ using Valve.VR.InteractionSystem;
 
 namespace InteractableObject
 {
-    public class Interact_TwoHandLinearDrive : MonoBehaviour
+    public class Interact_LinearDrive : MonoBehaviour
     {
-        [SerializeField] private Hand rightHand;
-        [SerializeField] private GameObject rightAttachedObjet;
-        [SerializeField] private Hand leftHand;
-        [SerializeField] private GameObject leftAttachedObject;
+        public bool isUsingTwoHands;
+        [HideInInspector] [SerializeField] private Hand rightHand;
+        [HideInInspector] [SerializeField] private GameObject rightAttachedObjet;
+        [HideInInspector] [SerializeField] private Hand leftHand;
+        [HideInInspector] [SerializeField] private GameObject leftAttachedObject;
 
         /// <summary>
         /// 鬆開手後是否回到原位
@@ -21,7 +22,7 @@ namespace InteractableObject
 
         public Transform startPosition;
         public Transform endPosition;
-        public LinearMapping linearMapping;
+        public Interact_LinearMapping linearMapping;
         public bool repositionGameObject = true;
         public bool maintainMomemntum = true;
         public float momemtumDampenRate = 5.0f;
@@ -54,7 +55,7 @@ namespace InteractableObject
             transform.position = startPosition.position;
             if (linearMapping == null)
             {
-                linearMapping = GetComponent<LinearMapping>();
+                linearMapping = GetComponent<Interact_LinearMapping>();
             }
 
             // if (linearMapping == null)
@@ -73,23 +74,29 @@ namespace InteractableObject
 
         protected virtual void OnHandHoverBegin(Hand hand)
         {
-            switch (hand.gameObject.name)
+            if (isUsingTwoHands)
             {
-                case "RightHand":
-                    rightHand=hand;
+                switch (hand.gameObject.name)
+                {
+                    case "RightHand":
+                        rightHand=hand;
 
-                    break;
-                case "LeftHand":
-                    leftHand = hand;
+                        break;
+                    case "LeftHand":
+                        leftHand = hand;
 
-                    break;
+                        break;
+                }
             }
         }
 
         protected virtual void OnHandHoverEnd(Hand hand)
         {
-            rightHand = null;
-            leftHand = null;
+            if (isUsingTwoHands)
+            {
+                rightHand = null;
+                leftHand = null;
+            }
         }
 
         protected virtual void HandHoverUpdate(Hand hand)
@@ -109,25 +116,37 @@ namespace InteractableObject
 
         void OnAttachedToHand(Hand hand)
         {
-            switch (hand.gameObject.name)
+            if (isUsingTwoHands)
             {
-                case "RightHand":
-                    rightHand=hand;
-                    rightAttachedObjet = gameObject;
-                    break;
-                case "LeftHand":
-                    leftHand = hand;
-                    leftAttachedObject = gameObject;
-                    break;
+                switch (hand.gameObject.name)
+                {
+                    case "RightHand":
+                        rightHand=hand;
+                        rightAttachedObjet = gameObject;
+                        break;
+                    case "LeftHand":
+                        leftHand = hand;
+                        leftAttachedObject = gameObject;
+                        break;
+                }
             }
+
         }
 
         protected virtual void HandAttachedUpdate(Hand hand)
         {
-            if (rightAttachedObjet != null && leftAttachedObject != null)
+            if (isUsingTwoHands)
+            {
+                if (rightAttachedObjet != null && leftAttachedObject != null)
+                {
+                    UpdateLinearMapping(hand.transform);
+                }
+            }
+            else
             {
                 UpdateLinearMapping(hand.transform);
             }
+
 
 
             if (hand.IsGrabEnding(this.gameObject))
@@ -138,10 +157,13 @@ namespace InteractableObject
 
         protected virtual void OnDetachedFromHand(Hand hand)
         {
-            rightHand = null;
-            rightAttachedObjet = null;
-            leftHand = null;
-            leftAttachedObject = null;
+            if (isUsingTwoHands)
+            {
+                rightHand = null;
+                rightAttachedObjet = null;
+                leftHand = null;
+                leftAttachedObject = null;
+            }
             CalculateMappingChangeRate();
         }
 

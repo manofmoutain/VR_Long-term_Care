@@ -14,7 +14,7 @@ namespace InteractableObject
         {
             onTriggerEnter.Invoke();
 
-            if (other.GetComponent<LinearDrive>() || other.GetComponent<Interact_TwoHandLinearDrive>())
+            if (other.GetComponent<LinearDrive>() || other.GetComponent<Interact_LinearDrive>())
             {
                 onLinearInteractTriggerEnter.Invoke();
             }

@@ -51,9 +51,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 652344491762508699, guid: fb16429307ed6f044a6d125cd9a91449, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 652344491762508700, guid: fb16429307ed6f044a6d125cd9a91449, type: 3}
       propertyPath: m_Name
       value: ResetPositionZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 652344491762508701, guid: fb16429307ed6f044a6d125cd9a91449, type: 3}
+      propertyPath: onPatientEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb16429307ed6f044a6d125cd9a91449, type: 3}
