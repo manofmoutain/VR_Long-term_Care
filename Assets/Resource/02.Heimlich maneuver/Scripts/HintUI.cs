@@ -32,8 +32,8 @@ namespace Heimlich_maneuver
         {
             moveToBackUI1.SetActive(patient.GetComponent<Patient>().isAtOriginPosition);
             moveToBackUI2.SetActive(patient.GetComponent<Patient>().isAtChangedPosition);
-            movePatientUI1.SetActive(patient.GetComponentInChildren<TakeEvent_TwoHandGrab>().snapTakeObject && !patient.GetComponent<HamlickPatient>().isChoking);
-            movePatientUI2.SetActive(patient.GetComponentInChildren<TakeEvent_TwoHandGrab>().snapTakeObject && patient.GetComponent<HamlickPatient>().isChoking);
+            movePatientUI1.SetActive(patient.GetComponentInChildren<TakeEvent_HandGrab>().snapTakeObject && !patient.GetComponent<HamlickPatient>().isChoking);
+            movePatientUI2.SetActive(patient.GetComponentInChildren<TakeEvent_HandGrab>().snapTakeObject && patient.GetComponent<HamlickPatient>().isChoking);
         }
 
 

@@ -746,7 +746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7136990001886850660, guid: e7eeeec546f53f54db147d75184df123, type: 3}
       propertyPath: m_Name
-      value: ChildWardRoom
+      value: 02_Room
       objectReference: {fileID: 0}
     - target: {fileID: 7136990001886850660, guid: e7eeeec546f53f54db147d75184df123, type: 3}
       propertyPath: m_StaticEditorFlags
