@@ -157,15 +157,17 @@ namespace AutoHandInteract
                 childCollider = GetComponentInChildren<Collider>();
             }
 
-            if (linearMapping == null)
+            if (linearMapping == null && !GetComponent<Interact_LinearMapping>())
+            {
+                linearMapping = gameObject.AddComponent<Interact_LinearMapping>();
+                linearMapping = GetComponent<Interact_LinearMapping>();
+            }
+            else if (linearMapping == null && GetComponent<Interact_LinearMapping>())
             {
                 linearMapping = GetComponent<Interact_LinearMapping>();
             }
 
-            if (linearMapping == null)
-            {
-                linearMapping = gameObject.AddComponent<Interact_LinearMapping>();
-            }
+
 
             worldPlaneNormal = new Vector3(0.0f, 0.0f, 0.0f);
             worldPlaneNormal[(int) axisOfRotation] = 0.005f;
@@ -199,23 +201,7 @@ namespace AutoHandInteract
 
         private void Update()
         {
-            if (grabbedHand != null)
-            {
-                if (!grabbedHand.IsGrabbing())
-                {
-                    print($"IsGrabbing : {grabbedHand.IsGrabbing()}");
-                    lastHandProjected = ComputeToTransformProjected(grabbedHand.transform);
-                    grabbable.body.isKinematic = false;
-                    UpdateLinearMapping();
-                    ComputeAngle(grabbedHand);
-                    UpdateAll();
-                }
-                else
-                {
-                    print($"IsGrabbing : {grabbedHand.IsGrabbing()}");
-                    grabbable.body.isKinematic = true;
-                }
-            }
+
         }
 
         void OnDisable()
@@ -235,11 +221,11 @@ namespace AutoHandInteract
         void OnGrab(Hand hand, Grabbable grabbable)
         {
             // print($"{hand.name} grabbed");
-            lastHandProjected = ComputeToTransformProjected(hand.transform);
+            // lastHandProjected = ComputeToTransformProjected(hand.transform);
 
             grabbedHand = hand;
 
-            driving = true;
+            // driving = true;
 
             // UpdateLinearMapping();
             // ComputeAngle(hand);
@@ -263,12 +249,39 @@ namespace AutoHandInteract
             grabbedHand = null;
         }
 
-        private void OnCollisionExit(Collision other)
+        private void OnTriggerStay(Collider other)
         {
-            // if (other.gameObject.GetComponent<Hand>())
-            // {
-            //     driving = false;
-            // }
+            if (other.gameObject.GetComponent<Hand>())
+            {
+
+                if (grabbedHand != null)
+                {
+                    print($"{grabbedHand.IsGrabbing()}");
+                    // if (driving)
+                    // {
+                    //     // print($"IsGrabbing : {grabbedHand.IsGrabbing()}");
+                    //     lastHandProjected = ComputeToTransformProjected(grabbedHand.transform);
+                    //     grabbable.body.isKinematic = false;
+                    //     UpdateLinearMapping();
+                    //     ComputeAngle(grabbedHand);
+                    //     UpdateAll();
+                    // }
+                    // else
+                    // {
+                    //     // print($"IsGrabbing : {grabbedHand.IsGrabbing()}");
+                    //     grabbable.body.isKinematic = true;
+                    // }
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<Hand>())
+            {
+                driving = false;
+                // grabbedHand = null;
+            }
         }
 
 
