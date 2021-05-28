@@ -7,20 +7,19 @@ namespace InteractableObject
 {
     [RequireComponent( typeof( Interactable ) )]
     [RequireComponent( typeof( Rigidbody ) )]
-    public class TakeEvent_TwoHandGrab : MonoBehaviour
+    public class TakeEvent_HandGrab : MonoBehaviour
     {
-        [Header("雙手資訊")]
-        [SerializeField] private Hand rightHand;
-        [SerializeField] private GameObject rightHandAttachedGameObject;
-        [SerializeField] private Hand leftHand;
-        [SerializeField] private GameObject leftHandAttachedGameObject;
+        public bool isUsingTwoHands;
+        [HideInInspector] [SerializeField] private Hand rightHand;
+        [HideInInspector] [SerializeField] private GameObject rightHandAttachedGameObject;
+        [HideInInspector] [SerializeField] private Hand leftHand;
+        [HideInInspector] [SerializeField] private GameObject leftHandAttachedGameObject;
 
-        [Header("模型位置參數")]
-        [Tooltip("原本位置")]
-        [SerializeField] GameObject OriginalPositionGameObject;
-        [SerializeField] private Vector3 originPosition;
-        [SerializeField] private Vector3 originRotation;
-        [SerializeField] private Vector3 originScale;
+        // [Header("模型位置參數")]
+        [Tooltip("原本位置")][SerializeField] GameObject OriginalPositionGameObject;
+        private Vector3 originPosition;
+        private Vector3 originRotation;
+        private Vector3 originScale;
         [Tooltip("要黏著的物件")] [SerializeField] GameObject[] UsePosition;
         [SerializeField] List<TakeEvent_SnapArea> snapZoneArea;
         [SerializeField] private GameObject takeObject;
@@ -28,63 +27,67 @@ namespace InteractableObject
         /// <summary>
         /// 是否已抓取物件
         /// </summary>
-        [Header("狀態")] [Tooltip("是否已抓取此物件")] [SerializeField]
-        public bool snapTakeObject;
+        // [Header("抓取狀態")]
+        [Tooltip("是否已抓取此物件")] public bool snapTakeObject;
         /// <summary>
         ///Trigger放開後是否要脫離手勢
         /// </summary>
-        [Tooltip("Trigger放開後是否要脫離手勢")] [SerializeField]
-        private bool snapReleaseGesture;
+        [Tooltip("Trigger放開後是否要脫離手勢")] [SerializeField] private bool snapReleaseGesture;
         public SnapFixed snapFixed;
         [SerializeField] private ThrowOutside throwOutside;
 
-        [Header("Gesture")]
+        // [Header("手勢資訊")]
         [Tooltip("SnapOnAttach=該對象應捕捉到手上指定的附著點的位置；" +
                  "DetachOthers=附著在此手上的其他物體將被分離；" +
                  "DetachFromOtherHand=該對象將與另一隻手分離；" +
                  "VelocityMovement=對象將嘗試移動以匹配手的位置和旋轉；" +
                  "AllowSidegrade=該對象能夠從捏握切換為抓握")]
         [SerializeField] private Hand.AttachmentFlags attachmentFlags;
-        [Tooltip( "由於扳機保持而不是扳機按下，該物體必須移動多快才能固定？ (-1 to disable)" )]
-        public float catchingSpeedThreshold = -1;
-        [Tooltip("保持時用作位置和旋轉偏移量的局部點")]
-        public Transform attachmentOffset;
+        [Tooltip( "由於扳機保持而不是扳機按下，該物體必須移動多快才能固定？ (-1 to disable)" )][SerializeField]  float catchingSpeedThreshold = -1;
+        [Tooltip("保持時用作位置和旋轉偏移量的局部點")][SerializeField]  Transform attachmentOffset;
 
 
-        [Header("Rigibody")]
-        [SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private VelocityEstimator velocityEstimator;
-        [SerializeField] protected RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;
+        //[Header("Rigibody")]
+        private Rigidbody rigidbody;
+        private VelocityEstimator velocityEstimator;
+        protected RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;
 
         /// <summary>
         /// 放開物件後的重力模擬
         /// </summary>
-        [Header("物理模擬")]
-        public ReleaseStyle releaseVelocityStyle = ReleaseStyle.GetFromHand;
-        [Tooltip("使用RawFromHand選項釋放對象時使用的時間偏移")]
-        public float releaseVelocityTimeOffset = -0.011f;
-        [Tooltip("釋放速度幅度代表水垢釋放速度曲線的終點. (-1 to disable)")]
-        public float scaleReleaseVelocityThreshold = -1.0f;
-        [Tooltip("使用此曲線可根據測得的釋放速度的大小輕鬆按比例縮放釋放速度。 這樣可以更好地區分跌落，拋擲和投擲。")]
-        public AnimationCurve scaleReleaseVelocityCurve = AnimationCurve.EaseInOut(0.0f, 0.1f, 1.0f, 1.0f);
-        public float scaleReleaseVelocity = 1.1f;
-        [Tooltip( "分離對象時，它應該返回其原始父對象嗎？" )]
-        public bool restoreOriginalParent = false;
+        //[Header("物理模擬")]
+        ReleaseStyle releaseVelocityStyle = ReleaseStyle.GetFromHand;
+        /// <summary>
+        /// 使用RawFromHand選項釋放對象時使用的時間偏移
+        /// </summary>
+        float releaseVelocityTimeOffset = -0.011f;
+        /// <summary>
+        /// 釋放速度幅度代表水垢釋放速度曲線的終點. (-1 to disable)
+        /// </summary>
+        float scaleReleaseVelocityThreshold = -1.0f;
+        /// <summary>
+        /// 使用此曲線可根據測得的釋放速度的大小輕鬆按比例縮放釋放速度。 這樣可以更好地區分跌落，拋擲和投擲。
+        /// </summary>
+        AnimationCurve scaleReleaseVelocityCurve = AnimationCurve.EaseInOut(0.0f, 0.1f, 1.0f, 1.0f);
+        float scaleReleaseVelocity = 1.1f;
+        /// <summary>
+        /// 分離對象時，它應該返回其原始父對象嗎？
+        /// </summary>
+        bool restoreOriginalParent = false;
 
-        [Header("InteractComponent")]
-        [SerializeField] private Interactable interactable;
-        [SerializeField] protected bool attached = false;
-        [SerializeField] protected float attachTime;
-        [SerializeField] protected Vector3 attachPosition;
-        [SerializeField] protected Quaternion attachRotation;
+        // [Header("InteractComponent")]
+        [HideInInspector] [SerializeField] private Interactable interactable;
+        [HideInInspector] [SerializeField] protected bool attached = false;
+        [HideInInspector] [SerializeField] protected float attachTime;
+        [HideInInspector] [SerializeField] protected Vector3 attachPosition;
+        [HideInInspector] [SerializeField] protected Quaternion attachRotation;
 
 
-        [Header("事件")]
-        [SerializeField] private UnityEvent snapIn;
-        [SerializeField] UnityEvent snapOut;
-        [SerializeField] private UnityEvent onPickUp;
-        // [SerializeField] private HandEvent onHeldUpdate;
-        [SerializeField] private UnityEvent dropDown;
+        [Header("事件")] public bool isHiddenEvents=false;
+        [HideInInspector] [SerializeField] private UnityEvent snapIn;
+        [HideInInspector] [SerializeField] UnityEvent snapOut;
+        [HideInInspector] [SerializeField] private UnityEvent onPickUp;
+        [HideInInspector] [SerializeField] private UnityEvent dropDown;
 
         private void Awake()
         {
@@ -100,33 +103,11 @@ namespace InteractableObject
 
         protected virtual void OnHandHoverBegin( Hand hand )
         {
-            // hand.ShowGrabHint();
             snapIn.Invoke();
-            // 通過按住交互按鈕而不是按下按鈕來“捕獲”可拋出對象.
-            // 僅當可拋物的移動速度快於規定的閾值速度並且未與另一隻手連接時，才執行此操作
-            // if ( !attached /*&& catchingSpeedThreshold != -1*/)
-            // {
-            //     // float catchingThreshold = catchingSpeedThreshold * SteamVR_Utils.GetLossyScale(Player.instance.trackingOriginTransform);
-            //
-            //     GrabTypes bestGrabType = hand.GetBestGrabbingType();
-            //
-            //     if ( bestGrabType != GrabTypes.None )
-            //     {
-            //
-            //         // if (rigidbody.velocity.magnitude >= catchingThreshold)
-            //         // {
-            //             print(bestGrabType);
-            //             hand.AttachObject( gameObject, bestGrabType, attachmentFlags );
-            //         // }
-            //     }
-            // }
-
-
         }
 
         protected virtual void OnHandHoverEnd( Hand hand )
         {
-            // hand.HideGrabHint();
             snapOut.Invoke();
         }
 
@@ -138,23 +119,43 @@ namespace InteractableObject
             if (startingGrabType != GrabTypes.None)
             {
                 hand.AttachObject( gameObject, startingGrabType, Hand.AttachmentFlags.VelocityMovement, attachmentOffset );
-                switch (hand.gameObject.name)
+                if (isUsingTwoHands)
                 {
-                    case "RightHand":
-                        rightHandAttachedGameObject = gameObject;
-                        break;
-                    case "LeftHand":
-                        leftHandAttachedGameObject = gameObject;
-                        break;
+                    switch (hand.gameObject.name)
+                    {
+                        case "RightHand":
+                            rightHandAttachedGameObject = gameObject;
+                            break;
+                        case "LeftHand":
+                            leftHandAttachedGameObject = gameObject;
+                            break;
 
+                    }
                 }
-                // print($"{hand.name}抓住了{gameObject.name}");
-                // hand.HideGrabHint();
-                if (rightHandAttachedGameObject!=null && leftHandAttachedGameObject!=null)
+
+                if (isUsingTwoHands)
                 {
+                    if (rightHandAttachedGameObject!=null && leftHandAttachedGameObject!=null)
+                    {
+                        attachmentFlags = Hand.AttachmentFlags.VelocityMovement | Hand.AttachmentFlags.ParentToHand;
+                        hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset );
+                        print("雙手抓取");
+                        snapTakeObject = true;
+                        if (snapFixed.isFixed && snapReleaseGesture)
+                        {
+                            print($"已鬆手，且物件已黏合:{snapFixed.isFixed}");
+                            print($"物件吻合:{snapFixed.isLocated}");
+                            snapFixed.isFixed = false;
+                            snapFixed.isLocated = false;
+                            // snapOut.Invoke();
+                        }
+                    }
+                }
+                else
+                {
+                    attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.VelocityMovement;
                     hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset );
-                    hand.changePositionByTwoHands=true;
-                     print("雙手抓取");
+                    print("單手抓取");
                     snapTakeObject = true;
                     if (snapFixed.isFixed && snapReleaseGesture)
                     {
@@ -165,10 +166,7 @@ namespace InteractableObject
                         // snapOut.Invoke();
                     }
                 }
-                else
-                {
 
-                }
             }
         }
 
@@ -176,7 +174,29 @@ namespace InteractableObject
         {
             hand.HoverLock( null );
 
-            if (rightHandAttachedGameObject == null || leftHandAttachedGameObject==null)
+            if (isUsingTwoHands)
+            {
+                if (rightHandAttachedGameObject == null || leftHandAttachedGameObject==null)
+                {
+                    hadInterpolation = this.rigidbody.interpolation;
+
+                    attached = true;
+
+                    onPickUp.Invoke();
+
+
+
+                    rigidbody.interpolation = RigidbodyInterpolation.None;
+
+                    if (velocityEstimator != null)
+                        velocityEstimator.BeginEstimatingVelocity();
+
+                    attachTime = Time.time;
+                    attachPosition = transform.position;
+                    attachRotation = transform.rotation;
+                }
+            }
+            else
             {
                 hadInterpolation = this.rigidbody.interpolation;
 
@@ -196,17 +216,18 @@ namespace InteractableObject
                 attachRotation = transform.rotation;
             }
 
-
-
         }
 
         protected virtual void OnDetachedFromHand(Hand hand)
         {
-            rightHandAttachedGameObject = null;
-            leftHandAttachedGameObject = null;
+            if (isUsingTwoHands)
+            {
+                rightHandAttachedGameObject = null;
+                leftHandAttachedGameObject = null;
+            }
 
-            // if (!hand.otherHand.IsGrabEnding(gameObject))
-            // {
+
+
             hand.changePositionByTwoHands = false;
                 attached = false;
 
@@ -226,7 +247,6 @@ namespace InteractableObject
                 rigidbody.angularVelocity = angularVelocity;
                 rigidbody.interpolation = hadInterpolation;
                 takeObject = null;
-            // }
 
 
 
@@ -429,6 +449,7 @@ namespace InteractableObject
                         if (snapZone.isSnapIn)
                         {
                             transform.SetParent(snapZone.transform.parent);
+                            Destroy(snapZone.fadedObject);
                             print($"{gameObject.name}已成為{snapZone.transform.parent.name}的子物件");
                             snapZone.isSnapIn = false;
                         }
@@ -482,6 +503,34 @@ namespace InteractableObject
                 // }
             }
         }
+    }
+
+    [System.Serializable]
+    public class SnapFixed
+    {
+        /// <summary>
+        /// 定位判斷－抓取的物件若吻合於黏貼區(未鬆手)
+        /// </summary>
+        [Tooltip("定位判斷－抓取的物件若吻合於黏貼區(未鬆手) ")] public bool isLocated;
+
+        /// <summary>
+        /// 吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區)
+        /// </summary>
+        [Tooltip("吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區) ")]
+        public bool isFixed;
+
+        /// <summary>
+        /// 定點判斷
+        /// </summary>
+        [Tooltip("定點判斷 ")] public bool isOutside;
+    }
+
+    [System.Serializable]
+    public class ThrowOutside
+    {
+        public bool outside;
+        public float outsideRange;
+        public Transform outsideZone;
     }
 
 

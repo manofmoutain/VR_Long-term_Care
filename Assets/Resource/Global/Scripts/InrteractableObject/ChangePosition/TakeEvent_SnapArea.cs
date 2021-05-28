@@ -14,12 +14,12 @@ namespace InteractableObject
         /// </summary>
         public bool isSnapIn;
 
-        [SerializeField] private GameObject fadedObject;
+        public GameObject fadedObject;
 
         /// <summary>
         /// 要黏貼物件的外框線預置體
         /// </summary>
-        [Tooltip("要黏貼物件的外框線預置體")] public GameObject fadedPrefab; // used to preview insubstantial inputObject
+        [Tooltip("要黏貼物件的外框線預置體")] [SerializeField] GameObject fadedPrefab; // used to preview insubstantial inputObject
 
         /// <summary>
         /// 被偵測的區域碰撞體
@@ -32,7 +32,7 @@ namespace InteractableObject
         [SerializeField] TakeEvent_SingleHandSnapPutZone takeEventSingleHandSnapPutZone;
 
         // [SerializeField] TakeEvent_TwoHandSnapPutZone takeEventTwoHandSnapPutZone;
-        [SerializeField] TakeEvent_TwoHandGrab takeEventTwoHandGrab;
+        [SerializeField] TakeEvent_HandGrab takeEventHandGrab;
 
         [SerializeField] private AutoHand_HandGrab autoHandGrab;
 
@@ -55,7 +55,7 @@ namespace InteractableObject
             //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
                 // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.GetComponent<TakeEvent_TwoHandGrab>()
+                || other.GetComponent<TakeEvent_HandGrab>()
                 || other.GetComponent<AutoHand_HandGrab>())
             {
                 if (!isSnapIn)
@@ -80,9 +80,9 @@ namespace InteractableObject
                     //     takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
                     // }
 
-                    if (takeEventTwoHandGrab != null)
+                    if (takeEventHandGrab != null)
                     {
-                        takeEventTwoHandGrab.snapFixed.isLocated = true;
+                        takeEventHandGrab.snapFixed.isLocated = true;
                     }
 
                     if (autoHandGrab!=null)
@@ -102,7 +102,7 @@ namespace InteractableObject
         {
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
                 // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.GetComponent<TakeEvent_TwoHandGrab>()
+                || other.GetComponent<TakeEvent_HandGrab>()
                 || other.GetComponent<AutoHand_HandGrab>())
             {
                 if (isSnapIn)
@@ -120,9 +120,9 @@ namespace InteractableObject
                     //     takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
                     // }
 
-                    if (takeEventTwoHandGrab != null)
+                    if (takeEventHandGrab != null)
                     {
-                        takeEventTwoHandGrab.snapFixed.isLocated = true;
+                        takeEventHandGrab.snapFixed.isLocated = true;
                     }
                     if (autoHandGrab!=null)
                     {
@@ -143,7 +143,7 @@ namespace InteractableObject
             // SteamVR代碼
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
                 // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.GetComponent<TakeEvent_TwoHandGrab>()
+                || other.GetComponent<TakeEvent_HandGrab>()
                 || other.GetComponent<AutoHand_HandGrab>())
             {
                 if (isSnapIn)
@@ -172,12 +172,12 @@ namespace InteractableObject
                     //     }
                     // }
 
-                    if (takeEventTwoHandGrab!=null)
+                    if (takeEventHandGrab!=null)
                     {
-                        if (takeEventTwoHandGrab.snapFixed.isLocated &&
-                            !takeEventTwoHandGrab.snapFixed.isFixed)
+                        if (takeEventHandGrab.snapFixed.isLocated &&
+                            !takeEventHandGrab.snapFixed.isFixed)
                         {
-                            takeEventTwoHandGrab.snapFixed.isLocated = false;
+                            takeEventHandGrab.snapFixed.isLocated = false;
                         }
                     }
 

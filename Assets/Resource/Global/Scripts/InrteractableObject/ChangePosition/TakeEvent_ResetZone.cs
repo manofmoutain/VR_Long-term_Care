@@ -18,7 +18,7 @@ namespace InteractableObject
             //特定觸發
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
                 // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.GetComponent<TakeEvent_TwoHandGrab>()
+                || other.GetComponent<TakeEvent_HandGrab>()
                 || other.GetComponent<AutoHand_HandGrab>())
             {
                 print($"碰觸到了{gameObject.name}");
