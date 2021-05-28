@@ -570,33 +570,4 @@ namespace InteractableObject
             velocity *= (scaleFactor * scaleReleaseVelocity);
         }
     }
-
-
-    [System.Serializable]
-    public class SnapFixed
-    {
-        /// <summary>
-        /// 定位判斷－抓取的物件若吻合於黏貼區(未鬆手)
-        /// </summary>
-        [Tooltip("定位判斷－抓取的物件若吻合於黏貼區(未鬆手) ")] public bool isLocated;
-
-        /// <summary>
-        /// 吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區)
-        /// </summary>
-        [Tooltip("吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區) ")]
-        public bool isFixed;
-
-        /// <summary>
-        /// 定點判斷
-        /// </summary>
-        [Tooltip("定點判斷 ")] public bool isOutside;
-    }
-
-    [System.Serializable]
-    public class ThrowOutside
-    {
-        public bool outside;
-        public float outsideRange;
-        public Transform outsideZone;
-    }
 }
