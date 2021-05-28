@@ -21,7 +21,7 @@ namespace InteractableObject
         /// <summary>
         /// 抓握的是哪一隻手
         /// </summary>
-        [Header("手勢")] [SerializeField] private Hand handHoverLocked;
+        [SerializeField] private Hand grabHand;
 
         /// <summary>
         /// 手勢標誌
@@ -36,12 +36,13 @@ namespace InteractableObject
         /// <summary>
         /// 旋轉方式是否為定點旋轉(true=定點旋轉，false=環繞旋轉)
         /// </summary>
-        [Tooltip("旋轉方式是否為定點旋轉(true=定點旋轉，false=環繞旋轉)")][SerializeField] private bool isRoot =true;
+        [Tooltip("旋轉方式是否為定點旋轉(true=定點旋轉，false=環繞旋轉)")] [SerializeField]
+        private bool isRoot = true;
 
         /// <summary>
         /// 是否正在驅動
         /// </summary>
-        [Header("旋轉角度")] [SerializeField] private bool driving = false;
+        [SerializeField] private bool driving = false;
 
         [Tooltip("驅動器的輸出角度值（以度為單位，無限制）將無限制地增加或減少，採用360模數來查找轉數")]
         public float outAngle;
@@ -51,8 +52,7 @@ namespace InteractableObject
         /// </summary>
         public float Value => linearMapping.value;
 
-        [Header("驅動設定")] [Tooltip("圓形驅動器將在局部空間中繞其旋轉的軸")]
-        public Axis_t axisOfRotation = Axis_t.XAxis;
+        [Tooltip("圓形驅動器將在局部空間中繞其旋轉的軸")] public Axis_t axisOfRotation = Axis_t.XAxis;
 
         /// <summary>
         /// 是否可以轉動
@@ -67,7 +67,7 @@ namespace InteractableObject
         [Tooltip("具有Collider組件以啟動交互的子GameObject，僅當存在多個Collider子對象時才需要設置")]
         private Collider childCollider;
 
-        [Tooltip("要驅動的LinearMapping組件（如果未指定）將動態添加到此GameObject中。")]
+        [Tooltip("要驅動的LinearMapping組件（如果未指定）將動態添加到此GameObject中。")] [SerializeField]
         private Interact_LinearMapping linearMapping;
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace InteractableObject
         /// <summary>
         /// 是否要設定極限值
         /// </summary>
-        [Header("旋轉的極限值")] [Tooltip("如果limited為true，則旋轉將限制為[minAngle，maxAngle]；如果為false，則旋轉將不受限制")]
-        [SerializeField] bool limited ;
+        [Tooltip("如果limited為true，則旋轉將限制為[minAngle，maxAngle]；如果為false，則旋轉將不受限制")]
+        public bool limited;
 
         // /// <summary>
         // /// 如果limited為true，旋轉的極限值
@@ -95,48 +95,48 @@ namespace InteractableObject
         /// <summary>
         /// 極限值的最小值
         /// </summary>
-        [Header("旋轉值極限值的最小值")] [Tooltip("如果Limited為true，則指定下限，否則未使用值")]
-        public float minAngle ;
+        [Tooltip("如果Limited為true，則指定下限，否則未使用值")] [HideInInspector]
+        public float minAngle;
 
         /// <summary>
         /// 在最小值時的事件
         /// </summary>
-        [Tooltip("如果Limited，則在到達minAngle時調用事件")]
+        [Tooltip("如果Limited，則在到達minAngle時調用事件")] [HideInInspector]
         public UnityEvent onMinAngle;
 
         /// <summary>
         /// 極限值的最大值
         /// </summary>
-        [Header("旋轉極限值的最大值")] [Tooltip("如果limited為true，則指定上限，否則未使用值")]
-        public float maxAngle ;
+        [Tooltip("如果limited為true，則指定上限，否則未使用值")] [HideInInspector]
+        public float maxAngle;
 
         /// <summary>
         /// 在最大值時事件
         /// </summary>
-        [Tooltip("如果Limited，則在達到maxAngle時調用事件")]
+        [Tooltip("如果Limited，則在達到maxAngle時調用事件")] [HideInInspector]
         public UnityEvent onMaxAngle;
 
         /// <summary>
         /// 是否要開啟角度事件，不可與Limit共用
         /// </summary>
-        [Header("特定角度的事件")][Tooltip("是否要開啟角度事件，不可與Limit共用")] [SerializeField]
-        private bool isAngleEvent;
+        [Tooltip("是否要開啟角度事件，不可與Limit共用")] public bool isAngleEvent;
 
         /// <summary>
         /// 執行事件的角度值
         /// </summary>
-        [Tooltip("執行事件的角度值")] public float eventAngle;
+        [HideInInspector] [Tooltip("執行事件的角度值")]
+        public float eventAngle;
 
         /// <summary>
         /// 當角度為eventAngle值時，執行事件
         /// </summary>
-        [SerializeField] private UnityEvent angleEvent;
+        [HideInInspector] [SerializeField] private UnityEvent angleEvent;
 
         /// <summary>
         /// 在limited的情況中，是否要強制設定初始值
         /// </summary>
-        [Header("強制改變初始值")] [Tooltip("如果limited為true，則強制將起始角度設為startAngle，並固定為[minAngle，maxAngle]")]
-        public bool forceStart ;
+        [Tooltip("如果limited為true，則強制將起始角度設為startAngle，並固定為[minAngle，maxAngle]")]
+        public bool forceStart;
 
         /// <summary>
         /// 強制設定的初始旋轉值
@@ -144,22 +144,18 @@ namespace InteractableObject
         [Tooltip("如果limited為true且forceStart為true，則起始角度將為此角度，並固定為[minAngle，maxAngle]")]
         public float startAngle;
 
-        [Header("控制三維的值")] [SerializeField] private Quaternion start;
 
-        [SerializeField] private Vector3 worldPlaneNormal ;
-        [SerializeField] private Vector3 localPlaneNormal ;
-
+        [SerializeField] private Quaternion startQuaternion;
+        [SerializeField] private Vector3 worldPlaneNormal;
+        [SerializeField] private Vector3 localPlaneNormal;
         [SerializeField] private Vector3 lastHandProjected;
-
 
         /// <summary>
         /// 如果驅動器被限制為最小/最大，則大於此角度的角度將被忽略
         /// </summary>
-        [SerializeField] private float minMaxAngularThreshold = 1.0f;
+        [HideInInspector] [SerializeField]private float minMaxAngularThreshold = 1.0f;
 
-
-
-        [SerializeField] private Interactable interactable;
+        [HideInInspector] [SerializeField]private Interactable interactable;
 
 
         private void Awake()
@@ -185,7 +181,7 @@ namespace InteractableObject
             }
 
             worldPlaneNormal = new Vector3(0.0f, 0.0f, 0.0f);
-            worldPlaneNormal[(int) axisOfRotation] = 0.005f;
+            worldPlaneNormal[(int) axisOfRotation] = 1f;
 
 
             localPlaneNormal = worldPlaneNormal;
@@ -197,7 +193,7 @@ namespace InteractableObject
 
             if (limited)
             {
-                start = Quaternion.identity;
+                startQuaternion = Quaternion.identity;
                 outAngle = transform.localEulerAngles[(int) axisOfRotation];
 
                 if (forceStart)
@@ -207,20 +203,21 @@ namespace InteractableObject
             }
             else
             {
-                start = Quaternion.AngleAxis(transform.localEulerAngles[(int) axisOfRotation], localPlaneNormal);
+                startQuaternion = Quaternion.AngleAxis(transform.localEulerAngles[(int) axisOfRotation], localPlaneNormal);
                 outAngle = 0.0f;
             }
 
-            UpdateAll();
+            UpdateLinearMapping();
+            UpdateGameObject();
         }
 
         void OnDisable()
         {
-            if (handHoverLocked)
+            if (grabHand)
             {
-                handHoverLocked.HideGrabHint();
-                handHoverLocked.HoverUnlock(interactable);
-                handHoverLocked = null;
+                grabHand.HideGrabHint();
+                grabHand.HoverUnlock(interactable);
+                grabHand = null;
             }
         }
 
@@ -242,7 +239,7 @@ namespace InteractableObject
             }
 
             driving = false;
-            handHoverLocked = null;
+            grabHand = null;
         }
 
 
@@ -258,19 +255,28 @@ namespace InteractableObject
             {
                 grabbedWithType = startingGrabType;
                 // Trigger was just pressed
-                lastHandProjected = ComputeToTransformProjected(hand.hoverSphereTransform);
+                if (isRoot)
+                {
+                    lastHandProjected = ComputeToTransformProjected(hand.transform);
+                }
+                else
+                {
+                    lastHandProjected = ComputeToTransformProjected(hand.hoverSphereTransform);
+                }
+
 
                 if (hoverLock)
                 {
                     hand.HoverLock(interactable);
-                    handHoverLocked = hand;
+                    grabHand = hand;
                 }
 
                 hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
                 driving = true;
 
                 ComputeAngle(hand);
-                UpdateAll();
+                UpdateLinearMapping();
+                UpdateGameObject();
 
                 hand.HideGrabHint();
             }
@@ -282,7 +288,7 @@ namespace InteractableObject
                 if (hoverLock)
                 {
                     hand.HoverUnlock(interactable);
-                    handHoverLocked = null;
+                    grabHand = null;
                 }
 
                 driving = false;
@@ -292,13 +298,13 @@ namespace InteractableObject
             if (driving && isGrabEnding == false && hand.hoveringInteractable == this.interactable)
             {
                 ComputeAngle(hand);
-                UpdateAll();
+                UpdateLinearMapping();
+                UpdateGameObject();
             }
         }
 
         void HandAttachedUpdate(Hand hand)
         {
-            UpdateLinearMapping();
             if (hand.IsGrabEnding(this.gameObject))
             {
                 hand.DetachObject(gameObject);
@@ -311,7 +317,7 @@ namespace InteractableObject
             if (hoverLock)
             {
                 hand.HoverUnlock(interactable);
-                handHoverLocked = null;
+                grabHand = null;
             }
 
             driving = false;
@@ -406,7 +412,8 @@ namespace InteractableObject
             if (rotateGameObject)
             {
                 // print($"localPlaneNormal : {localPlaneNormal}");
-                transform.localRotation = start * Quaternion.AngleAxis(outAngle, localPlaneNormal);
+                transform.localRotation = startQuaternion * Quaternion.AngleAxis(outAngle, localPlaneNormal);
+                // print($"localRotation : {transform.localRotation}");
             }
         }
 
@@ -416,8 +423,8 @@ namespace InteractableObject
         /// </summary>
         private void UpdateAll()
         {
-            UpdateLinearMapping();
-            UpdateGameObject();
+            // UpdateLinearMapping();
+            // UpdateGameObject();
             // UpdateDebugText();
         }
 
@@ -438,10 +445,11 @@ namespace InteractableObject
                 toHandProjected = ComputeToTransformProjected(hand.hoverSphereTransform);
             }
 
-
+            // print($"lastHandProjected : {lastHandProjected} ; toHandProjected : {toHandProjected}");
             if (!toHandProjected.Equals(lastHandProjected))
             {
                 float absAngleDelta = Vector3.Angle(lastHandProjected, toHandProjected);
+                // print($"absAngleDelta : {absAngleDelta}");
 
                 if (absAngleDelta > 0.0f)
                 {
@@ -460,6 +468,7 @@ namespace InteractableObject
                     {
                         float angleTmp = Mathf.Clamp(outAngle + signedAngleDelta, minAngle, maxAngle);
 
+
                         if (outAngle == minAngle)
                         {
                             if (angleTmp > minAngle && absAngleDelta < minMaxAngularThreshold)
@@ -470,6 +479,7 @@ namespace InteractableObject
                         }
                         else if (outAngle == maxAngle)
                         {
+                            // print($"angleTmp : {angleTmp} ; absAngleDelta : {absAngleDelta}");
                             if (angleTmp < maxAngle && absAngleDelta < minMaxAngularThreshold)
                             {
                                 outAngle = angleTmp;
