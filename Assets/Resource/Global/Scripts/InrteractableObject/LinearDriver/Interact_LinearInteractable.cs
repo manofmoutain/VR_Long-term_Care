@@ -70,9 +70,9 @@ namespace InteractableObject
                 interactPoint.transform.position = linearDrive.GetComponent<LinearDrive>().startPosition.position;
             }
 
-            if (linearDrive.GetComponent<Interact_TwoHandLinearDrive>())
+            if (linearDrive.GetComponent<Interact_LinearDrive>())
             {
-                interactPoint.transform.position = linearDrive.GetComponent<Interact_TwoHandLinearDrive>().startPosition.position;
+                interactPoint.transform.position = linearDrive.GetComponent<Interact_LinearDrive>().startPosition.position;
             }
 
             
