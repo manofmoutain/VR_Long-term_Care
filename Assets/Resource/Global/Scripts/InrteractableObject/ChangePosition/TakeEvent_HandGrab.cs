@@ -5,7 +5,9 @@ using Valve.VR.InteractionSystem;
 
 namespace InteractableObject
 {
-    [RequireComponent( typeof( Interactable ) )]
+    [RequireComponent(typeof(TakeEvent_ToResetPosition))]
+    [RequireComponent(typeof(Collider))]
+    [RequireComponent( typeof( MyInteractable ) )]
     [RequireComponent( typeof( Rigidbody ) )]
     public class TakeEvent_HandGrab : MonoBehaviour
     {
@@ -32,7 +34,7 @@ namespace InteractableObject
         /// <summary>
         ///Trigger放開後是否要脫離手勢
         /// </summary>
-        [Tooltip("Trigger放開後是否要脫離手勢")] [SerializeField] private bool snapReleaseGesture;
+        [Tooltip("Trigger放開後是否要脫離手勢")] [SerializeField] private bool snapReleaseGesture = true;
         public SnapFixed snapFixed;
         [SerializeField] private ThrowOutside throwOutside;
 
@@ -42,7 +44,7 @@ namespace InteractableObject
                  "DetachFromOtherHand=該對象將與另一隻手分離；" +
                  "VelocityMovement=對象將嘗試移動以匹配手的位置和旋轉；" +
                  "AllowSidegrade=該對象能夠從捏握切換為抓握")]
-        [SerializeField] private Hand.AttachmentFlags attachmentFlags;
+        [SerializeField] private Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand;
         [Tooltip( "由於扳機保持而不是扳機按下，該物體必須移動多快才能固定？ (-1 to disable)" )][SerializeField]  float catchingSpeedThreshold = -1;
         [Tooltip("保持時用作位置和旋轉偏移量的局部點")][SerializeField]  Transform attachmentOffset;
 
@@ -137,7 +139,7 @@ namespace InteractableObject
                 {
                     if (rightHandAttachedGameObject!=null && leftHandAttachedGameObject!=null)
                     {
-                        attachmentFlags = Hand.AttachmentFlags.VelocityMovement | Hand.AttachmentFlags.ParentToHand;
+                        // attachmentFlags = Hand.AttachmentFlags.VelocityMovement | Hand.AttachmentFlags.ParentToHand;
                         hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset );
                         print("雙手抓取");
                         snapTakeObject = true;
@@ -153,7 +155,7 @@ namespace InteractableObject
                 }
                 else
                 {
-                    attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.VelocityMovement;
+                    // attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.VelocityMovement;
                     hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset );
                     print("單手抓取");
                     snapTakeObject = true;
@@ -267,7 +269,11 @@ namespace InteractableObject
                     {
                         //強制鬆手
                         hand.DetachObject(gameObject);
-                        hand.otherHand.DetachObject(gameObject);
+                        if (isUsingTwoHands)
+                        {
+                            hand.otherHand.DetachObject(gameObject);
+                        }
+
                         // playerHand_L.DetachObject(gameObject);
                         // playerHand_R.DetachObject(gameObject);
                         // snapTakeObject = false;
@@ -280,10 +286,16 @@ namespace InteractableObject
                 //如果物件未吻合於區域
                 else
                 {
-                    hand.otherHand.DetachObject(gameObject);
                     // hand.otherHand.ObjectIsAttached(gameObject);
                     hand.DetachObject(gameObject);
-                    hand.otherHand.HoverUnlock(interactable);
+                    if (isUsingTwoHands )
+                    {
+                        if (hand.otherHand.ObjectIsAttached(gameObject))
+                        {
+                            hand.otherHand.DetachObject(gameObject);
+                        }
+
+                    }
                     hand.HoverUnlock(interactable);
 
                     if (throwOutside.outside)
@@ -383,6 +395,7 @@ namespace InteractableObject
 
         private void Initialize()
         {
+            GetComponent<Collider>().isTrigger = true;
             if (OriginalPositionGameObject==null)
             {
                 OriginalPositionGameObject = transform.parent.gameObject;
