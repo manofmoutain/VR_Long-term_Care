@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace InteractableObject
 {
+
     /// <summary>
     /// 要黏貼的區域
     /// </summary>
+    [RequireComponent(typeof(Collider))]
     public class TakeEvent_SnapArea : MonoBehaviour
     {
         /// <summary>
@@ -42,7 +44,7 @@ namespace InteractableObject
         {
             if (sphereCollider == null)
             {
-                sphereCollider = GetComponent<SphereCollider>();
+                sphereCollider = GetComponent<Collider>();
             }
         }
 

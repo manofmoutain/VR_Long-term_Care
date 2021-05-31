@@ -22,6 +22,10 @@ namespace InteractableObject
 
         private void Start()
         {
+            if (originTransform==null)
+            {
+                originTransform = transform.parent.transform;
+            }
             isEntry = false;
             originTransform = transform.parent;
             originPosition = transform.localPosition;
