@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 3130740099809322085}
   - component: {fileID: 4373850835920500971}
   - component: {fileID: 4373850835920500968}
-  - component: {fileID: 4373850835920500964}
   - component: {fileID: 4373850835920500965}
-  - component: {fileID: 4373850835920500970}
-  - component: {fileID: 4373850835920500969}
+  - component: {fileID: 382695607228296544}
+  - component: {fileID: 6166677008932881755}
+  - component: {fileID: 1027610861}
   m_Layer: 0
   m_Name: "\u83DC\u5200"
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3490962581116093872}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.00050000846, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -111,80 +111,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3490962581116093872}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.021574384, y: 0.39431655, z: 0.060656905}
-  m_Center: {x: 0.0000000144867505, y: 0.14148544, z: 0.013151675}
---- !u!114 &4373850835920500964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3490962581116093872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46975e50f65399e42890a47c535d31c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentFlags: 12
-  snapTakeObject: 0
-  snapReleaseGesture: 1
-  snapFixed:
-    isLocated: 0
-    isFixed: 0
-    isOutside: 0
-  throwOutside:
-    outside: 0
-    outsideRange: 0
-    outsideZone: {fileID: 0}
-  catchingSpeedThreshold: 0
-  releaseVelocityTimeOffset: 0
-  scaleReleaseVelocity: 0
-  scaleReleaseVelocityThreshold: 0
-  rigidbody: {fileID: 0}
-  hadInterpolation: 0
-  velocityEstimator: {fileID: 0}
-  scaleReleaseVelocityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  interactable: {fileID: 0}
-  sanpCurrentHand: {fileID: 0}
-  OriginalPosition: {fileID: 0}
-  UsePosition: []
-  snapZoneArea: []
-  takeObject: {fileID: 0}
-  snapIn:
-    m_PersistentCalls:
-      m_Calls: []
-  snapOut:
-    m_PersistentCalls:
-      m_Calls: []
-  pickUp:
-    m_PersistentCalls:
-      m_Calls: []
-  grabEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  dropDown:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4373850835920500965}
-        m_TargetAssemblyTypeName: InteractableObject.TakeEvent_ToResetPosition, Assembly-CSharp
-        m_MethodName: ReturnToOriginPosition
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  m_Size: {x: 0.46298674, y: 0.025331615, z: 0.071220316}
+  m_Center: {x: -0.16612525, y: 0.000000007353126, z: 0.015442061}
 --- !u!114 &4373850835920500965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +133,7 @@ MonoBehaviour:
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0}
   originScale: {x: 0, y: 0, z: 0}
---- !u!114 &4373850835920500970
+--- !u!114 &382695607228296544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,14 +142,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3490962581116093872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
+  m_Script: {fileID: 11500000, guid: 529f955dc7c27804d948c1e7bee2711b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activateActionSetOnAttach:
     actionSetPath: 
-  hideHandOnAttach: 1
+  hideHandOnAttach: 0
   hideSkeletonOnAttach: 0
-  hideControllerOnAttach: 0
+  hideControllerOnAttach: 1
   handAnimationOnPickup: 0
   setRangeOfMotionOnPickup: -1
   useHandObjectAttachmentPoint: 1
@@ -261,7 +192,7 @@ MonoBehaviour:
   hoverPriority: 0
   attachedToHand: {fileID: 0}
   hoveringHands: []
---- !u!114 &4373850835920500969
+--- !u!114 &6166677008932881755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,7 +201,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3490962581116093872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Script: {fileID: 11500000, guid: d2dd4b731b5288f4992fb6c59d7d89a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poseEditorExpanded: 1
@@ -288,3 +219,55 @@ MonoBehaviour:
   previewPoseSelection: 0
   blendingBehaviours: []
   scale: 1
+--- !u!114 &1027610861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3490962581116093872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd8cd88139a23747ad9b9c9332c3cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingTwoHands: 0
+  rightHand: {fileID: 0}
+  rightHandAttachedGameObject: {fileID: 0}
+  leftHand: {fileID: 0}
+  leftHandAttachedGameObject: {fileID: 0}
+  OriginalPositionGameObject: {fileID: 0}
+  UsePosition: []
+  snapZoneArea: []
+  takeObject: {fileID: 0}
+  snapTakeObject: 0
+  snapReleaseGesture: 1
+  snapFixed:
+    isLocated: 0
+    isFixed: 0
+    isOutside: 0
+  throwOutside:
+    outside: 0
+    outsideRange: 0
+    outsideZone: {fileID: 0}
+  attachmentFlags: 8
+  catchingSpeedThreshold: -1
+  attachmentOffset: {fileID: 0}
+  interactable: {fileID: 0}
+  attached: 0
+  attachTime: 0
+  attachPosition: {x: 0, y: 0, z: 0}
+  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  isHiddenEvents: 0
+  snapIn:
+    m_PersistentCalls:
+      m_Calls: []
+  snapOut:
+    m_PersistentCalls:
+      m_Calls: []
+  onPickUp:
+    m_PersistentCalls:
+      m_Calls: []
+  dropDown:
+    m_PersistentCalls:
+      m_Calls: []

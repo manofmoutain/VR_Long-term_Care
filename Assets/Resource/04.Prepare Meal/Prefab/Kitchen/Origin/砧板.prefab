@@ -166,7 +166,7 @@ MonoBehaviour:
     outside: 0
     outsideRange: 0
     outsideZone: {fileID: 0}
-  attachmentFlags: 24
+  attachmentFlags: 8
   catchingSpeedThreshold: -1
   attachmentOffset: {fileID: 0}
   interactable: {fileID: 0}

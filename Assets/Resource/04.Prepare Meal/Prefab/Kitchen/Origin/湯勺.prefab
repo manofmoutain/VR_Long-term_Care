@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 6906265944295645182}
   - component: {fileID: 7182597034517305546}
   - component: {fileID: 1685551526879442656}
-  - component: {fileID: 5650442520670186159}
-  - component: {fileID: 8533259625212782191}
   - component: {fileID: 842199632558086389}
+  - component: {fileID: 1065531331}
+  - component: {fileID: 1065531330}
+  - component: {fileID: 1065531329}
   m_Layer: 0
   m_Name: "\u6E6F\u52FA"
   m_TagString: Untagged
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7098488c69bb7484cb6100a88f5b58a1, type: 2}
+  - {fileID: 2100000, guid: 5fe82bdb0106982479fb44f47917913e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,7 +130,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5650442520670186159
+--- !u!114 &842199632558086389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,14 +139,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 3695326854532455229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
+  m_Script: {fileID: 11500000, guid: 34092037579d1104eb40b47aae8ef1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEntry: 0
+  originTransform: {fileID: 0}
+  originPosition: {x: 0, y: 0, z: 0}
+  originRotation: {x: 0, y: 0, z: 0}
+  originScale: {x: 0, y: 0, z: 0}
+--- !u!114 &1065531331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695326854532455229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529f955dc7c27804d948c1e7bee2711b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activateActionSetOnAttach:
     actionSetPath: 
-  hideHandOnAttach: 1
+  hideHandOnAttach: 0
   hideSkeletonOnAttach: 0
-  hideControllerOnAttach: 0
+  hideControllerOnAttach: 1
   handAnimationOnPickup: 0
   setRangeOfMotionOnPickup: -1
   useHandObjectAttachmentPoint: 1
@@ -188,7 +206,7 @@ MonoBehaviour:
   hoverPriority: 0
   attachedToHand: {fileID: 0}
   hoveringHands: []
---- !u!114 &8533259625212782191
+--- !u!114 &1065531330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,10 +215,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 3695326854532455229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46975e50f65399e42890a47c535d31c8, type: 3}
+  m_Script: {fileID: 11500000, guid: d2dd4b731b5288f4992fb6c59d7d89a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachmentFlags: 12
+  poseEditorExpanded: 1
+  blendEditorExpanded: 1
+  poseNames:
+  - TakeLadle (MAIN)
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf, type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25, type: 3}
+  skeletonMainPose: {fileID: 11400000, guid: 7fbce294b3352bd428f00bab8007f562, type: 2}
+  skeletonAdditionalPoses: []
+  showLeftPreview: 0
+  showRightPreview: 0
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours: []
+  scale: 1
+--- !u!114 &1065531329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695326854532455229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd8cd88139a23747ad9b9c9332c3cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingTwoHands: 0
+  rightHand: {fileID: 0}
+  rightHandAttachedGameObject: {fileID: 0}
+  leftHand: {fileID: 0}
+  leftHandAttachedGameObject: {fileID: 0}
+  OriginalPositionGameObject: {fileID: 0}
+  UsePosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  snapZoneArea: []
+  takeObject: {fileID: 0}
   snapTakeObject: 0
   snapReleaseGesture: 1
   snapFixed:
@@ -211,66 +266,24 @@ MonoBehaviour:
     outside: 0
     outsideRange: 0
     outsideZone: {fileID: 0}
-  catchingSpeedThreshold: 0
-  releaseVelocityTimeOffset: 0
-  scaleReleaseVelocity: 0
-  scaleReleaseVelocityThreshold: 0
-  rigidbody: {fileID: 0}
-  hadInterpolation: 0
-  velocityEstimator: {fileID: 0}
-  scaleReleaseVelocityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  attachmentFlags: 8
+  catchingSpeedThreshold: -1
+  attachmentOffset: {fileID: 0}
   interactable: {fileID: 0}
-  sanpCurrentHand: {fileID: 0}
-  OriginalPosition: {fileID: 0}
-  UsePosition: []
-  snapZoneArea: []
-  takeObject: {fileID: 0}
+  attached: 0
+  attachTime: 0
+  attachPosition: {x: 0, y: 0, z: 0}
+  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  isHiddenEvents: 1
   snapIn:
     m_PersistentCalls:
       m_Calls: []
   snapOut:
     m_PersistentCalls:
       m_Calls: []
-  pickUp:
-    m_PersistentCalls:
-      m_Calls: []
-  grabEvent:
+  onPickUp:
     m_PersistentCalls:
       m_Calls: []
   dropDown:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 842199632558086389}
-        m_TargetAssemblyTypeName: InteractableObject.TakeEvent_ToResetPosition, Assembly-CSharp
-        m_MethodName: ReturnToOriginPosition
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &842199632558086389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3695326854532455229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34092037579d1104eb40b47aae8ef1c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEntry: 0
-  originTransform: {fileID: 0}
-  originPosition: {x: 0, y: 0, z: 0}
-  originRotation: {x: 0, y: 0, z: 0}
-  originScale: {x: 0, y: 0, z: 0}
+      m_Calls: []
