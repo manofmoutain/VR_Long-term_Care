@@ -42,13 +42,13 @@ namespace InteractableObject
             EditorGUILayout.LabelField(new GUIContent("抓取狀態"),headerLayout);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("snapTakeObject"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("snapReleaseGesture"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("throwOutside"));
+            // EditorGUILayout.PropertyField(serializedObject.FindProperty("throwOutside"));
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(new GUIContent("手勢資訊"),headerLayout);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("attachmentFlags"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("catchingSpeedThreshold"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("attachmentOffset"));
+            // EditorGUILayout.PropertyField(serializedObject.FindProperty("catchingSpeedThreshold"));
+            // EditorGUILayout.PropertyField(serializedObject.FindProperty("attachmentOffset"));
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(new GUIContent("事件"),headerLayout);
