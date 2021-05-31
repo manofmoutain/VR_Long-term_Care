@@ -8,7 +8,7 @@ namespace InteractableObject
     {
         public UnityEvent onTriggerEnter;
         public UnityEvent onLinearInteractTriggerEnter;
-        public UnityEvent ontDropDownTriggerEnter;
+        public UnityEvent onTriggerCount;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -19,9 +19,9 @@ namespace InteractableObject
                 onLinearInteractTriggerEnter.Invoke();
             }
 
-            if (other.GetComponent<TakeEvent_ToResetPosition>())
+            if (other.GetComponent<Interact_Count>())
             {
-                ontDropDownTriggerEnter.Invoke();
+                onTriggerCount.Invoke();
             }
 
         }
