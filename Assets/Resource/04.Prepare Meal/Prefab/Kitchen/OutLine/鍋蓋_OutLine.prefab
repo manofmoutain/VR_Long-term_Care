@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1102669211638235410}
   - component: {fileID: 4678861039404609872}
   m_Layer: 0
-  m_Name: "\u934B\u84CB"
+  m_Name: "\u934B\u84CB_OutLine"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3813707348631806013}
-  m_Mesh: {fileID: -8113768720884857512, guid: 6e607f430e127454b966cc64e2cb0f44, type: 3}
+  m_Mesh: {fileID: 4729988176110476404, guid: 6e607f430e127454b966cc64e2cb0f44, type: 3}
 --- !u!23 &4678861039404609872
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -59,8 +59,6 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 267aa8c42d3266c44be6af8288793719, type: 2}
-  - {fileID: 2100000, guid: 267aa8c42d3266c44be6af8288793719, type: 2}
   - {fileID: 2100000, guid: 267aa8c42d3266c44be6af8288793719, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
