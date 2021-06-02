@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace InteractableObject
 {
@@ -8,12 +9,14 @@ namespace InteractableObject
     {
         public int count;
         [SerializeField] private int maxCount;
+        [SerializeField] private UnityEvent onMaxCountEvent;
 
         public void AddCount()
         {
             if (count>=maxCount)
             {
                 count = maxCount;
+                onMaxCountEvent.Invoke();
             }
             else
             {

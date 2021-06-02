@@ -9,6 +9,7 @@ namespace InteractableObject
         public UnityEvent onTriggerEnter;
         public UnityEvent onLinearInteractTriggerEnter;
         public UnityEvent onTriggerCount;
+        [SerializeField] private UnityEvent animatorTriggerEvent;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -22,6 +23,11 @@ namespace InteractableObject
             if (other.GetComponent<Interact_Count>())
             {
                 onTriggerCount.Invoke();
+            }
+
+            if (other.GetComponent<AnimatorTrigger>())
+            {
+                animatorTriggerEvent.Invoke();
             }
 
         }

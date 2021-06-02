@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class SwitchComponent : MonoBehaviour
+namespace InteractableObject
 {
-    public void TurnOffCollider(GameObject go)
+    public class SwitchComponent : MonoBehaviour
     {
-        go.GetComponent<Collider>().enabled = false;
-    }
+        public void SwitchCollider(GameObject go)
+        {
+            go.GetComponent<Collider>().enabled = !go.GetComponent<Collider>().enabled;
+        }
 
-    public void TurnOnCollider(GameObject go)
-    {
-        go.GetComponent<Collider>().enabled = true;
+        public void SwtichGameObject(GameObject go)
+        {
+            go.SetActive(!go.activeSelf);
+        }
     }
 }
+
