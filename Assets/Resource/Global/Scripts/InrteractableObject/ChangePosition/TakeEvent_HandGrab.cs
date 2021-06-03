@@ -85,7 +85,7 @@ namespace InteractableObject
         [HideInInspector] [SerializeField] protected Quaternion attachRotation;
 
 
-        [Header("事件")] public bool isHiddenEvents=false;
+        [Header("事件")] public bool isHiddenEvents=true;
         [HideInInspector] [SerializeField] private UnityEvent snapIn;
         [HideInInspector] [SerializeField] UnityEvent snapOut;
         [HideInInspector] [SerializeField] private UnityEvent onPickUp;
