@@ -397,7 +397,6 @@ namespace InteractableObject
 
         private void Initialize()
         {
-            GetComponent<Collider>().isTrigger = true;
             if (OriginalPositionGameObject==null)
             {
                 OriginalPositionGameObject = transform.parent.gameObject;
@@ -417,7 +416,30 @@ namespace InteractableObject
             scaleReleaseVelocityThreshold = -1.0f;
             scaleReleaseVelocityCurve = AnimationCurve.EaseInOut(0.0f, 0.1f, 1.0f, 1.0f);
 
-            GetComponent<Collider>().isTrigger = isStartTrigger;
+            if (isStartTrigger)
+            {
+                if (GetComponent<MeshCollider>() && GetComponent<MeshCollider>().convex)
+                {
+                    GetComponent<MeshCollider>().isTrigger = isStartTrigger;
+                }
+                else
+                {
+                    GetComponent<Collider>().isTrigger = isStartTrigger;
+                }
+            }
+            else
+            {
+                if (GetComponent<MeshCollider>())
+                {
+                    GetComponent<MeshCollider>().convex = false;
+                }
+                else
+                {
+                    GetComponent<Collider>().isTrigger = isStartTrigger;
+                }
+            }
+
+
 
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.maxAngularVelocity = 50.0f;
