@@ -1475,6 +1475,7 @@ GameObject:
   - component: {fileID: 919132147630597153}
   - component: {fileID: 919132147630597152}
   - component: {fileID: 919132147630597151}
+  - component: {fileID: 4116395323681982040}
   m_Layer: 0
   m_Name: "\u9BAD\u9B5A"
   m_TagString: Untagged
@@ -1566,7 +1567,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1583,6 +1584,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6158762562917920474}
+  animatorTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3882332993384951783}
+        m_TargetAssemblyTypeName: InteractableObject.AnimatorTrigger, Assembly-CSharp
+        m_MethodName: SetAnimatorTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CutOff
+          m_BoolArgument: 0
+        m_CallState: 2
+  animatorBool:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1743499431191065916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1693,6 +1712,8 @@ MonoBehaviour:
   rightHandAttachedGameObject: {fileID: 0}
   leftHand: {fileID: 0}
   leftHandAttachedGameObject: {fileID: 0}
+  isStartTrigger: 1
+  isStartKinematic: 1
   OriginalPositionGameObject: {fileID: 0}
   UsePosition:
   - {fileID: 0}
@@ -1729,6 +1750,33 @@ MonoBehaviour:
   dropDown:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4116395323681982040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6465260563013260181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd4b731b5288f4992fb6c59d7d89a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 1
+  blendEditorExpanded: 1
+  poseNames:
+  - TakeSalmon (MAIN)
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf, type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25, type: 3}
+  skeletonMainPose: {fileID: 11400000, guid: bd7d890dc9df4d14aaeaeecf5a6bfc9f, type: 2}
+  skeletonAdditionalPoses: []
+  showLeftPreview: 0
+  showRightPreview: 0
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours: []
+  scale: 1
 --- !u!1 &6539665799583479080
 GameObject:
   m_ObjectHideFlags: 0
