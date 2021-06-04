@@ -1,20 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace InteractableObject
 {
     public class SwitchComponent : MonoBehaviour
     {
-        public void SwitchCollider(GameObject go)
+        [SerializeField] private UnityEvent triggerEvent;
+        [SerializeField] private UnityEvent collisionEvent;
+
+        private void OnTriggerEnter(Collider other)
         {
-            go.GetComponent<Collider>().enabled = !go.GetComponent<Collider>().enabled;
+            if (other.GetComponent<Interact_TriggerComponent>())
+            {
+                print($"Touched {other.gameObject.name}");
+                triggerEvent.Invoke();
+            }
         }
 
-        public void SwtichGameObject(GameObject go)
+        private void OnCollisionEnter(Collision other)
         {
-            go.SetActive(!go.activeSelf);
+            if (other.gameObject.GetComponent<Interact_TriggerComponent>())
+            {
+                print($"Touched {other.gameObject.name}");
+                collisionEvent.Invoke();
+            }
+        }
+
+        public void SwitchCollider(bool switcher)
+        {
+            GetComponent<Collider>().enabled = switcher;
+        }
+
+        public void SwitchTrigger(bool switcher)
+        {
+            GetComponent<Collider>().isTrigger = switcher;
+        }
+
+        public void SwtichGameObject(bool switcher)
+        {
+            gameObject.SetActive(switcher);
+        }
+
+        public void SwitchRiggibodyKinematic(bool switcher)
+        {
+            GetComponent<Rigidbody>().isKinematic = switcher;
         }
     }
 }
-

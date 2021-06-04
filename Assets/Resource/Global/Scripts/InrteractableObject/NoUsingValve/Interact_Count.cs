@@ -15,8 +15,9 @@ namespace InteractableObject
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<Interact_OnTriggerEnterCount>())
+            if (other.GetComponent<Interact_TriggerComponent>())
             {
+                print($"AddCount");
                 AddCount();
             }
         }
