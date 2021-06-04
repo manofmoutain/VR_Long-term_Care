@@ -46,6 +46,8 @@ namespace InteractableObject
             {
                 sphereCollider = GetComponent<Collider>();
             }
+
+            sphereCollider.isTrigger = true;
         }
 
         private void OnTriggerEnter(Collider other)
