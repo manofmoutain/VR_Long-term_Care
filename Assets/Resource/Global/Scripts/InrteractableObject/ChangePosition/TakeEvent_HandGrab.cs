@@ -18,6 +18,8 @@ namespace InteractableObject
         [HideInInspector] [SerializeField] private GameObject leftHandAttachedGameObject;
 
         // [Header("模型位置參數")]
+        [SerializeField] private bool isStartTrigger=true;
+        [SerializeField] private bool isStartKinematic=true;
         [Tooltip("原本位置")][SerializeField] GameObject OriginalPositionGameObject;
         private Vector3 originPosition;
         private Vector3 originRotation;
@@ -415,9 +417,11 @@ namespace InteractableObject
             scaleReleaseVelocityThreshold = -1.0f;
             scaleReleaseVelocityCurve = AnimationCurve.EaseInOut(0.0f, 0.1f, 1.0f, 1.0f);
 
+            GetComponent<Collider>().isTrigger = isStartTrigger;
+
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.maxAngularVelocity = 50.0f;
-            rigidbody.isKinematic = true;
+            rigidbody.isKinematic = isStartKinematic;
 
             velocityEstimator = GetComponent<VelocityEstimator>();
             interactable = GetComponent<Interactable>();
