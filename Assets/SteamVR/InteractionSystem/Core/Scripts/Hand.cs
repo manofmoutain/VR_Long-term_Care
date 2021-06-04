@@ -1777,8 +1777,8 @@ namespace Valve.VR.InteractionSystem
         {
             // if (isHaptic)
             // {
-                float seconds = (float) microSecondsDuration / 1000000f;
-                hapticAction.Execute(0, seconds, 1f / seconds, 1, handType);
+                // float seconds = (float) microSecondsDuration / 1000000f;
+                // hapticAction.Execute(0, seconds, 1f / seconds, 1, handType);
             // }
 
         }
@@ -1787,7 +1787,7 @@ namespace Valve.VR.InteractionSystem
         {
             // if (isHaptic)
             // {
-                hapticAction.Execute(0, duration, frequency, amplitude, handType);
+                // hapticAction.Execute(0, duration, frequency, amplitude, handType);
 
             // }
         }
