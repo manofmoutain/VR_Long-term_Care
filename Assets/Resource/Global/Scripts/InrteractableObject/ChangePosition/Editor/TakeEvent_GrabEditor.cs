@@ -33,6 +33,8 @@ namespace InteractableObject
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(new GUIContent("位置參數"),headerLayout);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("isStartTrigger"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("isStartKinematic"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("OriginalPositionGameObject"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("UsePosition"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("snapZoneArea"));
