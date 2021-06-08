@@ -26,6 +26,16 @@ namespace InteractableObject
             }
         }
 
+        public void ActiveGameObject(GameObject go)
+        {
+            go.SetActive(true);
+        }
+
+        public void SwitchMeshRender(bool switcher)
+        {
+            GetComponent<MeshRenderer>().enabled = switcher;
+        }
+
         public void SwitchCollider(bool switcher)
         {
             GetComponent<Collider>().enabled = switcher;
