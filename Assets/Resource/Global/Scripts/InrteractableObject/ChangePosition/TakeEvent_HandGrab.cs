@@ -418,13 +418,22 @@ namespace InteractableObject
 
             if (isStartTrigger)
             {
-                if (GetComponent<MeshCollider>() && GetComponent<MeshCollider>().convex)
+                if (GetComponent<MeshCollider>())
                 {
-                    GetComponent<MeshCollider>().isTrigger = isStartTrigger;
+                    if (GetComponent<MeshCollider>().convex)
+                    {
+                        GetComponent<MeshCollider>().isTrigger = true;
+                    }
+                    else
+                    {
+                        GetComponent<MeshCollider>().convex = true;
+                        GetComponent<MeshCollider>().isTrigger = true;
+                    }
+
                 }
                 else
                 {
-                    GetComponent<Collider>().isTrigger = isStartTrigger;
+                    GetComponent<Collider>().isTrigger = true;
                 }
             }
             else
@@ -435,7 +444,7 @@ namespace InteractableObject
                 }
                 else
                 {
-                    GetComponent<Collider>().isTrigger = isStartTrigger;
+                    GetComponent<Collider>().isTrigger = false;
                 }
             }
 
