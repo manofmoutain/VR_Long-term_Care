@@ -7,7 +7,7 @@ namespace InteractableObject
 {
     public class Interact_CircularAnimator : MonoBehaviour
     {
-        public LinearMapping circularDriveGameObject;
+        public Interact_LinearMapping circularDriveGameObject;
         [SerializeField] private Animator animator;
 
         public float currentCircularMapping = float.NaN;
@@ -16,9 +16,10 @@ namespace InteractableObject
 
         private void Awake()
         {
-            if (animator == null)
+
+            if (GetComponent<Animator>())
             {
-                animator.GetComponent<Animator>();
+                animator = GetComponent<Animator>();
             }
 
             animator.speed = 0.0f;
