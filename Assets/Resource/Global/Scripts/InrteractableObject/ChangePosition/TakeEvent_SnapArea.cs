@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace InteractableObject
 {
-
     /// <summary>
     /// 要黏貼的區域
     /// </summary>
@@ -21,7 +20,8 @@ namespace InteractableObject
         /// <summary>
         /// 要黏貼物件的外框線預置體
         /// </summary>
-        [Tooltip("要黏貼物件的外框線預置體")] [SerializeField] GameObject fadedPrefab; // used to preview insubstantial inputObject
+        [Tooltip("要黏貼物件的外框線預置體")] [SerializeField]
+        GameObject fadedPrefab; // used to preview insubstantial inputObject
 
         /// <summary>
         /// 被偵測的區域碰撞體
@@ -39,7 +39,6 @@ namespace InteractableObject
         [SerializeField] private AutoHand_HandGrab autoHandGrab;
 
 
-
         void Start()
         {
             if (sphereCollider == null)
@@ -52,10 +51,6 @@ namespace InteractableObject
 
         private void OnTriggerEnter(Collider other)
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
-// Oculus Quest代碼
-#else
-            // SteamVR代碼
             //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
                 // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
@@ -66,7 +61,7 @@ namespace InteractableObject
                 {
                     // print($"{other.gameObject.name}進入{transform.parent.name}");
                     //產生外框線
-                    fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity,transform);
+                    fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity, transform);
                     // fadedObject.transform.SetParent(transform);
                     // fadedObject.transform.localPosition = Vector3.zero;
                     // fadedObject.transform.localScale = Vector3.one;
@@ -89,7 +84,7 @@ namespace InteractableObject
                         takeEventHandGrab.snapFixed.isLocated = true;
                     }
 
-                    if (autoHandGrab!=null)
+                    if (autoHandGrab != null)
                     {
                         // print($"{autoHandGrab.name}.snapFixed.isLocated : {autoHandGrab.snapFixed.isLocated}");
                         autoHandGrab.snapFixed.isLocated = true;
@@ -97,8 +92,6 @@ namespace InteractableObject
                     //Debug.Log("Snap Object Correct！");
                 }
             }
-
-#endif
         }
 
 
@@ -128,7 +121,8 @@ namespace InteractableObject
                     {
                         takeEventHandGrab.snapFixed.isLocated = true;
                     }
-                    if (autoHandGrab!=null)
+
+                    if (autoHandGrab != null)
                     {
                         // print($"{autoHandGrab.name}.snapFixed.isLocated : {autoHandGrab.snapFixed.isLocated}");
                         autoHandGrab.snapFixed.isLocated = true;
@@ -141,9 +135,6 @@ namespace InteractableObject
 
         private void OnTriggerExit(Collider other)
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
-// Oculus Quest代碼
-#else
             // SteamVR代碼
             if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
                 // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
@@ -152,10 +143,11 @@ namespace InteractableObject
             {
                 if (isSnapIn)
                 {
-                    if (fadedObject!=null)
+                    if (fadedObject != null)
                     {
                         Destroy(fadedObject);
                     }
+
                     isSnapIn = false;
 
                     if (takeEventSingleHandSnapPutZone != null)
@@ -167,16 +159,7 @@ namespace InteractableObject
                         }
                     }
 
-                    // if (takeEventTwoHandSnapPutZone != null)
-                    // {
-                    //     if (takeEventTwoHandSnapPutZone.snapFixed.isLocated &&
-                    //         !takeEventTwoHandSnapPutZone.snapFixed.isFixed)
-                    //     {
-                    //         takeEventTwoHandSnapPutZone.snapFixed.isLocated = false;
-                    //     }
-                    // }
-
-                    if (takeEventHandGrab!=null)
+                    if (takeEventHandGrab != null)
                     {
                         if (takeEventHandGrab.snapFixed.isLocated &&
                             !takeEventHandGrab.snapFixed.isFixed)
@@ -185,7 +168,7 @@ namespace InteractableObject
                         }
                     }
 
-                    if (autoHandGrab!=null)
+                    if (autoHandGrab != null)
                     {
                         if (autoHandGrab.snapFixed.isLocated && !autoHandGrab.snapFixed.isFixed)
                         {
@@ -194,9 +177,128 @@ namespace InteractableObject
                     }
                 }
             }
+        }
 
+        private void OnCollisionEnter(Collision other)
+        {
+            //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
+            if (other.gameObject.GetComponent<TakeEvent_SingleHandSnapPutZone>()
+                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
+                || other.gameObject.GetComponent<TakeEvent_HandGrab>()
+                || other.gameObject.GetComponent<AutoHand_HandGrab>())
+            {
+                if (!isSnapIn)
+                {
+                    // print($"{other.gameObject.name}進入{transform.parent.name}");
+                    //產生外框線
+                    fadedObject = Instantiate(fadedPrefab, transform.position, Quaternion.identity, transform);
+                    // fadedObject.transform.SetParent(transform);
+                    // fadedObject.transform.localPosition = Vector3.zero;
+                    // fadedObject.transform.localScale = Vector3.one;
+                    fadedObject.transform.localRotation = Quaternion.identity;
 
-#endif
+                    //要黏著的物體已黏著與此區域
+                    isSnapIn = true;
+                    if (takeEventSingleHandSnapPutZone != null)
+                    {
+                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                    }
+
+                    // if (takeEventTwoHandSnapPutZone != null)
+                    // {
+                    //     takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
+                    // }
+
+                    if (takeEventHandGrab != null)
+                    {
+                        takeEventHandGrab.snapFixed.isLocated = true;
+                    }
+
+                    if (autoHandGrab != null)
+                    {
+                        // print($"{autoHandGrab.name}.snapFixed.isLocated : {autoHandGrab.snapFixed.isLocated}");
+                        autoHandGrab.snapFixed.isLocated = true;
+                    }
+                    //Debug.Log("Snap Object Correct！");
+                }
+            }
+        }
+
+        private void OnCollisionStay(Collision other)
+        {
+            if (other.gameObject.GetComponent<TakeEvent_SingleHandSnapPutZone>()
+                || other.gameObject.GetComponent<TakeEvent_HandGrab>()
+                || other.gameObject.GetComponent<AutoHand_HandGrab>())
+            {
+                if (isSnapIn)
+                {
+                    // print($"{other.gameObject.name}停留{transform.parent.name}");
+
+                    //要黏著的物體已黏著與此區域
+                    if (takeEventSingleHandSnapPutZone != null)
+                    {
+                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                    }
+
+                    if (takeEventHandGrab != null)
+                    {
+                        takeEventHandGrab.snapFixed.isLocated = true;
+                    }
+
+                    if (autoHandGrab != null)
+                    {
+                        // print($"{autoHandGrab.name}.snapFixed.isLocated : {autoHandGrab.snapFixed.isLocated}");
+                        autoHandGrab.snapFixed.isLocated = true;
+                    }
+
+                    //Debug.Log("Snap Object Correct！");
+                }
+            }
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            if (other.gameObject.GetComponent<TakeEvent_SingleHandSnapPutZone>()
+                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
+                || other.gameObject.GetComponent<TakeEvent_HandGrab>()
+                || other.gameObject.GetComponent<AutoHand_HandGrab>())
+            {
+                if (isSnapIn)
+                {
+                    if (fadedObject != null)
+                    {
+                        Destroy(fadedObject);
+                    }
+
+                    isSnapIn = false;
+
+                    if (takeEventSingleHandSnapPutZone != null)
+                    {
+                        if (takeEventSingleHandSnapPutZone.snapFixed.isLocated &&
+                            !takeEventSingleHandSnapPutZone.snapFixed.isFixed)
+                        {
+                            takeEventSingleHandSnapPutZone.snapFixed.isLocated = false;
+                        }
+                    }
+
+                    if (takeEventHandGrab != null)
+                    {
+                        if (takeEventHandGrab.snapFixed.isLocated &&
+                            !takeEventHandGrab.snapFixed.isFixed)
+                        {
+                            takeEventHandGrab.snapFixed.isLocated = false;
+                        }
+                    }
+
+                    if (autoHandGrab != null)
+                    {
+                        if (autoHandGrab.snapFixed.isLocated && !autoHandGrab.snapFixed.isFixed)
+                        {
+                            autoHandGrab.snapFixed.isLocated = false;
+                        }
+                    }
+                }
+            }
         }
     }
 }
