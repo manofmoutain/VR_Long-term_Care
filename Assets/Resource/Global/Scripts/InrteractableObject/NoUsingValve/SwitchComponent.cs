@@ -42,6 +42,11 @@ namespace InteractableObject
             go.SetActive(true);
         }
 
+        public void DeactiveGameObject(GameObject go)
+        {
+            go.SetActive(false);
+        }
+
         public void SwitchMeshRender(bool switcher)
         {
             GetComponent<MeshRenderer>().enabled = switcher;
