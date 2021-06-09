@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,8 +6,18 @@ namespace InteractableObject
 {
     public class SwitchComponent : MonoBehaviour
     {
+        private Animator animator;
         [SerializeField] private UnityEvent triggerEvent;
         [SerializeField] private UnityEvent collisionEvent;
+
+        private void Start()
+        {
+            if (GetComponent<Animator>())
+            {
+                animator = GetComponent<Animator>();
+            }
+        }
+
 
         private void OnTriggerEnter(Collider other)
         {
@@ -51,9 +62,20 @@ namespace InteractableObject
             gameObject.SetActive(switcher);
         }
 
-        public void SwitchRiggibodyKinematic(bool switcher)
+        public void SwitchRigidbodyKinematic(bool switcher)
         {
             GetComponent<Rigidbody>().isKinematic = switcher;
+        }
+
+        public void AnimatorSetTrigger(string parameter)
+        {
+            animator.SetTrigger(parameter);
+        }
+
+        public void AnimatorSetBool(string parameter)
+        {
+
+            animator.SetBool(parameter,!animator.GetBool(parameter));
         }
     }
 }
