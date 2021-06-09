@@ -23,6 +23,7 @@ namespace InteractableObject
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isRoot"));
             if (circularDrive.transform.childCount>0)
             {
+                // Debug.Log("123");
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("childCollider"));
             }
 

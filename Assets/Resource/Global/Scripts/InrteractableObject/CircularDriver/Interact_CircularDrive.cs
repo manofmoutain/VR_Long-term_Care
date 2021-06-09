@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace InteractableObject
 {
-    [RequireComponent(typeof(Interactable))]
+    [RequireComponent(typeof(MyInteractable),typeof(Interact_LinearMapping),typeof(Rigidbody))]
     public class Interact_CircularDrive : MonoBehaviour
     {
         public enum Axis_t
@@ -65,7 +65,7 @@ namespace InteractableObject
         // [SerializeField] private bool isDetachedToResetAngle;
 
         [Tooltip("具有Collider組件以啟動交互的子GameObject，僅當存在多個Collider子對象時才需要設置")]
-        private Collider childCollider;
+        [SerializeField] private Collider childCollider;
 
         [Tooltip("要驅動的LinearMapping組件（如果未指定）將動態添加到此GameObject中。")] [SerializeField]
         private Interact_LinearMapping linearMapping;
@@ -170,14 +170,14 @@ namespace InteractableObject
                 childCollider = GetComponentInChildren<Collider>();
             }
 
-            if (linearMapping == null)
+            if (!GetComponent<Interact_LinearMapping>())
             {
+                gameObject.AddComponent<Interact_LinearMapping>();
                 linearMapping = GetComponent<Interact_LinearMapping>();
             }
-
-            if (linearMapping == null)
+            else
             {
-                linearMapping = gameObject.AddComponent<Interact_LinearMapping>();
+                linearMapping = GetComponent<Interact_LinearMapping>();
             }
 
             worldPlaneNormal = new Vector3(0.0f, 0.0f, 0.0f);
