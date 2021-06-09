@@ -1,3 +1,4 @@
+using System;
 using AutoHandInteract;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,9 +9,9 @@ namespace InteractableObject
     {
         public UnityEvent onPatientEnter;
         public UnityEvent onTriggerEnter;
+        public UnityEvent onCollisionEnter;
         private void OnTriggerEnter(Collider other)
         {
-
             //一般觸發
             onTriggerEnter.Invoke();
 
@@ -26,6 +27,21 @@ namespace InteractableObject
                 onPatientEnter.Invoke();
             }
 
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            onCollisionEnter.Invoke();
+
+            if (other.gameObject.GetComponent<TakeEvent_SingleHandSnapPutZone>()
+                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
+                || other.gameObject.GetComponent<TakeEvent_HandGrab>()
+                || other.gameObject.GetComponent<AutoHand_HandGrab>())
+            {
+                print($"碰觸到了{gameObject.name}");
+                other.gameObject.GetComponent<TakeEvent_ToResetPosition>().isEntry = true;
+                onPatientEnter.Invoke();
+            }
         }
     }
 }
