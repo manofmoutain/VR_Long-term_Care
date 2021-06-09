@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1065531331}
   - component: {fileID: 1065531330}
   - component: {fileID: 1065531329}
+  - component: {fileID: 459925450}
   m_Layer: 0
   m_Name: "\u6E6F\u52FA"
   m_TagString: Untagged
@@ -250,6 +251,8 @@ MonoBehaviour:
   rightHandAttachedGameObject: {fileID: 0}
   leftHand: {fileID: 0}
   leftHandAttachedGameObject: {fileID: 0}
+  isStartTrigger: 1
+  isStartKinematic: 1
   OriginalPositionGameObject: {fileID: 0}
   UsePosition:
   - {fileID: 0}
@@ -287,3 +290,15 @@ MonoBehaviour:
   dropDown:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &459925450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695326854532455229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d0fbbde84074a4085916c7e7ba292f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

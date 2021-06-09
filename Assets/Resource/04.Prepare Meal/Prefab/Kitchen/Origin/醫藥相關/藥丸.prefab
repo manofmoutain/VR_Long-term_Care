@@ -4960,7 +4960,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2129011208}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: SwitchRiggibodyKinematic
+        m_MethodName: SwitchTrigger
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
