@@ -17,12 +17,9 @@ namespace InteractableObject
 
 
             //特定觸發
-            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
-                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.GetComponent<TakeEvent_HandGrab>()
-                || other.GetComponent<AutoHand_HandGrab>())
+            if (other.GetComponent<TakeEvent_ToResetPosition>())
             {
-                print($"碰觸到了{gameObject.name}");
+                // print($"碰觸到了{gameObject.name}");
                 other.GetComponent<TakeEvent_ToResetPosition>().isEntry = true;
                 onPatientEnter.Invoke();
             }
