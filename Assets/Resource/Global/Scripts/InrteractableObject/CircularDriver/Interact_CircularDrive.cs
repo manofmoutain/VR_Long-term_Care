@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace InteractableObject
 {
-    [RequireComponent(typeof(MyInteractable),typeof(Interact_LinearMapping),typeof(Rigidbody))]
+    [RequireComponent(typeof(MyInteractable), typeof(Interact_LinearMapping), typeof(Rigidbody))]
     public class Interact_CircularDrive : MonoBehaviour
     {
         public enum Axis_t
@@ -64,8 +64,8 @@ namespace InteractableObject
         // /// </summary>
         // [SerializeField] private bool isDetachedToResetAngle;
 
-        [Tooltip("具有Collider組件以啟動交互的子GameObject，僅當存在多個Collider子對象時才需要設置")]
-        [SerializeField] private Collider childCollider;
+        [Tooltip("具有Collider組件以啟動交互的子GameObject，僅當存在多個Collider子對象時才需要設置")] [SerializeField]
+        private Collider childCollider;
 
         [Tooltip("要驅動的LinearMapping組件（如果未指定）將動態添加到此GameObject中。")] [SerializeField]
         private Interact_LinearMapping linearMapping;
@@ -153,9 +153,9 @@ namespace InteractableObject
         /// <summary>
         /// 如果驅動器被限制為最小/最大，則大於此角度的角度將被忽略
         /// </summary>
-        [HideInInspector] [SerializeField]private float minMaxAngularThreshold = 1.0f;
+        [HideInInspector] [SerializeField] private float minMaxAngularThreshold = 1.0f;
 
-        [HideInInspector] [SerializeField]private Interactable interactable;
+        [HideInInspector] [SerializeField] private Interactable interactable;
 
 
         private void Awake()
@@ -325,7 +325,6 @@ namespace InteractableObject
         }
 
 
-
         #region 計算的方法
 
         private IEnumerator HapticPulses(Hand hand, float flMagnitude, int nCount)
@@ -491,15 +490,15 @@ namespace InteractableObject
                         {
                             outAngle = angleTmp;
                             lastHandProjected = toHandProjected;
-                            onMinAngle.Invoke();
                             hand.DetachObject(gameObject);
+                            onMinAngle.Invoke();
                         }
                         else if (angleTmp == maxAngle)
                         {
                             outAngle = angleTmp;
                             lastHandProjected = toHandProjected;
-                            onMaxAngle.Invoke();
                             hand.DetachObject(gameObject);
+                            onMaxAngle.Invoke();
                         }
                         else
                         {
@@ -512,6 +511,7 @@ namespace InteractableObject
                         outAngle += signedAngleDelta;
                         if (isAngleEvent && outAngle >= eventAngle)
                         {
+                            hand.DetachObject(gameObject);
                             angleEvent.Invoke();
                             hand.DetachObject(gameObject);
                         }
