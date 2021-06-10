@@ -325,6 +325,7 @@ namespace InteractableObject
         }
 
 
+
         #region 計算的方法
 
         private IEnumerator HapticPulses(Hand hand, float flMagnitude, int nCount)
@@ -491,12 +492,14 @@ namespace InteractableObject
                             outAngle = angleTmp;
                             lastHandProjected = toHandProjected;
                             onMinAngle.Invoke();
+                            hand.DetachObject(gameObject);
                         }
                         else if (angleTmp == maxAngle)
                         {
                             outAngle = angleTmp;
                             lastHandProjected = toHandProjected;
                             onMaxAngle.Invoke();
+                            hand.DetachObject(gameObject);
                         }
                         else
                         {
@@ -510,6 +513,7 @@ namespace InteractableObject
                         if (isAngleEvent && outAngle >= eventAngle)
                         {
                             angleEvent.Invoke();
+                            hand.DetachObject(gameObject);
                         }
 
                         lastHandProjected = toHandProjected;
