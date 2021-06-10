@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e90911e410742a1498a167540c7865bf, type: 3}
-  m_Name: TakeLadle
+  m_Name: TakeLadle_CircularDrive
   m_EditorClassIdentifier: 
   leftHand:
     inputSource: 1
@@ -21,7 +21,7 @@ MonoBehaviour:
     pinkyFingerMovementType: 0
     ignoreRootPoseData: 1
     ignoreWristPoseData: 1
-    position: {x: -0.0068438053, y: 0.007389568, z: -0.10048328}
+    position: {x: 0.06583943, y: 0.015179381, z: -0.12922992}
     rotation: {x: -0.039490826, y: 0.85983974, z: 0.48777935, w: -0.14555915}
     bonePositions:
     - {x: -0, y: 0, z: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
     pinkyFingerMovementType: 0
     ignoreRootPoseData: 1
     ignoreWristPoseData: 1
-    position: {x: 0.0008511469, y: -0.0030374154, z: -0.12062064}
+    position: {x: -0.06908878, y: -0.023947865, z: -0.10815392}
     rotation: {x: 0.39587972, y: 0.105407454, z: 0.14408614, w: 0.90078175}
     bonePositions:
     - {x: -0, y: 0, z: 0}
