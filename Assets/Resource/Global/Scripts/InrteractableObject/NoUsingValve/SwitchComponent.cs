@@ -83,9 +83,12 @@ namespace InteractableObject
             animator.SetBool(parameter,!animator.GetBool(parameter));
         }
 
-        public void ResetRotation(float value)
+        public void ChangeParent(Transform parent)
         {
-            transform.localPosition = new Vector3(value,value,value);
+            transform.SetParent(parent);
+            transform.localPosition=Vector3.zero;
+            transform.localPosition=Vector3.zero;
+            transform.localScale=Vector3.one;
         }
     }
 }
