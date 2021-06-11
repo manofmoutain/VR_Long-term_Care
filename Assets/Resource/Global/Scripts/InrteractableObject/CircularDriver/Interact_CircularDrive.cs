@@ -183,6 +183,7 @@ namespace InteractableObject
             worldPlaneNormal = new Vector3(0.0f, 0.0f, 0.0f);
             worldPlaneNormal[(int) axisOfRotation] = 1f;
 
+            GetComponent<Rigidbody>().isKinematic = false;
 
             localPlaneNormal = worldPlaneNormal;
 
