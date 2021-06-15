@@ -7,17 +7,19 @@ namespace InteractableObject
     public class CircularDriverEditor : Editor
     {
         private Interact_CircularDrive circularDrive;
-        private GUIStyle headerStyle;
+        private GUIStyle mainHeaderStyle;
+        private GUIStyle secondHeaderStyle;
 
         private void OnEnable()
         {
             circularDrive = target as Interact_CircularDrive;
-            headerStyle = new GUIStyle() {fontStyle = FontStyle.Bold , fontSize = 13, alignment = TextAnchor.MiddleLeft};
+            mainHeaderStyle = new GUIStyle() {fontStyle = FontStyle.Bold , fontSize = 14, alignment = TextAnchor.MiddleLeft};
+            secondHeaderStyle = new GUIStyle() {fontStyle = FontStyle.Normal, fontSize = 13, alignment = TextAnchor.MiddleLeft};
         }
 
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.LabelField(new GUIContent("手勢資訊"),headerStyle);
+            EditorGUILayout.LabelField(new GUIContent("手勢資訊"),mainHeaderStyle);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("grabHand"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("attachmentFlags"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isRoot"));
@@ -29,7 +31,7 @@ namespace InteractableObject
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField(new GUIContent("驅動狀態"),headerStyle);
+            EditorGUILayout.LabelField(new GUIContent("驅動狀態"),mainHeaderStyle);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("axisOfRotation"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("rotateGameObject"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("hoverLock"));
@@ -37,30 +39,33 @@ namespace InteractableObject
             EditorGUILayout.PropertyField(serializedObject.FindProperty("outAngle"));
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField(new GUIContent("是否設定極限值"),headerStyle);
+            EditorGUILayout.LabelField(new GUIContent("是否設定極限值"),mainHeaderStyle);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("limited"));
             if (circularDrive.limited)
             {
-                EditorGUILayout.LabelField(new GUIContent("最小角度的事件"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("isLimteToDetatch"));
+                EditorGUILayout.LabelField(new GUIContent("最小角度的事件"),secondHeaderStyle);
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("minAngle"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("onMinAngle"));
                 EditorGUILayout.Space();
-                EditorGUILayout.LabelField(new GUIContent("最大角度的事件"));
+                EditorGUILayout.LabelField(new GUIContent("最大角度的事件"),secondHeaderStyle);
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("maxAngle"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("onMaxAngle"));
             }
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField(new GUIContent("是否設定角度事件"),headerStyle);
+            EditorGUILayout.LabelField(new GUIContent("是否設定角度事件"),mainHeaderStyle);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isAngleEvent"));
+
             if (circularDrive.isAngleEvent)
             {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("isAngleEventToDetatch"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("eventAngle"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("angleEvent"));
             }
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField(new GUIContent("是否強制改變初始值"),headerStyle);
+            EditorGUILayout.LabelField(new GUIContent("是否強制改變初始值"),mainHeaderStyle);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("forceStart"));
             if (circularDrive.forceStart)
             {

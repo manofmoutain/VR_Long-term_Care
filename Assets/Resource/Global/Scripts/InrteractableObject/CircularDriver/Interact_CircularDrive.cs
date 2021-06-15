@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Valve.VR;
 using Valve.VR.InteractionSystem;
 using Random = UnityEngine.Random;
 
@@ -82,6 +81,11 @@ namespace InteractableObject
         [Tooltip("如果limited為true，則旋轉將限制為[minAngle，maxAngle]；如果為false，則旋轉將不受限制")]
         public bool limited;
 
+        /// <summary>
+        /// 達到極限值是否立即鬆手
+        /// </summary>
+        public bool isLimteToDetatch;
+
         // /// <summary>
         // /// 如果limited為true，旋轉的極限值
         // /// </summary>
@@ -121,6 +125,8 @@ namespace InteractableObject
         /// </summary>
         [Tooltip("是否要開啟角度事件，不可與Limit共用")] public bool isAngleEvent;
 
+        public bool isAngleEventToDetatch;
+
         /// <summary>
         /// 執行事件的角度值
         /// </summary>
@@ -156,6 +162,8 @@ namespace InteractableObject
         [HideInInspector] [SerializeField] private float minMaxAngularThreshold = 1.0f;
 
         [HideInInspector] [SerializeField] private Interactable interactable;
+        private float angleBuffer;
+        private float blendPoseValue;
 
 
         private void Awake()
@@ -183,7 +191,7 @@ namespace InteractableObject
             worldPlaneNormal = new Vector3(0.0f, 0.0f, 0.0f);
             worldPlaneNormal[(int) axisOfRotation] = 1f;
 
-            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<Rigidbody>().isKinematic = true;
 
             localPlaneNormal = worldPlaneNormal;
 
@@ -440,89 +448,235 @@ namespace InteractableObject
             if (isRoot)
             {
                 toHandProjected = ComputeToTransformProjected(hand.transform);
+                if (!toHandProjected.Equals(lastHandProjected))
+                {
+                    float absAngleDelta = Vector3.Angle(lastHandProjected, toHandProjected);
+                    if (absAngleDelta > 0.0f)
+                    {
+                        Vector3 cross = Vector3.Cross(lastHandProjected, toHandProjected).normalized;
+                        float dot = Vector3.Dot(worldPlaneNormal, cross);
+
+                        float signedAngleDelta = absAngleDelta;
+
+                        if (dot < 0.0f)
+                        {
+                            signedAngleDelta = -signedAngleDelta;
+                        }
+
+                        if (limited)
+                        {
+                            float angleTmp = Mathf.Clamp(outAngle + signedAngleDelta, minAngle, maxAngle);
+
+                            if (outAngle == minAngle)
+                            {
+                                if (angleTmp > minAngle && absAngleDelta < minMaxAngularThreshold)
+                                {
+                                    // Debug.Log("Min Angle: ");
+                                    outAngle = angleTmp;
+                                    lastHandProjected = toHandProjected;
+                                }
+                                else
+                                {
+                                    outAngle = minAngle + 1;
+                                }
+                            }
+                            else if (outAngle == maxAngle)
+                            {
+                                if (angleTmp < maxAngle && absAngleDelta < minMaxAngularThreshold)
+                                {
+                                    // Debug.Log("Max Angle: ");
+                                    outAngle = angleTmp;
+                                    lastHandProjected = toHandProjected;
+                                }
+                                else
+                                {
+                                    outAngle = minAngle - 1;
+                                }
+                            }
+                            else if (angleTmp == minAngle)
+                            {
+                                outAngle = angleTmp;
+                                lastHandProjected = toHandProjected;
+                                if (isLimteToDetatch)
+                                {
+                                    hand.DetachObject(gameObject);
+                                }
+
+                                onMinAngle.Invoke();
+                            }
+                            else if (angleTmp == maxAngle)
+                            {
+                                outAngle = angleTmp;
+                                lastHandProjected = toHandProjected;
+                                if (isLimteToDetatch)
+                                {
+                                    hand.DetachObject(gameObject);
+                                }
+
+                                onMaxAngle.Invoke();
+                            }
+                            else
+                            {
+                                //當達到最小角度時
+                                if (angleTmp == minAngle)
+                                {
+                                    outAngle = angleTmp;
+                                    lastHandProjected = toHandProjected;
+                                    // if (isLimteToDetatch)
+                                    // {
+                                    //     hand.DetachObject(gameObject);
+                                    // }
+                                    //
+                                    // onMinAngle.Invoke();
+                                }
+                                //當達到最大角度時
+                                else if (angleTmp == maxAngle)
+                                {
+                                    outAngle = angleTmp;
+                                    lastHandProjected = toHandProjected;
+                                    // if (isLimteToDetatch)
+                                    // {
+                                    //     hand.DetachObject(gameObject);
+                                    // }
+                                    //
+                                    // onMaxAngle.Invoke();
+                                }
+                                else
+                                {
+                                    float angleDiffer = angleTmp - outAngle; //目前旋轉的角度差值
+                                    float angleVariable = outAngle - angleBuffer; //初始至目前旋轉的角度變化量：判斷手勢變化的臨界值
+
+
+                                    // 計算手勢變換遮罩值(Blend Mask)：取得 [0, 1] 的臨界值
+                                    blendPoseValue = (angleVariable - minAngle) / (maxAngle - minAngle);
+
+                                    //左右轉的手勢變換
+                                    if (angleDiffer > 0.1f)
+                                    {
+                                        // skeletonPoser.SetBlendingBehaviourValue("HoldValveRotateBack", 0);
+                                        // skeletonPoser.SetBlendingBehaviourValue("HoldValveRotateTurn", blendPoseValue + gestureConst);
+                                        //Debug.Log("向右轉: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
+                                    }
+                                    else if (angleDiffer < -0.1f)
+                                    {
+                                        // skeletonPoser.SetBlendingBehaviourValue("HoldValveRotateTurn", 0);
+                                        // skeletonPoser.SetBlendingBehaviourValue("HoldValveRotateBack", gestureConst - blendPoseValue);
+
+                                        //Debug.Log("向左轉: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
+                                    }
+
+
+                                    outAngle = angleTmp;
+                                    lastHandProjected = toHandProjected;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            outAngle += signedAngleDelta;
+                            if (isAngleEvent && outAngle >= eventAngle)
+                            {
+                                hand.DetachObject(gameObject);
+                                angleEvent.Invoke();
+                            }
+
+                            lastHandProjected = toHandProjected;
+                        }
+                    }
+                }
             }
             else
             {
                 toHandProjected = ComputeToTransformProjected(hand.hoverSphereTransform);
-            }
-
-            // print($"lastHandProjected : {lastHandProjected} ; toHandProjected : {toHandProjected}");
-            if (!toHandProjected.Equals(lastHandProjected))
-            {
-                float absAngleDelta = Vector3.Angle(lastHandProjected, toHandProjected);
-                // print($"absAngleDelta : {absAngleDelta}");
-
-                if (absAngleDelta > 0.0f)
+                // print($"lastHandProjected : {lastHandProjected} ; toHandProjected : {toHandProjected}");
+                if (!toHandProjected.Equals(lastHandProjected))
                 {
-                    Vector3 cross = Vector3.Cross(lastHandProjected, toHandProjected).normalized;
-                    float dot = Vector3.Dot(worldPlaneNormal, cross);
+                    float absAngleDelta = Vector3.Angle(lastHandProjected, toHandProjected);
+                    // print($"absAngleDelta : {absAngleDelta}");
 
-                    float signedAngleDelta = absAngleDelta;
-
-                    if (dot < 0.0f)
+                    if (absAngleDelta > 0.0f)
                     {
-                        signedAngleDelta = -signedAngleDelta;
-                    }
+                        Vector3 cross = Vector3.Cross(lastHandProjected, toHandProjected).normalized;
+                        float dot = Vector3.Dot(worldPlaneNormal, cross);
 
-                    //如果設定存在極限值
-                    if (limited)
-                    {
-                        float angleTmp = Mathf.Clamp(outAngle + signedAngleDelta, minAngle, maxAngle);
+                        float signedAngleDelta = absAngleDelta;
 
-
-                        if (outAngle == minAngle)
+                        if (dot < 0.0f)
                         {
-                            if (angleTmp > minAngle && absAngleDelta < minMaxAngularThreshold)
+                            signedAngleDelta = -signedAngleDelta;
+                        }
+
+                        //如果設定存在極限值
+                        if (limited)
+                        {
+                            float angleTmp = Mathf.Clamp(outAngle + signedAngleDelta, minAngle, maxAngle);
+
+
+                            if (outAngle == minAngle)
+                            {
+                                if (angleTmp > minAngle && absAngleDelta < minMaxAngularThreshold)
+                                {
+                                    outAngle = angleTmp;
+                                    lastHandProjected = toHandProjected;
+                                }
+                            }
+                            else if (outAngle == maxAngle)
+                            {
+                                // print($"angleTmp : {angleTmp} ; absAngleDelta : {absAngleDelta}");
+                                if (angleTmp < maxAngle && absAngleDelta < minMaxAngularThreshold)
+                                {
+                                    outAngle = angleTmp;
+                                    lastHandProjected = toHandProjected;
+                                }
+                            }
+                            else if (angleTmp == minAngle)
+                            {
+                                outAngle = angleTmp;
+                                lastHandProjected = toHandProjected;
+                                if (isLimteToDetatch)
+                                {
+                                    hand.DetachObject(gameObject);
+                                }
+
+                                onMinAngle.Invoke();
+                            }
+                            else if (angleTmp == maxAngle)
+                            {
+                                outAngle = angleTmp;
+                                lastHandProjected = toHandProjected;
+                                if (isLimteToDetatch)
+                                {
+                                    hand.DetachObject(gameObject);
+                                }
+
+                                onMaxAngle.Invoke();
+                            }
+                            else
                             {
                                 outAngle = angleTmp;
                                 lastHandProjected = toHandProjected;
                             }
-                        }
-                        else if (outAngle == maxAngle)
-                        {
-                            // print($"angleTmp : {angleTmp} ; absAngleDelta : {absAngleDelta}");
-                            if (angleTmp < maxAngle && absAngleDelta < minMaxAngularThreshold)
-                            {
-                                outAngle = angleTmp;
-                                lastHandProjected = toHandProjected;
-                            }
-                        }
-                        else if (angleTmp == minAngle)
-                        {
-                            outAngle = angleTmp;
-                            lastHandProjected = toHandProjected;
-                            hand.DetachObject(gameObject);
-                            onMinAngle.Invoke();
-                        }
-                        else if (angleTmp == maxAngle)
-                        {
-                            outAngle = angleTmp;
-                            lastHandProjected = toHandProjected;
-                            hand.DetachObject(gameObject);
-                            onMaxAngle.Invoke();
                         }
                         else
                         {
-                            outAngle = angleTmp;
+                            outAngle += signedAngleDelta;
+                            if (isAngleEvent && outAngle >= eventAngle)
+                            {
+                                if (isAngleEventToDetatch)
+                                {
+                                    hand.DetachObject(gameObject);
+                                }
+
+                                angleEvent.Invoke();
+                            }
+
                             lastHandProjected = toHandProjected;
                         }
                     }
-                    else
-                    {
-                        outAngle += signedAngleDelta;
-                        if (isAngleEvent && outAngle >= eventAngle)
-                        {
-                            hand.DetachObject(gameObject);
-                            angleEvent.Invoke();
-                            hand.DetachObject(gameObject);
-                        }
-
-                        lastHandProjected = toHandProjected;
-                    }
                 }
             }
-        }
 
-        #endregion
+            #endregion
+        }
     }
 }
