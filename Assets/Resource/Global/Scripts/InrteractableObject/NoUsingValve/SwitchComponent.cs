@@ -7,8 +7,6 @@ namespace InteractableObject
     public class SwitchComponent : MonoBehaviour
     {
         private Animator animator;
-        [SerializeField] private UnityEvent triggerEvent;
-        [SerializeField] private UnityEvent collisionEvent;
 
         private void Start()
         {
@@ -17,25 +15,7 @@ namespace InteractableObject
                 animator = GetComponent<Animator>();
             }
         }
-
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.GetComponent<Interact_TriggerComponent>())
-            {
-                print($"Touched {other.gameObject.name}");
-                triggerEvent.Invoke();
-            }
-        }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.GetComponent<Interact_TriggerComponent>())
-            {
-                print($"Touched {other.gameObject.name}");
-                collisionEvent.Invoke();
-            }
-        }
+        
 
         public void ActiveGameObject(GameObject go)
         {

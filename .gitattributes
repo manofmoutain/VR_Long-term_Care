@@ -3,3 +3,4 @@ Mr.fbx filter=lfs diff=lfs merge=lfs -text
 Assets/Resource/Global/Model/Mr.Woo/Mr.fbx filter=lfs diff=lfs merge=lfs -text
 *.exr filter=lfs diff=lfs merge=lfs -text
 Assets/Resource/Global/Fonts/TextMeshPro/msjhbd[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+Assets/Resource/Global/Model/人物/阿公01/Old.fbx filter=lfs diff=lfs merge=lfs -text
