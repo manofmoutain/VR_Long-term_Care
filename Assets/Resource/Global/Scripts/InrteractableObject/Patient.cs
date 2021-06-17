@@ -7,7 +7,7 @@ namespace Global.Pateint
 {
     public partial class  Patient : MonoBehaviour
     {
-        [Header("物件")] [Tooltip("VR攝影機")] public GameObject player;
+        [Tooltip("VR攝影機")] public GameObject player;
         [SerializeField] private Vector3 playerPosition;
         public GameObject patient;
         [SerializeField] private Vector3 patientPosition;
@@ -57,7 +57,11 @@ namespace Global.Pateint
                 patient = transform.GetChild(0).gameObject;
             }
 
-            // isPlayerBehindPatient = false;
+            if (isUsingBloodPressure)
+            {
+                int randomPressure = Random.Range(0, pressures.Length);
+                bloodPressure = pressures[randomPressure];
+            }
         }
 
         private void Update()
@@ -74,8 +78,12 @@ namespace Global.Pateint
                 }
             }
 
-            isAtOriginPosition = GetPatientTransform.parent == originTransform;
-            isAtChangedPosition = GetPatientTransform.parent == changedTransform;
+            if (changeTransformMode)
+            {
+                isAtOriginPosition = GetPatientTransform.parent == originTransform;
+                isAtChangedPosition = GetPatientTransform.parent == changedTransform;
+            }
+
 
 
             isPlayerBehindPatient = GetPatientDirection().y < 0;
@@ -159,14 +167,16 @@ namespace Global.Pateint
             return patientDirection;
         }
 
+        public void CheckPoint(int index)
+        {
+            ScoreManager.Instance.DecreaseOperateSteps(index);
+        }
+
         public void StartSpeechRecognize()
         {
             SpeechManager.Instance.StartRecognizeSpeech();
             // StartCoroutine(Co_StopCo());
             // StartCoroutine(Co_SetDone(speechIndex, topicIndex));
-
-
-
         }
 
 

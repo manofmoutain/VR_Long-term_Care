@@ -1,26 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Global.Pateint
 {
-    public class PatientBloodPressure : MonoBehaviour
+    public partial class Patient
     {
-        [SerializeField] private int[] pressures;
-        [SerializeField] private int bloodPressure;
+        public bool isUsingBloodPressure;
+        [SerializeField] private float[] pressures;
+        [SerializeField] private float bloodPressure;
 
-        public int BloodPressure => bloodPressure;
+        public float BloodPressure => bloodPressure;
 
-        void Start()
+
+        public void ShowBloodPressure(TextMeshProUGUI textMesh)
         {
-            int randomPressure = Random.Range(0, pressures.Length);
-            bloodPressure = pressures[randomPressure];
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            textMesh.text = BloodPressure.ToString();
         }
     }
 }

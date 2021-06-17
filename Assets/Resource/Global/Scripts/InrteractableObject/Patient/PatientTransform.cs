@@ -2,11 +2,14 @@
 using System.Collections;
 using Manager;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Global.Pateint
 {
     public partial class Patient : MonoBehaviour
     {
+      public bool changeTransformMode;
+
         [Tooltip("原始位置")] public Transform originTransform;
 
         [Tooltip("替換位置")] public Transform changedTransform;

@@ -7,13 +7,9 @@ namespace Global.Pateint
 {
     public partial class Patient
     {
-        [Header("音效")] [SerializeField] private AudioSource audioSource;
+        public bool isUsingSFX;
+        [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip[] sFXs;
-
-        // private void Start()
-        // {
-        //     audioSource = GetComponent<AudioSource>();
-        // }
 
         public void PlaySFX(int index)
         {
