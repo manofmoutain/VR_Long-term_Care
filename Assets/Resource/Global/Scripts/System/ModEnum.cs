@@ -9,6 +9,10 @@ namespace GlobalSystem
         /// <summary>
         /// 模擬考模式
         /// </summary>
-        Exam
+        Exam,
+        /// <summary>
+        /// 測試模式
+        /// </summary>
+        Test
     }
 }
