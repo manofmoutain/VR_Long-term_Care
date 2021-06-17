@@ -20,6 +20,13 @@ namespace InteractableObject
         public override void OnInspectorGUI()
         {
             EditorGUILayout.LabelField(new GUIContent("手勢資訊"),mainHeaderStyle);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("isUsingBlenderPoser"));
+            if (circularDrive.isUsingBlenderPoser)
+            {
+                EditorGUILayout.LabelField(new GUIContent("混合手勢"),secondHeaderStyle);
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("switchOnPoser"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("switchOffPoser"));
+            }
             EditorGUILayout.PropertyField(serializedObject.FindProperty("grabHand"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("attachmentFlags"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isRoot"));

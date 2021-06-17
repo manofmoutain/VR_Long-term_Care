@@ -18,6 +18,19 @@ namespace InteractableObject
         };
 
         /// <summary>
+        /// 是否要使用混合手勢
+        /// </summary>
+        public bool isUsingBlenderPoser;
+        /// <summary>
+        /// 轉開手勢
+        /// </summary>
+        [SerializeField] private UnityEvent switchOnPoser;
+        /// <summary>
+        /// 關閉手勢
+        /// </summary>
+        [SerializeField] private UnityEvent switchOffPoser;
+
+        /// <summary>
         /// 抓握的是哪一隻手
         /// </summary>
         [SerializeField] private Hand grabHand;
@@ -138,6 +151,8 @@ namespace InteractableObject
         /// </summary>
         [HideInInspector] [SerializeField] private UnityEvent angleEvent;
 
+
+
         /// <summary>
         /// 在limited的情況中，是否要強制設定初始值
         /// </summary>
@@ -163,7 +178,7 @@ namespace InteractableObject
 
         [HideInInspector] [SerializeField] private Interactable interactable;
         private float angleBuffer;
-        private float blendPoseValue;
+        public float blendPoseValue;
 
 
         private void Awake()
@@ -546,26 +561,23 @@ namespace InteractableObject
                                     float angleDiffer = angleTmp - outAngle; //目前旋轉的角度差值
                                     float angleVariable = outAngle - angleBuffer; //初始至目前旋轉的角度變化量：判斷手勢變化的臨界值
 
-
-                                    // 計算手勢變換遮罩值(Blend Mask)：取得 [0, 1] 的臨界值
-                                    blendPoseValue = (angleVariable - minAngle) / (maxAngle - minAngle);
-
-                                    //左右轉的手勢變換
-                                    if (angleDiffer > 0.1f)
+                                    if (isUsingBlenderPoser)
                                     {
-                                        // skeletonPoser.SetBlendingBehaviourValue("HoldValveRotateBack", 0);
-                                        // skeletonPoser.SetBlendingBehaviourValue("HoldValveRotateTurn", blendPoseValue + gestureConst);
-                                        //Debug.Log("向右轉: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
+                                        // 計算手勢變換遮罩值(Blend Mask)：取得 [0, 1] 的臨界值
+                                        blendPoseValue = (angleVariable - minAngle) / (maxAngle - minAngle);
+
+                                        //開關的手勢變換
+                                        if (angleDiffer > 0.1f)
+                                        {
+                                            switchOnPoser.Invoke();
+                                            // Debug.Log("轉開: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
+                                        }
+                                        else if (angleDiffer < -0.1f)
+                                        {
+                                            switchOffPoser.Invoke();
+                                            // Debug.Log("關閉: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
+                                        }
                                     }
-                                    else if (angleDiffer < -0.1f)
-                                    {
-                                        // skeletonPoser.SetBlendingBehaviourValue("HoldValveRotateTurn", 0);
-                                        // skeletonPoser.SetBlendingBehaviourValue("HoldValveRotateBack", gestureConst - blendPoseValue);
-
-                                        //Debug.Log("向左轉: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
-                                    }
-
-
                                     outAngle = angleTmp;
                                     lastHandProjected = toHandProjected;
                                 }
