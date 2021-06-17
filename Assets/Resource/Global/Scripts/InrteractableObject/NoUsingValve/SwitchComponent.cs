@@ -7,6 +7,7 @@ namespace InteractableObject
     public class SwitchComponent : MonoBehaviour
     {
         private Animator animator;
+        private MySkeletonPoser skeletonPoser;
 
         private void Start()
         {
@@ -14,8 +15,41 @@ namespace InteractableObject
             {
                 animator = GetComponent<Animator>();
             }
+
+            if (GetComponent<MySkeletonPoser>())
+            {
+                skeletonPoser = GetComponent<MySkeletonPoser>();
+            }
         }
-        
+
+
+        public void BlenderSwitchOnPoser(int index)
+        {
+            float blendPoseValue = 0;
+            float gestureConst=0.7f;
+            if (GetComponent<Interact_CircularDrive>())
+            {
+                blendPoseValue = GetComponent<Interact_CircularDrive>().blendPoseValue;
+            }
+            // print(skeletonPoser.blendingBehaviours[0].name);
+            skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index].name, 0);
+
+            skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index-1].name, blendPoseValue + gestureConst);
+        }
+
+        public void BlenderSwitchOffPoser(int index)
+        {
+            float blendPoseValue = 0;
+            float gestureConst=0.7f;
+            if (GetComponent<Interact_CircularDrive>())
+            {
+                blendPoseValue = GetComponent<Interact_CircularDrive>().blendPoseValue;
+            }
+            skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index].name, 0);
+
+            skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index+1].name, gestureConst - blendPoseValue);
+        }
+
 
         public void ActiveGameObject(GameObject go)
         {
