@@ -783,6 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f67b99f427f4e445aa36ef30681f03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLoadExel: 0
   examBtns:
   - {fileID: 1394198584}
   - {fileID: 1985875189}
@@ -6608,6 +6609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f67b99f427f4e445aa36ef30681f03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLoadExel: 0
   examBtns:
   - {fileID: 1841808270}
   - {fileID: 1048278460}
@@ -7771,6 +7773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f67b99f427f4e445aa36ef30681f03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLoadExel: 0
   examBtns:
   - {fileID: 1672148948}
   - {fileID: 914708201}
@@ -11117,6 +11120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f67b99f427f4e445aa36ef30681f03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLoadExel: 0
   examBtns:
   - {fileID: 1005975309}
   - {fileID: 77554862}
@@ -14059,6 +14063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f67b99f427f4e445aa36ef30681f03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLoadExel: 0
   examBtns:
   - {fileID: 1370670299}
   - {fileID: 1177654448}

@@ -1,0 +1,269 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5262407042264549234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8891980249627957422}
+  - component: {fileID: 1673046187938584039}
+  - component: {fileID: 146759921731966424}
+  - component: {fileID: 2581139580365565173}
+  m_Layer: 0
+  m_Name: Manager(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8891980249627957422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262407042264549234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1673046187938584039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262407042264549234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69788de3c0544af85f2a2cbc9f69337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &146759921731966424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262407042264549234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969979ad838045d6ac51ac63c04d40bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2581139580365565173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262407042264549234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f507f17f6e0491284f5b1ff94df0e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCounting: 1
+  gameMod: 2
+  _scoreSystem:
+    topicCount: 0
+    totalScore: 100
+    _operateTopics:
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u8AAA\u660E\u5099\u9910"
+      whatToDo: "\u5411\u6848\u4E3B\u8AAA\u660E\u70BA\u5176\u6E96\u5099\u9910\u98DF"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u6D17\u624B"
+      whatToDo: "\u6D17\u6DE8\u96D9\u624B"
+    - isDone: 0
+      operateSteps: 5
+      score: 0.4
+      isToDo: "\u672A\u6E05\u6D17\u98DF\u6750\u5668\u76BF"
+      whatToDo: "\u6E05\u6D17\u98DF\u6750\u53CA\u5668\u76BF"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u8A62\u554F\u70F9\u716E\u7FD2\u6163"
+      whatToDo: "\u8A62\u554F\u6848\u4E3B\u4E4B\u70F9\u8ABF\u7FD2\u6163(\u559C\u597D)\_
+        \_"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u7B26\u5408\u4F4E\u9E7D\u6A19\u6E96"
+      whatToDo: "\u8ABF\u5473\u7B26\u5408\u4F4E\u9E7D\u4E4B\u539F\u5247"
+    - isDone: 0
+      operateSteps: 3
+      score: 3
+      isToDo: "\u672A\u4F9D\u5E8F\u70F9\u716E\u98DF\u7269"
+      whatToDo: "\u4F9D\u5E8F\u70F9\u716E\u98DF\u7269"
+    - isDone: 0
+      operateSteps: 2
+      score: 2
+      isToDo: "\u672A\u5207\u788E\u6216\u6B63\u78BA\u70F9\u8ABF\u7C73\u7CA5"
+      whatToDo: "\u5207\u788E\uFF0C\u9ECF\u7A20\u72C0"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u5617\u8A66\u5473\u9053"
+      whatToDo: "\u4EE5\u5176\u4ED6\u9910\u5177\u8A66\u5690\u5473\u9053"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u7B26\u5408\u6848\u4E3B\u98DF\u91CF"
+      whatToDo: "\u7F6E\u65BC\u7897\u6216\u76E4\u4E2D\uFF0C\u4E26\u7B26\u5408\u6848\u4E3B\u7684\u98DF\u91CF"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u5354\u52A9\u6848\u4E3B\u570D\u4E0A\u570D\u515C"
+      whatToDo: "\u5354\u52A9\u6848\u4E3B\u570D\u4E0A\u570D\u515C"
+    - isDone: 0
+      operateSteps: 1
+      score: 3
+      isToDo: "\u672A\u6E2C\u8A66\u98DF\u7269\u6EAB\u5EA6"
+      whatToDo: "\u6E2C\u8A66\u98DF\u7269\u6EAB\u5EA6"
+    - isDone: 0
+      operateSteps: 1
+      score: 5
+      isToDo: "\u672A\u6B63\u78BA\u9935\u98DF\u6216\u4E92\u52D5"
+      whatToDo: "\u9935\u98DF\uFF0C\u4E26\u53E3\u8FF0\u9935\u98DF\u4E4B\u4E92 \u52D5\u8A9E\u8A00\uFF08\u5C07\u9935\u98DF\u5F8C\u7684\u7CA5\u7F6E\u65BC\u53E6\u4E00\u7A7A\u7897\u4E2D\uFF09"
+    - isDone: 0
+      operateSteps: 1
+      score: 3
+      isToDo: "\u6848\u4E3B\u55C6\u5230"
+      whatToDo: "\u6CE8\u610F\u907F\u514D\u6848\u4E3B\u55C6\u5230\u98DF\u7269"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u6E05\u6F54\u53E3\u8154"
+      whatToDo: "\u9935\u98DF\u5F8C\uFF0C\u5354\u52A9\u6848\u4E3B\u6E05\u6F54\u53E3\u8154"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u63D0\u9192\u907F\u514D\u5E73\u8EBA"
+      whatToDo: "\u98EF\u5F8C\u907F\u514D\u7ACB\u523B\u5E73\u8EBA\uFF08\u53E3\u8FF0\uFF09"
+    - isDone: 0
+      operateSteps: 1
+      score: 1
+      isToDo: "\u672A\u5C07\u6B98\u9918\u7269\u4E1F\u5165\u5783\u573E\u6876"
+      whatToDo: "\u4E1F\u5165\u5783\u573E\u7B52"
+    - isDone: 0
+      operateSteps: 6
+      score: 0.5
+      isToDo: "\u672A\u6D17\u6DE8\u6B78\u4F4D"
+      whatToDo: "\u6D17\u6DE8\u4E26\u6B78\u4F4D"
+    - isDone: 0
+      operateSteps: 1
+      score: 1
+      isToDo: "\u672A\u6E05\u7406\u6C34\u69FD"
+      whatToDo: "\u6E05\u7406\u6C34\u69FD"
+    - isDone: 0
+      operateSteps: 1
+      score: 1
+      isToDo: "\u672A\u64E6\u62ED\u684C\u9762"
+      whatToDo: "\u64E6\u62ED\u684C\u9762"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u6B63\u78BA\u5099\u85E5"
+      whatToDo: "\u6B63\u78BA\u5099\u85E5"
+    - isDone: 0
+      operateSteps: 1
+      score: 3
+      isToDo: "\u932F\u8AA4\u6642\u9593\u7528\u85E5"
+      whatToDo: "\u7528\u85E5\u6642\u9593\u6B63\u78BA"
+    - isDone: 0
+      operateSteps: 1
+      score: 2
+      isToDo: "\u672A\u78BA\u8A8D\u85E5\u7269\u5B89\u5168\u6027"
+      whatToDo: "\u78BA\u8A8D\u85E5\u7269\u7684\u5B89\u5168\u6027"
+    - isDone: 0
+      operateSteps: 1
+      score: 1
+      isToDo: "\u672A\u6B63\u78BA\u4F7F\u7528\u6DB2\u9AD4"
+      whatToDo: "\u4EE5\u6B63\u78BA\u7684\u670D\u85E5\u6EB6\u6DB2"
+    - isDone: 0
+      operateSteps: 1
+      score: 7
+      isToDo: "\u672A\u78BA\u8A8D\u7121\u85E5\u7269\u6B98\u7559"
+      whatToDo: "\u85E5\u4E38\u78E8\u7C89\uFF0C\u5012\u5165\u5C0F\u85E5\u676F\uFF0C\u78BA\u8A8D\u7121\u85E5\u7269\u6B98\u7559"
+    - isDone: 0
+      operateSteps: 1
+      score: 7
+      isToDo: "\u85E5\u7C89\u672A\u6EB6\u89E3"
+      whatToDo: "\u958B\u6C34\u52A0\u5165\u5C0F\u85E5\u676F\u5167\u6EB6\u89E3\u85E5\u7C89"
+    - isDone: 0
+      operateSteps: 4
+      score: 0.2
+      isToDo: "\u672A\u9032\u884C\u53CD\u62BD\u52D5\u4F5C"
+      whatToDo: "\u704C\u85E5\u524D\uFF0C\u5148\u78BA\u5B9A\u9F3B\u80C3\u7BA1\u9060\u7AEF\u5728\u80C3\u4E2D\uFF08\u9808\u6709\u53CD\u62BD\u52D5\u4F5C\uFF09"
+    - isDone: 0
+      operateSteps: 1
+      score: 7
+      isToDo: "\u672A\u6B63\u78BA\u6E05\u6F54\u7528\u85E5\u8A2D\u5099"
+      whatToDo: "\u704C\u85E5\u5F8C\uFF0C\u4F9D\u91CD\u529B\u539F\u7406\u5C07\u958B\u6C34\u6D41\u5165\u80C3\u5167\uFF0C\u76F4\u5230\u85E5\u676F\u3001\u704C\u98DF\u5668\u53CA\u9F3B\u80C3\u7BA1\u4E2D\u6C92\u6709\u6B98\u7559\u7684\u85E5\u7269\u70BA\u6B62\u5F8C\uFF0C\u518D\u7D66\u6C34\u81F3\u5C1130cc"
+    - isDone: 0
+      operateSteps: 1
+      score: 5
+      isToDo: "\u7A7A\u6C23\u9032\u5165\u60A3\u8005\u80C3\u90E8"
+      whatToDo: "\u5FC5\u8981\u6642\u53CD\u647A\u9F3B\u80C3\u7BA1\uFF0C\u907F\u514D\u7A7A\u6C23\u704C\u5165\u80C3\u90E8"
+    - isDone: 0
+      operateSteps: 0
+      score: 4
+      isToDo: "\u52D5\u4F5C\u672A\u7B26\u5408\u6B63\u78BA\u7FD2\u6163"
+      whatToDo: "\u98DF\u7269\u88FD\u5099\u904E\u7A0B\u4E2D\uFF0C\u4E0D\u5F97\u7528\u570D\u88D9\u3001\u62B9\u5E03\u64E6\u624B\uFF0C\u6216\u7FD2\u6163\u6027\u6293\u982D\u3001\u6478\u81C9\u7B49"
+    - isDone: 0
+      operateSteps: 0
+      score: 3
+      isToDo: "\u4EE5\u624B\u89F8\u6478\u716E\u719F\u98DF\u6750"
+      whatToDo: "\u4E0D\u53EF\u7528\u624B\u76F4\u63A5\u89F8\u6478\u5DF2\u716E\u719F\u4E4B\u98DF\u7269"
+    - isDone: 0
+      operateSteps: 0
+      score: 3
+      isToDo: "\u80C3\u4FDD\u6301\u9910\u5177\u4E7E\u6DE8"
+      whatToDo: "\u4E0D\u53EF\u7528\u62B9\u5E03\u64E6\u9910\u5177\uFF0C \u4FDD\u6301\u9910\u5177\u53CA\u5EDA\u5177\u4E4B\u4E7E\u6DE8"
+    - isDone: 0
+      operateSteps: 0
+      score: 2
+      isToDo: "\u672A\u6CE8\u610F\u6C34\u6D41"
+      whatToDo: "\u6C34\u9F8D\u982D\u4F4D\u4F7F\u7528\u6642\u6301\u7E8C\u6027\u6D41\u6C34"
+    - isDone: 0
+      operateSteps: 0
+      score: 9
+      isToDo: "\u672A\u6CE8\u610F\u5B89\u5168"
+      whatToDo: "\u88FD\u5099\u904E\u7A0B\u6CE8\u610F\u5B89\u5168\u539F\u5247\u53CA\u719F\u7DF4\u6D41\u66A2"
+    - isDone: 0
+      operateSteps: 1
+      score: 5
+      isToDo: "\u672A\u65BC\u6642\u9650\u5167\u64CD\u4F5C\u5B8C\u7562"
+      whatToDo: "\u6642\u9650\u5167\u64CD\u4F5C\u5B8C\u7562"
+    - isDone: 0
+      operateSteps: 0
+      score: 100
+      isToDo: "\u672A\u6CE8\u610F\u7210\u706B"
+      whatToDo: "\u70F9\u716E\u5F8C\u7210\u706B\u95DC\u9589"
+    excelFileName: Exam04
+    m_ID: ad
+    m_Lesson: "\u5099\u9910\u3001\u9935\u98DF\u53CA\u5354\u52A9\u7528\u85E5"
+    m_School: "\u9577\u5E9A\u79D1\u6280\u5927\u5B78"
+    m_StudentName: asd
+    timeLimite: 40
+    timing: 13.2269745
+  _examinClasses:
+  - {fileID: 11400000, guid: d42e8a27b8fbdf6498258cc6448b3598, type: 2}
+  - {fileID: 11400000, guid: a66999ffdf6f3b94fad5826b1c7061d8, type: 2}
+  - {fileID: 11400000, guid: 7c48f0d44e68397418ea9533b8e8860f, type: 2}
+  - {fileID: 11400000, guid: dc5ac49dac480874b9d0d3a54e2e7d5e, type: 2}
+  - {fileID: 11400000, guid: 219395fb5f7bf794d89997727d19a5b7, type: 2}
+  - {fileID: 11400000, guid: deb3ee659fb93194fb7686f402a48ba7, type: 2}
+  - {fileID: 11400000, guid: d88122efdad136b4fab30409e5b720db, type: 2}
+  - {fileID: 11400000, guid: 588aeec8b8b89b044bb14620fbc5ae02, type: 2}

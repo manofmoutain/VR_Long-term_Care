@@ -270,7 +270,7 @@ MonoBehaviour:
   poseEditorExpanded: 1
   blendEditorExpanded: 1
   poseNames:
-  - Archery_Pose (MAIN)
+  - TurnGasSwitch (MAIN)
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf, type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25, type: 3}
   skeletonMainPose: {fileID: 11400000, guid: 4d274034a7f36cf49b63ac0d50609916, type: 2}
@@ -297,7 +297,7 @@ MonoBehaviour:
   grabHand: {fileID: 0}
   attachmentFlags: 16
   grabbedWithType: 0
-  isRoot: 1
+  isRoot: 0
   driving: 0
   outAngle: 0
   axisOfRotation: 2
@@ -306,13 +306,14 @@ MonoBehaviour:
   linearMapping: {fileID: 0}
   hoverLock: 1
   limited: 1
+  isLimteToDetatch: 0
   minAngle: 0
   onMinAngle:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8982348932156044320}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchVFX, Assembly-CSharp
-        m_MethodName: SwitchOffVFX
+      - m_Target: {fileID: 4763585538798387916}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DeactiveGameObject
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8982348931709169375}
@@ -338,9 +339,9 @@ MonoBehaviour:
   onMaxAngle:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8982348932156044320}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchVFX, Assembly-CSharp
-        m_MethodName: SwitchOnVFX
+      - m_Target: {fileID: 4763585538798387916}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DeactiveGameObject
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8982348931709169375}
@@ -411,6 +412,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isAngleEvent: 0
+  isAngleEventToDetatch: 0
   eventAngle: 0
   angleEvent:
     m_PersistentCalls:
@@ -432,7 +434,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8875767749796189136}
-  - component: {fileID: 8982348932156044320}
+  - component: {fileID: 4763585538798387916}
   m_Layer: 0
   m_Name: "\u5361\u5F0F\u74E6\u65AF\u7210"
   m_TagString: Untagged
@@ -457,7 +459,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8982348932156044320
+--- !u!114 &4763585538798387916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -466,9 +468,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8099406250452191594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3526b903f0392cf4eb5cbf2bc6e3b85f, type: 3}
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8982348931709169375
 GameObject:
   m_ObjectHideFlags: 0
