@@ -30,7 +30,7 @@ MonoBehaviour:
     whatToDo: "\u6D17\u6DE8\u96D9\u624B"
   - isDone: 0
     operateSteps: 5
-    score: 2
+    score: 0.4
     isToDo: "\u672A\u6E05\u6D17\u98DF\u6750\u5668\u76BF"
     whatToDo: "\u6E05\u6D17\u98DF\u6750\u53CA\u5668\u76BF"
   - isDone: 0
@@ -45,12 +45,12 @@ MonoBehaviour:
     isToDo: "\u672A\u7B26\u5408\u4F4E\u9E7D\u6A19\u6E96"
     whatToDo: "\u8ABF\u5473\u7B26\u5408\u4F4E\u9E7D\u4E4B\u539F\u5247"
   - isDone: 0
-    operateSteps: 3
+    operateSteps: 1
     score: 3
     isToDo: "\u672A\u4F9D\u5E8F\u70F9\u716E\u98DF\u7269"
     whatToDo: "\u4F9D\u5E8F\u70F9\u716E\u98DF\u7269"
   - isDone: 0
-    operateSteps: 4
+    operateSteps: 2
     score: 2
     isToDo: "\u672A\u5207\u788E\u6216\u6B63\u78BA\u70F9\u8ABF\u7C73\u7CA5"
     whatToDo: "\u5207\u788E\uFF0C\u9ECF\u7A20\u72C0"
@@ -75,7 +75,7 @@ MonoBehaviour:
     isToDo: "\u672A\u6E2C\u8A66\u98DF\u7269\u6EAB\u5EA6"
     whatToDo: "\u6E2C\u8A66\u98DF\u7269\u6EAB\u5EA6"
   - isDone: 0
-    operateSteps: 10
+    operateSteps: 1
     score: 5
     isToDo: "\u672A\u6B63\u78BA\u9935\u98DF\u6216\u4E92\u52D5"
     whatToDo: "\u9935\u98DF\uFF0C\u4E26\u53E3\u8FF0\u9935\u98DF\u4E4B\u4E92 \u52D5\u8A9E\u8A00\uFF08\u5C07\u9935\u98DF\u5F8C\u7684\u7CA5\u7F6E\u65BC\u53E6\u4E00\u7A7A\u7897\u4E2D\uFF09"
@@ -146,7 +146,7 @@ MonoBehaviour:
     whatToDo: "\u958B\u6C34\u52A0\u5165\u5C0F\u85E5\u676F\u5167\u6EB6\u89E3\u85E5\u7C89"
   - isDone: 0
     operateSteps: 4
-    score: 7
+    score: 0.2
     isToDo: "\u672A\u9032\u884C\u53CD\u62BD\u52D5\u4F5C"
     whatToDo: "\u704C\u85E5\u524D\uFF0C\u5148\u78BA\u5B9A\u9F3B\u80C3\u7BA1\u9060\u7AEF\u5728\u80C3\u4E2D\uFF08\u9808\u6709\u53CD\u62BD\u52D5\u4F5C\uFF09"
   - isDone: 0
