@@ -303,7 +303,11 @@ namespace Manager
                 DontDestroyOnLoad(this.gameObject);
             }
 
-            _scoreSystem = new ScoreSystem(100);
+            if (GameMod!=Mod.Test)
+            {
+                _scoreSystem = new ScoreSystem(100);
+            }
+
         }
 
         private void Update()
