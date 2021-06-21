@@ -159,12 +159,12 @@ namespace InteractableObject
                 {
                     // attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.VelocityMovement;
                     hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset );
-                    print("單手抓取");
+                    // print("單手抓取");
                     snapTakeObject = true;
                     if (snapFixed.isFixed && snapReleaseGesture)
                     {
-                        print($"已鬆手，且物件已黏合:{snapFixed.isFixed}");
-                        print($"物件吻合:{snapFixed.isLocated}");
+                        // print($"已鬆手，且物件已黏合:{snapFixed.isFixed}");
+                        // print($"物件吻合:{snapFixed.isLocated}");
                         snapFixed.isFixed = false;
                         snapFixed.isLocated = false;
                         // snapOut.Invoke();
@@ -312,7 +312,7 @@ namespace InteractableObject
 
                     snapTakeObject = false;
                     rigidbody.isKinematic = false;
-                    Debug.Log("放下了" + gameObject.name);
+                    // Debug.Log("放下了" + gameObject.name);
                 }
             }
             else

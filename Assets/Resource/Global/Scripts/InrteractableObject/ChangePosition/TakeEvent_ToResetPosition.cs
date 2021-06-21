@@ -48,7 +48,7 @@ namespace InteractableObject
         {
             if (isEntry)
             {
-                print($"{gameObject.name}回歸原位");
+                // print($"{gameObject.name}回歸原位");
                 transform.SetParent(originTransform);
                 if (isEntryKinematic)
                 {
