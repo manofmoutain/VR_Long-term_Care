@@ -102,6 +102,11 @@ namespace InteractableObject
             Destroy(go);
         }
 
+        public void DestroyThisGameObject()
+        {
+            Destroy(gameObject);
+        }
+
         /// <summary>
         /// 開關物件的MeshRemder
         /// </summary>
