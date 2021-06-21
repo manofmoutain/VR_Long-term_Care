@@ -3,16 +3,14 @@ using UnityEngine;
 
 namespace PrepareMeal
 {
-    public class EventToShowVFX : MonoBehaviour
+    public class Faucet : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem vfx;
         [SerializeField] private bool isFlowing;
         [SerializeField] private float timer;
         [SerializeField] private GameObject hands;
 
         private void Start()
         {
-            vfx.gameObject.SetActive(false);
             isFlowing = false;
             hands.SetActive(false);
         }
@@ -29,10 +27,9 @@ namespace PrepareMeal
             }
         }
 
-        public void SwitchVFX(bool on)
+        public void SwitchFlowing(bool switcher)
         {
-            isFlowing = on;
-            vfx.gameObject.SetActive(on);
+            isFlowing = switcher;
         }
 
 
