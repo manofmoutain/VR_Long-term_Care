@@ -11,28 +11,25 @@ namespace InteractableObject
         public int count;
         [SerializeField] private int maxCount;
         [SerializeField] private UnityEvent onMaxCountEvent;
+        [SerializeField] private UnityEvent overCountEvent;
 
 
-        // private void OnTriggerEnter(Collider other)
-        // {
-        //     if (other.GetComponent<Interact_TriggerComponent>())
-        //     {
-        //         if (count<maxCount)
-        //         {
-        //             AddCount();
-        //         }
-        //
-        //     }
-        // }
+        public void ResetCount()
+        {
+            count = 0;
+        }
 
         public void AddCount()
         {
             count++;
-            if (count==maxCount)
+            if (count == maxCount)
             {
                 onMaxCountEvent.Invoke();
+            }
+            else if (count>maxCount)
+            {
+                overCountEvent.Invoke();
             }
         }
     }
 }
-
