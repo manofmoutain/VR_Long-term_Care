@@ -167,8 +167,8 @@ namespace InteractableObject
 
 
         [SerializeField] private Quaternion startQuaternion;
-        [SerializeField] private Vector3 worldPlaneNormal;
-        [SerializeField] private Vector3 localPlaneNormal;
+        [SerializeField] private Vector3 worldPlaneNormalize;
+        [SerializeField] private Vector3 localPlaneNormalize;
         [SerializeField] private Vector3 lastHandProjected;
 
         /// <summary>
@@ -203,16 +203,16 @@ namespace InteractableObject
                 linearMapping = GetComponent<Interact_LinearMapping>();
             }
 
-            worldPlaneNormal = new Vector3(0.0f, 0.0f, 0.0f);
-            worldPlaneNormal[(int) axisOfRotation] = 1f;
+            worldPlaneNormalize = new Vector3(0.0f, 0.0f, 0.0f);
+            worldPlaneNormalize[(int) axisOfRotation] = 1f;
 
             GetComponent<Rigidbody>().isKinematic = true;
 
-            localPlaneNormal = worldPlaneNormal;
+            localPlaneNormalize = worldPlaneNormalize;
 
             if (transform.parent)
             {
-                worldPlaneNormal = transform.parent.localToWorldMatrix.MultiplyVector(worldPlaneNormal).normalized;
+                worldPlaneNormalize = transform.parent.localToWorldMatrix.MultiplyVector(worldPlaneNormalize).normalized;
             }
 
             if (limited)
@@ -227,7 +227,7 @@ namespace InteractableObject
             }
             else
             {
-                startQuaternion = Quaternion.AngleAxis(transform.localEulerAngles[(int) axisOfRotation], localPlaneNormal);
+                startQuaternion = Quaternion.AngleAxis(transform.localEulerAngles[(int) axisOfRotation], localPlaneNormalize);
                 outAngle = 0.0f;
             }
 
@@ -379,13 +379,22 @@ namespace InteractableObject
         [SerializeField]
         private Vector3 ComputeToTransformProjected(Transform xForm)
         {
-            Vector3 toTransform = (xForm.position - transform.position).normalized;
+            Vector3 toTransform;
+            if (isRoot)
+            {
+                toTransform = (xForm.eulerAngles - transform.eulerAngles).normalized;
+            }
+            else
+            {
+                toTransform = (xForm.position - transform.position).normalized;
+            }
+
             Vector3 toTransformProjected = new Vector3(0.0f, 0.0f, 0.0f);
 
             // Need a non-zero distance from the hand to the center of the CircularDrive
             if (toTransform.sqrMagnitude > 0.0f)
             {
-                toTransformProjected = Vector3.ProjectOnPlane(toTransform, worldPlaneNormal).normalized;
+                toTransformProjected = Vector3.ProjectOnPlane(toTransform, worldPlaneNormalize).normalized;
             }
             else
             {
@@ -436,7 +445,8 @@ namespace InteractableObject
             if (rotateGameObject)
             {
                 // print($"localPlaneNormal : {localPlaneNormal}");
-                transform.localRotation = startQuaternion * Quaternion.AngleAxis(outAngle, localPlaneNormal);
+                transform.localRotation = startQuaternion * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+
                 // print($"localRotation : {transform.localRotation}");
             }
         }
@@ -469,7 +479,7 @@ namespace InteractableObject
                     if (absAngleDelta > 0.0f)
                     {
                         Vector3 cross = Vector3.Cross(lastHandProjected, toHandProjected).normalized;
-                        float dot = Vector3.Dot(worldPlaneNormal, cross);
+                        float dot = Vector3.Dot(worldPlaneNormalize, cross);
 
                         float signedAngleDelta = absAngleDelta;
 
@@ -594,6 +604,19 @@ namespace InteractableObject
 
                             lastHandProjected = toHandProjected;
                         }
+
+                        if (isAngleEvent)
+                        {
+                            if (outAngle >= eventAngle-10 && outAngle <= eventAngle+10)
+                            {
+                                if (isAngleEventToDetatch)
+                                {
+                                    hand.DetachObject(gameObject);
+                                }
+                                angleEvent.Invoke();
+                            }
+
+                        }
                     }
                 }
             }
@@ -609,7 +632,7 @@ namespace InteractableObject
                     if (absAngleDelta > 0.0f)
                     {
                         Vector3 cross = Vector3.Cross(lastHandProjected, toHandProjected).normalized;
-                        float dot = Vector3.Dot(worldPlaneNormal, cross);
+                        float dot = Vector3.Dot(worldPlaneNormalize, cross);
 
                         float signedAngleDelta = absAngleDelta;
 
