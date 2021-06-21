@@ -659,13 +659,14 @@ GameObject:
   - component: {fileID: 4975626743120805047}
   - component: {fileID: 4793592882782755665}
   - component: {fileID: 4793592882782755670}
-  - component: {fileID: 4793592882782755664}
   - component: {fileID: 4793592882782755668}
   - component: {fileID: 4793592882208839038}
   - component: {fileID: 4793592882208839037}
   - component: {fileID: 4793592882208839036}
+  - component: {fileID: 2975905627645054456}
+  - component: {fileID: 4793592882782755664}
+  - component: {fileID: 1574195030}
   - component: {fileID: 1574195029}
-  - component: {fileID: 1574195028}
   m_Layer: 0
   m_Name: "\u9AD8\u9E97\u83DC"
   m_TagString: Untagged
@@ -735,23 +736,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4793592882782755664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5640523812045219341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58cde0afeb775534ebd930c75e28ac68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  count: 0
-  maxCount: 3
-  onMaxCountEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!54 &4793592882782755668
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -781,6 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEntry: 0
+  isEntryKinematic: 1
   originTransform: {fileID: 0}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0}
@@ -899,7 +884,19 @@ MonoBehaviour:
   dropDown:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1574195029
+--- !u!114 &2975905627645054456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640523812045219341}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d0fbbde84074a4085916c7e7ba292f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4793592882782755664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -908,7 +905,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 5640523812045219341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Script: {fileID: 11500000, guid: 58cde0afeb775534ebd930c75e28ac68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 0
+  maxCount: 3
+  onMaxCountEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2975905627645054456}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
+        m_MethodName: CheckPoint
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1574195029}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: SwitchTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1574195030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640523812045219341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggerEvent:
@@ -940,8 +990,32 @@ MonoBehaviour:
         m_CallState: 2
   collisionEvent:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1574195028
+      m_Calls:
+      - m_Target: {fileID: 1574195029}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: SwitchRigidbodyKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1574195029}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: ChangeParent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1574195029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -950,12 +1024,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5640523812045219341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58cde0afeb775534ebd930c75e28ac68, type: 3}
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 0
-  maxCount: 0
-  onMaxCountEvent:
+  achieveCheckpointEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6097570981448698880
