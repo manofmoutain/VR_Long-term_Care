@@ -50,7 +50,7 @@ MonoBehaviour:
     isToDo: "\u672A\u4F9D\u5E8F\u70F9\u716E\u98DF\u7269"
     whatToDo: "\u4F9D\u5E8F\u70F9\u716E\u98DF\u7269"
   - isDone: 0
-    operateSteps: 2
+    operateSteps: 3
     score: 2
     isToDo: "\u672A\u5207\u788E\u6216\u6B63\u78BA\u70F9\u8ABF\u7C73\u7CA5"
     whatToDo: "\u5207\u788E\uFF0C\u9ECF\u7A20\u72C0"
