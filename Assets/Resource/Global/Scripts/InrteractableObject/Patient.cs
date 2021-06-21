@@ -172,6 +172,11 @@ namespace Global.Pateint
             ScoreManager.Instance.DecreaseOperateSteps(index);
         }
 
+        public void WrongOperate(int index)
+        {
+            ScoreManager.Instance.IncreaseOperateSteps(index);
+        }
+
         public void StartSpeechRecognize()
         {
             SpeechManager.Instance.StartRecognizeSpeech();
