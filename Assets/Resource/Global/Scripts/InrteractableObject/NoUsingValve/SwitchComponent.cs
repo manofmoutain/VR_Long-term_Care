@@ -1,5 +1,6 @@
 using System;
 using Manager;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,16 +9,24 @@ namespace InteractableObject
     public class SwitchComponent : MonoBehaviour
     {
         private Animator animator;
-        private MySkeletonPoser skeletonPoser;
 
+        /// <summary>
+        /// 是否要啟動對某個項目的判定，以打開achieveCheckpointEvent事件
+        /// </summary>
         public bool isUsingCheckPoint;
         /// <summary>
         /// 達成某個項目之後要觸發的事件
         /// </summary>
         [SerializeField] private UnityEvent achieveCheckpointEvent;
 
+        private Vector3 originPosition;
+        private Vector3 originRotation;
+        private MySkeletonPoser skeletonPoser;
+
         private void Start()
         {
+            originPosition = transform.localPosition;
+            originRotation = transform.localEulerAngles;
             if (GetComponent<Animator>())
             {
                 animator = GetComponent<Animator>();
@@ -58,7 +67,8 @@ namespace InteractableObject
             // print(skeletonPoser.blendingBehaviours[0].name);
             skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index].name, 0);
 
-            skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index - 1].name, blendPoseValue + gestureConst);
+            skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index - 1].name,
+                blendPoseValue + gestureConst);
         }
 
         /// <summary>
@@ -76,7 +86,8 @@ namespace InteractableObject
 
             skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index].name, 0);
 
-            skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index + 1].name, gestureConst - blendPoseValue);
+            skeletonPoser.SetBlendingBehaviourValue(skeletonPoser.blendingBehaviours[index + 1].name,
+                gestureConst - blendPoseValue);
         }
 
         /// <summary>
@@ -102,6 +113,9 @@ namespace InteractableObject
             Destroy(go);
         }
 
+        /// <summary>
+        /// 刪除自身物件
+        /// </summary>
         public void DestroyThisGameObject()
         {
             Destroy(gameObject);
@@ -116,43 +130,65 @@ namespace InteractableObject
             GetComponent<MeshRenderer>().enabled = switcher;
         }
 
+        /// <summary>
+        /// 開關Collider組件
+        /// </summary>
+        /// <param name="switcher"></param>
         public void SwitchCollider(bool switcher)
         {
             GetComponent<Collider>().enabled = switcher;
         }
 
+        /// <summary>
+        /// 開關Trigger
+        /// </summary>
+        /// <param name="switcher"></param>
         public void SwitchTrigger(bool switcher)
         {
             GetComponent<Collider>().isTrigger = switcher;
         }
 
+        /// <summary>
+        /// 自身物件的開關
+        /// </summary>
+        /// <param name="switcher"></param>
         public void SwtichGameObject(bool switcher)
         {
             gameObject.SetActive(switcher);
         }
 
+        /// <summary>
+        /// 開關RigidBody的靜態屬性
+        /// </summary>
+        /// <param name="switcher"></param>
         public void SwitchRigidbodyKinematic(bool switcher)
         {
             GetComponent<Rigidbody>().isKinematic = switcher;
+            transform.localPosition = Vector3.zero;
+            transform.localEulerAngles=Vector3.zero;
         }
 
-        public void AnimatorSetTrigger(string parameter)
+        /// <summary>
+        /// 啟動Animator的某個Trigger
+        /// </summary>
+        /// <param name="parameter"></param>
+       public void AnimatorSetTrigger(string parameter)
         {
             animator.SetTrigger(parameter);
         }
 
         public void AnimatorSetBool(string parameter)
         {
-
             animator.SetBool(parameter, !animator.GetBool(parameter));
         }
 
         public void ChangeParent(Transform parent)
         {
             transform.SetParent(parent);
+
             transform.localPosition = Vector3.zero;
-            transform.localPosition = Vector3.zero;
-            transform.localScale = Vector3.one;
+            transform.localEulerAngles=Vector3.zero;
+            // transform.localScale = Vector3.one;
         }
     }
 }
