@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 6166677008932881755}
   - component: {fileID: 1027610861}
   - component: {fileID: 1901721139}
-  - component: {fileID: 3761185884455215423}
   m_Layer: 0
   m_Name: "\u83DC\u5200"
   m_TagString: Untagged
@@ -131,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEntry: 0
+  isEntryKinematic: 1
   originTransform: {fileID: 0}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0}
@@ -238,8 +238,12 @@ MonoBehaviour:
   rightHandAttachedGameObject: {fileID: 0}
   leftHand: {fileID: 0}
   leftHandAttachedGameObject: {fileID: 0}
+  isStartTrigger: 1
+  isStartKinematic: 1
   OriginalPositionGameObject: {fileID: 0}
-  UsePosition: []
+  UsePosition:
+  - {fileID: 0}
+  - {fileID: 0}
   snapZoneArea: []
   takeObject: {fileID: 0}
   snapTakeObject: 0
@@ -253,13 +257,7 @@ MonoBehaviour:
     outsideRange: 0
     outsideZone: {fileID: 0}
   attachmentFlags: 8
-  catchingSpeedThreshold: -1
-  attachmentOffset: {fileID: 0}
-  interactable: {fileID: 0}
-  attached: 0
-  attachTime: 0
-  attachPosition: {x: 0, y: 0, z: 0}
-  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  releaseVelocityStyle: 1
   isHiddenEvents: 0
   snapIn:
     m_PersistentCalls:
@@ -286,15 +284,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2662608, y: 0.025331615, z: 0.071220316}
   m_Center: {x: -0.26448822, y: 0.0000000074505766, z: 0.015442062}
---- !u!114 &3761185884455215423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3490962581116093872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d0fbbde84074a4085916c7e7ba292f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

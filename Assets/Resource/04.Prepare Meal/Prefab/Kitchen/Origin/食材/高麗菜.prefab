@@ -663,7 +663,6 @@ GameObject:
   - component: {fileID: 4793592882208839038}
   - component: {fileID: 4793592882208839037}
   - component: {fileID: 4793592882208839036}
-  - component: {fileID: 2975905627645054456}
   - component: {fileID: 4793592882782755664}
   - component: {fileID: 1574195030}
   - component: {fileID: 1574195029}
@@ -765,7 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEntry: 0
-  isEntryKinematic: 1
+  isEntryKinematic: 0
   originTransform: {fileID: 0}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0}
@@ -846,7 +845,7 @@ MonoBehaviour:
   rightHandAttachedGameObject: {fileID: 0}
   leftHand: {fileID: 0}
   leftHandAttachedGameObject: {fileID: 0}
-  isStartTrigger: 1
+  isStartTrigger: 0
   isStartKinematic: 1
   OriginalPositionGameObject: {fileID: 0}
   UsePosition:
@@ -863,15 +862,9 @@ MonoBehaviour:
     outside: 0
     outsideRange: 0
     outsideZone: {fileID: 0}
-  attachmentFlags: 8
-  catchingSpeedThreshold: -1
-  attachmentOffset: {fileID: 0}
-  interactable: {fileID: 0}
-  attached: 0
-  attachTime: 0
-  attachPosition: {x: 0, y: 0, z: 0}
-  attachRotation: {x: 0, y: 0, z: 0, w: 0}
-  isHiddenEvents: 0
+  attachmentFlags: 85
+  releaseVelocityStyle: 1
+  isHiddenEvents: 1
   snapIn:
     m_PersistentCalls:
       m_Calls: []
@@ -884,18 +877,6 @@ MonoBehaviour:
   dropDown:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2975905627645054456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5640523812045219341}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d0fbbde84074a4085916c7e7ba292f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4793592882782755664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,18 +894,6 @@ MonoBehaviour:
   onMaxCountEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2975905627645054456}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
         m_MethodName: CheckPoint
@@ -949,6 +918,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  overCountEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1574195030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,6 +933,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerName:
+  - "\u83DC\u5200"
+  - "\u934B\u5B50"
+  collapseTriggerEvent: 1
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -988,6 +964,7 @@ MonoBehaviour:
           m_StringArgument: CutOff
           m_BoolArgument: 0
         m_CallState: 2
+  collapseCollisionEvent: 1
   collisionEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1027,6 +1004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
   achieveCheckpointEvent:
     m_PersistentCalls:
       m_Calls: []

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,12 +8,17 @@ namespace InteractableObject
 {
     public class SwitchComponentEvent : MonoBehaviour
     {
-        [Tooltip("要互動對象的名稱")][SerializeField] private string[] triggerName;
+        [Tooltip("trigger的名稱")]public string[] triggerName;
+        [Tooltip("collision的名稱")]public string[] collisionName;
+
         public bool collapseTriggerEvent;
+
         [SerializeField] private UnityEvent triggerEvent;
 
         public bool collapseCollisionEvent;
+
         [SerializeField] private UnityEvent collisionEvent;
+
         private void OnTriggerEnter(Collider other)
         {
             if (triggerName.Length>0)
@@ -36,11 +42,12 @@ namespace InteractableObject
         {
             if (triggerName.Length>0)
             {
-                foreach (var s in triggerName)
+                foreach (var s in collisionName)
                 {
                     if (other.gameObject.name==s)
                     {
                         collisionEvent.Invoke();
+                        break;
                     }
                 }
             }
