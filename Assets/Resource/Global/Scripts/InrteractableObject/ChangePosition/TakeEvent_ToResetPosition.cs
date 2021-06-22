@@ -7,6 +7,7 @@ namespace InteractableObject
     /// 可互動性物件的重制位置
     /// 這個腳本會和SnapPutZone配合在一起
     /// </summary>
+    [RequireComponent(typeof(Collider))]
     public class TakeEvent_ToResetPosition : MonoBehaviour
     {
         /// <summary>
