@@ -20,16 +20,19 @@ namespace InteractableObject
 
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.LabelField("摺疊Trigger事件",mainHeader);
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("collapseTriggerEvent"));
-            if (switchComponentEvent.collapseTriggerEvent)
+            EditorGUILayout.LabelField("Trigger事件",mainHeader);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("triggerName"));
+            // EditorGUILayout.PropertyField(serializedObject.FindProperty("collapseTriggerEvent"));
+            if (switchComponentEvent.triggerName.Length>0)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("triggerEvent"));
             }
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("摺疊用Collider事件",mainHeader);
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("collapseCollisionEvent"));
-            if (switchComponentEvent.collapseCollisionEvent)
+
+            EditorGUILayout.LabelField("Collider事件",mainHeader);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("collisionName"));
+            // EditorGUILayout.PropertyField(serializedObject.FindProperty("collapseCollisionEvent"));
+            if (switchComponentEvent.collisionName.Length>0)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("collisionEvent"));
             }

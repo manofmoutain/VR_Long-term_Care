@@ -49,8 +49,7 @@ namespace InteractableObject
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(new GUIContent("手勢資訊"),headerLayout);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("attachmentFlags"));
-            // EditorGUILayout.PropertyField(serializedObject.FindProperty("catchingSpeedThreshold"));
-            // EditorGUILayout.PropertyField(serializedObject.FindProperty("attachmentOffset"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("releaseVelocityStyle"));
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(new GUIContent("事件"),headerLayout);

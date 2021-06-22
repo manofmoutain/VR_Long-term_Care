@@ -376,7 +376,6 @@ namespace InteractableObject
         /// </summary>
         /// <param name="xForm"></param>
         /// <returns></returns>
-        [SerializeField]
         private Vector3 ComputeToTransformProjected(Transform xForm)
         {
             Vector3 toTransform;
