@@ -31,7 +31,7 @@ namespace InteractableObject
         /// <summary>
         /// 要黏貼的物件(必須要有snapTakeDropZone腳本)
         /// </summary>
-        [SerializeField] TakeEvent_SingleHandSnapPutZone takeEventSingleHandSnapPutZone;
+        // [SerializeField] TakeEvent_SingleHandSnapPutZone takeEventSingleHandSnapPutZone;
 
         // [SerializeField] TakeEvent_TwoHandSnapPutZone takeEventTwoHandSnapPutZone;
         [SerializeField] TakeEvent_HandGrab takeEventHandGrab;
@@ -69,10 +69,10 @@ namespace InteractableObject
 
                     //要黏著的物體已黏著與此區域
                     isSnapIn = true;
-                    if (takeEventSingleHandSnapPutZone != null)
-                    {
-                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
-                    }
+                    // if (takeEventSingleHandSnapPutZone != null)
+                    // {
+                    //     takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                    // }
 
                     // if (takeEventTwoHandSnapPutZone != null)
                     // {
@@ -107,10 +107,10 @@ namespace InteractableObject
                     // print($"{other.gameObject.name}停留{transform.parent.name}");
 
                     //要黏著的物體已黏著與此區域
-                    if (takeEventSingleHandSnapPutZone != null)
-                    {
-                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
-                    }
+                    // if (takeEventSingleHandSnapPutZone != null)
+                    // {
+                    //     takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                    // }
 
                     // if (takeEventTwoHandSnapPutZone != null)
                     // {
@@ -150,14 +150,14 @@ namespace InteractableObject
 
                     isSnapIn = false;
 
-                    if (takeEventSingleHandSnapPutZone != null)
-                    {
-                        if (takeEventSingleHandSnapPutZone.snapFixed.isLocated &&
-                            !takeEventSingleHandSnapPutZone.snapFixed.isFixed)
-                        {
-                            takeEventSingleHandSnapPutZone.snapFixed.isLocated = false;
-                        }
-                    }
+                    // if (takeEventSingleHandSnapPutZone != null)
+                    // {
+                    //     if (takeEventSingleHandSnapPutZone.snapFixed.isLocated &&
+                    //         !takeEventSingleHandSnapPutZone.snapFixed.isFixed)
+                    //     {
+                    //         takeEventSingleHandSnapPutZone.snapFixed.isLocated = false;
+                    //     }
+                    // }
 
                     if (takeEventHandGrab != null)
                     {
@@ -199,10 +199,10 @@ namespace InteractableObject
 
                     //要黏著的物體已黏著與此區域
                     isSnapIn = true;
-                    if (takeEventSingleHandSnapPutZone != null)
-                    {
-                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
-                    }
+                    // if (takeEventSingleHandSnapPutZone != null)
+                    // {
+                    //     takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                    // }
 
                     // if (takeEventTwoHandSnapPutZone != null)
                     // {
@@ -235,10 +235,10 @@ namespace InteractableObject
                     // print($"{other.gameObject.name}停留{transform.parent.name}");
 
                     //要黏著的物體已黏著與此區域
-                    if (takeEventSingleHandSnapPutZone != null)
-                    {
-                        takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
-                    }
+                    // if (takeEventSingleHandSnapPutZone != null)
+                    // {
+                    //     takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
+                    // }
 
                     if (takeEventHandGrab != null)
                     {
@@ -272,14 +272,14 @@ namespace InteractableObject
 
                     isSnapIn = false;
 
-                    if (takeEventSingleHandSnapPutZone != null)
-                    {
-                        if (takeEventSingleHandSnapPutZone.snapFixed.isLocated &&
-                            !takeEventSingleHandSnapPutZone.snapFixed.isFixed)
-                        {
-                            takeEventSingleHandSnapPutZone.snapFixed.isLocated = false;
-                        }
-                    }
+                    // if (takeEventSingleHandSnapPutZone != null)
+                    // {
+                    //     if (takeEventSingleHandSnapPutZone.snapFixed.isLocated &&
+                    //         !takeEventSingleHandSnapPutZone.snapFixed.isFixed)
+                    //     {
+                    //         takeEventSingleHandSnapPutZone.snapFixed.isLocated = false;
+                    //     }
+                    // }
 
                     if (takeEventHandGrab != null)
                     {
