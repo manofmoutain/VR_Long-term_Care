@@ -17,7 +17,12 @@ namespace InteractableObject
         /// <summary>
         /// 達成某個項目之後要觸發的事件
         /// </summary>
-        [SerializeField] private UnityEvent achieveCheckpointEvent;
+        [SerializeField] private UnityEvent achieveCheckPointEvent;
+
+        /// <summary>
+        /// 為達成目標時的事件
+        /// </summary>
+        [SerializeField] private UnityEvent notAchieveCheckPointEvent;
 
         private Vector3 originPosition;
         private Vector3 originRotation;
@@ -47,7 +52,11 @@ namespace InteractableObject
         {
             if (ScoreManager.Instance.GetIsDone(index))
             {
-                achieveCheckpointEvent.Invoke();
+                achieveCheckPointEvent.Invoke();
+            }
+            else
+            {
+                notAchieveCheckPointEvent.Invoke();
             }
         }
 

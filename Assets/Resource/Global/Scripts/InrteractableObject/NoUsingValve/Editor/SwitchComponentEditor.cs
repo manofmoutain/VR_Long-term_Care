@@ -24,7 +24,8 @@ namespace InteractableObject
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isUsingCheckPoint"));
             if (switchComponent.isUsingCheckPoint)
             {
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("achieveCheckpointEvent"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("achieveCheckPointEvent"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("notAchieveCheckPointEvent"));
             }
 
             serializedObject.ApplyModifiedProperties();
