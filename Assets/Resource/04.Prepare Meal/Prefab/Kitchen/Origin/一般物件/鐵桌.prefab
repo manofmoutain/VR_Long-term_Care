@@ -129,7 +129,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 5153340548629661557, guid: 12206b2824abdd941b43a81b6f74f30e, type: 3}
   sphereCollider: {fileID: 311740851}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 0}
   autoHandGrab: {fileID: 0}
 --- !u!1 &354879035
@@ -211,7 +210,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 5025991612916842487, guid: 783c70053a6a56a4888e85f023d6578e, type: 3}
   sphereCollider: {fileID: 447890656}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 0}
   autoHandGrab: {fileID: 0}
 --- !u!135 &447890656
@@ -275,7 +273,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 5025991612916842487, guid: 783c70053a6a56a4888e85f023d6578e, type: 3}
   sphereCollider: {fileID: 694630791}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 0}
   autoHandGrab: {fileID: 0}
 --- !u!135 &694630791
@@ -593,13 +590,7 @@ MonoBehaviour:
     outsideRange: 0
     outsideZone: {fileID: 0}
   attachmentFlags: 8
-  catchingSpeedThreshold: -1
-  attachmentOffset: {fileID: 0}
-  interactable: {fileID: 0}
-  attached: 0
-  attachTime: 0
-  attachPosition: {x: 0, y: 0, z: 0}
-  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  releaseVelocityStyle: 3
   isHiddenEvents: 0
   snapIn:
     m_PersistentCalls:
@@ -852,6 +843,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 0
+  triggerName:
+  - "\u85E5\u6775"
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collapseTriggerEvent: 0
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -867,6 +865,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  collapseCollisionEvent: 0
   collisionEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1095,13 +1094,7 @@ MonoBehaviour:
     outsideRange: 0
     outsideZone: {fileID: 0}
   attachmentFlags: 8
-  catchingSpeedThreshold: -1
-  attachmentOffset: {fileID: 0}
-  interactable: {fileID: 0}
-  attached: 0
-  attachTime: 0
-  attachPosition: {x: 0, y: 0, z: 0}
-  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  releaseVelocityStyle: 3
   isHiddenEvents: 0
   snapIn:
     m_PersistentCalls:
@@ -1324,13 +1317,7 @@ MonoBehaviour:
     outsideRange: 0
     outsideZone: {fileID: 0}
   attachmentFlags: 8
-  catchingSpeedThreshold: -1
-  attachmentOffset: {fileID: 0}
-  interactable: {fileID: 0}
-  attached: 0
-  attachTime: 0
-  attachPosition: {x: 0, y: 0, z: 0}
-  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  releaseVelocityStyle: 3
   isHiddenEvents: 1
   snapIn:
     m_PersistentCalls:
@@ -1494,13 +1481,7 @@ MonoBehaviour:
     outsideRange: 0
     outsideZone: {fileID: 0}
   attachmentFlags: 8
-  catchingSpeedThreshold: -1
-  attachmentOffset: {fileID: 0}
-  interactable: {fileID: 0}
-  attached: 0
-  attachTime: 0
-  attachPosition: {x: 0, y: 0, z: 0}
-  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  releaseVelocityStyle: 3
   isHiddenEvents: 1
   snapIn:
     m_PersistentCalls:
@@ -1586,6 +1567,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 0
+  triggerName:
+  - "\u85E5\u6775"
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collapseTriggerEvent: 0
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1601,6 +1589,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  collapseCollisionEvent: 0
   collisionEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1754,6 +1743,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 0
+  triggerName:
+  - "\u85E5\u6775"
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collapseTriggerEvent: 0
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1769,6 +1765,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  collapseCollisionEvent: 0
   collisionEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1988,7 +1985,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 884732579187512107, guid: 0cd90eb4d59017c40bbd57fefa0b00b8, type: 3}
   sphereCollider: {fileID: 0}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 8458951385220157557}
   autoHandGrab: {fileID: 0}
 --- !u!54 &6366173693058023532
@@ -2032,6 +2028,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 0
+  triggerName:
+  - "\u85E5\u6775"
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collapseTriggerEvent: 0
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2047,6 +2050,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  collapseCollisionEvent: 0
   collisionEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2123,7 +2127,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 4030317044691692287, guid: caab8f2fcc317f040b027560ceff92d9, type: 3}
   sphereCollider: {fileID: 0}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 0}
   autoHandGrab: {fileID: 0}
 --- !u!1 &4695274699378484723
@@ -2219,7 +2222,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 6727864085295929633, guid: a6e4be861cfbab249a2a64321aeea428, type: 3}
   sphereCollider: {fileID: 0}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 0}
   autoHandGrab: {fileID: 0}
 --- !u!1 &4949811866176866377
@@ -2283,7 +2285,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 5401957625676752518, guid: 98f2d1c5f6e33e045ad4cadf37ea9ffd, type: 3}
   sphereCollider: {fileID: 0}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 8633494445915022094}
   autoHandGrab: {fileID: 0}
 --- !u!65 &4380803248051519159
@@ -2886,7 +2887,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 1566346875409548741, guid: d9d9a698c77ebee4ebffe08667f0e395, type: 3}
   sphereCollider: {fileID: 0}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 5568585060942656609}
   autoHandGrab: {fileID: 0}
 --- !u!65 &715147809882037908
@@ -3060,6 +3060,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 0
+  triggerName:
+  - "\u85E5\u6775"
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collapseTriggerEvent: 0
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -3075,6 +3082,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  collapseCollisionEvent: 0
   collisionEvent:
     m_PersistentCalls:
       m_Calls:
@@ -3151,7 +3159,6 @@ MonoBehaviour:
   fadedObject: {fileID: 0}
   fadedPrefab: {fileID: 6187197381111867649, guid: 2eb18428501ef1348bee4c2595b71b6c, type: 3}
   sphereCollider: {fileID: 0}
-  takeEventSingleHandSnapPutZone: {fileID: 0}
   takeEventHandGrab: {fileID: 4098102354264451648}
   autoHandGrab: {fileID: 0}
 --- !u!65 &598253651908221636

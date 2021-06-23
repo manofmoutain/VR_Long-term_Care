@@ -11,13 +11,16 @@ GameObject:
   - component: {fileID: 3695326854532155165}
   - component: {fileID: 3695326854533449533}
   - component: {fileID: 3695326854534448637}
-  - component: {fileID: 6906265944295645182}
   - component: {fileID: 7182597034517305546}
   - component: {fileID: 1685551526879442656}
+  - component: {fileID: 6906265944295645182}
   - component: {fileID: 842199632558086389}
   - component: {fileID: 1065531331}
   - component: {fileID: 1065531330}
   - component: {fileID: 1065531329}
+  - component: {fileID: 145382475}
+  - component: {fileID: 145382476}
+  - component: {fileID: 145382477}
   m_Layer: 0
   m_Name: "\u6E6F\u52FA"
   m_TagString: Untagged
@@ -88,19 +91,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6906265944295645182
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3695326854532455229}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.048534464
-  m_Center: {x: 0.028180528, y: 0.00000006296405, z: -0.3102491}
 --- !u!65 &7182597034517305546
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -130,6 +120,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &6906265944295645182
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695326854532455229}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.06257479
+  m_Center: {x: -0.02425777, y: -0.31479943, z: 1.1602229e-16}
 --- !u!114 &842199632558086389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +254,7 @@ MonoBehaviour:
   rightHandAttachedGameObject: {fileID: 0}
   leftHand: {fileID: 0}
   leftHandAttachedGameObject: {fileID: 0}
-  isStartTrigger: 1
+  isStartTrigger: 0
   isStartKinematic: 1
   OriginalPositionGameObject: {fileID: 0}
   UsePosition:
@@ -270,13 +273,7 @@ MonoBehaviour:
     outsideRange: 0
     outsideZone: {fileID: 0}
   attachmentFlags: 8
-  catchingSpeedThreshold: -1
-  attachmentOffset: {fileID: 0}
-  interactable: {fileID: 0}
-  attached: 0
-  attachTime: 0
-  attachPosition: {x: 0, y: 0, z: 0}
-  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  releaseVelocityStyle: 1
   isHiddenEvents: 1
   snapIn:
     m_PersistentCalls:
@@ -288,5 +285,104 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   dropDown:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &145382475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695326854532455229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cde0afeb775534ebd930c75e28ac68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 0
+  maxCount: 3
+  onMaxCountEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 145382477}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DestroyGmaobject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  overCountEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &145382476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695326854532455229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 1
+  triggerName:
+  - "\u7CA5"
+  isUsingCollisionEvent: 1
+  collisionName:
+  - CleanTrigger
+  collapseTriggerEvent: 0
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 145382475}
+        m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
+        m_MethodName: AddCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  collapseCollisionEvent: 0
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
+        m_MethodName: AddCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &145382477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695326854532455229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
     m_PersistentCalls:
       m_Calls: []

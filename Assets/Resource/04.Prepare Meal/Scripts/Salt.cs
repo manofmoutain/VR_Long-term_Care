@@ -39,6 +39,7 @@ namespace PrepareMeal
                     if (isSpawn)
                     {
                         GameObject go = Instantiate(salt,spwanPosition);
+                        go.name = "鹽";
                         Destroy(go , 2);
                     }
 
