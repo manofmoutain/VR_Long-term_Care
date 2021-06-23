@@ -31,5 +31,10 @@ namespace InteractableObject
                 overCountEvent.Invoke();
             }
         }
+
+        public void ChangeMaxCount(int value)
+        {
+            maxCount = value;
+        }
     }
 }
