@@ -29,8 +29,8 @@ MonoBehaviour:
     isToDo: "\u672A\u6D17\u624B"
     whatToDo: "\u6D17\u6DE8\u96D9\u624B"
   - isDone: 0
-    operateSteps: 5
-    score: 0.4
+    operateSteps: 1
+    score: 2
     isToDo: "\u672A\u6E05\u6D17\u98DF\u6750\u5668\u76BF"
     whatToDo: "\u6E05\u6D17\u98DF\u6750\u53CA\u5668\u76BF"
   - isDone: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
     isToDo: "\u672A\u7B26\u5408\u4F4E\u9E7D\u6A19\u6E96"
     whatToDo: "\u8ABF\u5473\u7B26\u5408\u4F4E\u9E7D\u4E4B\u539F\u5247"
   - isDone: 0
-    operateSteps: 1
+    operateSteps: 3
     score: 3
     isToDo: "\u672A\u4F9D\u5E8F\u70F9\u716E\u98DF\u7269"
     whatToDo: "\u4F9D\u5E8F\u70F9\u716E\u98DF\u7269"
@@ -100,8 +100,8 @@ MonoBehaviour:
     isToDo: "\u672A\u5C07\u6B98\u9918\u7269\u4E1F\u5165\u5783\u573E\u6876"
     whatToDo: "\u4E1F\u5165\u5783\u573E\u7B52"
   - isDone: 0
-    operateSteps: 6
-    score: 0.5
+    operateSteps: 1
+    score: 2
     isToDo: "\u672A\u6D17\u6DE8\u6B78\u4F4D"
     whatToDo: "\u6D17\u6DE8\u4E26\u6B78\u4F4D"
   - isDone: 0
