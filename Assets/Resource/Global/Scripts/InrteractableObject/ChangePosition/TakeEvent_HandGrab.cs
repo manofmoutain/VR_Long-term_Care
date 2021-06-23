@@ -48,7 +48,7 @@ namespace InteractableObject
         [SerializeField]
         private Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.SnapOnAttach |
                                                        Hand.AttachmentFlags.DetachFromOtherHand |
-                                                       Hand.AttachmentFlags.TurnOnKinematic;
+                                                       Hand.AttachmentFlags.TurnOffGravity;
 
         /// <summary>
         /// 由於扳機保持而不是扳機按下，該物體必須移動多快才能固定？ (-1 to disable)
@@ -586,18 +586,17 @@ namespace InteractableObject
         /// <summary>
         /// 定位判斷－抓取的物件若吻合於黏貼區(未鬆手)
         /// </summary>
-        [Tooltip("定位判斷－抓取的物件若吻合於黏貼區(未鬆手) ")] public bool isLocated;
+        public bool isLocated;
 
         /// <summary>
         /// 吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區)
         /// </summary>
-        [Tooltip("吻合判斷－抓取的物件若吻合於黏貼區(已鬆手，物件已修正於黏貼區) ")]
         public bool isFixed;
 
         /// <summary>
         /// 定點判斷
         /// </summary>
-        [Tooltip("定點判斷 ")] public bool isOutside;
+        public bool isOutside;
     }
 
     [System.Serializable]

@@ -26,14 +26,11 @@ namespace InteractableObject
         /// <summary>
         /// 被偵測的區域碰撞體
         /// </summary>
-        public Collider sphereCollider;
+        // public Collider sphereCollider;
 
         /// <summary>
         /// 要黏貼的物件(必須要有snapTakeDropZone腳本)
         /// </summary>
-        // [SerializeField] TakeEvent_SingleHandSnapPutZone takeEventSingleHandSnapPutZone;
-
-        // [SerializeField] TakeEvent_TwoHandSnapPutZone takeEventTwoHandSnapPutZone;
         [SerializeField] TakeEvent_HandGrab takeEventHandGrab;
 
         [SerializeField] private AutoHand_HandGrab autoHandGrab;
@@ -41,22 +38,21 @@ namespace InteractableObject
 
         void Start()
         {
-            if (sphereCollider == null)
-            {
-                sphereCollider = GetComponent<Collider>();
-            }
-
-            sphereCollider.isTrigger = true;
+            // if (sphereCollider == null)
+            // {
+            //     sphereCollider = GetComponent<Collider>();
+            // // }
+            //
+            // sphereCollider.isTrigger = true;
+            GetComponent<Collider>().isTrigger = true;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
-                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.GetComponent<TakeEvent_HandGrab>()
-                || other.GetComponent<AutoHand_HandGrab>())
+            if (other.name==takeEventHandGrab.name)
             {
+                print($"{other.name}");
                 if (!isSnapIn)
                 {
                     // print($"{other.gameObject.name}進入{transform.parent.name}");
@@ -69,15 +65,7 @@ namespace InteractableObject
 
                     //要黏著的物體已黏著與此區域
                     isSnapIn = true;
-                    // if (takeEventSingleHandSnapPutZone != null)
-                    // {
-                    //     takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
-                    // }
 
-                    // if (takeEventTwoHandSnapPutZone != null)
-                    // {
-                    //     takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
-                    // }
 
                     if (takeEventHandGrab != null)
                     {
@@ -97,25 +85,13 @@ namespace InteractableObject
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
-                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.GetComponent<TakeEvent_HandGrab>()
-                || other.GetComponent<AutoHand_HandGrab>())
+            if (other.name==takeEventHandGrab.name)
             {
                 if (isSnapIn)
                 {
                     // print($"{other.gameObject.name}停留{transform.parent.name}");
 
                     //要黏著的物體已黏著與此區域
-                    // if (takeEventSingleHandSnapPutZone != null)
-                    // {
-                    //     takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
-                    // }
-
-                    // if (takeEventTwoHandSnapPutZone != null)
-                    // {
-                    //     takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
-                    // }
 
                     if (takeEventHandGrab != null)
                     {
@@ -136,10 +112,7 @@ namespace InteractableObject
         private void OnTriggerExit(Collider other)
         {
             // SteamVR代碼
-            if (other.GetComponent<TakeEvent_SingleHandSnapPutZone>()
-                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.GetComponent<TakeEvent_HandGrab>()
-                || other.GetComponent<AutoHand_HandGrab>())
+            if (other.name==takeEventHandGrab.name)
             {
                 if (isSnapIn)
                 {
@@ -149,15 +122,6 @@ namespace InteractableObject
                     }
 
                     isSnapIn = false;
-
-                    // if (takeEventSingleHandSnapPutZone != null)
-                    // {
-                    //     if (takeEventSingleHandSnapPutZone.snapFixed.isLocated &&
-                    //         !takeEventSingleHandSnapPutZone.snapFixed.isFixed)
-                    //     {
-                    //         takeEventSingleHandSnapPutZone.snapFixed.isLocated = false;
-                    //     }
-                    // }
 
                     if (takeEventHandGrab != null)
                     {
@@ -182,10 +146,7 @@ namespace InteractableObject
         private void OnCollisionEnter(Collision other)
         {
             //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.gameObject.GetComponent<TakeEvent_SingleHandSnapPutZone>()
-                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.gameObject.GetComponent<TakeEvent_HandGrab>()
-                || other.gameObject.GetComponent<AutoHand_HandGrab>())
+            if (other.gameObject.name==takeEventHandGrab.name)
             {
                 if (!isSnapIn)
                 {
@@ -199,15 +160,6 @@ namespace InteractableObject
 
                     //要黏著的物體已黏著與此區域
                     isSnapIn = true;
-                    // if (takeEventSingleHandSnapPutZone != null)
-                    // {
-                    //     takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
-                    // }
-
-                    // if (takeEventTwoHandSnapPutZone != null)
-                    // {
-                    //     takeEventTwoHandSnapPutZone.snapFixed.isLocated = true;
-                    // }
 
                     if (takeEventHandGrab != null)
                     {
@@ -226,19 +178,13 @@ namespace InteractableObject
 
         private void OnCollisionStay(Collision other)
         {
-            if (other.gameObject.GetComponent<TakeEvent_SingleHandSnapPutZone>()
-                || other.gameObject.GetComponent<TakeEvent_HandGrab>()
-                || other.gameObject.GetComponent<AutoHand_HandGrab>())
+            if (other.gameObject.name==takeEventHandGrab.name)
             {
                 if (isSnapIn)
                 {
                     // print($"{other.gameObject.name}停留{transform.parent.name}");
 
                     //要黏著的物體已黏著與此區域
-                    // if (takeEventSingleHandSnapPutZone != null)
-                    // {
-                    //     takeEventSingleHandSnapPutZone.snapFixed.isLocated = true;
-                    // }
 
                     if (takeEventHandGrab != null)
                     {
@@ -258,10 +204,7 @@ namespace InteractableObject
 
         private void OnCollisionExit(Collision other)
         {
-            if (other.gameObject.GetComponent<TakeEvent_SingleHandSnapPutZone>()
-                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.gameObject.GetComponent<TakeEvent_HandGrab>()
-                || other.gameObject.GetComponent<AutoHand_HandGrab>())
+            if (other.gameObject.name==takeEventHandGrab.name)
             {
                 if (isSnapIn)
                 {
@@ -272,14 +215,6 @@ namespace InteractableObject
 
                     isSnapIn = false;
 
-                    // if (takeEventSingleHandSnapPutZone != null)
-                    // {
-                    //     if (takeEventSingleHandSnapPutZone.snapFixed.isLocated &&
-                    //         !takeEventSingleHandSnapPutZone.snapFixed.isFixed)
-                    //     {
-                    //         takeEventSingleHandSnapPutZone.snapFixed.isLocated = false;
-                    //     }
-                    // }
 
                     if (takeEventHandGrab != null)
                     {
