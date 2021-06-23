@@ -44,10 +44,9 @@ namespace InteractableObject
         [SerializeField] private ThrowOutside throwOutside;
 
         // [Header("手勢資訊")]
-        [Tooltip(
-            "SnapOnAttach=該對象應捕捉到手上指定的附著點的位置\nDetachOthers=附著在此手上的其他物體將被分離\nDetachFromOtherHand=該對象將與另一隻手分離\nVelocityMovement=對象將嘗試移動以匹配手的位置和旋\nAllowSidegrade=該對象能夠從捏握切換為抓握")]
+        [Tooltip("SnapOnAttach=該對象應捕捉到手上指定的附著點的位置\nDetachOthers=附著在此手上的其他物體將被分離\nDetachFromOtherHand=該對象將與另一隻手分離\nVelocityMovement=對象將嘗試移動以匹配手的位置和旋\nAllowSidegrade=該對象能夠從捏握切換為抓握")]
         [SerializeField]
-        private Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand |
+        private Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.SnapOnAttach |
                                                        Hand.AttachmentFlags.DetachFromOtherHand |
                                                        Hand.AttachmentFlags.TurnOnKinematic;
 
@@ -150,7 +149,7 @@ namespace InteractableObject
 
             if (startingGrabType != GrabTypes.None)
             {
-                // hand.AttachObject(gameObject, startingGrabType, attachmentFlags,attachmentOffset);
+                hand.AttachObject(gameObject, startingGrabType,Hand.AttachmentFlags.VelocityMovement,attachmentOffset);
 
                 switch (hand.gameObject.name)
                 {
@@ -171,12 +170,12 @@ namespace InteractableObject
                         // attachmentFlags = Hand.AttachmentFlags.VelocityMovement | Hand.AttachmentFlags.ParentToHand;
                         hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
                         rigidbody.isKinematic = false;
-                        print("雙手抓取");
+                        // print("雙手抓取");
                         snapTakeObject = true;
                         if (snapFixed.isFixed && snapReleaseGesture)
                         {
-                            print($"已鬆手，且物件已黏合:{snapFixed.isFixed}");
-                            print($"物件吻合:{snapFixed.isLocated}");
+                            // print($"已鬆手，且物件已黏合:{snapFixed.isFixed}");
+                            // print($"物件吻合:{snapFixed.isLocated}");
                             snapFixed.isFixed = false;
                             snapFixed.isLocated = false;
                             // snapOut.Invoke();
@@ -251,11 +250,8 @@ namespace InteractableObject
 
         protected virtual void OnDetachedFromHand(Hand hand)
         {
-            if (isUsingTwoHands)
-            {
-                rightHandAttachedGameObject = null;
+            rightHandAttachedGameObject = null;
                 leftHandAttachedGameObject = null;
-            }
 
             hand.changePositionByTwoHands = false;
 
