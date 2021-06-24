@@ -126,13 +126,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsingOnEnableEvent: 0
+  onEnableEvent:
+    m_PersistentCalls:
+      m_Calls: []
   touchedGameObject: {fileID: 0}
   isUsingTriggerEvent: 1
   triggerName:
   - "\u83DC\u5200"
   - "\u6E6F\u5319_\u9935\u98DF\u7528"
   - "\u6E6F\u5319_\u8A66\u5403\u7528"
-  - "\u88DD\u7C73\u7684\u7897"
+  - "\u9BAD\u9B5A"
+  - "\u9AD8\u9E97\u83DC"
   isUsingCollisionEvent: 1
   collisionName:
   - "\u934B\u5B50"
@@ -140,8 +145,6 @@ MonoBehaviour:
   - "\u6E6F\u52FA"
   - "\u7897_\u653E\u5165\u9935\u98DF\u904E\u7684\u98EF"
   - "\u7897_\u9935\u98DF\u7528"
-  - "\u9BAD\u9B5A"
-  - "\u9AD8\u9E97\u83DC"
   collapseTriggerEvent: 0
   triggerEvent:
     m_PersistentCalls:
@@ -211,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  maxCount: 11
+  maxCount: 10
   onMaxCountEvent:
     m_PersistentCalls:
       m_Calls:
@@ -223,30 +226,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 83900441}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: ActiveGameObject
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 710132906}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 83900441}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: DestroyThisGameObject
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -428,6 +407,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsingOnEnableEvent: 1
+  onEnableEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 83900441}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   touchedGameObject: {fileID: 0}
   isUsingTriggerEvent: 1
   triggerName:
@@ -511,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  maxCount: 11
+  maxCount: 9
   onMaxCountEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5792,10 +5787,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUsingCheckPoint: 0
+  isUsingCheckPoint: 1
   achieveCheckPointEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 722750896}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: ActiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 710132906}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   notAchieveCheckPointEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5858,7 +5865,7 @@ MonoBehaviour:
   grabHand: {fileID: 0}
   attachmentFlags: 16
   grabbedWithType: 0
-  isRoot: 1
+  isRoot: 0
   driving: 0
   outAngle: 0
   axisOfRotation: 1
@@ -5924,12 +5931,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  isAngleEvent: 0
+      - m_Target: {fileID: 722750896}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: CheckPointInEvent
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 11
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  isAngleEvent: 1
   isAngleEventToDetatch: 0
-  eventAngle: 0
+  eventAngle: 70
   angleEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 722750896}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: ActiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1373200191}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   forceStart: 0
   startAngle: 0
   startQuaternion: {x: 0, y: 0, z: 0, w: 0}
@@ -6009,8 +6040,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8308908, y: 1.2163112, z: 0.6927875}
-  m_Center: {x: 0.08138943, y: 0.04481089, z: 0.08566755}
+  m_Size: {x: 0.8308908, y: 0.42986393, z: 0.6927875}
+  m_Center: {x: 0.08138943, y: 0.43803453, z: 0.08566755}
 --- !u!114 &4649859470981869395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6026,6 +6057,21 @@ MonoBehaviour:
   isFlowing: 0
   timer: 0
   hands: {fileID: 4649859471938596835}
+  overFlowingEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
+        m_MethodName: WrongOperate
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 31
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4649859471938627911
 PrefabInstance:
   m_ObjectHideFlags: 0
