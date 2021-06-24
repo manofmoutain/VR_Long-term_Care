@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c209697c7c8f73940a68c6b0e58a7f35, type: 2}
+  - {fileID: 2100000, guid: af594809f69ebcd40887edfcc875b625, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -197,7 +197,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6957492625015851939}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.061366055
@@ -225,7 +225,6 @@ MonoBehaviour:
   UsePosition:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   snapZoneArea: []
   takeObject: {fileID: 0}
   snapTakeObject: 0
@@ -238,7 +237,7 @@ MonoBehaviour:
     outside: 0
     outsideRange: 0
     outsideZone: {fileID: 0}
-  attachmentFlags: 8
+  attachmentFlags: 72
   releaseVelocityStyle: 1
   isHiddenEvents: 0
   snapIn:
