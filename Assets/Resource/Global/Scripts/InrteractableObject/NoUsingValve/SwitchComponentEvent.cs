@@ -9,6 +9,16 @@ namespace InteractableObject
 {
     public class SwitchComponentEvent : MonoBehaviour
     {
+        /// <summary>
+        /// 是否在打開物件時啟用事件
+        /// </summary>
+        public bool isUsingOnEnableEvent;
+        /// <summary>
+        /// 打開物件時要啟用的事件
+        /// </summary>
+        [SerializeField] private UnityEvent onEnableEvent;
+
+
         [SerializeField] private GameObject touchedGameObject;
         public bool isUsingTriggerEvent;
         [Tooltip("trigger的名稱")]public List<string> triggerName;
@@ -22,6 +32,12 @@ namespace InteractableObject
         public bool collapseCollisionEvent;
 
         [SerializeField] private UnityEvent collisionEvent;
+
+
+        private void OnEnable()
+        {
+            onEnableEvent.Invoke();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
