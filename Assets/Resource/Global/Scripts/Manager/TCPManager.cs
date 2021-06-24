@@ -4,25 +4,26 @@ using UnityEngine.Networking;
 
 namespace Manager
 {
-    public class TCPManager : MonoBehaviour
+    public class TCPManager : Monosingleton<TCPManager>
     {
         private void Start()
         {
-            // StartCoroutine(Upload());
+
         }
 
-        public void UploadData()
+        public void UploadData(string data)
         {
             Application.OpenURL("https://nutcvr.rdto.io/");
-            StartCoroutine(Upload());
+            StartCoroutine(Upload(data));
         }
 
-        IEnumerator Upload()
+        IEnumerator Upload(string data)
         {
-            var data = System.Text.Encoding.UTF8.GetBytes(ScoreManager.Instance._ScoreSystem());
-            var unityWebRequest = new UnityWebRequest("https://nutcvr.rdto.io/api/v1/vr/session", "POST");
+            var myData = new byte[2048];
+            myData = System.Text.Encoding.UTF8.GetBytes(data);
+            UnityWebRequest unityWebRequest = new UnityWebRequest("https://nutcvr.rdto.io/api/v1/vr/session", "POST");
 
-            unityWebRequest.uploadHandler = (UploadHandler) new UploadHandlerRaw(data);
+            unityWebRequest.uploadHandler = (UploadHandler) new UploadHandlerRaw(myData);
             unityWebRequest.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
             unityWebRequest.SetRequestHeader("AUTHORIZATION",
                 "rkgvmme5CBWMAfwpM9GOZRgP+2BgvknHv0Y3raH1mKzMP23nHzrRR4b6B!9Bgs0pdON@BAB!EPfXeCod");

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using GlobalSystem;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using UnityEngine;
+using Valve.VR;
 
 namespace Manager
 {
@@ -24,10 +26,15 @@ namespace Manager
 
         [SerializeField] ScoreSystem _scoreSystem;
 
-        public string _ScoreSystem()
+        public ScoreSystem _ScoreSystem()
         {
             var _data = JsonUtility.ToJson(_scoreSystem);
-            return _data;
+            return _scoreSystem;
+        }
+
+        public LoginData _LoginData()
+        {
+            return _scoreSystem.loginData;
         }
 
         /// <summary>
@@ -287,6 +294,14 @@ namespace Manager
             return !(Mathf.CeilToInt(_scoreSystem.ExamTime) <= _scoreSystem.LimitTime*60.0f);
         }
 
+
+        public void SaveData(object data , string fileName = "user.dat")
+        {
+            var serializeData = JsonUtility.ToJson(data);
+            var filePath = Application.persistentDataPath + "/" + fileName;
+            File.WriteAllText(filePath,serializeData);
+        }
+
         #endregion
 
         #region Protected Methods
@@ -306,6 +321,7 @@ namespace Manager
             if (GameMod!=Mod.Test)
             {
                 _scoreSystem = new ScoreSystem(100);
+                _scoreSystem.loginData = new LoginData();
             }
 
         }
