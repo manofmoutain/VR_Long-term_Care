@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PrepareMeal
 {
@@ -8,6 +9,7 @@ namespace PrepareMeal
         [SerializeField] private bool isFlowing;
         [SerializeField] private float timer;
         [SerializeField] private GameObject hands;
+        [SerializeField] private UnityEvent overFlowingEvent;
 
         private void Start()
         {
@@ -20,6 +22,11 @@ namespace PrepareMeal
             if (isFlowing)
             {
                 timer += Time.deltaTime;
+                if (timer>120.0f)
+                {
+                    overFlowingEvent.Invoke();
+                    timer = 0;
+                }
             }
             else
             {
