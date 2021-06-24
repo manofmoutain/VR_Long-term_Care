@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Excel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using JetBrains.Annotations;
 using TMPro.Examples;
@@ -32,6 +33,8 @@ namespace GlobalSystem
         /// 試題檔案名稱
         /// </summary>
         [SerializeField] private string excelFileName;
+
+        public LoginData loginData;
 
         /// <summary>
         /// 受試者編號
@@ -244,6 +247,8 @@ namespace GlobalSystem
         public void SetId(string id)
         {
             m_ID = id;
+            loginData.user_id = id;
+            loginData.user_password = id;
             Debug.Log($"受試者編號：{id}");
         }
 
@@ -276,6 +281,7 @@ namespace GlobalSystem
         public void SetSchool(string schoolData)
         {
             m_School = schoolData;
+            loginData.lesson_id = schoolData;
             Debug.Log($"設置學校：{schoolData}");
         }
 
@@ -286,6 +292,7 @@ namespace GlobalSystem
         public void SetStudentName(string _name)
         {
             m_StudentName = _name;
+            loginData.user_password = _name;
             Debug.Log($"設置受試者名稱：{_name}");
         }
 

@@ -47,7 +47,9 @@ namespace TitleUIScripts
             {
                 ScoreManager.Instance.SetStudentID(setStudentID.text);
                 ScoreManager.Instance.SetStudentName(setStudentName.text);
-                ScoreManager.Instance.SetSchool(schoolInputField.text);
+                ScoreManager.Instance.SetSchool("110-V13");
+                ScoreManager.Instance.SaveData(ScoreManager.Instance._LoginData());
+                TCPManager.Instance.UploadData(JsonUtility.ToJson(ScoreManager.Instance._LoginData()));
                 // SceneLoader.Instance.LoadScene(1);
                 UI_Manager.Instance.OpenPanel(1,0,false);
             });

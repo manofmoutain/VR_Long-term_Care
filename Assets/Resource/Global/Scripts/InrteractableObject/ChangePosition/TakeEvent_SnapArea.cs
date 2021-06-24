@@ -52,7 +52,7 @@ namespace InteractableObject
             //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
             if (other.name==takeEventHandGrab.name && takeEventHandGrab!=null)
             {
-                print($"{other.name}");
+                // print($"{other.name}");
                 if (!isSnapIn)
                 {
                     // print($"{other.gameObject.name}進入{transform.parent.name}");
