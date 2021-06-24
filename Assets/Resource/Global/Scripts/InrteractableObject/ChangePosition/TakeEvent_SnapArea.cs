@@ -50,7 +50,7 @@ namespace InteractableObject
         private void OnTriggerEnter(Collider other)
         {
             //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.name==takeEventHandGrab.name)
+            if (other.name==takeEventHandGrab.name && takeEventHandGrab!=null)
             {
                 print($"{other.name}");
                 if (!isSnapIn)
@@ -85,7 +85,7 @@ namespace InteractableObject
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.name==takeEventHandGrab.name)
+            if (other.name==takeEventHandGrab.name && takeEventHandGrab!=null)
             {
                 if (isSnapIn)
                 {
@@ -112,7 +112,7 @@ namespace InteractableObject
         private void OnTriggerExit(Collider other)
         {
             // SteamVR代碼
-            if (other.name==takeEventHandGrab.name)
+            if (other.name==takeEventHandGrab.name && takeEventHandGrab!=null)
             {
                 if (isSnapIn)
                 {
@@ -146,7 +146,7 @@ namespace InteractableObject
         private void OnCollisionEnter(Collision other)
         {
             //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.gameObject.name==takeEventHandGrab.name)
+            if (other.gameObject.name==takeEventHandGrab.name && takeEventHandGrab!=null)
             {
                 if (!isSnapIn)
                 {
@@ -178,7 +178,7 @@ namespace InteractableObject
 
         private void OnCollisionStay(Collision other)
         {
-            if (other.gameObject.name==takeEventHandGrab.name)
+            if (other.gameObject.name==takeEventHandGrab.name && takeEventHandGrab!=null)
             {
                 if (isSnapIn)
                 {
@@ -204,7 +204,7 @@ namespace InteractableObject
 
         private void OnCollisionExit(Collision other)
         {
-            if (other.gameObject.name==takeEventHandGrab.name)
+            if (other.gameObject.name==takeEventHandGrab.name && takeEventHandGrab!=null)
             {
                 if (isSnapIn)
                 {
