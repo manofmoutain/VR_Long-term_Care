@@ -37,8 +37,7 @@ namespace InteractableObject
         /// <summary>
         ///Trigger放開後是否要脫離手勢
         /// </summary>
-        [Tooltip("Trigger放開後是否要脫離手勢")] [SerializeField]
-        private bool snapReleaseGesture = true;
+        // [Tooltip("Trigger放開後是否要脫離手勢")] [SerializeField] private bool snapReleaseGesture = true;
 
         public SnapFixed snapFixed;
         [SerializeField] private ThrowOutside throwOutside;
@@ -172,14 +171,14 @@ namespace InteractableObject
                         rigidbody.isKinematic = false;
                         // print("雙手抓取");
                         snapTakeObject = true;
-                        if (snapFixed.isFixed && snapReleaseGesture)
-                        {
+                        // if (snapFixed.isFixed && snapReleaseGesture)
+                        // {
                             // print($"已鬆手，且物件已黏合:{snapFixed.isFixed}");
                             // print($"物件吻合:{snapFixed.isLocated}");
                             snapFixed.isFixed = false;
                             snapFixed.isLocated = false;
                             // snapOut.Invoke();
-                        }
+                        // }
                     }
                 }
                 else
@@ -188,14 +187,14 @@ namespace InteractableObject
                     rigidbody.isKinematic = false;
                     // print("單手抓取");
                     snapTakeObject = true;
-                    if (snapFixed.isFixed && snapReleaseGesture)
-                    {
+                    // if (snapFixed.isFixed && snapReleaseGesture)
+                    // {
                         // print($"已鬆手，且物件已黏合:{snapFixed.isFixed}");
                         // print($"物件吻合:{snapFixed.isLocated}");
                         snapFixed.isFixed = false;
                         snapFixed.isLocated = false;
                         // snapOut.Invoke();
-                    }
+                    // }
                 }
             }
         }
@@ -286,19 +285,15 @@ namespace InteractableObject
                 if (snapFixed.isLocated)
                 {
                     //鬆開Trigger若手勢脫離的情況
-                    if (snapReleaseGesture)
-                    {
+                    // if (snapReleaseGesture)
+                    // {
                         //強制鬆手
                         hand.DetachObject(gameObject);
                         if (isUsingTwoHands)
                         {
                             hand.otherHand.DetachObject(gameObject);
                         }
-
-                        // playerHand_L.DetachObject(gameObject);
-                        // playerHand_R.DetachObject(gameObject);
-                        // snapTakeObject = false;
-                    }
+                    // }
 
                     //Snap in：吻合物件到指定位置
                     rigidbody.isKinematic = true;
@@ -330,6 +325,7 @@ namespace InteractableObject
                         }
                     }
 
+                    snapFixed.isFixed = false;
                     snapTakeObject = false;
                     rigidbody.isKinematic = false;
                     // Debug.Log("放下了" + gameObject.name);
@@ -340,6 +336,10 @@ namespace InteractableObject
                 if (rightHandAttachedGameObject != null && leftHandAttachedGameObject != null)
                 {
                     // gameObject.transform.position = hand.transform.position;
+                }
+                if (transform.parent!=OriginalPositionGameObject.transform)
+                {
+                    transform.SetParent(OriginalPositionGameObject.transform);
                 }
             }
 
@@ -520,7 +520,7 @@ namespace InteractableObject
                         {
                             transform.SetParent(snapZone.transform.parent);
                             Destroy(snapZone.fadedObject);
-                            // print($"{gameObject.name}已成為{snapZone.transform.parent.name}的子物件");
+                            print($"{gameObject.name}已成為{snapZone.transform.parent.name}的子物件");
                             snapZone.isSnapIn = false;
                         }
                     }
@@ -535,6 +535,10 @@ namespace InteractableObject
 
                 else
                 {
+                    // if (transform.parent!=OriginalPositionGameObject.transform)
+                    // {
+                    //     transform.SetParent(OriginalPositionGameObject.transform);
+                    // }
                     onPickUp.Invoke();
                 }
             }
