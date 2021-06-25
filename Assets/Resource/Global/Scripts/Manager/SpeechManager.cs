@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GlobalSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Manager
 {
@@ -21,7 +22,7 @@ namespace Manager
 
         #region Private Variables
 
-        [SerializeField] private AudioSource audioSource;
+        private AudioSource audioSource;
 
         [SerializeField] private List<Situations> _situations;
 
@@ -154,7 +155,7 @@ namespace Manager
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        private string[] KeyWordsInSituation(int index) => _situations[index].keyWords;
+        private List<string> KeyWordsInSituation(int index) => _situations[index].keyWords;
 
         /// <summary>
         /// 依據索引回應內容
@@ -175,28 +176,24 @@ namespace Manager
                     if (i==index)
                     {
                         _situations[i].correctKeyWords = true;
+
                         Debug.Log($"這是{_situations[index].situationName}狀況");
                         PlayAudio(index);
                         ScoreManager.Instance.DecreaseOperateSteps(_situations[i].topicIndex);
                         ScoreManager.Instance.SetDone(_situations[i].topicIndex);
+                        if (_situations[i].isCorrectClearKeywords)
+                        {
+                            _situations[i].keyWords.Clear();
+                            return;
+                        }
                     }
-
                 }
-                // switch (index)
-                // {
-                //     case 0:
-                //         Debug.Log($"這是{_situations[index].situationName}狀況");
-                //         // ScoreManager.Instance.DecreaseOperateSteps(0);
-                //         // ScoreManager.Instance.SetDone(index, true);
-                //         break;
-                //     case 1:
-                //         break;
-                //     default:
-                //         Debug.Log($"沒有設置回應");
-                //         break;
-                //         ;
-                // }
             }
+        }
+
+        void RemoveKeywords(int index)
+        {
+            _situations[index].keyWords.Clear();
         }
 
         #endregion
@@ -211,15 +208,15 @@ namespace Manager
         {
             #region Public Variables
             public string situationName;
+            public bool isCorrectClearKeywords;
             public bool correctKeyWords;
             public AudioClip[] respondAudio;
             public string respond;
-            public string[] keyWords;
+            public List<string> keyWords;
             /// <summary>
             /// 語音辨識對應的考題編號
             /// </summary>
             public int topicIndex;
-
             #endregion
         }
 
