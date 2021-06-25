@@ -520,7 +520,7 @@ namespace InteractableObject
                         {
                             transform.SetParent(snapZone.transform.parent);
                             Destroy(snapZone.fadedObject);
-                            print($"{gameObject.name}已成為{snapZone.transform.parent.name}的子物件");
+                            // print($"{gameObject.name}已成為{snapZone.transform.parent.name}的子物件");
                             snapZone.isSnapIn = false;
                         }
                     }
