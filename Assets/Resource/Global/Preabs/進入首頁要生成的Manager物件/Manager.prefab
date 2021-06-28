@@ -78,9 +78,9 @@ MonoBehaviour:
     _operateTopics: []
     excelFileName: 
     loginData:
-      userID: 
-      password: 
-      lessonID: 110-V13
+      user_id: 
+      user_password: 
+      lesson_id: 110-V13
     m_ID: 
     m_Lesson: 
     m_School: 
@@ -100,3 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00a386d785e415b86200c00e7b8ddac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  devicePin:
+    pin: 
+    device_id: 
+    login_url: 
+  lesson_ID: A99
+  pages: []
+  page: 0
+  uri: https://nutcvr.rdto.io/api/v2/vr/session/
