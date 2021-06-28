@@ -246,7 +246,7 @@ namespace InteractableObject
                     //開啟置放區的觸發
                     for (int i = 0; i < UsePosition.Length; i++)
                     {
-                        snapZoneArea[i].sphereCollider.isTrigger = true;
+                        // snapZoneArea[i].sphereCollider.isTrigger = true;
                     }
 
                     Debug.Log($"抓住了{gameObject.name}");
@@ -340,7 +340,7 @@ namespace InteractableObject
                 //關閉置放區的trigger
                 for (int i = 0; i < UsePosition.Length; i++)
                 {
-                    snapZoneArea[i].sphereCollider.isTrigger = false;
+                    // snapZoneArea[i].sphereCollider.isTrigger = false;
                 }
             }
             //持續抓取時
