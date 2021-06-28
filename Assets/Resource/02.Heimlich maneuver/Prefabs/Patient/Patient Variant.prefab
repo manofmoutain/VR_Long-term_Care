@@ -25,6 +25,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  notAchieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &7288040706032364628
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55,6 +62,8 @@ MonoBehaviour:
   rightHandAttachedGameObject: {fileID: 0}
   leftHand: {fileID: 0}
   leftHandAttachedGameObject: {fileID: 0}
+  isStartTrigger: 1
+  isStartKinematic: 1
   OriginalPositionGameObject: {fileID: 1640553966951339983}
   UsePosition:
   - {fileID: 0}
@@ -62,7 +71,6 @@ MonoBehaviour:
   snapZoneArea: []
   takeObject: {fileID: 0}
   snapTakeObject: 0
-  snapReleaseGesture: 1
   snapFixed:
     isLocated: 0
     isFixed: 0
@@ -72,13 +80,7 @@ MonoBehaviour:
     outsideRange: 0
     outsideZone: {fileID: 0}
   attachmentFlags: 24
-  catchingSpeedThreshold: -1
-  attachmentOffset: {fileID: 0}
-  interactable: {fileID: 0}
-  attached: 0
-  attachTime: 0
-  attachPosition: {x: 0, y: 0, z: 0}
-  attachRotation: {x: 0, y: 0, z: 0, w: 0}
+  releaseVelocityStyle: 3
   isHiddenEvents: 0
   snapIn:
     m_PersistentCalls:
@@ -358,7 +360,7 @@ PrefabInstance:
     - target: {fileID: 5582063689746986618, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: linearMapping
       value: 
-      objectReference: {fileID: 5180861795129541772, guid: fa327f76613bd984e8127f23e46e49da, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5582063689746986619, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -427,6 +429,14 @@ PrefabInstance:
       propertyPath: sFXs.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: c2252c7e6c0f854419ca5cf366600161, type: 3}
+    - target: {fileID: 5846364451968565245, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+      propertyPath: isUsingSFX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846364451968565245, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
+      propertyPath: changeTransformMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5846364451968565246, guid: d2af4c20e98b0eb488f76168f9658d6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

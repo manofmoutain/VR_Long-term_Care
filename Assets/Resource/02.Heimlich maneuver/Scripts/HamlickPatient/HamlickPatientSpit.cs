@@ -38,7 +38,7 @@ namespace Heimlich_maneuver
         [SerializeField] private int pushCount;
 
         [SerializeField] private GameObject pushPoint;
-        [SerializeField] private LinearMapping linearMapping;
+        [SerializeField] private Interact_LinearMapping linearMapping;
 
 
         /// <summary>
