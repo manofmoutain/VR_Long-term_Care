@@ -294,10 +294,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018235910b910f048bc418c75f0ff447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsingBlenderPoser: 0
+  switchOnPoser:
+    m_PersistentCalls:
+      m_Calls: []
+  switchOffPoser:
+    m_PersistentCalls:
+      m_Calls: []
   grabHand: {fileID: 0}
   attachmentFlags: 16
   grabbedWithType: 0
-  isRoot: 0
+  isRoot: 1
   driving: 0
   outAngle: 0
   axisOfRotation: 2
@@ -311,6 +318,18 @@ MonoBehaviour:
   onMinAngle:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: CheckPointInEvent
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4763585538798387916}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
         m_MethodName: DeactiveGameObject
@@ -325,23 +344,29 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: DeactiveGameObject
-        m_Mode: 2
+        m_MethodName: SwtichGameObject
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  maxAngle: 90
+  maxAngle: 170
   onMaxAngle:
+    m_PersistentCalls:
+      m_Calls: []
+  isAngleEvent: 1
+  isAngleEventToDetatch: 0
+  eventAngle: 90
+  angleEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4763585538798387916}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: DeactiveGameObject
+        m_MethodName: ActiveGameObject
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8982348931709169375}
@@ -377,11 +402,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: DeactiveGameObject
-        m_Mode: 2
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -389,11 +414,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: DeactiveGameObject
-        m_Mode: 2
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -401,30 +426,25 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: DeactiveGameObject
-        m_Mode: 2
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isAngleEvent: 0
-  isAngleEventToDetatch: 0
-  eventAngle: 0
-  angleEvent:
-    m_PersistentCalls:
-      m_Calls: []
   forceStart: 0
   startAngle: 0
   startQuaternion: {x: 0, y: 0, z: 0, w: 0}
-  worldPlaneNormal: {x: 0, y: 0, z: 0}
-  localPlaneNormal: {x: 0, y: 0, z: 0}
+  worldPlaneNormalize: {x: 0, y: 0, z: 0}
+  localPlaneNormalize: {x: 0, y: 0, z: 0}
   lastHandProjected: {x: 0, y: 0, z: 0}
   minMaxAngularThreshold: 1
   interactable: {fileID: 0}
+  blendPoseValue: 0
 --- !u!1 &8099406250452191594
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,10 +491,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerEvent:
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
     m_PersistentCalls:
       m_Calls: []
-  collisionEvent:
+  notAchieveCheckPointEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &8982348931709169375

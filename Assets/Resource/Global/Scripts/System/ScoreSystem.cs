@@ -122,7 +122,7 @@ namespace GlobalSystem
                 _operateTopics[index].operateSteps = 0;
             }
 
-            // Debug.Log($"第{index}項操作剩餘{_operateTopics[index].operateSteps}個步驟未操作");
+            Debug.Log($"第{index}項剩餘{_operateTopics[index].operateSteps}個步驟未操作");
         }
 
         /// <summary>

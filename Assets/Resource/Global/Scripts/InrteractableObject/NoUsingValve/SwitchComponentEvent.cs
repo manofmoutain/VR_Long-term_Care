@@ -13,6 +13,7 @@ namespace InteractableObject
         /// 是否在打開物件時啟用事件
         /// </summary>
         public bool isUsingOnEnableEvent;
+
         /// <summary>
         /// 打開物件時要啟用的事件
         /// </summary>
@@ -21,9 +22,11 @@ namespace InteractableObject
 
         [SerializeField] private GameObject touchedGameObject;
         public bool isUsingTriggerEvent;
-        [Tooltip("trigger的名稱")]public List<string> triggerName;
+        [Tooltip("trigger的名稱")] public List<string> triggerName;
+        public List<GameObject> triggerOBJs;
         public bool isUsingCollisionEvent;
-        [Tooltip("collision的名稱")]public List<string> collisionName;
+        [Tooltip("collision的名稱")] public List<string> collisionName;
+        public List<GameObject> collisionOBJs;
 
         public bool collapseTriggerEvent;
 
@@ -41,11 +44,23 @@ namespace InteractableObject
 
         private void OnTriggerEnter(Collider other)
         {
-            if (triggerName.Count>0)
+            if (triggerOBJs.Count > 0)
+            {
+                foreach (var go in triggerOBJs)
+                {
+                    if (other == go)
+                    {
+                        touchedGameObject = other.gameObject;
+                        triggerEvent.Invoke();
+                        break;
+                    }
+                }
+            }
+            else if (triggerOBJs.Count == 0 && triggerName.Count > 0)
             {
                 foreach (var s in triggerName)
                 {
-                    if (other.name==s)
+                    if (other.name == s)
                     {
                         touchedGameObject = other.gameObject;
                         triggerEvent.Invoke();
@@ -62,11 +77,23 @@ namespace InteractableObject
 
         private void OnCollisionEnter(Collision other)
         {
-            if (collisionName.Count>0)
+            if (collisionOBJs.Count > 0)
+            {
+                foreach (var go in collisionOBJs)
+                {
+                    if (other.gameObject == go)
+                    {
+                        touchedGameObject = other.gameObject;
+                        collisionEvent.Invoke();
+                        break;
+                    }
+                }
+            }
+            else if (collisionOBJs.Count == 0 && collisionName.Count > 0)
             {
                 foreach (var s in collisionName)
                 {
-                    if (other.gameObject.name==s)
+                    if (other.gameObject.name == s)
                     {
                         touchedGameObject = other.gameObject;
                         collisionEvent.Invoke();
@@ -83,24 +110,32 @@ namespace InteractableObject
 
         public void RemoveKeywords()
         {
-            for (var i = 0; i < triggerName.Count; i++)
+            for (var i = 0; i < triggerOBJs.Count; i++)
             {
-                if (touchedGameObject.name!=triggerName[i]) continue;
-                triggerName.Remove(touchedGameObject.name);
-                print($"從{triggerName}刪除了{touchedGameObject.name}");
-                break;
+                if (touchedGameObject != triggerOBJs[i]) continue;
+                triggerOBJs.Remove(touchedGameObject);
+                return;
             }
 
-            foreach (var VARIABLE in collisionName)
+            for (var i = 0; i < triggerName.Count; i++)
             {
-                if (touchedGameObject.name == VARIABLE)
-                {
-                    collisionName.Remove(touchedGameObject.name);
-                    print($"從{collisionName}刪除了{touchedGameObject.name}");
-                    return;
-                }
+                if (touchedGameObject.name != triggerName[i]) continue;
+                triggerName.Remove(touchedGameObject.name);
+                return;
+            }
+
+            foreach (var go in collisionOBJs)
+            {
+                if (touchedGameObject == go) continue;
+                collisionOBJs.Remove(touchedGameObject);
+                return;
+            }
+            foreach (var s in collisionName)
+            {
+                if (touchedGameObject.name == s) continue;
+                collisionName.Remove(touchedGameObject.name);
+                return;
             }
         }
     }
 }
-

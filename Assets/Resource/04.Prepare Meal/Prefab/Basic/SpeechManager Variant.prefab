@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 814602171245953676, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: m_Name
-      value: SpeechManager
+      value: SpeechManager Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7918684583577604067, guid: d7b0e2e06f84fc04082e35136b1aae27, type: 3}
       propertyPath: m_LocalPosition.x

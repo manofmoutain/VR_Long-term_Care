@@ -20,7 +20,7 @@ namespace InteractableObject
 
         private void Update()
         {
-            int count = switchEvent.triggerName.Count + switchEvent.collisionName.Count;
+            int count = switchEvent.triggerOBJs.Count + switchEvent.collisionOBJs.Count;
             countText.text = $"{hint}:{count}";
         }
     }

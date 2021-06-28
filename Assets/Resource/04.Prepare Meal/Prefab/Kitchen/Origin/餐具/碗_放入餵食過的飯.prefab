@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!135 &237534399335890521
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363270278159852201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.07
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6957492625015851939
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,12 +27,12 @@ GameObject:
   - component: {fileID: 252072004172928553}
   - component: {fileID: 252072004172928558}
   - component: {fileID: 252072004172928559}
-  - component: {fileID: 252072004172928556}
   - component: {fileID: 252072004172928557}
   - component: {fileID: 6805546549658166574}
   - component: {fileID: 252072002353818846}
   - component: {fileID: 252072002353818845}
   - component: {fileID: 252072002353818844}
+  - component: {fileID: 1539444390}
   m_Layer: 0
   m_Name: "\u7897_\u653E\u5165\u9935\u98DF\u904E\u7684\u98EF"
   m_TagString: Untagged
@@ -193,19 +206,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &252072004172928556
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6957492625015851939}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.061366055
-  m_Center: {x: 0, y: 0.05, z: -0.0000000018626451}
 --- !u!114 &252072004172928557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,10 +386,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 252072002353818845}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: ActiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4363270278159852201}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   collapseCollisionEvent: 0
   collisionEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &1539444390
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6957492625015851939}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.12273211, y: 0.036698066, z: 0.120867535}
+  m_Center: {x: 0.0000000037252903, y: 0.015319359, z: 0}
 --- !u!1001 &3480186172845711352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -457,8 +482,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u9935\u98DF\u904E\u7684\u7CA5"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 04cd1bb8cce839b488b67db83b82bd2f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04cd1bb8cce839b488b67db83b82bd2f, type: 3}
+--- !u!1 &4363270278159852201 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 04cd1bb8cce839b488b67db83b82bd2f, type: 3}
+  m_PrefabInstance: {fileID: 3480186172845711352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4019079624361031699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04cd1bb8cce839b488b67db83b82bd2f, type: 3}

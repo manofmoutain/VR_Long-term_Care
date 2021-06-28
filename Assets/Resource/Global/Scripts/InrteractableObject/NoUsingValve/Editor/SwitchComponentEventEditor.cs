@@ -33,6 +33,7 @@ namespace InteractableObject
             if (switchComponentEvent.isUsingTriggerEvent)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("triggerName"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("triggerOBJs"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("triggerEvent"));
             }
             EditorGUILayout.Space();
@@ -42,6 +43,7 @@ namespace InteractableObject
             if (switchComponentEvent.isUsingCollisionEvent)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("collisionName"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("collisionOBJs"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("collisionEvent"));
             }
 

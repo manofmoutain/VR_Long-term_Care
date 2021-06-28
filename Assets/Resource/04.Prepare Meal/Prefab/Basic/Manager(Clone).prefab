@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8135749802502212926}
   - component: {fileID: 539388722499604304}
   - component: {fileID: 4589881931542811449}
-  - component: {fileID: 1141601448168754322}
   m_Layer: 0
   m_Name: Manager(Clone)
   m_TagString: Untagged
@@ -71,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCounting: 1
-  gameMod: 0
+  gameMod: 2
   _scoreSystem:
     topicCount: 0
     totalScore: 100
@@ -123,13 +122,13 @@ MonoBehaviour:
       operateType: 
       whatToDo: "\u4EE5\u5176\u4ED6\u9910\u5177\u8A66\u5690\u5473\u9053"
       score: 2
-      operateSteps: 2
+      operateSteps: 1
       isToDo: "\u672A\u5617\u8A66\u5473\u9053"
     - isDone: 0
       operateType: 
       whatToDo: "\u7F6E\u65BC\u7897\u6216\u76E4\u4E2D\uFF0C\u4E26\u7B26\u5408\u6848\u4E3B\u7684\u98DF\u91CF"
       score: 2
-      operateSteps: 2
+      operateSteps: 1
       isToDo: "\u672A\u7B26\u5408\u6848\u4E3B\u98DF\u91CF"
     - isDone: 0
       operateType: 
@@ -303,27 +302,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: deb3ee659fb93194fb7686f402a48ba7, type: 2}
   - {fileID: 11400000, guid: d88122efdad136b4fab30409e5b720db, type: 2}
   - {fileID: 11400000, guid: 588aeec8b8b89b044bb14620fbc5ae02, type: 2}
---- !u!114 &1141601448168754322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2882708590989897546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d00a386d785e415b86200c00e7b8ddac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  devicePin:
-    pin: 30250
-    device_id: 1
-    login_url: https://nutcvr.rdto.io/active/30250
-  userData:
-    vr_session_id: 16
-    user_id: 21
-    user_name: "\u6E2C\u8A66\u4E00"
-  getPinURI: /api/v2/vr/session/
-  lesson_ID: A99
-  loginURL: /api/v2/vr/session/poll/
-  isLogin: 1
