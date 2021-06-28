@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Net.Sockets;
 using GlobalSystem;
 using Manager;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -10,13 +13,11 @@ namespace TitleUIScripts
 {
     public class LoginScene : MonoBehaviour
     {
-        [SerializeField] private GameObject manager;
-        [SerializeField] private int operateListCount;
+        [SerializeField] private GameObject managerPrefab;
 
-        [SerializeField] private Text lesson;
         [SerializeField] private InputField schoolInputField;
-        [SerializeField] private InputField setStudentID;
-        [SerializeField] private InputField setStudentName;
+        [SerializeField] private Text IDText;
+        [SerializeField] private Text nameText;
         [SerializeField] private Button loginBtn;
         [SerializeField] private Button setScoreBtn;
 
@@ -27,45 +28,41 @@ namespace TitleUIScripts
 
         private void Awake()
         {
-            GameObject go = Instantiate(manager);
-            // go.AddComponent<ScoreManager>();
-            // go.GetComponent<ScoreManager>().Initialize(operateListCount);
+            GameObject go = Instantiate(managerPrefab);
 
 
             setScene.SetActive(false);
-
-            // lesson.text = ScoreManager.Instance.Lesson();
         }
 
         private void Start()
         {
+            IDText.text = string.Empty;
+            nameText.text = string.Empty;
             for (int i = 0; i < _examinClasses.Count; i++)
             {
                 ScoreManager.Instance.AddExamData(_examinClasses[i]);
             }
             loginBtn.onClick.AddListener(delegate
             {
-                ScoreManager.Instance.SetStudentID(setStudentID.text);
-                ScoreManager.Instance.SetStudentName(setStudentName.text);
+                ScoreManager.Instance.SetStudentID(IDText.text);
+                ScoreManager.Instance.SetStudentName(nameText.text);
                 ScoreManager.Instance.SetSchool("110-V13");
-                ScoreManager.Instance.SaveData(ScoreManager.Instance._LoginData());
-                TCPManager.Instance.UploadData(JsonUtility.ToJson(ScoreManager.Instance._LoginData()));
-                // SceneLoader.Instance.LoadScene(1);
                 UI_Manager.Instance.OpenPanel(1,0,false);
             });
-            // setScoreBtn.onClick.AddListener(delegate { setScene.SetActive(true); });
-            // lesson.text = ScoreManager.Instance.Lesson();
-            // schoolInputField.text = ScoreManager.Instance.School();
         }
 
         private void Update()
         {
-            if (setStudentID.text!="" && setStudentName.text!="")
+            if (TCPManager.Instance.isLogin)
             {
+                IDText.text = TCPManager.Instance.UserID;
+                nameText.text = TCPManager.Instance.UserName;
                 loginBtn.interactable = true;
             }
             else
             {
+                IDText.text = string.Empty;
+                nameText.text = string.Empty;
                 loginBtn.interactable = false;
             }
         }
