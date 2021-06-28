@@ -26,16 +26,16 @@ namespace Manager
 
         [SerializeField] ScoreSystem _scoreSystem;
 
-        public ScoreSystem _ScoreSystem()
-        {
-            var _data = JsonUtility.ToJson(_scoreSystem);
-            return _scoreSystem;
-        }
-
-        public LoginData _LoginData()
-        {
-            return _scoreSystem.loginData;
-        }
+        // public ScoreSystem _ScoreSystem()
+        // {
+        //     var _data = JsonUtility.ToJson(_scoreSystem);
+        //     return _scoreSystem;
+        // }
+        //
+        // public LoginData _LoginData()
+        // {
+        //     return _scoreSystem.loginData;
+        // }
 
         /// <summary>
         /// 獲得操作時間
@@ -321,7 +321,7 @@ namespace Manager
             if (GameMod!=Mod.Test)
             {
                 _scoreSystem = new ScoreSystem(100);
-                _scoreSystem.loginData = new LoginData();
+                // _scoreSystem.loginData = new LoginData();
             }
 
         }

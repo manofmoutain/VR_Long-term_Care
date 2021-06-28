@@ -43,11 +43,11 @@ namespace GlobalSystem
         #endregion
     }
 
-    [Serializable]
-    public class LoginData
-    {
-        public string user_id;
-        public string user_password;
-        public string lesson_id="110-V13";
-    }
+    // [Serializable]
+    // public class LoginData
+    // {
+    //     public string user_id;
+    //     public string user_password;
+    //     public string lesson_id="110-V13";
+    // }
 }
