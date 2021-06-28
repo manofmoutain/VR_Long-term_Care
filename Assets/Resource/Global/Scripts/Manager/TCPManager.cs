@@ -98,12 +98,13 @@ namespace Manager
             }
         }
 
-
+        /// <summary>
+        /// 透過pin碼登入
+        /// </summary>
         public void LoginByPin()
         {
             StartCoroutine(Co_Device_Login_State_Polling());
         }
-
 
         /// <summary>
         /// 從pin碼取得使用者資訊

@@ -96,8 +96,7 @@ namespace GlobalSystem
         public void DecreaseScore(int index)
         {
             totalScore -= _operateTopics[index].score;
-            Debug.Log(
-                $"第{index}題：{_operateTopics[index].whatToDo}操作失敗，扣{_operateTopics[index].score}分，總分剩{totalScore}分");
+            // Debug.Log($"第{index}題：{_operateTopics[index].whatToDo}操作失敗，扣{_operateTopics[index].score}分，總分剩{totalScore}分");
         }
 
         /// <summary>
@@ -108,7 +107,7 @@ namespace GlobalSystem
         {
             _operateTopics[index].operateSteps++;
 
-            Debug.Log($"第{index}項操作失誤，增加為{_operateTopics[index].operateSteps}個操作步驟");
+            // Debug.Log($"第{index}項操作失誤，增加為{_operateTopics[index].operateSteps}個操作步驟");
         }
 
         /// <summary>
@@ -123,7 +122,7 @@ namespace GlobalSystem
                 _operateTopics[index].operateSteps = 0;
             }
 
-            Debug.Log($"第{index}項操作剩餘{_operateTopics[index].operateSteps}個步驟未操作");
+            // Debug.Log($"第{index}項操作剩餘{_operateTopics[index].operateSteps}個步驟未操作");
         }
 
         /// <summary>
@@ -146,7 +145,7 @@ namespace GlobalSystem
             {
                 _operateTopics[index].isDone = true;
             }
-            Debug.Log(_operateTopics[index].isDone ? $"第{index}項已操作完成" : $"第{index}項操作未完成");
+            // Debug.Log(_operateTopics[index].isDone ? $"第{index}項已操作完成" : $"第{index}項操作未完成");
             return _operateTopics[index].isDone;
         }
 
@@ -156,7 +155,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public string GetLesson()
         {
-            Debug.Log($"測試題目為{m_Lesson}");
+            // Debug.Log($"測試題目為{m_Lesson}");
             return m_Lesson;
         }
 
@@ -166,7 +165,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public int GetListCount()
         {
-            Debug.Log($"操作項目共有{_operateTopics.Count}項");
+            // Debug.Log($"操作項目共有{_operateTopics.Count}項");
             return _operateTopics.Count;
         }
 
@@ -177,7 +176,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public int GetOperateSteps(int index)
         {
-            Debug.Log($"第{index}項需要{_operateTopics[index].operateSteps}個操作步驟");
+            // Debug.Log($"第{index}項需要{_operateTopics[index].operateSteps}個操作步驟");
             return _operateTopics[index].operateSteps;
         }
 
@@ -236,7 +235,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public string GetSchool()
         {
-            Debug.Log($"受試者學校為：{m_School}");
+            // Debug.Log($"受試者學校為：{m_School}");
             return m_School;
         }
 
@@ -249,7 +248,7 @@ namespace GlobalSystem
             m_ID = id;
             // loginData.user_id = id;
             // loginData.user_password = id;
-            Debug.Log($"受試者編號：{id}");
+            // Debug.Log($"受試者編號：{id}");
         }
 
         /// <summary>
@@ -260,7 +259,7 @@ namespace GlobalSystem
         public void SetIsDone(int index)
         {
             _operateTopics[index].isDone = _operateTopics[index].operateSteps <= 0 ? true : false;
-            Debug.Log($"第{index}題操作結果：{_operateTopics[index].isDone}");
+            // Debug.Log($"第{index}題操作結果：{_operateTopics[index].isDone}");
         }
 
 
@@ -271,7 +270,7 @@ namespace GlobalSystem
         public void SetLesson(string lessonData)
         {
             m_Lesson = lessonData;
-            Debug.Log($"設置測驗題目：{lessonData}");
+            // Debug.Log($"設置測驗題目：{lessonData}");
         }
 
         /// <summary>
@@ -281,7 +280,7 @@ namespace GlobalSystem
         public void SetSchool(string schoolData)
         {
             m_School = schoolData;
-            Debug.Log($"設置學校：{schoolData}");
+            // Debug.Log($"設置學校：{schoolData}");
         }
 
         /// <summary>
@@ -292,7 +291,7 @@ namespace GlobalSystem
         {
             m_StudentName = _name;
             // loginData.user_password = _name;
-            Debug.Log($"設置受試者名稱：{_name}");
+            // Debug.Log($"設置受試者名稱：{_name}");
         }
 
         /// <summary>
@@ -303,7 +302,7 @@ namespace GlobalSystem
         public void SetTopicScore(int index, int score)
         {
             _operateTopics[index].score = score;
-            Debug.Log($"設置第{index}題分數為{score}");
+            // Debug.Log($"設置第{index}題分數為{score}");
         }
 
         /// <summary>
@@ -313,7 +312,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public int GetSteps(int index)
         {
-            Debug.Log($"第{index}項操作剩餘{_operateTopics[index].operateSteps}個步驟未操作");
+            // Debug.Log($"第{index}項操作剩餘{_operateTopics[index].operateSteps}個步驟未操作");
             return _operateTopics[index].operateSteps;
         }
 
@@ -323,7 +322,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public string GetStudentID()
         {
-            Debug.Log($"受試者編號為：{m_ID}");
+            // Debug.Log($"受試者編號為：{m_ID}");
             return m_ID;
         }
 
@@ -333,7 +332,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public string GetStudentName()
         {
-            Debug.Log($"受試者姓名為：{m_StudentName}");
+            // Debug.Log($"受試者姓名為：{m_StudentName}");
             return m_StudentName;
         }
 
@@ -344,7 +343,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public string GetToDo(int index)
         {
-            Debug.Log($"第{index}項的目標標題為{_operateTopics[index].isToDo}");
+            // Debug.Log($"第{index}項的目標標題為{_operateTopics[index].isToDo}");
             return _operateTopics[index].isToDo;
         }
 
@@ -355,7 +354,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public float GetTopicScore(int index)
         {
-            Debug.Log($"第{index}題的分數為{_operateTopics[index].score}");
+            // Debug.Log($"第{index}題的分數為{_operateTopics[index].score}");
             return _operateTopics[index].score;
         }
 
@@ -365,7 +364,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public float GetTotalScore()
         {
-            Debug.Log($"總分為{totalScore}");
+            // Debug.Log($"總分為{totalScore}");
             return totalScore < 0 ? totalScore = 0 : totalScore;
         }
 
@@ -376,7 +375,7 @@ namespace GlobalSystem
         /// <returns></returns>
         public string GetWhatToDo(int index)
         {
-            Debug.Log($"第{index}項的標題是{_operateTopics[index].whatToDo}");
+            // Debug.Log($"第{index}項的標題是{_operateTopics[index].whatToDo}");
             return _operateTopics[index].whatToDo;
         }
 
@@ -413,7 +412,7 @@ namespace GlobalSystem
         private DataRowCollection ExcelReader(string excelName, string sheetName, int columnsIndex)
         {
             string path = Application.dataPath + "/外部修改檔案/" + excelName;
-            // Debug.Log(path);
+            Debug.Log(path);
             FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
