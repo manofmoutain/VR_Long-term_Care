@@ -149,8 +149,11 @@ namespace InteractableObject
 
             if (startingGrabType != GrabTypes.None)
             {
-                transform.SetParent(originalTransform);
-                // hand.AttachObject(gameObject, startingGrabType,Hand.AttachmentFlags.VelocityMovement,attachmentOffset);
+                if (attachmentFlags!=Hand.AttachmentFlags.ParentToHand)
+                {
+                    transform.SetParent(originalTransform);
+                }
+
 
                 switch (hand.gameObject.name)
                 {
@@ -166,7 +169,8 @@ namespace InteractableObject
 
                 if (isUsingTwoHands)
                 {
-                    transform.SetParent(originalTransform);
+                    // transform.SetParent(originalTransform);
+                    hand.AttachObject(gameObject, startingGrabType,Hand.AttachmentFlags.VelocityMovement,attachmentOffset);
                     if (rightHandAttachedGameObject != null && leftHandAttachedGameObject != null)
                     {
                         // attachmentFlags = Hand.AttachmentFlags.VelocityMovement | Hand.AttachmentFlags.ParentToHand;
@@ -186,7 +190,7 @@ namespace InteractableObject
                 }
                 else
                 {
-                    transform.SetParent(originalTransform);
+                    // transform.SetParent(originalTransform);
                     hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
                     rigidbody.isKinematic = false;
                     // print("單手抓取");
