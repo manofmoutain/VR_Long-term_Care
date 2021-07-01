@@ -119,7 +119,7 @@ MonoBehaviour:
     operateType: 
     whatToDo: "\u6D17\u6DE8\u4E26\u6B78\u4F4D"
     score: 2
-    operateSteps: 2
+    operateSteps: 1
     isToDo: "\u672A\u6D17\u6DE8\u6B78\u4F4D"
   - isDone: 0
     operateType: 
