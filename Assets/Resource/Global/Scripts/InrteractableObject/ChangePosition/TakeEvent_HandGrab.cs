@@ -20,7 +20,7 @@ namespace InteractableObject
         // [Header("模型位置參數")]
         [SerializeField] private bool isStartTrigger = true;
         [SerializeField] private bool isStartKinematic = true;
-        [Tooltip("原本位置")] [SerializeField] GameObject OriginalPositionGameObject;
+        [Tooltip("原本位置")] [SerializeField] Transform originalTransform;
         private Vector3 originPosition;
         private Vector3 originRotation;
         private Vector3 originScale;
@@ -47,6 +47,7 @@ namespace InteractableObject
         [SerializeField]
         private Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.SnapOnAttach |
                                                        Hand.AttachmentFlags.DetachFromOtherHand |
+                                                       Hand.AttachmentFlags.VelocityMovement |
                                                        Hand.AttachmentFlags.TurnOffGravity;
 
         /// <summary>
@@ -148,7 +149,8 @@ namespace InteractableObject
 
             if (startingGrabType != GrabTypes.None)
             {
-                hand.AttachObject(gameObject, startingGrabType,Hand.AttachmentFlags.VelocityMovement,attachmentOffset);
+                transform.SetParent(originalTransform);
+                // hand.AttachObject(gameObject, startingGrabType,Hand.AttachmentFlags.VelocityMovement,attachmentOffset);
 
                 switch (hand.gameObject.name)
                 {
@@ -164,6 +166,7 @@ namespace InteractableObject
 
                 if (isUsingTwoHands)
                 {
+                    transform.SetParent(originalTransform);
                     if (rightHandAttachedGameObject != null && leftHandAttachedGameObject != null)
                     {
                         // attachmentFlags = Hand.AttachmentFlags.VelocityMovement | Hand.AttachmentFlags.ParentToHand;
@@ -183,6 +186,7 @@ namespace InteractableObject
                 }
                 else
                 {
+                    transform.SetParent(originalTransform);
                     hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
                     rigidbody.isKinematic = false;
                     // print("單手抓取");
@@ -337,9 +341,9 @@ namespace InteractableObject
                 {
                     // gameObject.transform.position = hand.transform.position;
                 }
-                if (transform.parent!=OriginalPositionGameObject.transform)
+                if (transform.parent!=originalTransform.transform)
                 {
-                    transform.SetParent(OriginalPositionGameObject.transform);
+                    transform.SetParent(originalTransform.transform);
                 }
             }
 
@@ -420,9 +424,9 @@ namespace InteractableObject
 
         private void Initialize()
         {
-            if (OriginalPositionGameObject == null)
+            if (originalTransform == null)
             {
-                OriginalPositionGameObject = transform.parent.gameObject;
+                originalTransform = transform.parent;
             }
 
             originPosition = transform.localPosition;
@@ -550,7 +554,7 @@ namespace InteractableObject
 
                 if (attachmentFlags==Hand.AttachmentFlags.ParentToHand)
                 {
-                    transform.SetParent(OriginalPositionGameObject.transform);
+                    transform.SetParent(originalTransform.transform);
                 }
 
 

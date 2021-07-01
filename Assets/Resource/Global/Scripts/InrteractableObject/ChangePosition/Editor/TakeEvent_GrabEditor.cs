@@ -35,16 +35,16 @@ namespace InteractableObject
             EditorGUILayout.LabelField(new GUIContent("位置參數"),headerLayout);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isStartTrigger"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isStartKinematic"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("OriginalPositionGameObject"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("originalTransform"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("UsePosition"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("snapZoneArea"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("takeObject"));
+            // EditorGUILayout.PropertyField(serializedObject.FindProperty("snapZoneArea"));
+            // EditorGUILayout.PropertyField(serializedObject.FindProperty("takeObject"));
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(new GUIContent("抓取狀態"),headerLayout);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("snapTakeObject"));
             // EditorGUILayout.PropertyField(serializedObject.FindProperty("snapReleaseGesture"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("snapFixed"));
+            // EditorGUILayout.PropertyField(serializedObject.FindProperty("snapFixed"));
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(new GUIContent("手勢資訊"),headerLayout);

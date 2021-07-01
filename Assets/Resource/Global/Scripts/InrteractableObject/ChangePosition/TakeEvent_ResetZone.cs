@@ -30,9 +30,7 @@ namespace InteractableObject
         {
             onCollisionEnter.Invoke();
 
-            if (other.gameObject.GetComponent<TakeEvent_SingleHandSnapPutZone>()
-                // || other.GetComponent<TakeEvent_TwoHandSnapPutZone>()
-                || other.gameObject.GetComponent<TakeEvent_HandGrab>()
+            if (other.gameObject.GetComponent<TakeEvent_HandGrab>()
                 || other.gameObject.GetComponent<AutoHand_HandGrab>())
             {
                 print($"碰觸到了{gameObject.name}");
