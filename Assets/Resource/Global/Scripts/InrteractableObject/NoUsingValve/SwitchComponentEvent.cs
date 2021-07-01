@@ -21,19 +21,23 @@ namespace InteractableObject
 
 
         [SerializeField] private GameObject touchedGameObject;
+
+        /// <summary>
+        /// 是否打開trigger事件(Editor用)
+        /// </summary>
         public bool isUsingTriggerEvent;
+
         [Tooltip("trigger的名稱")] public List<string> triggerName;
-        public List<GameObject> triggerOBJs;
-        public bool isUsingCollisionEvent;
-        [Tooltip("collision的名稱")] public List<string> collisionName;
-        public List<GameObject> collisionOBJs;
-
-        public bool collapseTriggerEvent;
-
+        [Tooltip("trigger的物件")] public List<GameObject> triggerOBJs;
         [SerializeField] private UnityEvent triggerEvent;
 
-        public bool collapseCollisionEvent;
+        /// <summary>
+        /// 是否打開碰撞事件(Editor用)
+        /// </summary>
+        public bool isUsingCollisionEvent;
 
+        [Tooltip("collision的名稱")] public List<string> collisionName;
+        [Tooltip("collision的物件")] public List<GameObject> collisionOBJs;
         [SerializeField] private UnityEvent collisionEvent;
 
 
@@ -48,7 +52,7 @@ namespace InteractableObject
             {
                 foreach (var go in triggerOBJs)
                 {
-                    if (other == go)
+                    if (other.gameObject == go)
                     {
                         touchedGameObject = other.gameObject;
                         triggerEvent.Invoke();
@@ -60,7 +64,7 @@ namespace InteractableObject
             {
                 foreach (var s in triggerName)
                 {
-                    if (other.name == s)
+                    if (other.gameObject.name == s)
                     {
                         touchedGameObject = other.gameObject;
                         triggerEvent.Invoke();
@@ -110,16 +114,17 @@ namespace InteractableObject
 
         public void RemoveKeywords()
         {
-            for (var i = 0; i < triggerOBJs.Count; i++)
+            foreach (GameObject go in triggerOBJs)
             {
-                if (touchedGameObject != triggerOBJs[i]) continue;
+                if (touchedGameObject != go) continue;
+                triggerName.Remove(touchedGameObject.name);
                 triggerOBJs.Remove(touchedGameObject);
                 return;
             }
 
-            for (var i = 0; i < triggerName.Count; i++)
+            foreach (string s in triggerName)
             {
-                if (touchedGameObject.name != triggerName[i]) continue;
+                if (touchedGameObject.name != s) continue;
                 triggerName.Remove(touchedGameObject.name);
                 return;
             }
@@ -127,6 +132,7 @@ namespace InteractableObject
             foreach (var go in collisionOBJs)
             {
                 if (touchedGameObject == go) continue;
+                collisionName.Remove(touchedGameObject.name);
                 collisionOBJs.Remove(touchedGameObject);
                 return;
             }

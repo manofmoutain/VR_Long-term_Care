@@ -14,6 +14,7 @@ namespace InteractableObject
         /// 是否要啟動對某個項目的判定，以打開achieveCheckpointEvent事件
         /// </summary>
         public bool isUsingCheckPoint;
+
         /// <summary>
         /// 達成某個項目之後要觸發的事件
         /// </summary>
@@ -105,7 +106,10 @@ namespace InteractableObject
         /// <param name="go"></param>
         public void ActiveGameObject(GameObject go)
         {
-            go.SetActive(true);
+            if (go != null)
+            {
+                go.SetActive(true);
+            }
         }
 
         /// <summary>
@@ -114,12 +118,22 @@ namespace InteractableObject
         /// <param name="go"></param>
         public void DeactiveGameObject(GameObject go)
         {
-            go.SetActive(false);
+            if (go != null)
+            {
+                go.SetActive(false);
+            }
         }
 
+        /// <summary>
+        /// 刪除某個物件
+        /// </summary>
+        /// <param name="go"></param>
         public void DestroyGmaobject(GameObject go)
         {
-            Destroy(go);
+            if (go != null)
+            {
+                Destroy(go);
+            }
         }
 
         /// <summary>
@@ -174,14 +188,14 @@ namespace InteractableObject
         {
             GetComponent<Rigidbody>().isKinematic = switcher;
             transform.localPosition = Vector3.zero;
-            transform.localEulerAngles=Vector3.zero;
+            transform.localEulerAngles = Vector3.zero;
         }
 
         /// <summary>
         /// 啟動Animator的某個Trigger
         /// </summary>
         /// <param name="parameter"></param>
-       public void AnimatorSetTrigger(string parameter)
+        public void AnimatorSetTrigger(string parameter)
         {
             animator.SetTrigger(parameter);
         }
@@ -191,12 +205,18 @@ namespace InteractableObject
             animator.SetBool(parameter, !animator.GetBool(parameter));
         }
 
+        /// <summary>
+        /// 更換副物件
+        /// </summary>
+        /// <param name="parent"></param>
         public void ChangeParent(Transform parent)
         {
-            transform.SetParent(parent);
-
-            transform.localPosition = Vector3.zero;
-            transform.localEulerAngles=Vector3.zero;
+            if (transform != null)
+            {
+                transform.SetParent(parent);
+                transform.localPosition = Vector3.zero;
+                transform.localEulerAngles = Vector3.zero;
+            }
             // transform.localScale = Vector3.one;
         }
     }

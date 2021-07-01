@@ -1,12 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 
 namespace InteractableObject
 {
-    public class SwitchComponentEventCountOnUI : MonoBehaviour
+    public class Interact_CountOnUI : MonoBehaviour
     {
-        [SerializeField] SwitchComponentEvent switchEvent;
+        [SerializeField] Interact_Count count;
         [SerializeField] private TextMeshProUGUI countText;
         [SerializeField] private string hint;
 
@@ -20,8 +21,7 @@ namespace InteractableObject
 
         private void Update()
         {
-            int count = switchEvent.triggerOBJs.Count + switchEvent.collisionOBJs.Count;
-            countText.text = $"{hint}:{count}";
+            countText.text = $"{hint}:{count.MaxCount}";
         }
     }
 }

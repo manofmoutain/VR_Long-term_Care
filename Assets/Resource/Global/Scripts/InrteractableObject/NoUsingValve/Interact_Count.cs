@@ -8,9 +8,26 @@ namespace InteractableObject
 {
     public class Interact_Count : MonoBehaviour
     {
-        public int count;
+        /// <summary>
+        /// 目前觸碰次數
+        /// </summary>
+        [SerializeField] int count;
+        public int Count => count;
+
+        /// <summary>
+        /// 最大觸碰次數
+        /// </summary>
         [SerializeField] private int maxCount;
+        public int MaxCount => maxCount;
+
+        /// <summary>
+        /// 達到指定數值後觸發事件
+        /// </summary>
         [SerializeField] private UnityEvent onMaxCountEvent;
+
+        /// <summary>
+        /// 達到指定次數後再次觸碰後觸發的事件
+        /// </summary>
         [SerializeField] private UnityEvent overCountEvent;
 
 
