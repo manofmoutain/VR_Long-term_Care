@@ -7,6 +7,7 @@ using Valve.VR.InteractionSystem;
 
 namespace InteractableObject
 {
+    [RequireComponent(typeof(MyInteractable))]
     public class Interact_LinearDrive : MonoBehaviour
     {
         public bool isUsingTwoHands;

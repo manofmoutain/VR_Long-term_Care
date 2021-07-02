@@ -28,6 +28,8 @@ namespace InteractableObject
             }
             EditorGUILayout.Space();
 
+            EditorGUILayout.LabelField("觸碰到物件後是否要清除關鍵字",mainHeader);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("isRemoveKeyword"));
             EditorGUILayout.LabelField("Trigger事件",mainHeader);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isUsingTriggerEvent"));
             if (switchComponentEvent.isUsingTriggerEvent)

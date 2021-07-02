@@ -103,9 +103,10 @@ namespace InteractableObject
 
         public bool isHiddenEvents = true;
         [SerializeField] private UnityEvent snapIn;
-        [SerializeField] UnityEvent snapOut;
+        [SerializeField] private UnityEvent snapOut;
         [SerializeField] private UnityEvent onPickUp;
         [SerializeField] private UnityEvent dropDown;
+        [SerializeField] private UnityEvent onOtherHandTouch;
 
         private void Awake()
         {

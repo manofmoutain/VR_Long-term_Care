@@ -9,6 +9,9 @@ namespace InteractableObject
 {
     public class SwitchComponentEvent : MonoBehaviour
     {
+
+        public bool isRemoveKeyword;
+
         /// <summary>
         /// 是否在打開物件時啟用事件
         /// </summary>
@@ -55,6 +58,10 @@ namespace InteractableObject
                     if (other.gameObject == go)
                     {
                         touchedGameObject = other.gameObject;
+                        if (isRemoveKeyword)
+                        {
+                            RemoveKeywords();
+                        }
                         triggerEvent.Invoke();
                         break;
                     }
@@ -67,6 +74,10 @@ namespace InteractableObject
                     if (other.gameObject.name == s)
                     {
                         touchedGameObject = other.gameObject;
+                        if (isRemoveKeyword)
+                        {
+                            RemoveKeywords();
+                        }
                         triggerEvent.Invoke();
                         break;
                     }
@@ -88,6 +99,10 @@ namespace InteractableObject
                     if (other.gameObject == go)
                     {
                         touchedGameObject = other.gameObject;
+                        if (isRemoveKeyword)
+                        {
+                            RemoveKeywords();
+                        }
                         collisionEvent.Invoke();
                         break;
                     }
@@ -100,6 +115,10 @@ namespace InteractableObject
                     if (other.gameObject.name == s)
                     {
                         touchedGameObject = other.gameObject;
+                        if (isRemoveKeyword)
+                        {
+                            RemoveKeywords();
+                        }
                         collisionEvent.Invoke();
                         break;
                     }
@@ -112,7 +131,7 @@ namespace InteractableObject
             touchedGameObject = null;
         }
 
-        public void RemoveKeywords()
+        void RemoveKeywords()
         {
             foreach (GameObject go in triggerOBJs)
             {
