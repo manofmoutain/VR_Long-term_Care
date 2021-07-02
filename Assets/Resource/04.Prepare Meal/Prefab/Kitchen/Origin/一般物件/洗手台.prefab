@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRemoveKeyword: 0
   isUsingOnEnableEvent: 0
   onEnableEvent:
     m_PersistentCalls:
@@ -419,6 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRemoveKeyword: 0
   isUsingOnEnableEvent: 1
   onEnableEvent:
     m_PersistentCalls:
@@ -6299,6 +6301,45 @@ MonoBehaviour:
   hoverPriority: 0
   attachedToHand: {fileID: 0}
   hoveringHands: []
+--- !u!65 &561522591
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4649859472765003561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.047287464, y: 0.07882416, z: 0.50650084}
+  m_Center: {x: 0.4028409, y: 1.102427, z: -0.085265696}
+--- !u!65 &561522592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4649859472765003561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.047471523, y: 0.06968188, z: 0.5010778}
+  m_Center: {x: -0.39484483, y: 1.1044024, z: -0.08444357}
+--- !u!65 &561522593
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4649859472765003561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6425359, y: 0.038962007, z: 0.35514724}
+  m_Center: {x: 0.006794274, y: 0.9050502, z: -0.005913973}
 --- !u!65 &852152625
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6342,45 +6383,125 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!65 &561522591
-BoxCollider:
+--- !u!114 &3353819400832027264
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4649859472765003561}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.047287464, y: 0.07882416, z: 0.50650084}
-  m_Center: {x: 0.4028409, y: 1.102427, z: -0.085265696}
---- !u!65 &561522592
-BoxCollider:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemoveKeyword: 1
+  isUsingOnEnableEvent: 0
+  onEnableEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 1
+  triggerName:
+  - "\u62B9\u5E03"
+  triggerOBJs:
+  - {fileID: 0}
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 42682385053360397}
+        m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
+        m_MethodName: AddCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collisionOBJs: []
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &42682385053360397
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4649859472765003561}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.047471523, y: 0.06968188, z: 0.5010778}
-  m_Center: {x: -0.39484483, y: 1.1044024, z: -0.08444357}
---- !u!65 &561522593
-BoxCollider:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cde0afeb775534ebd930c75e28ac68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 0
+  maxCount: 1
+  onMaxCountEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6412713538880124265}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: CheckPointInEvent
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 11
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  overCountEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6412713538880124265
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4649859472765003561}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6425359, y: 0.038962007, z: 0.35514724}
-  m_Center: {x: 0.006794274, y: 0.9050502, z: -0.005913973}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCheckPoint: 1
+  achieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
+        m_MethodName: CheckPoint
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 17
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  notAchieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
+        m_MethodName: CheckPoint
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 17
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &2491935146182725907
 PrefabInstance:
   m_ObjectHideFlags: 0
