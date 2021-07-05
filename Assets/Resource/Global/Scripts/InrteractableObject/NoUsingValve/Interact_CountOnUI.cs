@@ -21,7 +21,7 @@ namespace InteractableObject
 
         private void Update()
         {
-            countText.text = $"{hint}:{count.MaxCount}";
+            countText.text = $"{hint}:{count.MaxCount-count.Count}";
         }
     }
 }
