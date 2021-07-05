@@ -312,7 +312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5709376725397499704, guid: dd48e73d667c362438a2ca8a4b6e22e3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.901
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5709376725397499704, guid: dd48e73d667c362438a2ca8a4b6e22e3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -568,6 +568,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1869113713331867648, guid: 40560223bab292a41b7a20583d788440, type: 3}
       propertyPath: takeEventTwoHandGrab
+      value: 
+      objectReference: {fileID: 3336256967933682013}
+    - target: {fileID: 1869113713331867648, guid: 40560223bab292a41b7a20583d788440, type: 3}
+      propertyPath: takeEventHandGrab
       value: 
       objectReference: {fileID: 3336256967933682013}
     - target: {fileID: 1869113713331867655, guid: 40560223bab292a41b7a20583d788440, type: 3}
@@ -1626,6 +1630,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4622067119907889911, guid: b45ad77b076a7374e95ee2ceb334265b, type: 3}
       propertyPath: takeEventTwoHandGrab
+      value: 
+      objectReference: {fileID: 3336256967933682013}
+    - target: {fileID: 4622067119907889911, guid: b45ad77b076a7374e95ee2ceb334265b, type: 3}
+      propertyPath: takeEventHandGrab
       value: 
       objectReference: {fileID: 3336256967933682013}
     - target: {fileID: 4622067120986483608, guid: b45ad77b076a7374e95ee2ceb334265b, type: 3}
@@ -3417,7 +3425,8 @@ PrefabInstance:
       propertyPath: UsePosition.Array.data[1]
       value: 
       objectReference: {fileID: 350703250}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 761503077756378701, guid: fa327f76613bd984e8127f23e46e49da, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fa327f76613bd984e8127f23e46e49da, type: 3}
 --- !u!114 &3336256967933682012 stripped
 MonoBehaviour:
@@ -3441,6 +3450,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd8cd88139a23747ad9b9c9332c3cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3336256967933682014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 761503077756378707, guid: fa327f76613bd984e8127f23e46e49da, type: 3}
+  m_PrefabInstance: {fileID: 3336256967933682011}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3336256967933682015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336256967933682014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f685c1332b6da42bf1c7c33731b4e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linearMapping: {fileID: 3336256967933682012}
+  teethCount: 128
+  minimumPulseDuration: 500
+  maximumPulseDuration: 900
+  onPulse:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3336256967933682016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336256967933682014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529f955dc7c27804d948c1e7bee2711b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateActionSetOnAttach:
+    actionSetPath: 
+  hideHandOnAttach: 0
+  hideSkeletonOnAttach: 0
+  hideControllerOnAttach: 1
+  handAnimationOnPickup: 0
+  setRangeOfMotionOnPickup: -1
+  useHandObjectAttachmentPoint: 1
+  attachEaseIn: 0
+  snapAttachEaseInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  snapAttachEaseInTime: 0.15
+  snapAttachEaseInCompleted: 0
+  skeletonPoser: {fileID: 0}
+  handFollowTransform: 1
+  highlightOnHover: 1
+  highlightRenderers: []
+  existingRenderers: []
+  highlightHolder: {fileID: 0}
+  highlightSkinnedRenderers: []
+  existingSkinnedRenderers: []
+  hideHighlight: []
+  hoverPriority: 0
+  attachedToHand: {fileID: 0}
+  hoveringHands: []
 --- !u!1001 &3345376572255694834
 PrefabInstance:
   m_ObjectHideFlags: 0
