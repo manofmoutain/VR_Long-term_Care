@@ -1,6 +1,7 @@
 using System;
 using AutoHandInteract;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace InteractableObject
 {
@@ -35,6 +36,8 @@ namespace InteractableObject
 
         [SerializeField] private AutoHand_HandGrab autoHandGrab;
 
+        public UnityEvent onLocatedEvent;
+
 
         void Start()
         {
@@ -50,7 +53,7 @@ namespace InteractableObject
         private void OnTriggerEnter(Collider other)
         {
             //要黏著的物件進入黏著區時，且黏著區尚未啟動已黏著
-            if (other.name==takeEventHandGrab.name && takeEventHandGrab!=null)
+            if (other.gameObject.name==takeEventHandGrab.name)
             {
                 // print($"{other.name}");
                 if (!isSnapIn)
@@ -85,7 +88,7 @@ namespace InteractableObject
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.name==takeEventHandGrab.name && takeEventHandGrab!=null)
+            if (other.gameObject.name==takeEventHandGrab.name)
             {
                 if (isSnapIn)
                 {

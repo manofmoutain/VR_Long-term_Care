@@ -63,7 +63,7 @@ namespace InteractableObject
 
         //[Header("Rigibody")]
         private Rigidbody rigidbody;
-        private VelocityEstimator velocityEstimator;
+
         protected RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;
 
         /// <summary>
@@ -93,8 +93,9 @@ namespace InteractableObject
         /// </summary>
         bool restoreOriginalParent = false;
 
-        // [Header("InteractComponent")]
+        //引力模擬
         private MyInteractable interactable;
+        private VelocityEstimator velocityEstimator;
         bool attached = false;
         float attachTime;
         Vector3 attachPosition;
@@ -121,7 +122,6 @@ namespace InteractableObject
 
         protected virtual void OnHandHoverBegin(Hand hand)
         {
-            snapIn.Invoke();
             if (!attached && catchingSpeedThreshold != -1)
             {
                 float catchingThreshold = catchingSpeedThreshold *
@@ -150,12 +150,6 @@ namespace InteractableObject
 
             if (startingGrabType != GrabTypes.None)
             {
-                if (attachmentFlags!=Hand.AttachmentFlags.ParentToHand)
-                {
-                    transform.SetParent(originalTransform);
-                }
-
-
                 switch (hand.gameObject.name)
                 {
                     case "RightHand":
@@ -174,7 +168,10 @@ namespace InteractableObject
                     hand.AttachObject(gameObject, startingGrabType,Hand.AttachmentFlags.VelocityMovement,attachmentOffset);
                     if (rightHandAttachedGameObject != null && leftHandAttachedGameObject != null)
                     {
-                        // attachmentFlags = Hand.AttachmentFlags.VelocityMovement | Hand.AttachmentFlags.ParentToHand;
+                        if (attachmentFlags!=Hand.AttachmentFlags.ParentToHand)
+                        {
+                            transform.SetParent(originalTransform);
+                        }
                         hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
                         rigidbody.isKinematic = false;
                         // print("雙手抓取");
@@ -191,7 +188,10 @@ namespace InteractableObject
                 }
                 else
                 {
-                    // transform.SetParent(originalTransform);
+                    if (attachmentFlags!=Hand.AttachmentFlags.ParentToHand)
+                    {
+                        transform.SetParent(originalTransform);
+                    }
                     hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
                     rigidbody.isKinematic = false;
                     // print("單手抓取");
@@ -346,7 +346,7 @@ namespace InteractableObject
                 {
                     // gameObject.transform.position = hand.transform.position;
                 }
-                if (transform.parent!=originalTransform.transform)
+                if (transform.parent!=originalTransform.transform && attachmentFlags!= Hand.AttachmentFlags.ParentToHand)
                 {
                     transform.SetParent(originalTransform.transform);
                 }
@@ -527,7 +527,9 @@ namespace InteractableObject
                         //判斷是否為觸發放置區域
                         if (snapZone.isSnapIn)
                         {
+                            snapZone.onLocatedEvent.Invoke();
                             transform.SetParent(snapZone.transform.parent);
+
                             Destroy(snapZone.fadedObject);
                             // print($"{gameObject.name}已成為{snapZone.transform.parent.name}的子物件");
                             snapZone.isSnapIn = false;
@@ -538,7 +540,6 @@ namespace InteractableObject
                     transform.localPosition = originPosition;
                     transform.localEulerAngles = originRotation;
                     transform.localScale = originScale;
-
                     snapIn.Invoke();
                 }
 
