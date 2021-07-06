@@ -16317,6 +16317,10 @@ PrefabInstance:
       propertyPath: isDetachToResetPosition
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 683269710, guid: b66cbaf2adcd8b3439acb6f81594519e, type: 3}
+      propertyPath: isUsingTwoHands
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 694630792, guid: b66cbaf2adcd8b3439acb6f81594519e, type: 3}
       propertyPath: takeEventHandGrab
       value: 
