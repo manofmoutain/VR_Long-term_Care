@@ -63,7 +63,7 @@ namespace InteractableObject
 
         //[Header("Rigibody")]
         private Rigidbody rigidbody;
-
+        private VelocityEstimator velocityEstimator;
         protected RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;
 
         /// <summary>
@@ -93,9 +93,8 @@ namespace InteractableObject
         /// </summary>
         bool restoreOriginalParent = false;
 
-        //引力模擬
+        // [Header("InteractComponent")]
         private MyInteractable interactable;
-        private VelocityEstimator velocityEstimator;
         bool attached = false;
         float attachTime;
         Vector3 attachPosition;
@@ -501,7 +500,7 @@ namespace InteractableObject
             //隱藏放置提示輪廓線
             foreach (GameObject useObject in UsePosition)
             {
-                useObject.SetActive(false);
+                useObject.transform.Find($"{gameObject.name}_OutLine").gameObject.SetActive(false);
             }
         }
 
@@ -512,10 +511,10 @@ namespace InteractableObject
             {
                 // rigidbody.isKinematic = false;
                 //開啟黏著區物件
-                foreach (GameObject useObject in UsePosition)
-                {
-                    useObject.SetActive(true);
-                }
+                // foreach (GameObject useObject in UsePosition)
+                // {
+                //     useObject.SetActive(true);
+                // }
 
                 //已鬆手，物件已修正於新區域
                 if (snapFixed.isFixed)
@@ -532,6 +531,7 @@ namespace InteractableObject
 
                             Destroy(snapZone.fadedObject);
                             // print($"{gameObject.name}已成為{snapZone.transform.parent.name}的子物件");
+                            snapTakeObject = false;
                             snapZone.isSnapIn = false;
                         }
                     }
@@ -569,11 +569,11 @@ namespace InteractableObject
                 //snapFixed.isThrowed = false;
 
                 //隱藏放置提示輪廓線
-                foreach (GameObject useObject in UsePosition)
-                {
-                    // useObject.transform.GetChild(0).GetComponent<SnapZoneArea>().isSnapIn = true;
-                    useObject.SetActive(false);
-                }
+                // foreach (GameObject useObject in UsePosition)
+                // {
+                //     // useObject.transform.GetChild(0).GetComponent<SnapZoneArea>().isSnapIn = true;
+                //     useObject.SetActive(false);
+                // }
 
                 // if (playerHand_L != null & playerHand_R != null)
                 // {
