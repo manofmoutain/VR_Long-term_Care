@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Heimlich_maneuver;
 using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
@@ -24,28 +25,38 @@ namespace InteractableObject
         public Transform startPosition;
         public Transform endPosition;
         public Interact_LinearMapping linearMapping;
+
+        /// <summary>
+        /// 是否允許驅動，預設為true，可手動設置允許時機
+        /// </summary>
         public bool repositionGameObject = true;
         public bool maintainMomemntum = true;
         public float momemtumDampenRate = 5.0f;
 
-        [SerializeField] protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand;
-        [Tooltip("保持時用作位置和旋轉偏移量的局部點")]
+        [SerializeField] protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.VelocityMovement;
+        /// <summary>
+        /// 保持時用作位置和旋轉偏移量的局部點
+        /// </summary>
         public Transform attachmentOffset;
 
-        [SerializeField] protected float initialMappingOffset;
-        [SerializeField] protected int numMappingChangeSamples = 5;
-        [SerializeField] protected float[] mappingChangeSamples;
-        [SerializeField] protected float prevMapping = 0.0f;
-        [SerializeField] protected float mappingChangeRate;
-        [SerializeField] protected int sampleCount = 0;
+        protected float initialMappingOffset;
+        protected int numMappingChangeSamples = 5;
+        protected float[] mappingChangeSamples;
+        protected float prevMapping = 0.0f;
+        protected float mappingChangeRate;
+        protected int sampleCount = 0;
 
-        [SerializeField] protected Interactable interactable;
+        protected MyInteractable interactable;
+        public bool isUsingEvent;
+        [SerializeField] private UnityEvent minEvent;
+        [SerializeField] private UnityEvent maxEvent;
+
 
 
         protected virtual void Awake()
         {
             mappingChangeSamples = new float[numMappingChangeSamples];
-            interactable = GetComponent<Interactable>();
+            interactable = GetComponent<MyInteractable>();
         }
 
         protected virtual void Start()
@@ -140,11 +151,57 @@ namespace InteractableObject
             {
                 if (rightAttachedObjet != null && leftAttachedObject != null)
                 {
+                    if (isUsingEvent)
+                    {
+                        if (linearMapping.value==0)
+                        {
+
+                            hand.DetachObject(gameObject);
+                            if (hand.otherHand.ObjectIsAttached(gameObject))
+                            {
+                                hand.otherHand.DetachObject(gameObject);
+                            }
+                            rightAttachedObjet = null;
+                            leftAttachedObject = null;
+                            minEvent.Invoke();
+                        }
+                        else if (linearMapping.value==1)
+                        {
+                            hand.DetachObject(gameObject);
+                            if (hand.otherHand.ObjectIsAttached(gameObject))
+                            {
+                                hand.otherHand.DetachObject(gameObject);
+                            }
+                            rightAttachedObjet = null;
+                            leftAttachedObject = null;
+                            maxEvent.Invoke();
+                        }
+                    }
                     UpdateLinearMapping(hand.transform);
+
                 }
             }
             else
             {
+                if (isUsingEvent)
+                {
+                    if (linearMapping.value==0)
+                    {
+                        if (minEvent.GetPersistentEventCount()>0)
+                        {
+                            hand.DetachObject(gameObject);
+                        }
+                        minEvent.Invoke();
+                    }
+                    else if (linearMapping.value==1)
+                    {
+                        if (maxEvent.GetPersistentEventCount()>0)
+                        {
+                            hand.DetachObject(gameObject);
+                        }
+                        maxEvent.Invoke();
+                    }
+                }
                 UpdateLinearMapping(hand.transform);
             }
 
@@ -195,7 +252,9 @@ namespace InteractableObject
         {
             // print("Go");
             prevMapping = linearMapping.value;
+
             linearMapping.value = Mathf.Clamp01(initialMappingOffset + CalculateLinearMapping(updateTransform));
+
 
             mappingChangeSamples[sampleCount % mappingChangeSamples.Length] = (1.0f / Time.deltaTime) * (linearMapping.value - prevMapping);
             sampleCount++;
