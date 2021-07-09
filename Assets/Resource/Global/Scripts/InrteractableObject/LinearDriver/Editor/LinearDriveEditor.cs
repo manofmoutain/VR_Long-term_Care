@@ -51,6 +51,12 @@ namespace InteractableObject
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("minEvent"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("maxEvent"));
             }
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("isUsingPointEvent"));
+            if (linearDrive.isUsingPointEvent)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("pointValue"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("pointEvent"));
+            }
 
 
 

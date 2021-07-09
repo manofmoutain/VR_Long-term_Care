@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Autohand;
 using Heimlich_maneuver;
 using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
+using Hand = Valve.VR.InteractionSystem.Hand;
 
 namespace InteractableObject
 {
@@ -51,6 +53,9 @@ namespace InteractableObject
         [SerializeField] private UnityEvent minEvent;
         [SerializeField] private UnityEvent maxEvent;
 
+        public bool isUsingPointEvent;
+        [SerializeField] private UnityEvent pointEvent;
+        [SerializeField] private float pointValue;
 
 
         protected virtual void Awake()
@@ -177,6 +182,11 @@ namespace InteractableObject
                             maxEvent.Invoke();
                         }
                     }
+
+                    if (isUsingPointEvent && linearMapping.value==pointValue)
+                    {
+                        pointEvent.Invoke();
+                    }
                     UpdateLinearMapping(hand.transform);
 
                 }
@@ -202,11 +212,12 @@ namespace InteractableObject
                         maxEvent.Invoke();
                     }
                 }
+                if (isUsingPointEvent && linearMapping.value<=pointValue-0.01f && linearMapping.value>=pointValue+0.01f)
+                {
+                    pointEvent.Invoke();
+                }
                 UpdateLinearMapping(hand.transform);
             }
-
-
-
             if (hand.IsGrabEnding(this.gameObject))
             {
                 hand.DetachObject(gameObject);
@@ -291,6 +302,11 @@ namespace InteractableObject
                         Vector3.Lerp(startPosition.position, endPosition.position, linearMapping.value);
                 }
             }
+        }
+
+        public void SwitchEvent(bool switcher)
+        {
+            isUsingPointEvent = switcher;
         }
     }
 }
