@@ -65,13 +65,13 @@ MonoBehaviour:
     operateType: 
     whatToDo: "\u4EE5\u5176\u4ED6\u9910\u5177\u8A66\u5690\u5473\u9053"
     score: 2
-    operateSteps: 2
+    operateSteps: 1
     isToDo: "\u672A\u5617\u8A66\u5473\u9053"
   - isDone: 0
     operateType: 
     whatToDo: "\u7F6E\u65BC\u7897\u6216\u76E4\u4E2D\uFF0C\u4E26\u7B26\u5408\u6848\u4E3B\u7684\u98DF\u91CF"
     score: 2
-    operateSteps: 2
+    operateSteps: 1
     isToDo: "\u672A\u7B26\u5408\u6848\u4E3B\u98DF\u91CF"
   - isDone: 0
     operateType: 
@@ -161,7 +161,7 @@ MonoBehaviour:
     operateType: 
     whatToDo: "\u85E5\u4E38\u78E8\u7C89\uFF0C\u5012\u5165\u5C0F\u85E5\u676F\uFF0C\u78BA\u8A8D\u7121\u85E5\u7269\u6B98\u7559"
     score: 7
-    operateSteps: 1
+    operateSteps: 2
     isToDo: "\u672A\u78BA\u8A8D\u7121\u85E5\u7269\u6B98\u7559"
   - isDone: 0
     operateType: 
@@ -172,8 +172,8 @@ MonoBehaviour:
   - isDone: 0
     operateType: 
     whatToDo: "\u704C\u85E5\u524D\uFF0C\u5148\u78BA\u5B9A\u9F3B\u80C3\u7BA1\u9060\u7AEF\u5728\u80C3\u4E2D\uFF08\u9808\u6709\u53CD\u62BD\u52D5\u4F5C\uFF09"
-    score: 0.2
-    operateSteps: 4
+    score: 1
+    operateSteps: 1
     isToDo: "\u672A\u9032\u884C\u53CD\u62BD\u52D5\u4F5C"
   - isDone: 0
     operateType: 

@@ -8516,7 +8516,7 @@ MonoBehaviour:
     user_name: 
   getPinURI: /api/v2/vr/session/
   lesson_ID: 
-  loginURL: /api/v2/vr/session/poll/
+  devicePollingURL: /api/v2/vr/session/poll/
   isLogin: 0
 --- !u!114 &952403565
 MonoBehaviour:
