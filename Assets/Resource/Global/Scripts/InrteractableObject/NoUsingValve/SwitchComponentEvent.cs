@@ -9,7 +9,6 @@ namespace InteractableObject
 {
     public class SwitchComponentEvent : MonoBehaviour
     {
-
         public bool isRemoveKeyword;
 
         /// <summary>
@@ -51,19 +50,20 @@ namespace InteractableObject
 
         private void OnTriggerEnter(Collider other)
         {
+            touchedGameObject = other.gameObject;
             if (triggerOBJs.Count > 0)
             {
                 foreach (var go in triggerOBJs)
                 {
                     if (other.gameObject == go)
                     {
-                        touchedGameObject = other.gameObject;
                         if (isRemoveKeyword)
                         {
                             RemoveKeywords();
                         }
+
                         triggerEvent.Invoke();
-                        break;
+                        return;
                     }
                 }
             }
@@ -73,13 +73,13 @@ namespace InteractableObject
                 {
                     if (other.gameObject.name == s)
                     {
-                        touchedGameObject = other.gameObject;
                         if (isRemoveKeyword)
                         {
                             RemoveKeywords();
                         }
+
                         triggerEvent.Invoke();
-                        break;
+                        return;
                     }
                 }
             }
@@ -92,19 +92,20 @@ namespace InteractableObject
 
         private void OnCollisionEnter(Collision other)
         {
+            touchedGameObject = other.gameObject;
             if (collisionOBJs.Count > 0)
             {
                 foreach (var go in collisionOBJs)
                 {
                     if (other.gameObject == go)
                     {
-                        touchedGameObject = other.gameObject;
                         if (isRemoveKeyword)
                         {
                             RemoveKeywords();
                         }
+
                         collisionEvent.Invoke();
-                        break;
+                        return;
                     }
                 }
             }
@@ -114,13 +115,13 @@ namespace InteractableObject
                 {
                     if (other.gameObject.name == s)
                     {
-                        touchedGameObject = other.gameObject;
                         if (isRemoveKeyword)
                         {
                             RemoveKeywords();
                         }
+
                         collisionEvent.Invoke();
-                        break;
+                        return;
                     }
                 }
             }
@@ -133,33 +134,38 @@ namespace InteractableObject
 
         void RemoveKeywords()
         {
-            foreach (GameObject go in triggerOBJs)
+            for (int i = 0; i < triggerOBJs.Count; i++)
             {
-                if (touchedGameObject != go) continue;
-                triggerName.Remove(touchedGameObject.name);
-                triggerOBJs.Remove(touchedGameObject);
-                return;
+                if (touchedGameObject == triggerOBJs[i])
+                {
+                    triggerName.Remove(touchedGameObject.name);
+                    triggerOBJs.Remove(touchedGameObject);
+                }
             }
 
-            foreach (string s in triggerName)
+            for (int i = 0; i < triggerName.Count; i++)
             {
-                if (touchedGameObject.name != s) continue;
-                triggerName.Remove(touchedGameObject.name);
-                return;
+                if (touchedGameObject.name == triggerName[i])
+                {
+                    triggerName.Remove(touchedGameObject.name);
+                }
             }
 
-            foreach (var go in collisionOBJs)
+            for (int i = 0; i < collisionOBJs.Count; i++)
             {
-                if (touchedGameObject == go) continue;
-                collisionName.Remove(touchedGameObject.name);
-                collisionOBJs.Remove(touchedGameObject);
-                return;
+                if (touchedGameObject == collisionOBJs[i])
+                {
+                    collisionName.Remove(touchedGameObject.name);
+                    collisionOBJs.Remove(touchedGameObject);
+                }
             }
-            foreach (var s in collisionName)
+
+            for (int i = 0; i < collisionName.Count; i++)
             {
-                if (touchedGameObject.name == s) continue;
-                collisionName.Remove(touchedGameObject.name);
-                return;
+                if (touchedGameObject.name == collisionName[i])
+                {
+                    collisionName.Remove(touchedGameObject.name);
+                }
             }
         }
     }

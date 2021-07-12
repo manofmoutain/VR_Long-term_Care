@@ -20,6 +20,7 @@ namespace InteractableObject
 
         public override void OnInspectorGUI()
         {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("touchedGameObject"));
             EditorGUILayout.LabelField("是否在打開物件時觸發事件",mainHeader);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isUsingOnEnableEvent"));
             if (switchComponentEvent.isUsingOnEnableEvent)
