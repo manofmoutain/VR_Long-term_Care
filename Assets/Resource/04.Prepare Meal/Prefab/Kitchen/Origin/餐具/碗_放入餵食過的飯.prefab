@@ -13,6 +13,81 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.07
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7476968755109068205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363270278159852201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  notAchieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6777058881644981830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363270278159852201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemoveKeyword: 0
+  isUsingOnEnableEvent: 0
+  onEnableEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 1
+  triggerName:
+  - "\u5783\u573E\u6876"
+  triggerOBJs:
+  - {fileID: 0}
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
+        m_MethodName: AddCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7476968755109068205}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collisionOBJs: []
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6957492625015851939
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +300,7 @@ MonoBehaviour:
   leftHandAttachedGameObject: {fileID: 0}
   isStartTrigger: 0
   isStartKinematic: 1
-  OriginalPositionGameObject: {fileID: 0}
+  originalTransform: {fileID: 0}
   UsePosition:
   - {fileID: 0}
   - {fileID: 0}
@@ -240,9 +315,9 @@ MonoBehaviour:
     outside: 0
     outsideRange: 0
     outsideZone: {fileID: 0}
-  attachmentFlags: 72
+  attachmentFlags: 81
   releaseVelocityStyle: 1
-  isHiddenEvents: 0
+  isHiddenEvents: 1
   snapIn:
     m_PersistentCalls:
       m_Calls: []
@@ -253,6 +328,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   dropDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onOtherHandTouch:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &6805546549658166574
@@ -348,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRemoveKeyword: 0
   isUsingOnEnableEvent: 0
   onEnableEvent:
     m_PersistentCalls:
@@ -356,9 +435,8 @@ MonoBehaviour:
   isUsingTriggerEvent: 1
   triggerName:
   - "\u653E\u5728\u9935\u98DF\u7528\u6E6F\u5319\u4E0A\u7684\u7CA5"
-  isUsingCollisionEvent: 0
-  collisionName: []
-  collapseTriggerEvent: 0
+  triggerOBJs:
+  - {fileID: 0}
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -398,7 +476,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  collapseCollisionEvent: 0
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collisionOBJs: []
   collisionEvent:
     m_PersistentCalls:
       m_Calls: []

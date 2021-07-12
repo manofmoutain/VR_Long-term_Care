@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4196157055098941858}
   - component: {fileID: 32599313}
   - component: {fileID: 450289939}
+  - component: {fileID: 2522998094002640695}
   m_Layer: 0
   m_Name: "\u7897_\u9935\u98DF\u7528"
   m_TagString: Untagged
@@ -214,7 +215,7 @@ MonoBehaviour:
   leftHandAttachedGameObject: {fileID: 0}
   isStartTrigger: 0
   isStartKinematic: 1
-  OriginalPositionGameObject: {fileID: 0}
+  originalTransform: {fileID: 0}
   UsePosition:
   - {fileID: 0}
   - {fileID: 0}
@@ -230,9 +231,9 @@ MonoBehaviour:
     outside: 0
     outsideRange: 0
     outsideZone: {fileID: 0}
-  attachmentFlags: 72
+  attachmentFlags: 81
   releaseVelocityStyle: 3
-  isHiddenEvents: 0
+  isHiddenEvents: 1
   snapIn:
     m_PersistentCalls:
       m_Calls: []
@@ -243,6 +244,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   dropDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onOtherHandTouch:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &4453433287930153142
@@ -337,6 +341,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4453433287930153145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,6 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRemoveKeyword: 0
   isUsingOnEnableEvent: 0
   onEnableEvent:
     m_PersistentCalls:
@@ -394,10 +411,8 @@ MonoBehaviour:
   isUsingTriggerEvent: 1
   triggerName:
   - "\u653E\u5728\u6E6F\u52FA\u4E0A\u7684\u7CA5"
-  isUsingCollisionEvent: 0
-  collisionName:
-  - "\u653E\u5728\u6E6F\u52FA\u4E0A\u7684\u7CA5"
-  collapseTriggerEvent: 0
+  triggerOBJs:
+  - {fileID: 0}
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -437,7 +452,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  collapseCollisionEvent: 0
+  isUsingCollisionEvent: 0
+  collisionName:
+  - "\u653E\u5728\u6E6F\u52FA\u4E0A\u7684\u7CA5"
+  collisionOBJs: []
   collisionEvent:
     m_PersistentCalls:
       m_Calls:
@@ -490,6 +508,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.12273211, y: 0.038575314, z: 0.120867535}
   m_Center: {x: 0.000000022351742, y: 0.016257863, z: 0}
+--- !u!114 &2522998094002640695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4453433287930153144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93edacd05d275bb47b056b5e7ed78d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  riceOBJ:
+  - {fileID: 5980459951963776856}
+  - {fileID: 5980459951445809253}
+  - {fileID: 5980459951302214444}
+  grabHand: {fileID: 0}
 --- !u!65 &2046912567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -503,6 +538,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1502253, y: 0.037658133, z: 0.1194916}
   m_Center: {x: -0.00064502726, y: 0.008829055, z: -0.00013022867}
+--- !u!114 &2055442692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980459951302214444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  notAchieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2055442691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980459951302214444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemoveKeyword: 0
+  isUsingOnEnableEvent: 0
+  onEnableEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 1
+  triggerName:
+  - "\u7CA5_\u904E\u591A"
+  triggerOBJs:
+  - {fileID: 0}
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
+        m_MethodName: AddCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2055442692}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collisionOBJs: []
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &618478384
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -516,6 +626,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10000001, y: 0.04328064, z: 0.10000001}
   m_Center: {x: 1.4676421e-15, y: 0.011640311, z: 0}
+--- !u!114 &2111475258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980459951445809253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  notAchieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2111475257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980459951445809253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemoveKeyword: 0
+  isUsingOnEnableEvent: 0
+  onEnableEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 1
+  triggerName:
+  - "\u7CA5_\u904E\u591A"
+  triggerOBJs:
+  - {fileID: 0}
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
+        m_MethodName: AddCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2111475258}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collisionOBJs: []
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1004935640
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -529,6 +714,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.03598771, z: 0.1}
   m_Center: {x: 7.3776305e-16, y: 0.007993802, z: 0}
+--- !u!114 &205949776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980459951963776856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  notAchieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &205949775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980459951963776856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemoveKeyword: 0
+  isUsingOnEnableEvent: 0
+  onEnableEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  touchedGameObject: {fileID: 0}
+  isUsingTriggerEvent: 1
+  triggerName:
+  - "\u7CA5_\u904E\u591A"
+  triggerOBJs:
+  - {fileID: 0}
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
+        m_MethodName: AddCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 205949776}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DestroyThisGameObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  isUsingCollisionEvent: 0
+  collisionName: []
+  collisionOBJs: []
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &6791346264635939337
 PrefabInstance:
   m_ObjectHideFlags: 0

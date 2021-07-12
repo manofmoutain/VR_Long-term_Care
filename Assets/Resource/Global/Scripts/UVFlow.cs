@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class UVFlow : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float uVSpeed;
+    [SerializeField] private float moveSpeed;
     private float timer;
 
     [SerializeField] private Transform startPosition;
@@ -18,10 +19,10 @@ public class UVFlow : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(startPosition.position, endPosition.position, timer*0.25f);
+        transform.position = Vector3.Lerp(startPosition.position, endPosition.position, timer*moveSpeed);
 
         timer += Time.deltaTime;
         GetComponent<Renderer>().material.mainTextureOffset =
-            new Vector2(-speed * timer, speed * timer);
+            new Vector2(-uVSpeed * timer, uVSpeed * timer);
     }
 }
