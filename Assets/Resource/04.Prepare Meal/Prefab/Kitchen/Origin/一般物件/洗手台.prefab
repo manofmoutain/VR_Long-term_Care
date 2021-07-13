@@ -112,7 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1063ef1d4f60d4e8ab94135cf9096f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -0.1
+  uVSpeed: -0.1
+  moveSpeed: 0.25
   startPosition: {fileID: 1461376965}
   endPosition: {fileID: 357287356}
 --- !u!114 &83900440
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRemoveKeyword: 0
+  isRemoveKeyword: 1
   isUsingOnEnableEvent: 0
   onEnableEvent:
     m_PersistentCalls:
@@ -163,18 +164,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 83900440}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchComponentEvent, Assembly-CSharp
-        m_MethodName: RemoveKeywords
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   isUsingCollisionEvent: 1
   collisionName:
   - "\u7897_\u9935\u98DF\u7528"
@@ -192,18 +181,6 @@ MonoBehaviour:
       - m_Target: {fileID: 83900439}
         m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
         m_MethodName: AddCount
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 83900440}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchComponentEvent, Assembly-CSharp
-        m_MethodName: RemoveKeywords
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -242,6 +219,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 83900441}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DeactiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 452187592}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 83900441}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: SwitchCollider
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   overCountEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -264,6 +265,140 @@ MonoBehaviour:
   notAchieveCheckPointEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &269659291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269659292}
+  - component: {fileID: 269659294}
+  - component: {fileID: 269659293}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &269659292
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269659291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 536855590}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &269659294
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269659291}
+  m_CullTransparentMesh: 0
+--- !u!114 &269659293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269659291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: New Text
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 50dd6a98d01c2334a882f5038031a31d, type: 2}
+  m_sharedMaterial: {fileID: -3682336739880593386, guid: 50dd6a98d01c2334a882f5038031a31d, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &357287355
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +429,121 @@ Transform:
   m_Father: {fileID: 1373200192}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &536855589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 536855590}
+  - component: {fileID: 536855594}
+  - component: {fileID: 536855593}
+  - component: {fileID: 536855592}
+  - component: {fileID: 536855591}
+  m_Layer: 5
+  m_Name: "\u6E05\u6D17\u6D41\u7406\u81FA\u63D0\u793A\u6846"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &536855590
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536855589}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000003874302}
+  m_LocalPosition: {x: 0, y: 0, z: -0.321}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 269659292}
+  m_Father: {fileID: 4649859472764910345}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.4324, y: 1.4156}
+  m_SizeDelta: {x: 0.77482176, y: 0.44679582}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &536855594
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536855589}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &536855593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536855589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!114 &536855592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536855589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &536855591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536855589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbdf1c2ee8db8d4b9d987e63714087b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: {fileID: 42682385053360397}
+  countText: {fileID: 269659293}
+  hint: "\u6E05\u6D17\u6D41\u7406\u81FA\u6B21\u6578"
 --- !u!1 &710132906
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +559,7 @@ GameObject:
   - component: {fileID: 710132911}
   - component: {fileID: 710132910}
   - component: {fileID: 710132909}
+  - component: {fileID: 942528349}
   m_Layer: 0
   m_Name: Water2nd
   m_TagString: Untagged
@@ -405,7 +656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1063ef1d4f60d4e8ab94135cf9096f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -0.1
+  uVSpeed: -0.1
+  moveSpeed: 0.25
   startPosition: {fileID: 1461376965}
   endPosition: {fileID: 357287356}
 --- !u!114 &710132910
@@ -420,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7318e2c624b5a5d41b05c7143e55798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRemoveKeyword: 0
+  isRemoveKeyword: 1
   isUsingOnEnableEvent: 1
   onEnableEvent:
     m_PersistentCalls:
@@ -464,18 +716,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 710132910}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchComponentEvent, Assembly-CSharp
-        m_MethodName: RemoveKeywords
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   isUsingCollisionEvent: 1
   collisionName:
   - "\u7827\u677F"
@@ -495,18 +735,6 @@ MonoBehaviour:
       - m_Target: {fileID: 710132909}
         m_TargetAssemblyTypeName: InteractableObject.Interact_Count, Assembly-CSharp
         m_MethodName: AddCount
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 710132910}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchComponentEvent, Assembly-CSharp
-        m_MethodName: RemoveKeywords
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -545,7 +773,62 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 942528349}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DeactiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1915370290811140741}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6412713538880124265}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: ActiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 536855589}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: ActiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   overCountEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &942528349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710132906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  notAchieveCheckPointEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &985639060
@@ -722,14 +1005,14 @@ MonoBehaviour:
   onHandHoverBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 985639064}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: CheckPointInEvent
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
+        m_MethodName: CheckPoint
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -814,37 +1097,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUsingCheckPoint: 1
+  isUsingCheckPoint: 0
   achieveCheckPointEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
-        m_MethodName: CheckPoint
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   notAchieveCheckPointEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
-        m_MethodName: CheckPoint
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1373200191
 GameObject:
   m_ObjectHideFlags: 0
@@ -5840,7 +6099,7 @@ GameObject:
   - component: {fileID: 1395635821272152871}
   - component: {fileID: 331671435429013806}
   m_Layer: 5
-  m_Name: "\u63D0\u793A\u6846"
+  m_Name: "\u7B2C\u4E8C\u6B21\u6E05\u6D17\u63D0\u793A\u6846"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6065,6 +6324,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 722750896}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DeactiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 83900433}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 722750896}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
         m_MethodName: ActiveGameObject
         m_Mode: 2
         m_Arguments:
@@ -6137,7 +6408,7 @@ MonoBehaviour:
   grabHand: {fileID: 0}
   attachmentFlags: 16
   grabbedWithType: 0
-  isRoot: 0
+  isRoot: 1
   driving: 0
   outAngle: 0
   axisOfRotation: 1
@@ -6171,6 +6442,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 722750896}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: CheckPointInEvent
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6312,8 +6595,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.047287464, y: 0.07882416, z: 0.50650084}
-  m_Center: {x: 0.4028409, y: 1.102427, z: -0.085265696}
+  m_Size: {x: 0.047287464, y: 0.27309966, z: 0.50650084}
+  m_Center: {x: 0.4028409, y: 1.0052892, z: -0.085265696}
 --- !u!65 &561522592
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6325,8 +6608,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.047471523, y: 0.06968188, z: 0.5010778}
-  m_Center: {x: -0.39484483, y: 1.1044024, z: -0.08444357}
+  m_Size: {x: 0.047471523, y: 0.31366825, z: 0.5010778}
+  m_Center: {x: -0.39484483, y: 0.98240924, z: -0.08444357}
 --- !u!65 &561522593
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6353,7 +6636,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8480389, y: 0.067065, z: 0.1561755}
   m_Center: {x: 0.0040559173, y: 1.1064743, z: 0.24226457}
---- !u!114 &4649859470981869395
+--- !u!114 &42682385053360397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6362,27 +6645,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 4649859472765003561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ce4ce6e7092324ca623939f54e127b, type: 3}
+  m_Script: {fileID: 11500000, guid: 58cde0afeb775534ebd930c75e28ac68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFlowing: 0
-  timer: 0
-  hands: {fileID: 4649859471938596835}
-  overFlowingEvent:
+  count: 0
+  maxCount: 1
+  onMaxCountEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
-        m_MethodName: WrongOperate
+      - m_Target: {fileID: 6412713538880124265}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: CheckPointInEvent
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 31
+          m_IntArgument: 11
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6412713538880124265}
+        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
+        m_MethodName: DeactiveGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 536855589}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  overCountEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3353819400832027264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6427,7 +6724,7 @@ MonoBehaviour:
   collisionEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &42682385053360397
+--- !u!114 &4649859470981869395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6436,29 +6733,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 4649859472765003561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58cde0afeb775534ebd930c75e28ac68, type: 3}
+  m_Script: {fileID: 11500000, guid: d7ce4ce6e7092324ca623939f54e127b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 0
-  maxCount: 1
-  onMaxCountEvent:
+  isFlowing: 0
+  timer: 0
+  hands: {fileID: 4649859471938596835}
+  overFlowingEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6412713538880124265}
-        m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: CheckPointInEvent
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Global.Pateint.Patient, Assembly-CSharp
+        m_MethodName: WrongOperate
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 11
+          m_IntArgument: 31
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  overCountEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6412713538880124265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6599,10 +6894,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2491935146550985947, guid: a983b857f3d546044a42d54aaa3e16b5, type: 3}
       propertyPath: m_Name
-      value: "\u63D0\u793A\u6846"
+      value: "\u7B2C\u4E00\u6B21\u6E05\u6D17\u63D0\u793A\u6846"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a983b857f3d546044a42d54aaa3e16b5, type: 3}
+--- !u!1 &452187592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2491935146550985947, guid: a983b857f3d546044a42d54aaa3e16b5, type: 3}
+  m_PrefabInstance: {fileID: 2491935146182725907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &452187593 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2491935146550985946, guid: a983b857f3d546044a42d54aaa3e16b5, type: 3}

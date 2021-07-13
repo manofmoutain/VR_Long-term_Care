@@ -18,6 +18,7 @@ namespace TitleUIScripts
         [SerializeField] private InputField schoolInputField;
         [SerializeField] private Text IDText;
         [SerializeField] private Text nameText;
+        [SerializeField] private Button fbLoginBtn;
         [SerializeField] private Button loginBtn;
         [SerializeField] private Button setScoreBtn;
 
@@ -42,6 +43,10 @@ namespace TitleUIScripts
             {
                 ScoreManager.Instance.AddExamData(_examinClasses[i]);
             }
+            fbLoginBtn.onClick.AddListener(delegate
+            {
+                TCPManager.Instance.LoginByDevice();
+            });
             loginBtn.onClick.AddListener(delegate
             {
                 ScoreManager.Instance.SetStudentID(IDText.text);
@@ -57,13 +62,15 @@ namespace TitleUIScripts
             {
                 IDText.text = TCPManager.Instance.UserID;
                 nameText.text = TCPManager.Instance.UserName;
-                loginBtn.interactable = true;
+                loginBtn.gameObject.SetActive(true);
+                fbLoginBtn.gameObject.SetActive(false);
             }
             else
             {
                 IDText.text = string.Empty;
                 nameText.text = string.Empty;
-                loginBtn.interactable = false;
+                loginBtn.gameObject.SetActive(false);
+                fbLoginBtn.gameObject.SetActive(true);
             }
         }
 

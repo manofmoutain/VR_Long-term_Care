@@ -55,10 +55,13 @@ namespace Manager
             devicePin = new DevicePin();
             userData = new UserData();
             isLogin = false;
-
-            StartCoroutine(Co_GetDevicePin());
         }
 
+
+        public void LoginByDevice()
+        {
+            StartCoroutine(Co_GetDevicePin());
+        }
 
         /// <summary>
         /// 獲取pin碼

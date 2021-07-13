@@ -42,6 +42,8 @@ namespace InteractableObject
             EditorGUILayout.PropertyField(serializedObject.FindProperty("linearMapping"));
             EditorGUILayout.LabelField(new GUIContent("是否允許驅動"),new GUIStyle(){fontStyle = FontStyle.Bold,fontSize = 12});
             EditorGUILayout.PropertyField(serializedObject.FindProperty("repositionGameObject"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("prevMapping"));
+
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(new GUIContent("是否使用事件"),headerStyle);

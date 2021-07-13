@@ -2562,25 +2562,6 @@ MonoBehaviour:
   hoverPriority: 0
   attachedToHand: {fileID: 0}
   hoveringHands: []
---- !u!114 &919132148436493048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526701251549437565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isUsingCheckPoint: 0
-  achieveCheckPointEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  notAchieveCheckPointEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &919132148436493047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2601,7 +2582,7 @@ MonoBehaviour:
   touchedGameObject: {fileID: 0}
   isUsingTriggerEvent: 1
   triggerName:
-  - "\u7CA5_\u904E\u591A"
+  - "\u5783\u573E\u6876"
   triggerOBJs:
   - {fileID: 0}
   triggerEvent:
@@ -2619,10 +2600,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1868579754487227168}
+        m_TargetAssemblyTypeName: InteractableObject.TakeEvent_HandGrab, Assembly-CSharp
+        m_MethodName: DetachHand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 919132148436493048}
         m_TargetAssemblyTypeName: InteractableObject.SwitchComponent, Assembly-CSharp
-        m_MethodName: DestroyThisGameObject
-        m_Mode: 1
+        m_MethodName: SwtichGameObject
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2635,6 +2628,25 @@ MonoBehaviour:
   collisionName: []
   collisionOBJs: []
   collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &919132148436493048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526701251549437565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e475d45bd8b0346a3fce214eb3c102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsingCheckPoint: 0
+  achieveCheckPointEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  notAchieveCheckPointEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &2028096862
@@ -5688,6 +5700,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2088486785912226894, guid: 59a5d6211f70b4e47aa971b5be0cc099, type: 3}
+      propertyPath: UsePosition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088486785912226894, guid: 59a5d6211f70b4e47aa971b5be0cc099, type: 3}
+      propertyPath: UsePosition.Array.data[0]
+      value: 
+      objectReference: {fileID: 1523207670}
     - target: {fileID: 2088486785912226895, guid: 59a5d6211f70b4e47aa971b5be0cc099, type: 3}
       propertyPath: m_Size.x
       value: 0.13155687
@@ -6332,10 +6352,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8890207735318008426, guid: 12206b2824abdd941b43a81b6f74f30e, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 5652963169295460550, guid: 188bec2be411a8e4aa0ff9060086bcfc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12206b2824abdd941b43a81b6f74f30e, type: 3}
 --- !u!4 &6134184316556737849 stripped
@@ -8239,6 +8255,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5138966200946080441}
     m_Modifications:
+    - target: {fileID: 2522420418242600132, guid: 1855f7994921aea4abdd389b4a5c7160, type: 3}
+      propertyPath: UsePosition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522420418242600132, guid: 1855f7994921aea4abdd389b4a5c7160, type: 3}
+      propertyPath: UsePosition.Array.data[0]
+      value: 
+      objectReference: {fileID: 2025547076124478581}
     - target: {fileID: 2848268344771871363, guid: 1855f7994921aea4abdd389b4a5c7160, type: 3}
       propertyPath: m_Name
       value: "\u76DB\u85E5\u7684\u6E6F\u5319"

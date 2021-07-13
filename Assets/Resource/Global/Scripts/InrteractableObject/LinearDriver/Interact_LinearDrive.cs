@@ -22,7 +22,7 @@ namespace InteractableObject
         /// <summary>
         /// 鬆開手後是否回到原位
         /// </summary>
-        [SerializeField] private bool isDetachToResetPosition;
+        [SerializeField] private bool isDetachToResetPosition = false;
 
         public Transform startPosition;
         public Transform endPosition;
@@ -32,10 +32,12 @@ namespace InteractableObject
         /// 是否允許驅動，預設為true，可手動設置允許時機
         /// </summary>
         public bool repositionGameObject = true;
+
         public bool maintainMomemntum = true;
         public float momemtumDampenRate = 5.0f;
 
         [SerializeField] protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.VelocityMovement;
+
         /// <summary>
         /// 保持時用作位置和旋轉偏移量的局部點
         /// </summary>
@@ -44,7 +46,7 @@ namespace InteractableObject
         protected float initialMappingOffset;
         protected int numMappingChangeSamples = 5;
         protected float[] mappingChangeSamples;
-        protected float prevMapping = 0.0f;
+        [SerializeField] protected float prevMapping = 0.0f;
         protected float mappingChangeRate;
         protected int sampleCount = 0;
 
@@ -62,6 +64,10 @@ namespace InteractableObject
         {
             mappingChangeSamples = new float[numMappingChangeSamples];
             interactable = GetComponent<MyInteractable>();
+        }
+
+        private void OnEnable()
+        {
         }
 
         protected virtual void Start()
@@ -85,7 +91,6 @@ namespace InteractableObject
             if (repositionGameObject)
             {
                 UpdateLinearMapping(transform);
-
             }
         }
 
@@ -96,7 +101,7 @@ namespace InteractableObject
                 switch (hand.gameObject.name)
                 {
                     case "RightHand":
-                        rightHand=hand;
+                        rightHand = hand;
 
                         break;
                     case "LeftHand":
@@ -127,7 +132,6 @@ namespace InteractableObject
                 mappingChangeRate = 0.0f;
 
                 hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
-
             }
         }
 
@@ -138,7 +142,7 @@ namespace InteractableObject
                 switch (hand.gameObject.name)
                 {
                     case "RightHand":
-                        rightHand=hand;
+                        rightHand = hand;
                         rightAttachedObjet = gameObject;
                         break;
                     case "LeftHand":
@@ -147,7 +151,6 @@ namespace InteractableObject
                         break;
                 }
             }
-
         }
 
         protected virtual void HandAttachedUpdate(Hand hand)
@@ -158,66 +161,73 @@ namespace InteractableObject
                 {
                     if (isUsingEvent)
                     {
-                        if (linearMapping.value==0)
+                        if (linearMapping.value == 0)
                         {
-
                             hand.DetachObject(gameObject);
                             if (hand.otherHand.ObjectIsAttached(gameObject))
                             {
                                 hand.otherHand.DetachObject(gameObject);
                             }
+
                             rightAttachedObjet = null;
                             leftAttachedObject = null;
                             minEvent.Invoke();
                         }
-                        else if (linearMapping.value==1)
+                        else if (linearMapping.value == 1)
                         {
                             hand.DetachObject(gameObject);
                             if (hand.otherHand.ObjectIsAttached(gameObject))
                             {
                                 hand.otherHand.DetachObject(gameObject);
                             }
+
                             rightAttachedObjet = null;
                             leftAttachedObject = null;
                             maxEvent.Invoke();
                         }
                     }
 
-                    if (isUsingPointEvent && linearMapping.value==pointValue)
+                    if (isUsingPointEvent && linearMapping.value == pointValue)
                     {
                         pointEvent.Invoke();
                     }
-                    UpdateLinearMapping(hand.transform);
 
+                    UpdateLinearMapping(hand.transform);
                 }
             }
             else
             {
                 if (isUsingEvent)
                 {
-                    if (linearMapping.value==0)
+                    if (linearMapping.value == 0)
                     {
-                        if (minEvent.GetPersistentEventCount()>0)
+                        if (minEvent.GetPersistentEventCount() > 0)
                         {
                             hand.DetachObject(gameObject);
                         }
+
                         minEvent.Invoke();
                     }
-                    else if (linearMapping.value==1)
+                    else if (linearMapping.value == 1)
                     {
-                        if (maxEvent.GetPersistentEventCount()>0)
+                        if (maxEvent.GetPersistentEventCount() > 0)
                         {
                             hand.DetachObject(gameObject);
                         }
+
                         maxEvent.Invoke();
                     }
                 }
-                if (isUsingPointEvent && linearMapping.value<=pointValue-0.01f && linearMapping.value>=pointValue+0.01f)
+
+                if (isUsingPointEvent && linearMapping.value <= pointValue - 0.01f &&
+                    linearMapping.value >= pointValue + 0.01f)
                 {
                     pointEvent.Invoke();
                 }
+
                 UpdateLinearMapping(hand.transform);
             }
+
             if (hand.IsGrabEnding(this.gameObject))
             {
                 hand.DetachObject(gameObject);
@@ -226,25 +236,16 @@ namespace InteractableObject
 
         protected virtual void OnDetachedFromHand(Hand hand)
         {
-            if (isUsingTwoHands)
-            {
-                rightHand = null;
-                rightAttachedObjet = null;
-                leftHand = null;
-                leftAttachedObject = null;
-            }
+            rightHand = null;
+            rightAttachedObjet = null;
+            leftHand = null;
+            leftAttachedObject = null;
             CalculateMappingChangeRate();
         }
 
 
         protected void CalculateMappingChangeRate()
         {
-            if (isDetachToResetPosition)
-            {
-                linearMapping.value = 0;
-                transform.localPosition = Vector3.zero;
-            }
-
             //Compute the mapping change rate
             mappingChangeRate = 0.0f;
             int mappingSamplesCount = Mathf.Min(sampleCount, mappingChangeSamples.Length);
@@ -267,7 +268,8 @@ namespace InteractableObject
             linearMapping.value = Mathf.Clamp01(initialMappingOffset + CalculateLinearMapping(updateTransform));
 
 
-            mappingChangeSamples[sampleCount % mappingChangeSamples.Length] = (1.0f / Time.deltaTime) * (linearMapping.value - prevMapping);
+            mappingChangeSamples[sampleCount % mappingChangeSamples.Length] =
+                (1.0f / Time.deltaTime) * (linearMapping.value - prevMapping);
             sampleCount++;
 
             if (repositionGameObject)

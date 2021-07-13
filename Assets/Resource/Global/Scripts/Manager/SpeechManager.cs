@@ -92,6 +92,10 @@ namespace Manager
         /// <param name="index"></param>
         public void FindKeyWords(int index)
         {
+            for (int i = 0; i < KeyWordsInSituation(index).Count; i++)
+            {
+                // Respond(words, index);
+            }
             foreach (string words in KeyWordsInSituation(index))
             {
                 Respond(words, index);

@@ -471,6 +471,15 @@ namespace InteractableObject
             Vector3 toHandProjected;
             if (isRoot)
             {
+                // print(hand.transform.Find("RightRenderModel Slim(Clone)").transform.Find("vr_glove_right_model_slim(Clone)").gameObject.name);
+                // if (hand.name=="RightHand")
+                // {
+                //     toHandProjected = ComputeToTransformProjected(hand.transform.Find("RightRenderModel Slim(Clone)").transform.Find("vr_glove_right_model_slim(Clone)").transform);
+                // }
+                // else
+                // {
+                //     toHandProjected = ComputeToTransformProjected(hand.transform.Find("LeftRenderModel Slim(Clone)").transform.Find("vr_glove_left_model_slim(Clone)").transform);
+                // }
                 toHandProjected = ComputeToTransformProjected(hand.transform);
                 if (!toHandProjected.Equals(lastHandProjected))
                 {

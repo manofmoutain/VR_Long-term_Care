@@ -39,6 +39,7 @@ namespace PrepareMeal
                 if (transform.localScale.y==end)
                 {
                     isInject = false;
+                    gameObject.SetActive(false);
                 }
             }
         }
