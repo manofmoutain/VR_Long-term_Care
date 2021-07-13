@@ -1,4 +1,3 @@
-using System;
 using AutoHandInteract;
 using UnityEngine;
 using UnityEngine.Events;
@@ -65,6 +64,7 @@ namespace InteractableObject
                     // fadedObject.transform.localPosition = Vector3.zero;
                     // fadedObject.transform.localScale = Vector3.one;
                     fadedObject.transform.localRotation = Quaternion.identity;
+                    Destroy(fadedObject , 1f);
 
                     //要黏著的物體已黏著與此區域
                     isSnapIn = true;

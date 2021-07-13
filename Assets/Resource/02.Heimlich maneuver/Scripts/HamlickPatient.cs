@@ -40,9 +40,9 @@ namespace Heimlich_maneuver
             //player位於病患背後
             canHug = GetComponent<Patient>().isPlayerBehindPatient;
 
-            interactHint.SetActive(GetComponent<Patient>().isAtChangedPosition );
-
-            interactPoint.SetActive(GetComponent<Patient>().isAtChangedPosition );
+            // interactHint.SetActive(GetComponent<Patient>().isAtChangedPosition );
+            //
+            // interactPoint.SetActive(GetComponent<Patient>().isAtChangedPosition );
 
 
             velocityDirection = GetComponent<Patient>().patientDirection;

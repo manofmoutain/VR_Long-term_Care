@@ -95,6 +95,7 @@ namespace Heimlich_maneuver
                         SpeechManager.Instance.StopAudio();
                     }
                     Destroy(go, 3f);
+                    GetComponent<Patient>().patient.GetComponent<TakeEvent_HandGrab>().DetachHand();
                     isChoking = false;
                 }
             }

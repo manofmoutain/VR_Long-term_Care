@@ -500,7 +500,10 @@ namespace InteractableObject
             //隱藏放置提示輪廓線
             foreach (GameObject useObject in UsePosition)
             {
-                useObject.transform.Find($"{gameObject.name}_OutLine").gameObject.SetActive(false);
+                if (useObject.transform.Find($"{gameObject.name}_OutLine").gameObject)
+                {
+                    useObject.transform.Find($"{gameObject.name}_OutLine").gameObject.SetActive(false);
+                }
             }
         }
 
@@ -509,12 +512,15 @@ namespace InteractableObject
             //如果以抓取物件
             if (snapTakeObject)
             {
-                // rigidbody.isKinematic = false;
-                //開啟黏著區物件
-                // foreach (GameObject useObject in UsePosition)
-                // {
-                //     useObject.SetActive(true);
-                // }
+
+                //開啟所有可以放置的提示輪廓
+                foreach (GameObject useObject in UsePosition)
+                {
+                    if (useObject.transform.Find($"{gameObject.name}_OutLine").gameObject)
+                    {
+                        useObject.transform.Find($"{gameObject.name}_OutLine").gameObject.SetActive(true);
+                    }
+                }
 
                 //已鬆手，物件已修正於新區域
                 if (snapFixed.isFixed)
@@ -554,9 +560,14 @@ namespace InteractableObject
             }
             else
             {
-                // rigidbody.isKinematic = true;
-                //放下物品：參數重置
-                // gameObject.tag = "DropObject";
+                //關閉放置提示框
+                foreach (GameObject useObject in UsePosition)
+                {
+                    if (useObject.transform.Find($"{gameObject.name}_OutLine").gameObject)
+                    {
+                        useObject.transform.Find($"{gameObject.name}_OutLine").gameObject.SetActive(false);
+                    }
+                }
 
                 if (attachmentFlags==Hand.AttachmentFlags.ParentToHand)
                 {
@@ -590,6 +601,24 @@ namespace InteractableObject
                 }
 
                 // }
+            }
+        }
+
+        public void ClearAttachFlag()
+        {
+            attachmentFlags = 0;
+        }
+
+        public void DetachHand()
+        {
+            if (rightHand!=null)
+            {
+                rightHand.DetachObject(gameObject);
+            }
+
+            if (leftHand!=null)
+            {
+                leftHand.DetachObject(gameObject);
             }
         }
     }
