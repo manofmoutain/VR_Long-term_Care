@@ -10,6 +10,9 @@ namespace InteractableObject
     [RequireComponent(typeof(MyInteractable), typeof(Interact_LinearMapping), typeof(Rigidbody))]
     public class Interact_CircularDrive : MonoBehaviour
     {
+        private Hand rightHand;
+        private Hand leftHand;
+
         public enum Axis_t
         {
             XAxis,
@@ -21,10 +24,12 @@ namespace InteractableObject
         /// 是否要使用混合手勢
         /// </summary>
         public bool isUsingBlenderPoser;
+
         /// <summary>
         /// 轉開手勢
         /// </summary>
         [SerializeField] private UnityEvent switchOnPoser;
+
         /// <summary>
         /// 關閉手勢
         /// </summary>
@@ -41,7 +46,7 @@ namespace InteractableObject
         [SerializeField] private Hand.AttachmentFlags attachmentFlags;
 
         /// <summary>
-        /// 設定抓握的方式
+        /// 目前被抓握的方式
         /// </summary>
         [Tooltip("設定抓握的方式")] [SerializeField] private GrabTypes grabbedWithType;
 
@@ -58,6 +63,11 @@ namespace InteractableObject
 
         [Tooltip("驅動器的輸出角度值（以度為單位，無限制）將無限制地增加或減少，採用360模數來查找轉數")]
         public float outAngle;
+
+        /// <summary>
+        /// 在isRoot的情況下，目前的旋轉值(0-360)
+        /// </summary>
+        Vector3 eulerRotation;
 
         /// <summary>
         /// 給予Animator的值(0-1)
@@ -152,7 +162,6 @@ namespace InteractableObject
         [HideInInspector] [SerializeField] private UnityEvent angleEvent;
 
 
-
         /// <summary>
         /// 在limited的情況中，是否要強制設定初始值
         /// </summary>
@@ -188,6 +197,8 @@ namespace InteractableObject
 
         private void Start()
         {
+            rightHand = null;
+            leftHand = null;
             if (childCollider == null)
             {
                 childCollider = GetComponentInChildren<Collider>();
@@ -212,7 +223,8 @@ namespace InteractableObject
 
             if (transform.parent)
             {
-                worldPlaneNormalize = transform.parent.localToWorldMatrix.MultiplyVector(worldPlaneNormalize).normalized;
+                worldPlaneNormalize =
+                    transform.parent.localToWorldMatrix.MultiplyVector(worldPlaneNormalize).normalized;
             }
 
             if (limited)
@@ -227,7 +239,8 @@ namespace InteractableObject
             }
             else
             {
-                startQuaternion = Quaternion.AngleAxis(transform.localEulerAngles[(int) axisOfRotation], localPlaneNormalize);
+                startQuaternion =
+                    Quaternion.AngleAxis(transform.localEulerAngles[(int) axisOfRotation], localPlaneNormalize);
                 outAngle = 0.0f;
             }
 
@@ -269,16 +282,18 @@ namespace InteractableObject
 
         private void HandHoverUpdate(Hand hand)
         {
-            //抓握的狀態
+            //取得在HoverUpdate時，"手部"的抓握狀態
             GrabTypes startingGrabType = hand.GetGrabStarting();
-            //是否已鬆手
+            //取得目前手部抓握的狀態是否等於物件目前被抓握的方式，設定為false"
             bool isGrabEnding = hand.IsGrabbingWithType(grabbedWithType) == false;
 
-            //如果沒有執行任何的抓握
+            //如果目前被抓握的方式等於none，且目前手抓握的狀態不等於none
+            //也就是物件尚未被抓取，而手部開始進行抓握的狀態
             if (grabbedWithType == GrabTypes.None && startingGrabType != GrabTypes.None)
             {
+                //物件目前被抓握的狀態=手部抓握的狀態
                 grabbedWithType = startingGrabType;
-                // Trigger was just pressed
+
                 if (isRoot)
                 {
                     lastHandProjected = ComputeToTransformProjected(hand.transform);
@@ -295,6 +310,15 @@ namespace InteractableObject
                     grabHand = hand;
                 }
 
+                if (hand.name == "RightHand")
+                {
+                    rightHand = hand;
+                }
+                else
+                {
+                    leftHand = hand;
+                }
+
                 hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
                 driving = true;
 
@@ -304,7 +328,7 @@ namespace InteractableObject
 
                 hand.HideGrabHint();
             }
-            //如果鬆手
+            //如果目前被抓握方式不等於none(已經改變)，且目前抓握的狀態為設定的抓握方式(none)
             else if (grabbedWithType != GrabTypes.None && isGrabEnding)
             {
                 // hand.DetachObject(gameObject);
@@ -332,6 +356,8 @@ namespace InteractableObject
             if (hand.IsGrabEnding(this.gameObject))
             {
                 hand.DetachObject(gameObject);
+                rightHand = null;
+                leftHand = null;
             }
         }
 
@@ -391,9 +417,14 @@ namespace InteractableObject
             Vector3 toTransformProjected = new Vector3(0.0f, 0.0f, 0.0f);
 
             // Need a non-zero distance from the hand to the center of the CircularDrive
-            if (toTransform.sqrMagnitude > 0.0f)
+            if (toTransform.sqrMagnitude > 0.0f && !isRoot)
             {
                 toTransformProjected = Vector3.ProjectOnPlane(toTransform, worldPlaneNormalize).normalized;
+            }
+            else if (isRoot)
+            {
+                toTransformProjected = Vector3.ProjectOnPlane(toTransform, worldPlaneNormalize);
+                // print(toTransformProjected);
             }
             else
             {
@@ -443,8 +474,66 @@ namespace InteractableObject
         {
             if (rotateGameObject)
             {
-                // print($"localPlaneNormal : {localPlaneNormal}");
-                transform.localRotation = startQuaternion * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+                if (isRoot)
+                {
+                    switch (axisOfRotation)
+                    {
+                        case Axis_t.XAxis:
+                            if (rightHand != null)
+                            {
+                                eulerRotation = new Vector3(rightHand.transform.localEulerAngles.x, 0, 0);
+                                transform.rotation = Quaternion.Euler(eulerRotation);
+                                // transform.localRotation = Quaternion.Euler(eulerRotation) * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+                            }
+
+                            if (leftHand != null)
+                            {
+                                eulerRotation = new Vector3(rightHand.transform.localEulerAngles.x, 0, 0);
+                                transform.rotation = Quaternion.Euler(eulerRotation);
+                                // transform.localRotation = Quaternion.Euler(eulerRotation) * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+                            }
+
+                            break;
+                        case Axis_t.YAxis:
+                            if (rightHand != null)
+                            {
+                                eulerRotation = new Vector3(0, rightHand.transform.localEulerAngles.y, 0);
+                                transform.rotation = Quaternion.Euler(eulerRotation);
+                                // transform.localRotation = Quaternion.Euler(eulerRotation) * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+                            }
+
+                            if (leftHand != null)
+                            {
+                                eulerRotation = new Vector3(0, rightHand.transform.localEulerAngles.y, 0);
+                                transform.rotation = Quaternion.Euler(eulerRotation);
+                                // transform.localRotation = Quaternion.Euler(eulerRotation) * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+                            }
+
+                            break;
+                        case Axis_t.ZAxis:
+                            if (rightHand != null)
+                            {
+                                eulerRotation = new Vector3(0, 0, rightHand.transform.localEulerAngles.z);
+
+                                transform.eulerAngles = eulerRotation;
+
+                                // transform.localRotation = Quaternion.Euler(eulerRotation) * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+                            }
+
+                            if (leftHand != null)
+                            {
+                                eulerRotation = new Vector3(0, 0, leftHand.transform.localEulerAngles.z);
+                                transform.eulerAngles = eulerRotation;
+                                // transform.localRotation = Quaternion.Euler(eulerRotation) * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+                            }
+
+                            break;
+                    }
+                }
+                else
+                {
+                    transform.localRotation = startQuaternion * Quaternion.AngleAxis(outAngle, localPlaneNormalize);
+                }
 
                 // print($"localRotation : {transform.localRotation}");
             }
@@ -471,16 +560,7 @@ namespace InteractableObject
             Vector3 toHandProjected;
             if (isRoot)
             {
-                // print(hand.transform.Find("RightRenderModel Slim(Clone)").transform.Find("vr_glove_right_model_slim(Clone)").gameObject.name);
-                // if (hand.name=="RightHand")
-                // {
-                //     toHandProjected = ComputeToTransformProjected(hand.transform.Find("RightRenderModel Slim(Clone)").transform.Find("vr_glove_right_model_slim(Clone)").transform);
-                // }
-                // else
-                // {
-                //     toHandProjected = ComputeToTransformProjected(hand.transform.Find("LeftRenderModel Slim(Clone)").transform.Find("vr_glove_left_model_slim(Clone)").transform);
-                // }
-                toHandProjected = ComputeToTransformProjected(hand.transform);
+                toHandProjected = ComputeToTransformProjected(hand.hoverSphereTransform);
                 if (!toHandProjected.Equals(lastHandProjected))
                 {
                     float absAngleDelta = Vector3.Angle(lastHandProjected, toHandProjected);
@@ -496,134 +576,165 @@ namespace InteractableObject
                             signedAngleDelta = -signedAngleDelta;
                         }
 
+                        switch (axisOfRotation)
+                        {
+                            case Axis_t.XAxis:
+                                outAngle = transform.localEulerAngles.x;
+                                break;
+                            case Axis_t.YAxis:
+                                outAngle = transform.localEulerAngles.y;
+                                break;
+                            case Axis_t.ZAxis:
+                                outAngle = transform.localEulerAngles.z;
+                                if (transform.localEulerAngles.z > 180.0f)
+                                {
+                                    outAngle = -(360.0f - outAngle);
+                                }
+
+                                break;
+                        }
+
                         if (limited)
                         {
-                            float angleTmp = Mathf.Clamp(outAngle + signedAngleDelta, minAngle, maxAngle);
-
-                            if (outAngle == minAngle)
+                            if (outAngle <= minAngle + 10.0f && outAngle >= minAngle - 10.0f)
                             {
-                                if (angleTmp > minAngle && absAngleDelta < minMaxAngularThreshold)
-                                {
-                                    // Debug.Log("Min Angle: ");
-                                    outAngle = angleTmp;
-                                    lastHandProjected = toHandProjected;
-                                }
-                                else
-                                {
-                                    outAngle = minAngle + 1;
-                                }
-                            }
-                            else if (outAngle == maxAngle)
-                            {
-                                if (angleTmp < maxAngle && absAngleDelta < minMaxAngularThreshold)
-                                {
-                                    // Debug.Log("Max Angle: ");
-                                    outAngle = angleTmp;
-                                    lastHandProjected = toHandProjected;
-                                }
-                                else
-                                {
-                                    outAngle = minAngle - 1;
-                                }
-                            }
-                            else if (angleTmp == minAngle)
-                            {
-                                outAngle = angleTmp;
-                                lastHandProjected = toHandProjected;
-                                if (isLimteToDetatch)
-                                {
-                                    hand.DetachObject(gameObject);
-                                }
-
                                 onMinAngle.Invoke();
                             }
-                            else if (angleTmp == maxAngle)
+                            else if (outAngle <= maxAngle + 10.0f && outAngle >= maxAngle - 10.0f)
                             {
-                                outAngle = angleTmp;
-                                lastHandProjected = toHandProjected;
-                                if (isLimteToDetatch)
-                                {
-                                    hand.DetachObject(gameObject);
-                                }
-
                                 onMaxAngle.Invoke();
                             }
-                            else
-                            {
-                                //當達到最小角度時
-                                if (angleTmp == minAngle)
-                                {
-                                    outAngle = angleTmp;
-                                    lastHandProjected = toHandProjected;
-                                    // if (isLimteToDetatch)
-                                    // {
-                                    //     hand.DetachObject(gameObject);
-                                    // }
-                                    //
-                                    // onMinAngle.Invoke();
-                                }
-                                //當達到最大角度時
-                                else if (angleTmp == maxAngle)
-                                {
-                                    outAngle = angleTmp;
-                                    lastHandProjected = toHandProjected;
-                                    // if (isLimteToDetatch)
-                                    // {
-                                    //     hand.DetachObject(gameObject);
-                                    // }
-                                    //
-                                    // onMaxAngle.Invoke();
-                                }
-                                else
-                                {
-                                    float angleDiffer = angleTmp - outAngle; //目前旋轉的角度差值
-                                    float angleVariable = outAngle - angleBuffer; //初始至目前旋轉的角度變化量：判斷手勢變化的臨界值
 
-                                    if (isUsingBlenderPoser)
-                                    {
-                                        // 計算手勢變換遮罩值(Blend Mask)：取得 [0, 1] 的臨界值
-                                        blendPoseValue = (angleVariable - minAngle) / (maxAngle - minAngle);
+                            // if (outAngle>=eventAngle)
+                            // {
+                            //     angleEvent.Invoke();
+                            // }
 
-                                        //開關的手勢變換
-                                        if (angleDiffer > 0.1f)
-                                        {
-                                            switchOnPoser.Invoke();
-                                            // Debug.Log("轉開: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
-                                        }
-                                        else if (angleDiffer < -0.1f)
-                                        {
-                                            switchOffPoser.Invoke();
-                                            // Debug.Log("關閉: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
-                                        }
-                                    }
-                                    outAngle = angleTmp;
-                                    lastHandProjected = toHandProjected;
-                                }
-                            }
+
+                            // float angleTmp = Mathf.Clamp(outAngle + signedAngleDelta, minAngle, maxAngle);
+                            //
+                            // if (outAngle == minAngle)
+                            // {
+                            //     if (angleTmp > minAngle && absAngleDelta < minMaxAngularThreshold)
+                            //     {
+                            //         // Debug.Log("Min Angle: ");
+                            //         outAngle = angleTmp;
+                            //         lastHandProjected = toHandProjected;
+                            //     }
+                            //     else
+                            //     {
+                            //         outAngle = minAngle + 1;
+                            //     }
+                            // }
+                            // else if (outAngle == maxAngle)
+                            // {
+                            //     if (angleTmp < maxAngle && absAngleDelta < minMaxAngularThreshold)
+                            //     {
+                            //         // Debug.Log("Max Angle: ");
+                            //         outAngle = angleTmp;
+                            //         lastHandProjected = toHandProjected;
+                            //     }
+                            //     else
+                            //     {
+                            //         outAngle = minAngle - 1;
+                            //     }
+                            // }
+                            // else if (angleTmp == minAngle)
+                            // {
+                            //     outAngle = angleTmp;
+                            //     lastHandProjected = toHandProjected;
+                            //     if (isLimteToDetatch)
+                            //     {
+                            //         hand.DetachObject(gameObject);
+                            //     }
+                            //
+                            //     onMinAngle.Invoke();
+                            // }
+                            // else if (angleTmp == maxAngle)
+                            // {
+                            //     outAngle = angleTmp;
+                            //     lastHandProjected = toHandProjected;
+                            //     if (isLimteToDetatch)
+                            //     {
+                            //         hand.DetachObject(gameObject);
+                            //     }
+                            //
+                            //     onMaxAngle.Invoke();
+                            // }
+                            // else
+                            // {
+                            //     //當達到最小角度時
+                            //     if (angleTmp == minAngle)
+                            //     {
+                            //         outAngle = angleTmp;
+                            //         lastHandProjected = toHandProjected;
+                            //         // if (isLimteToDetatch)
+                            //         // {
+                            //         //     hand.DetachObject(gameObject);
+                            //         // }
+                            //         //
+                            //         // onMinAngle.Invoke();
+                            //     }
+                            //     //當達到最大角度時
+                            //     else if (angleTmp == maxAngle)
+                            //     {
+                            //         outAngle = angleTmp;
+                            //         lastHandProjected = toHandProjected;
+                            //         // if (isLimteToDetatch)
+                            //         // {
+                            //         //     hand.DetachObject(gameObject);
+                            //         // }
+                            //         //
+                            //         // onMaxAngle.Invoke();
+                            //     }
+                            //     else
+                            //     {
+                            //         float angleDiffer = angleTmp - outAngle; //目前旋轉的角度差值
+                            //         float angleVariable = outAngle - angleBuffer; //初始至目前旋轉的角度變化量：判斷手勢變化的臨界值
+                            //
+                            //         if (isUsingBlenderPoser)
+                            //         {
+                            //             // 計算手勢變換遮罩值(Blend Mask)：取得 [0, 1] 的臨界值
+                            //             blendPoseValue = (angleVariable - minAngle) / (maxAngle - minAngle);
+                            //
+                            //             //開關的手勢變換
+                            //             if (angleDiffer > 0.1f)
+                            //             {
+                            //                 switchOnPoser.Invoke();
+                            //                 // Debug.Log("轉開: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
+                            //             }
+                            //             else if (angleDiffer < -0.1f)
+                            //             {
+                            //                 switchOffPoser.Invoke();
+                            //                 // Debug.Log("關閉: " + Mathf.Floor(angleDiffer) + ", 手轉幅度：" + blendPoseValue);
+                            //             }
+                            //         }
+                            //
+                            //         outAngle = angleTmp;
+                            //         lastHandProjected = toHandProjected;
+                            //     }
+                            // }
                         }
                         else
                         {
-                            outAngle += signedAngleDelta;
-                            if (isAngleEvent && outAngle >= eventAngle)
-                            {
-                                hand.DetachObject(gameObject);
-                                angleEvent.Invoke();
-                            }
-
-                            lastHandProjected = toHandProjected;
+                            // outAngle += signedAngleDelta;
+                            // if (isAngleEvent && outAngle >= eventAngle)
+                            // {
+                            //     hand.DetachObject(gameObject);
+                            //     angleEvent.Invoke();
+                            // }
+                            //
+                            // lastHandProjected = toHandProjected;
                         }
 
-                        if (isAngleEvent)
+                        if (isAngleEvent && outAngle >= eventAngle - 10 && outAngle <= eventAngle + 10)
                         {
-                            if (outAngle >= eventAngle-10 && outAngle <= eventAngle+10)
+                            if (isAngleEventToDetatch)
                             {
-                                if (isAngleEventToDetatch)
-                                {
-                                    hand.DetachObject(gameObject);
-                                }
-                                angleEvent.Invoke();
+                                hand.DetachObject(gameObject);
                             }
 
+                            angleEvent.Invoke();
                         }
                     }
                 }

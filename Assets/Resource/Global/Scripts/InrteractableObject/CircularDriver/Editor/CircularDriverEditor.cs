@@ -21,6 +21,7 @@ namespace InteractableObject
         {
             EditorGUILayout.LabelField(new GUIContent("手勢資訊"),mainHeaderStyle);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isUsingBlenderPoser"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("grabbedWithType"));
             if (circularDrive.isUsingBlenderPoser)
             {
                 EditorGUILayout.LabelField(new GUIContent("混合手勢"),secondHeaderStyle);
